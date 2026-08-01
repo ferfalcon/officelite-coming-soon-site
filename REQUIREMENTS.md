@@ -3,7 +3,7 @@
 ## 1. Document information
 
 - **Status:** Draft — Stage 2 complete
-- **Version:** 0.1
+- **Version:** 0.2
 - **Last updated:** 2026-08-01
 - **Owner:** Project owner
 - **Design source:** [Officelite coming soon site](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3)
@@ -242,14 +242,14 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 
 **Evidence:** Figma prototype reactions; explicit user decision.
 
-## 8. Recommended functional requirements requiring approval
+## 8. Additional confirmed functional requirements
 
 ### FR-011 — Report IndexedDB storage failure
 
-**Classification:** Recommended  
-**Priority:** Should
+**Classification:** Confirmed  
+**Priority:** Must
 
-**Description:** A failed IndexedDB write should show and announce an error without showing success.
+**Description:** A failed IndexedDB write must show and announce an error without showing success.
 
 **Rationale:** Silent failure would make the confirmed success definition unreliable.
 
@@ -259,22 +259,22 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 - Visible and programmatic failure feedback is provided.
 - Entered values remain available for correction or retry where technically possible.
 
-**Evidence:** Reliability gap in `FIGMA-AUDIT.md`.
+**Evidence:** Explicit user approval; reliability gap in `FIGMA-AUDIT.md`.
 
 ### FR-012 — Define the generic CTA default plan
 
-**Classification:** Recommended  
-**Priority:** Should
+**Classification:** Confirmed  
+**Priority:** Must
 
-**Description:** Generic `Get Started` actions and direct Sign Up navigation should select Basic by default.
+**Description:** Generic `Get Started` actions and direct Sign Up navigation must select Basic by default.
 
-**Rationale:** All supplied Sign Up frames show Basic selected, but this behavior was not explicitly approved.
+**Rationale:** All supplied Sign Up frames show Basic selected, and the user explicitly approved this default behavior.
 
 **Acceptance criteria:**
 
 - Generic and direct navigation begin with Basic unless a valid plan is supplied.
 
-**Evidence:** Figma Sign Up frames; requires approval.
+**Evidence:** Figma Sign Up frames; explicit user approval.
 
 ## 9. Business and data requirements
 
@@ -356,7 +356,7 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 
 ### Assumptions
 
-- **A-001 — Inferred:** Basic is the default for generic CTAs/direct Sign Up; approval is required.
+- **A-001 — Resolved:** Basic is the confirmed default for generic CTAs and direct Sign Up navigation.
 - **A-002 — Inferred:** The five displayed fields remain the complete form until changed by a stakeholder.
 - **A-003 — Inferred:** The future date API will supply a value sufficient for a client countdown; timezone and payload are unknown.
 - **A-004 — Inferred:** Target browsers permit IndexedDB; fallback behavior is unapproved.
@@ -376,7 +376,7 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 
 | Risk | Impact | Likelihood | Mitigation / disposition |
 |---|---|---:|---|
-| IndexedDB unavailable or write failure | High | Medium | Approve and specify FR-011. |
+| IndexedDB unavailable or write failure | High | Medium | Implement and verify FR-011. |
 | No retention/deletion policy for contact data | High | Medium | Keep local-only; define policy before API phase. |
 | Contrast combinations fail normal-text thresholds | Medium | Confirmed | Record deviation; revisit before conformance claims. |
 | Placeholder content mistaken for final | Medium | Medium | Mark placeholders and keep content replaceable. |
@@ -391,23 +391,21 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 
 ### Product
 
-1. What should generic `Get Started` actions select by default?
-2. Should duplicate submissions be allowed, rejected, or update an existing record?
-3. Should users be able to view or remove locally stored sign-up data?
+1. Should duplicate submissions be allowed, rejected, or update an existing record?
+2. Should users be able to view or remove locally stored sign-up data?
 
 ### Data and technical
 
-4. What IndexedDB database, object store, key, timestamp, and schema-version strategy is required?
-5. What visible and announced behavior is required when IndexedDB is unavailable or a write fails?
-6. What timezone and payload shape will the future launch-date API use?
-7. What browser-support matrix must the project meet?
+3. What IndexedDB database, object store, key, timestamp, and schema-version strategy is required?
+4. What timezone and payload shape will the future launch-date API use?
+5. What browser-support matrix must the project meet?
 
 ### Content and design
 
-8. What are the approved validation, failure, and success messages?
-9. What visual pattern presents success confirmation?
-10. How do `24rem`, `48rem`, and `80rem` map to inclusive/exclusive media-query ranges?
-11. Will the two-color focus treatment be normalized across every surface?
+6. What are the approved validation, failure, and success messages?
+7. What visual pattern presents success and storage-failure feedback?
+8. How do `24rem`, `48rem`, and `80rem` map to inclusive/exclusive media-query ranges?
+9. Will the two-color focus treatment be normalized across every surface?
 
 ## 17. Definition of Done
 
@@ -415,8 +413,9 @@ The current requirements are satisfied when:
 
 - All Must functional requirements and business rules are implemented.
 - Valid data is committed to IndexedDB and only then confirmed as successful.
+- IndexedDB failure produces visible and programmatically announced error feedback without showing success.
 - Invalid required data is not stored.
-- Plan CTAs preselect their corresponding plan.
+- Plan CTAs preselect their corresponding plan, and generic/direct Sign Up defaults to Basic.
 - The countdown updates once per second using the current placeholder-date boundary.
 - Home and Sign Up implement the required transformations at and between approved breakpoints.
 - Keyboard operation, semantic controls, visible focus, labels, and status announcements are verified.
@@ -433,7 +432,7 @@ The current requirements are satisfied when:
 |---|---|---|---|
 | FR-001–FR-005 | Home/Sign Up frames, components, prototype, user decisions | DESIGN/SPEC | Planned |
 | FR-006–FR-010 | README, user decisions, Figma countdown/logo | SPEC | Planned |
-| FR-011–FR-012 | Audit gaps and Figma default selection | Requirements approval | Recommended |
+| FR-011–FR-012 | Audit gaps, Figma default selection, explicit user approval | SPEC | Planned |
 | BR-001–BR-007 | Figma, README, user decisions | SPEC | Planned |
 | DR-001–DR-006 | User decisions and future-scope boundary | SPEC/ARCHITECTURE | Planned/Open |
 | AR-001–AR-010 | Project accessibility principles, Figma, user decisions | DESIGN/SPEC | Planned/Deviation |
@@ -461,12 +460,13 @@ Completed:
 - Accepted contrast risk is not presented as conformance.
 - Stale mobile-grid metadata is excluded from responsive requirements.
 - Remaining questions do not block Stage 3 but must remain visible through specification and review.
+- FR-011 and FR-012 are confirmed and no longer require approval.
 
 ## 21. Stage completion
 
 - **File created:** `REQUIREMENTS.md`
 - **Important decisions captured:** IndexedDB persistence, provisional all-field validation, success definition, plan preselection, native select, live countdown, future server date, approved breakpoints, mobile inset layout, decorative imagery, placeholder content, and non-goals.
-- **Recommended requirements awaiting approval:** IndexedDB failure feedback and Basic as the generic CTA default.
+- **Newly confirmed requirements:** IndexedDB failure feedback and Basic as the generic CTA/direct-navigation default.
 - **Accepted risks:** Contrast deviation, incomplete data-governance policy, undefined record metadata, and repository/README inconsistencies.
 - **Blockers:** None for Stage 3.
-- **Readiness:** **Ready for Stage 3 with documented non-blocking open questions and recommendations.**
+- **Readiness:** **Ready for Stage 3 with documented non-blocking open questions.**
