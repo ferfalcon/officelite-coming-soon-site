@@ -2,37 +2,29 @@
 
 ## 1. Document information
 
-- **Status:** Stage 1 complete
+- **Status:** Stage 1 complete — stakeholder decisions incorporated
 - **Audit date:** 2026-08-01
-- **Project:** Officelite coming soon site
+- **Decision update:** 2026-08-01
 - **Design source:** [Officelite coming soon site](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3)
 - **Supplied node:** `4:3`
 - **Figma file key:** `L7MdLOW8usVUcPwV0cMQ1n`
-- **Figma page:** `4:2` — `👋 Overview`
+- **Page:** `4:2` — `👋 Overview`
 - **Repository:** `ferfalcon/officelite-coming-soon-site`
-- **Purpose:** Establish a factual Figma evidence baseline for the later requirements, design, specification, architecture, planning, implementation, and validation stages.
+- **Purpose:** Provide the factual Figma evidence baseline for requirements, design, specification, architecture, planning, implementation, and validation.
 
 ## 2. Evidence classification
 
-This audit uses the following classifications:
+- **Confirmed:** supported by project documentation or a user decision.
+- **Observed:** directly inspected in Figma.
+- **Inferred:** strongly suggested but not confirmed.
+- **Recommended:** proposed to resolve a gap.
+- **Open question:** cannot be determined safely.
 
-- **Confirmed:** explicitly supplied in project instructions or established by a user decision.
-- **Observed:** directly inspected in the Figma file.
-- **Inferred:** strongly suggested by the design but not explicitly defined.
-- **Recommended:** a proposed resolution to a gap or implementation concern.
-- **Open question:** cannot be determined safely from the available evidence.
+Inferences and recommendations are not treated as confirmed requirements.
 
-This document does not convert inferred behavior into confirmed product requirements.
+## 3. Audited scope
 
-## 3. Audit scope
-
-### 3.1 Confirmed scope
-
-The supplied source is the Figma design file and node referenced above.
-
-### 3.2 Observed scope
-
-The supplied node resolves to a page-level Figma node named `Border`. The relevant content is organized on the single top-level page `👋 Overview` into five sections:
+The supplied node resolves to a page-level node named `Border`. The relevant content is organized into five sections:
 
 | Section | Node | Purpose |
 |---|---|---|
@@ -40,334 +32,172 @@ The supplied node resolves to a page-level Figma node named `Border`. The releva
 | Sign Up | [`2141:2386`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-2386) | Responsive sign-up compositions |
 | Interaction States | [`2141:2949`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-2949) | Desktop hover and focus examples |
 | Design System — Foundations | [`2141:938`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-938) | Color, typography, spacing, and radius references |
-| Design System — Components | [`2141:935`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-935) | Reusable logo, buttons, form controls, illustration, and decoration |
+| Design System — Components | [`2141:935`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-935) | Logo, buttons, controls, illustration, and decoration |
 
-### 3.3 Excluded from this stage
+This audit does not define repository architecture, production APIs, analytics, deployment, or final accessibility conformance.
 
-- Product requirements not directly established by the design
-- Repository architecture and implementation decisions
-- API, persistence, analytics, security, or deployment behavior
-- Final accessibility conformance decisions
-- Production validation against the live site
-
-Those responsibilities belong to later workflow stages.
-
-## 4. Screen and viewport inventory
+## 4. Screen inventory
 
 ### 4.1 Home
 
-| Viewport | Frame | Dimensions | Primary composition |
+| Viewport | Frame | Dimensions | Composition |
 |---|---|---:|---|
-| Desktop | [`2141:1599`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1599) | 1440 × 1778 | Two-column hero, three-column pricing, horizontal footer countdown |
-| Tablet | [`2141:1724`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1724) | 768 × 2164 | Compressed two-column hero, vertically stacked horizontal pricing cards, centered countdown |
-| Mobile | [`2141:1813`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1813) | 375 × 2801 | Illustration-first hero, centered copy, vertically stacked pricing cards, centered countdown |
+| Desktop | [`2141:1599`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1599) | 1440 × 1778 | Two-column hero, three-column pricing, horizontal countdown footer |
+| Tablet | [`2141:1724`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1724) | 768 × 2164 | Compact two-column hero, stacked horizontal pricing cards, centered countdown |
+| Mobile | [`2141:1813`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1813) | 375 × 2801 | Illustration-first hero, centered copy, stacked vertical pricing cards |
 
 ### 4.2 Sign Up
 
-| Viewport | Frame | Dimensions | Primary composition |
+| Viewport | Frame | Dimensions | Composition |
 |---|---|---:|---|
-| Desktop | [`2141:1680`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1680) | 1321 × 1024 | Left introduction and countdown; right form overlapping a dark background strip |
-| Tablet | [`2141:1896`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1896) | 768 × 1230 | Centered introduction and countdown; form below over a dark lower region |
-| Mobile | [`2141:1940`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1940) | 375 × 1244 | Centered introduction and compact countdown; full-width inset form over a dark lower region |
+| Desktop | [`2141:1680`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1680) | 1321 × 1024 | Introduction/countdown left; form overlapping right dark region |
+| Tablet | [`2141:1896`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1896) | 768 × 1230 | Centered introduction/countdown; form below over dark region |
+| Mobile | [`2141:1940`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-1940) | 375 × 1244 | Centered introduction/countdown; inset form over dark region |
 
-### 4.3 Interaction-state frames
+### 4.3 Interaction examples
 
-| Frame | Node | Demonstrated state |
+| Frame | Node | Evidence |
 |---|---|---|
-| Desktop — Home — Hover | [`2141:2441`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-2441) | Hover treatments for representative calls to action |
-| Desktop — Home — Focus | [`2141:2542`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-2542) | Focus treatments for representative calls to action |
-| Desktop — Sign Up — Hover | [`2141:2387`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-2387) | Hover treatment for the name field and submit action |
-| Desktop — Sign Up — Focus | [`2141:2638`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-2638) | Focus treatment for the name field and submit action |
+| Home hover | `2141:2441` | Representative CTA hover states |
+| Home focus | `2141:2542` | Representative CTA focus states |
+| Sign Up hover | `2141:2387` | Name field and submit hover states |
+| Sign Up focus | `2141:2638` | Name field and submit focus states |
 
-## 5. Page structure and content hierarchy
+## 5. Page structure and flow
 
-### 5.1 Home
-
-**Observed:** The page reads in the following visual order:
+### 5.1 Home reading order
 
 1. Brand header
-2. Hero illustration and hero message
+2. Hero illustration and message
 3. Primary `Get Started` action
-4. Three pricing plans
+4. Basic, Pro, and Ultimate plans
 5. Launch date and countdown
 6. Final `Get Started` action
 
-Desktop and tablet place hero copy before the illustration in the left-to-right visual order. Mobile places the illustration above the heading and description.
+Desktop and tablet place copy before the illustration visually. Mobile places the decorative illustration before the heading.
 
-### 5.2 Sign Up
-
-**Observed:** The page reads in the following visual order:
+### 5.2 Sign Up reading order
 
 1. Brand header
-2. Page heading and description
+2. Heading and description
 3. Launch date and countdown
 4. Sign-up form
 
-On desktop, the introduction and form are side by side. On tablet and mobile, they stack vertically.
+### 5.3 Prototype navigation
 
-## 6. Navigation and prototype flow
+The file contains 18 click reactions and no named prototype starting point.
 
-### 6.1 Observed click paths
+- Every Home CTA navigates to the matching responsive Sign Up frame.
+- The logo navigates to Home only from Sign Up.
+- Navigation has no transition animation.
+- Form submission, validation, success, and failure are not prototyped.
 
-The page contains 18 click reactions and no named prototype flow starting point.
+## 6. Responsive behavior
 
-- Home hero, pricing, and countdown calls to action navigate to the corresponding Sign Up frame at the same responsive size.
-- The logo on each Sign Up frame navigates back to the corresponding Home frame.
-- Reactions use direct navigation with no transition animation.
+### 6.1 Confirmed breakpoints
 
-| Source family | Desktop destination | Tablet destination | Mobile destination |
-|---|---|---|---|
-| Home calls to action | Sign Up `2141:1680` | Sign Up `2141:1896` | Sign Up `2141:1940` |
-| Sign Up logo | Home `2141:1599` | Home `2141:1724` | Home `2141:1813` |
+**User decision:** Use `24rem`, `48rem`, and `80rem`.
 
-### 6.2 Missing prototype evidence
+The Figma reference widths demonstrate target compositions. Exact inclusive/exclusive media-query semantics remain a specification detail.
 
-- No submit action or post-submission destination is defined.
-- No plan-selection interaction is defined.
-- No field validation or error path is defined.
-- No loading or success path is defined.
-- No live countdown behavior is prototyped.
-- No keyboard-specific interaction is demonstrated.
+### 6.2 Home transformations
 
-## 7. Responsive behavior
+- Desktop uses a centered 1110 px content region.
+- Tablet retains a side-by-side hero but reduces copy and illustration dimensions.
+- Mobile moves the illustration above centered copy and CTA.
+- Pricing changes from three columns, to stacked horizontal cards, to stacked centered cards.
+- Countdown and final CTA change from a horizontal desktop arrangement to a centered vertical arrangement.
 
-### 7.1 Home hero
+### 6.3 Sign Up transformations
 
-**Desktop — observed:**
+- Desktop uses a two-column composition with a 445 × 489 px form.
+- Tablet centers the introduction and places the form below without reducing its width.
+- Mobile reduces the form to 327 px, with 24 px outer insets and 20 px internal horizontal padding.
 
-- A centered 1110 px content region begins at x = 165 px.
-- Copy occupies 540 px and the illustration occupies 475 × 531 px.
-- Decorative orbit geometry extends beyond the top and right edges and is clipped by the page frame.
+### 6.4 Mobile grid re-inspection
 
-**Tablet — observed:**
+Both 375 px production frames contain a hidden copied grid with 12 columns, 48 px columns, 10 px gutters, and an approximately 39.17 px offset. It cannot fit within 375 px and is not the operative layout.
 
-- The hero remains side by side.
-- Copy width reduces to 345 px.
-- The illustration scales to approximately 280 × 313 px.
-- Horizontal content inset is approximately 40 px.
+The actual composition uses:
 
-**Mobile — observed:**
+- A 343 px content region with approximately 16 px side insets for primary mobile content.
+- A 327 px Sign Up form with 24 px page insets.
+- Fluid width and wrapping rather than the stale hidden grid.
 
-- The illustration moves above the message.
-- Main content uses a 343 px region with 16 px side insets.
-- Heading, description, and action are centered.
-- The illustration scales to approximately 200 × 224 px.
+## 7. Design foundations
 
-### 7.2 Pricing
+### 7.1 Colors
 
-**Desktop — observed:**
-
-- Three cards share one row within a 1110 px content region.
-- Cards are approximately 349 × 489 px with 30–32 px horizontal separation.
-- The Pro card is visually emphasized with a blue surface.
-- Cards overlap the transition between the light page background and dark footer region.
-
-**Tablet — observed:**
-
-- Cards stack vertically within an approximately 689 px region.
-- Each card changes to a horizontal internal composition: plan summary and action on the left, features on the right.
-- Each card is approximately 689 × 315 px.
-- The Pro card includes decorative orbit geometry.
-
-**Mobile — observed:**
-
-- Cards stack vertically in a 343 px region.
-- Internal content becomes centered and vertically ordered.
-- Basic and Ultimate cards are 481 px high; Pro is 497 px high.
-- The dark background begins behind the pricing stack rather than only below it.
-
-### 7.3 Countdown
-
-**Desktop — observed:** The date and countdown are left aligned while the final action is right aligned.
-
-**Tablet and mobile — observed:** The date, countdown, and final action are centered and vertically grouped.
-
-**Mobile — observed:** Countdown cards shrink to approximately 74 px wide and 110 px high.
-
-### 7.4 Sign Up
-
-**Desktop — observed:**
-
-- The viewport is 1321 px wide, unlike the 1440 px Home desktop frame.
-- The main content region is 1110 px wide and centered at x = 105.5 px.
-- A 420 px dark strip occupies the right side.
-- The 445 × 489 px form overlaps the boundary between light and dark regions.
-
-**Tablet — observed:**
-
-- Introductory content and countdown center above the form.
-- The form remains 445 × 489 px.
-- A dark lower section begins behind the lower part of the form.
-
-**Mobile — observed:**
-
-- The form becomes 327 × 489 px with 24 px page insets.
-- Form horizontal padding reduces from 40 px to 20 px.
-- Countdown values and form controls reduce in width without removing content.
-
-### 7.5 Behavior between supplied widths
-
-**Open question:** Figma demonstrates 375 px, 768 px, and desktop compositions but does not establish exact breakpoint values or interpolation rules between them.
-
-**Recommended for later specification:** Define behavior in terms of content fit and layout transformation, then select implementation breakpoints that preserve those behaviors rather than treating the three frame widths as the only supported sizes.
-
-## 8. Layout systems and grids
-
-### 8.1 Desktop grid
-
-**Observed:** Home desktop uses:
-
-- 12 columns
-- 65 px column width
-- 30 px gutter
-- 165 px left offset
-- A repeated 60 px row with 12 px gutter
-
-This produces the 1110 px central content region used by the header, hero, pricing, and countdown.
-
-### 8.2 Tablet grid
-
-**Observed:** Tablet frames use:
-
-- 12 columns
-- 48 px column width
-- 10 px gutter
-- Approximately 39.17 px offset
-- The same 60 px row / 12 px gutter pattern
-
-### 8.3 Mobile grid inconsistency
-
-**Observed:** Mobile frames retain the same 48 px / 10 px / 12-column grid metadata as tablet. That grid cannot fit inside a 375 px viewport.
-
-**Inferred:** The mobile grid metadata was likely copied from the tablet frame and does not describe the actual 16 px inset / 343 px content composition.
-
-**Open question:** Should implementation use a dedicated mobile grid token or a simple fluid container with 16 px insets?
-
-## 9. Design foundations
-
-### 9.1 Color variables
-
-One local variable collection named `Collections` contains one mode, `Mode 1`.
-
-| Variable | Value | Observed usage |
+| Variable | Value | Main use |
 |---|---:|---|
-| `colors/neutral/0` | `#FFFFFF` | Card and control surfaces, inverse button |
+| `colors/neutral/0` | `#FFFFFF` | Cards and control surfaces |
 | `colors/neutral/50` | `#FAFAFA` | Page background |
-| `colors/neutral/500` | `#747B95` | Secondary and body text |
-| `colors/neutral/800` | `#333950` | Supporting dark text and countdown surfaces |
-| `colors/neutral/900` | `#25293A` | Primary text and dark page regions |
-| `colors/blue/100` | `#E4EAFF` | Subtle action and countdown backgrounds |
-| `colors/blue/300` | `#829CFF` | Primary-button hover surface |
-| `colors/blue/500` | `#5175FF` | Primary actions, Pro plan, accent text |
-| `colors/red/400` | `#F05B5B` | Error-oriented token; no error composition is shown |
+| `colors/neutral/500` | `#747B95` | Secondary/body text |
+| `colors/neutral/800` | `#333950` | Supporting dark text and countdown tiles |
+| `colors/neutral/900` | `#25293A` | Primary text and dark surfaces |
+| `colors/blue/100` | `#E4EAFF` | Subtle action/countdown backgrounds |
+| `colors/blue/300` | `#829CFF` | Primary-button hover |
+| `colors/blue/500` | `#5175FF` | Primary actions and Pro plan |
+| `colors/red/400` | `#F05B5B` | Error token; no error state is shown |
 
-**Observed:** Variables use `ALL_SCOPES`, have no platform code syntax, and are grouped in a generically named collection.
+The file has one local variable collection named `Collections`, one mode, `ALL_SCOPES` variables, and no platform code syntax.
 
-### 9.2 Typography styles
+### 7.2 Typography
 
-All production text uses Kumbh Sans. No missing fonts were reported during inspection.
+| Style | Font | Size | Line height | Usage |
+|---|---|---:|---:|---|
+| `Display/Large` | Kumbh Sans Bold | 56 px | 120% | Desktop headings, prices, large countdown values |
+| `Display/Medium` | Kumbh Sans Bold | 40 px | 120% | Tablet/mobile headings and compact values |
+| `Heading/Small` | Kumbh Sans Bold | 20 px | 140% | Plan names |
+| `Body/Large` | Kumbh Sans Regular | 18 px | 150% | Page descriptions |
+| `Body/Medium` | Kumbh Sans Regular | 16 px | 160% | Billing and feature text |
+| `Label/Strong` | Kumbh Sans Bold | 16 px | 160% | Buttons, selected plan, countdown units |
+| `Label/Overline` | Kumbh Sans Bold | 16 px | 160% | Uppercase launch-date label; 5 px tracking |
 
-| Style | Font | Size | Line height | Tracking | Intended role shown in foundations |
-|---|---|---:|---:|---:|---|
-| `Display/Large` | Kumbh Sans Bold | 56 px | 120% | 0 | Desktop headings, prices, large countdown values |
-| `Display/Medium` | Kumbh Sans Bold | 40 px | 120% | 0 | Tablet/mobile headings and compact countdown values |
-| `Heading/Small` | Kumbh Sans Bold | 20 px | 140% | 0 | Plan names |
-| `Body/Large` | Kumbh Sans Regular | 18 px | 150% | 0 | Hero and Sign Up descriptions |
-| `Body/Medium` | Kumbh Sans Regular | 16 px | 160% | 0 | Billing summaries and feature lists |
-| `Label/Strong` | Kumbh Sans Bold | 16 px | 160% | 0 | Buttons, selected plan, countdown units |
-| `Label/Overline` | Kumbh Sans Bold | 16 px | 160% | 5 px | Uppercase launch-date overline |
+### 7.3 Spacing and radius
 
-### 9.3 Spacing variables
+Spacing variables now include `0`, `2`, `4`, `6`, `8`, `10`, `12`, `16`, `20`, `24`, `32`, `40`, `48`, `64`, `80`, `96`, `112`, `128`, and `140` px.
 
-The variable collection defines:
+**Resolved Figma correction:** Added `spacing/125 = 10` as `VariableID:2182:134`, matching the existing foundation specimen.
 
-`0`, `2`, `4`, `6`, `8`, `12`, `16`, `20`, `24`, `32`, `40`, `48`, `64`, `80`, `96`, `112`, `128`, and `140` px.
+Radius variables include `0`, `4`, `6`, `8`, `10`, `12`, `16`, `20`, `24`, and `999` px. Cards/forms use 12 px; buttons use the full radius.
 
-**Observed inconsistency:** The foundation specimen documents `spacing-125` as 10 px, but no `spacing/125` variable exists in the local collection.
+## 8. Reusable components
 
-### 9.4 Radius variables
-
-The variable collection defines:
-
-`0`, `4`, `6`, `8`, `10`, `12`, `16`, `20`, `24`, and `999` px (`corner-radius/full`).
-
-Observed major use:
-
-- Cards and form: 12 px
-- Buttons: full/pill radius
-- Countdown tiles: compact rounded rectangles
-
-### 9.5 Styles and bindings
-
-- Seven local text styles exist.
-- No local paint, effect, or grid styles exist.
-- Colors, spacing, radii, and some effects are bound directly to variables on many component layers.
-- Frame grids are local to individual frames rather than reusable grid styles.
-
-## 10. Reusable components
-
-All inspected components are local and unpublished. Component descriptions are empty.
+All inspected components are local, connected to their instances, unpublished, and have empty descriptions.
 
 | Component | Node | Variants or anatomy |
 |---|---|---|
-| Brand / Logo | [`4:871`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-871) | Logo mark and wordmark |
-| Button / Pricing / Standard | [`10:531`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=10-531) | Default, Hover, Focus |
-| Button / Primary | [`10:526`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=10-526) | Default, Hover, Focus |
-| Button / Pricing / Inverse | [`10:567`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=10-567) | Default, Hover, Focus |
-| Illustration / Product Dashboard | [`5:275`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=5-275) | Line-chart card, typography preview, metrics card |
-| Form / Text Field | [`10:503`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=10-503) | Default, Hover, Focus |
-| Form / Plan Select | [`10:512`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=10-512) | Default, Hover, Focus |
-| Decoration / Hero Orbits | [`2141:931`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-931) | Three orbit rings and dot cluster |
-| Decoration / Footer Orbits | [`2141:932`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=2141-932) | Six rings and three dots |
-| Typography Specimen | [`4:462`](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-462) | Reused to display the seven text roles |
+| Brand / Logo | `4:871` | Mark and wordmark |
+| Button / Pricing / Standard | `10:531` | Default, Hover, Focus |
+| Button / Primary | `10:526` | Default, Hover, Focus |
+| Button / Pricing / Inverse | `10:567` | Default, Hover, Focus |
+| Illustration / Product Dashboard | `5:275` | Chart, typography, and metric cards |
+| Form / Text Field | `10:503` | Default, Hover, Focus |
+| Form / Plan Select | `10:512` | Default, Hover, Focus |
+| Decoration / Hero Orbits | `2141:931` | Rings and dot cluster |
+| Decoration / Footer Orbits | `2141:932` | Rings and dots |
 
-### 10.1 Component-instance integrity
+Buttons are approximately 170–171 × 50 px and use pill radii. Text fields are 360 × 45 px on desktop/tablet and 287 px wide on mobile. The plan select is 360 × 43 px on desktop/tablet.
 
-**Observed:** Inspected production instances resolve to their source components. No detached or unresolved production instances were found in the audited scope.
+**User decision:** Use the states supplied by Figma: default, hover, and focus. Additional active, disabled, loading, and invalid control states are not in current design scope.
 
-### 10.2 Button visual states
+**User decision:** The plan control should open and behave like a native select.
 
-All button variants are approximately 170–171 × 50 px with 40 px horizontal and 12 px vertical padding.
+## 9. Assets and decoration
 
-| Button family | Default | Hover | Focus |
-|---|---|---|---|
-| Primary | Blue `#5175FF`, white label, soft lower shadow | Blue `#829CFF`, white label | Default surface with a white/blue multi-ring focus treatment |
-| Pricing / Standard | Pale blue `#E4EAFF`, blue label | Blue `#5175FF`, white label | Default surface with a white/blue multi-ring focus treatment |
-| Pricing / Inverse | White, blue label | Pale blue `#E4EAFF`, blue label | White surface with reversed white/blue focus rings |
+- The logo, dashboard illustration, orbit systems, and select chevron are vector-based.
+- Existing SVG assets are available for implementation.
+- No raster photography or image fills are present.
+- The dashboard illustration and orbit systems are decorative and should not add accessible names or announced content.
 
-### 10.3 Form controls
+## 10. Content inventory and rules
 
-- Text fields are 360 × 45 px on desktop/tablet.
-- The plan select is 360 × 43 px on desktop/tablet.
-- Mobile form controls reduce to 287 px wide.
-- Controls use an underline-style boundary rather than a full box in default and hover states.
-- Focus introduces a white fill and visible two-ring treatment.
+### 10.1 Placeholder content
 
-## 11. Assets and decoration
+The current marketing copy, prices, features, and launch date are placeholders rather than final content.
 
-### 11.1 Observed assets
-
-- Brand logo is built from vector/boolean geometry.
-- Product dashboard illustration is built from Figma shapes and text; no raster image fill is present.
-- Hero and footer orbit decorations are reusable vector components.
-- The select includes a small downward chevron.
-- No external photography or raster imagery appears in the audited scope.
-
-### 11.2 Implementation implications to carry forward
-
-**Recommended:** Treat orbit systems as decorative and exclude them from the accessibility tree unless a later product decision gives them meaning.
-
-**Open question:** Whether the dashboard illustration is purely decorative or requires a concise alternative text cannot be determined from Figma alone.
-
-## 12. Canonical content observed in Figma
-
-### 12.1 Home hero
-
-- Heading: `A simple solution to complex tasks is coming soon`
-- Description: `Say goodbye to inefficient juggling of multiple apps, teams, and projects. Officelite is the new collaboration platform built with an intuitive interface to improve productivity.`
-- Primary action: `Get Started`
-
-### 12.2 Pricing
+Observed pricing content:
 
 | Plan | Price | Billing | Features |
 |---|---|---|---|
@@ -375,210 +205,146 @@ All button variants are approximately 170–171 × 50 px with 40 px horizontal a
 | Pro | $9.99 | Per user, billed monthly | All essential integrations; 50 GB storage; More control and insights |
 | Ultimate | $19.99 | Per user, billed monthly | Robust work management; 100 GB storage; VIP support |
 
-Pricing action: `Try for Free`
+### 10.2 Confirmed content behavior
 
-### 12.3 Countdown
+- Content can vary in length.
+- Countdown labels remain `days`, `hours`, `min`, and `sec`.
+- The launch date uses the `31 Dec 2026` display pattern when populated with the real value.
+- Localization is out of scope.
+- Exact validation, error, loading, and success-message copy is deferred.
 
-- Launch label: `Coming 31 Dec 2026`
-- Sample displayed values: `47 days`, `07 hours`, `56 min`, `14 sec`
+## 11. Product and technical decisions
 
-**Observed:** The countdown values are static text in the design.
+1. The displayed launch date is a placeholder. The final date will be server-derived from an API.
+2. Countdown behavior at zero is out of scope.
+3. Current sign-up data is stored in browser IndexedDB.
+4. Sending sign-up data to an API is future scope.
+5. All displayed form fields are provisionally required.
+6. A sign-up is successful when the record is stored in IndexedDB.
+7. Successful storage must produce an on-screen confirmation message.
+8. Pricing-plan CTAs must preselect the corresponding plan on Sign Up.
+9. Phone Number and Company remain in scope and are currently required.
+10. The logo navigates Home only from Sign Up.
+11. Anti-spam, privacy, retention, consent, and production API policies are deferred and must be flagged for the future integration phase.
+12. Implementation token naming and Figma code syntax mapping are deferred.
 
-**Open question:** The design does not define target timezone, update cadence, behavior at zero, or whether the target date includes a specific time.
+## 12. State coverage
 
-### 12.4 Sign Up
+| State | Current decision |
+|---|---|
+| Default | Required and shown |
+| Hover | Required and shown |
+| Focus | Required and shown |
+| Active/pressed | Not required in current design scope |
+| Selected | Pro plan emphasis and selected plan value are shown |
+| Select open | Native-select behavior required; menu appearance follows the platform control |
+| Disabled | Not required in current design scope |
+| Loading | Not required in current design scope |
+| Invalid/error | No visual design required now; storage failure behavior remains undefined |
+| Success | Required after IndexedDB storage; visual treatment and copy remain undefined |
 
-- Heading: `Work smarter. Save time.`
-- Description: `Easily manage your projects. Get on the list and receive in-app perks available only to early subscribers. We are moving into final development and getting ready for official launch soon.`
-- Form content: `Name`, `Email Address`, `Basic Pack`, `Free`, `Phone Number`, `Company`
-- Submit action: `Get on the list`
+## 13. Accessibility observations and decisions
 
-## 13. State coverage
+### 13.1 Positive evidence
 
-| State | Buttons | Text fields | Plan select | Form/page flow |
-|---|---|---|---|---|
-| Default | Observed | Observed | Observed | Observed |
-| Hover | Observed | Observed | Observed | Representative desktop frame observed |
-| Focus | Observed | Observed | Observed | Representative desktop frame observed |
-| Active/pressed | Not shown | Not shown | Not shown | Not shown |
-| Selected/open | Pro card emphasized; selected plan text shown | Not applicable | Closed selected value only | Dropdown list not shown |
-| Disabled | Not shown | Not shown | Not shown | Not shown |
-| Loading | Not shown | Not shown | Not shown | Not shown |
-| Empty | Not shown | Placeholder-like empty fields shown | Not shown | Not shown |
-| Error/invalid | Red token exists; no control state | Not shown | Not shown | Not shown |
-| Success | Not shown | Not shown | Not shown | No completion screen or message |
+- Explicit focus variants exist for buttons and form controls.
+- Primary actions are 50 px high.
+- Layouts reflow rather than requiring horizontal scrolling.
+- Visual hierarchy is clear.
 
-## 14. Accessibility observations
+### 13.2 Form labeling
 
-These observations identify implementation risks; they are not a final conformance audit.
+The fields display prompt text but no separate persistent visual labels. Later specification must require programmatic labels and must not rely on placeholders as the only accessible name.
 
-### 14.1 Positive evidence
+### 13.3 Reading order
 
-- Explicit focus variants exist for all reusable button and form-control families.
-- Primary action height is 50 px.
-- Text fields are 45 px high; the select is 43 px high.
-- Main text hierarchy is visually clear.
-- Tablet and mobile layouts reflow rather than depending on horizontal scrolling.
+**User decision:** On mobile, semantic order follows the visual order. The decorative illustration precedes the heading but contributes no announced content.
 
-### 14.2 Contrast concerns
+### 13.4 Contrast risk
 
-Ratios calculated from the observed Figma color variables include:
+Observed approximate ratios include:
 
-| Foreground / background | Approximate ratio | Concern |
-|---|---:|---|
-| `#5175FF` on `#FFFFFF` | 3.93:1 | Insufficient for normal-size text at the common 4.5:1 AA threshold |
-| `#5175FF` on `#E4EAFF` | 3.28:1 | Insufficient for normal-size text |
-| `#747B95` on `#FFFFFF` | 4.19:1 | Slightly below the normal-text threshold |
-| `#747B95` on `#FAFAFA` | 4.02:1 | Below the normal-text threshold |
-| `#829CFF` on `#FFFFFF` | 2.58:1 | Insufficient for normal-size text and potentially weak for component boundaries |
+- `#5175FF` on `#FFFFFF`: 3.93:1
+- `#5175FF` on `#E4EAFF`: 3.28:1
+- `#747B95` on `#FFFFFF`: 4.19:1
+- `#747B95` on `#FAFAFA`: 4.02:1
+- `#829CFF` on `#FFFFFF`: 2.58:1
 
-**Observed risk:** Several 16 px labels and body-text combinations need formal contrast verification and likely adjustment during requirements/design review.
+Several normal-size text combinations may not satisfy WCAG AA contrast expectations.
 
-### 14.3 Form labeling
+**User decision:** Do not remediate contrast at this stage. Preserve this as an accepted accessibility risk and potential implementation deviation, not as a claim of conformance.
 
-**Observed:** Form controls display prompt text inside the field area, but no separate persistent labels are shown.
+### 13.5 Dynamic content
 
-**Open question:** Whether the prompt text represents placeholders, labels rendered within the control, or a floating-label pattern is not defined.
+Countdown announcement frequency and storage-success/failure announcements are not defined by Figma. They must be specified without announcing every second disruptively.
 
-**Recommended:** Later specifications should require persistent programmatic labels and must not rely on placeholders as the only accessible name.
+## 14. Inconsistencies and risks
 
-### 14.4 Reading order
+| Finding | Status or impact |
+|---|---|
+| Supplied page-level node is named `Border` | Weak handoff naming remains |
+| Mobile frames retain an unusable hidden tablet grid | Confirmed stale metadata; use actual fluid insets |
+| `spacing/125` was absent | Resolved in Figma |
+| Components are unpublished and undocumented | Reuse intent exists but guidance is not encoded |
+| Variables use `ALL_SCOPES` and no code syntax | Code mapping remains deferred |
+| No paint, effect, or grid styles | Some visual rules remain local to frames/nodes |
+| Desktop Home and Sign Up use different source widths | Use the confirmed `80rem` breakpoint, not equal frame widths |
+| Interaction examples are desktop-only | Apply the demonstrated states responsively |
+| Success state is not designed | Functional success feedback is required; presentation remains open |
+| Long-content examples are missing | Later design/spec must define wrapping and growth |
+| IndexedDB failure behavior is undefined | Must remain an explicit specification gap |
+| Contrast remediation is deferred | Accepted accessibility risk |
 
-**Observed:** Mobile visually places the dashboard illustration before the hero heading, while desktop visually places the heading before the illustration.
+## 15. Remaining non-blocking open questions
 
-**Open question:** The intended semantic DOM order is not defined.
+1. What exact confirmation copy and visual treatment appear after IndexedDB storage succeeds?
+2. What error copy, announcement, and recovery behavior apply if IndexedDB storage fails?
+3. What fields and metadata constitute the IndexedDB record: identifier, selected plan, timestamp, schema version, or only entered values?
+4. How should provisional required-field rules be revisited before production/API integration?
+5. Which inclusive/exclusive media-query semantics map `24rem`, `48rem`, and `80rem` to the demonstrated compositions?
+6. Should the observed two-color focus treatment be normalized across every surface? This is deferred.
 
-**Recommended:** Keep the page heading and explanatory content early in the semantic reading order unless user testing or product intent supports an illustration-first reading order.
+## 16. Evidence map
 
-### 14.5 Dynamic content
-
-**Open question:** The countdown’s screen-reader announcement policy, update frequency, and behavior at zero are not defined. Announcing every second would be disruptive.
-
-### 14.6 Keyboard and semantics
-
-Figma demonstrates visual focus but cannot confirm:
-
-- Native link, button, input, and select semantics
-- Tab order
-- Enter/Space behavior
-- Focus movement after navigation or submission
-- Error association and announcement
-- Form autocomplete attributes
-- Landmark and heading structure
-
-## 15. Inconsistencies and missing evidence
-
-| Finding | Classification | Impact |
+| Evidence | Figma references | Later use |
 |---|---|---|
-| Supplied node is named `Border` although it represents the audited page scope | Observed | Node naming is not descriptive for handoff or traceability |
-| Mobile frames retain an unusable tablet grid definition | Observed | Grid metadata cannot be copied directly into implementation |
-| `spacing-125` is documented as 10 px but is absent from variables | Observed | Foundation specimen and token collection disagree |
-| Components are unpublished and have empty descriptions | Observed | Reuse intent is visible but component guidance is not encoded |
-| Variables use `ALL_SCOPES` and have no code syntax | Observed | Token intent is broad and code mapping is not defined |
-| No paint, effect, or grid styles exist | Observed | Some reusable visual rules remain local to nodes or frames |
-| Home desktop is 1440 px while Sign Up desktop is 1321 px | Observed | Shared desktop responsive rules cannot be derived from equal source widths |
-| Interaction examples are desktop-only | Observed | Mobile/tablet hover and focus placement is not demonstrated |
-| Active, disabled, loading, error, and success states are absent | Observed | Later requirements and design decisions must define applicable states |
-| No long-content or missing-content examples exist | Observed | Resilience to copy growth and absent content remains undefined |
-| Countdown behavior is not prototyped | Observed | Static design cannot establish functional countdown rules |
-| Form submission and validation are not prototyped | Observed | Product and data behavior cannot be inferred safely |
-| Plan dropdown contents are not shown | Observed | Available options and selection behavior are unknown |
+| Home responsive behavior | `2141:1599`, `2141:1724`, `2141:1813` | REQUIREMENTS, DESIGN, SPEC |
+| Sign Up responsive behavior | `2141:1680`, `2141:1896`, `2141:1940` | REQUIREMENTS, DESIGN, SPEC |
+| Navigation intent | CTA and Sign Up logo reactions | REQUIREMENTS, SPEC |
+| Interactive states | `2141:2949`, `10:531`, `10:526`, `10:567`, `10:503`, `10:512` | DESIGN, SPEC |
+| Foundations | `2141:938`, variable collection `4:385` | DESIGN, ARCHITECTURE, tokens |
+| Reusable patterns | `2141:935` | DESIGN, ARCHITECTURE, PLAN |
+| Content and plans | Production Home and Sign Up frames | REQUIREMENTS, DESIGN, SPEC |
+| Decisions and gaps | Sections 10–15 | REQUIREMENTS, DESIGN, SPEC, DOCUMENT-REVIEW |
 
-## 16. Unresolved questions
+## 17. Review pass 1 — Completeness and correctness
 
-### 16.1 Product questions
+Completed:
 
-1. Is the launch target exactly 31 December 2026, and what time and timezone apply?
-2. What happens when the countdown reaches zero?
-3. What service or destination receives sign-up submissions?
-4. Which form fields are required, optional, or conditionally required?
-5. What constitutes a successful sign-up, and what confirmation must the user receive?
-6. Must selecting a pricing-plan action preselect that plan on the Sign Up page?
-7. Are `Phone Number` and `Company` necessary for the initial release?
-8. Is the logo intended to navigate home only from Sign Up, or from every page?
+- Inspected all six production frames and four interaction-state frames.
+- Inspected foundations, components, variants, instances, variables, text styles, grids, assets, and prototype reactions.
+- Re-inspected both mobile frames and nested content containers.
+- Incorporated stakeholder decisions without turning deferred details into facts.
+- Added and verified `spacing/125 = 10` in Figma.
+- Distinguished current IndexedDB behavior from future API integration.
+- Distinguished required success feedback from undefined success copy/design.
 
-### 16.2 Design questions
+## 18. Review pass 2 — Consistency, traceability, and uncertainty
 
-1. What exact breakpoints or content-fit conditions trigger the desktop, tablet, and mobile transformations?
-2. What is the intended mobile grid, given the inconsistent frame metadata?
-3. Which active/pressed, disabled, loading, invalid, and success states are required?
-4. How should the plan select appear when open?
-5. Should focus rings retain the demonstrated two-color treatment at every background boundary?
-6. Should the mobile visual order of illustration before heading also be the semantic reading order?
-7. Is the product dashboard illustration decorative or informative?
-8. What is the approved resolution for the observed contrast concerns?
+Completed:
 
-### 16.3 Content questions
+- Material findings are connected to Figma nodes or explicit user decisions.
+- Observed evidence, decisions, risks, and open questions remain distinct.
+- The stale mobile grid and resolved spacing token are accurately recorded.
+- Contrast deferral is documented as risk, not accessibility conformance.
+- Current and future persistence boundaries do not conflict.
+- Remaining questions are non-blocking for requirements but cannot be invented later.
 
-1. Are the supplied marketing and pricing strings final content?
-2. Can plan names, prices, billing summaries, or features vary in length?
-3. Are countdown labels fixed to `days`, `hours`, `min`, and `sec`?
-4. What validation, error, loading, and success messages are required?
-5. Is localization in scope?
-6. Should the displayed launch date use the current `31 Dec 2026` format in every locale?
+## 19. Stage completion
 
-### 16.4 Technical questions
-
-1. Is the countdown client-side only, server-derived, or synchronized against an external source?
-2. Is form submission handled by an existing API, serverless function, third-party form service, or mail workflow?
-3. What anti-spam, validation, privacy, retention, and consent rules apply?
-4. How should the vector illustration and orbit decorations be exported or reconstructed for production?
-5. What implementation token names should map to the Figma variables?
-6. Should the missing `spacing/125` variable be added to Figma or intentionally excluded from code?
-
-## 17. Evidence map for later documents
-
-| Evidence area | Primary Figma references | Later document use |
-|---|---|---|
-| Home structure and responsive transformations | `2141:1599`, `2141:1724`, `2141:1813` | REQUIREMENTS, DESIGN, SPEC |
-| Sign Up structure and responsive transformations | `2141:1680`, `2141:1896`, `2141:1940` | REQUIREMENTS, DESIGN, SPEC |
-| Navigation intent | Home CTA and Sign Up logo reactions in the six production frames | REQUIREMENTS, SPEC |
-| Interactive visual states | `2141:2949`, component sets `10:531`, `10:526`, `10:567`, `10:503`, `10:512` | DESIGN, SPEC |
-| Typography | `2141:938`, local text styles | DESIGN, SPEC, implementation tokens |
-| Color, spacing, and radius | `2141:938`, variable collection `4:385` | DESIGN, ARCHITECTURE, implementation tokens |
-| Reusable visual patterns | `2141:935` | DESIGN, ARCHITECTURE, PLAN |
-| Content | Production Home and Sign Up frames | REQUIREMENTS, DESIGN, SPEC |
-| Missing states and unresolved behavior | Sections 13–16 of this audit | REQUIREMENTS, DESIGN, SPEC, DOCUMENT-REVIEW |
-
-## 18. Review pass 1 — Completeness and correctness
-
-Completed checks:
-
-- Inspected the complete supplied page scope rather than only the selected production frame.
-- Inspected all Home and Sign Up responsive frames.
-- Inspected reusable components and their variants.
-- Inspected foundation variables and text styles.
-- Inspected representative hover and focus frames.
-- Inspected prototype reactions and confirmed the absence of named flow starting points.
-- Compared visual compositions with node metadata.
-- Recorded missing states, accessibility concerns, responsive uncertainties, and content gaps.
-- Verified that production instances inspected remain connected to source components.
-
-Corrections made during this pass:
-
-- Did not treat the static countdown sample as defined runtime behavior.
-- Did not treat form fields as required or optional without evidence.
-- Did not treat the demonstrated viewport widths as confirmed CSS breakpoints.
-- Did not assume the form-submit destination or persistence model.
-
-## 19. Review pass 2 — Consistency, traceability, and uncertainty
-
-Completed checks:
-
-- Every material screen, component, foundation, and interaction finding has a Figma node or section reference.
-- Observations are separated from inferences and recommendations.
-- Product behavior missing from Figma remains an open question.
-- The mobile grid conflict and spacing-token conflict are recorded rather than silently resolved.
-- Accessibility recommendations are not presented as existing design decisions.
-- Later-document responsibilities are preserved; this audit does not prescribe repository architecture or implementation sequencing.
-
-No blocking contradiction prevents creation of an initial requirements document. Product and technical questions must remain visible in Stage 2 and may prevent individual requirements from being classified as confirmed.
-
-## 20. Stage completion
-
-- **File created:** `FIGMA-AUDIT.md`
-- **Important findings:** Two responsive page flows, six production frames, explicit default/hover/focus component states, a variable-backed foundation, and direct Home-to-Sign-Up prototype navigation are present.
-- **Assumptions introduced:** None treated as confirmed. Recommendations are explicitly labeled.
-- **Open questions:** Countdown rules, form requirements and submission behavior, plan-selection behavior, missing states, mobile grid, contrast remediation, and semantic reading order.
-- **Blockers:** None for beginning Stage 2; several questions block finalizing particular requirements.
-- **Readiness:** **Ready for Stage 2 with documented non-blocking open questions.**
+- **File modified:** `FIGMA-AUDIT.md`
+- **Figma modified:** Added and verified `spacing/125 = 10` (`VariableID:2182:134`).
+- **Important findings:** Two responsive page flows, explicit default/hover/focus states, direct Home-to-Sign-Up navigation, IndexedDB persistence, plan preselection, and a future server-derived launch date are established.
+- **Accepted risks/deferrals:** Contrast remediation, exact feedback copy, IndexedDB record shape, focus-ring normalization, privacy/retention policy, and code token naming.
+- **Blockers:** None for Stage 2.
+- **Readiness:** **Ready for Stage 2 with documented non-blocking decisions and risks.**
