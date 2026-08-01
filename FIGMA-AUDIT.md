@@ -227,6 +227,8 @@ Observed pricing content:
 10. The logo navigates Home only from Sign Up.
 11. Anti-spam, privacy, retention, consent, and production API policies are deferred and must be flagged for the future integration phase.
 12. Implementation token naming and Figma code syntax mapping are deferred.
+13. An IndexedDB write failure must show and announce an error, must not show success, and should preserve entered values for correction or retry where technically possible.
+14. Generic `Get Started` actions and direct Sign Up navigation default the Plan field to Basic.
 
 ## 12. State coverage
 
@@ -240,7 +242,7 @@ Observed pricing content:
 | Select open | Native-select behavior required; menu appearance follows the platform control |
 | Disabled | Not required in current design scope |
 | Loading | Not required in current design scope |
-| Invalid/error | No visual design required now; storage failure behavior remains undefined |
+| Invalid/error | IndexedDB storage failure feedback is required; exact visual treatment and copy remain undefined |
 | Success | Required after IndexedDB storage; visual treatment and copy remain undefined |
 
 ## 13. Accessibility observations and decisions
@@ -276,7 +278,7 @@ Several normal-size text combinations may not satisfy WCAG AA contrast expectati
 
 ### 13.5 Dynamic content
 
-Countdown announcement frequency and storage-success/failure announcements are not defined by Figma. They must be specified without announcing every second disruptively.
+Countdown announcement frequency is not defined by Figma and must avoid announcing every second disruptively. IndexedDB success and failure feedback must be visibly presented and programmatically announced.
 
 ## 14. Inconsistencies and risks
 
@@ -292,17 +294,16 @@ Countdown announcement frequency and storage-success/failure announcements are n
 | Interaction examples are desktop-only | Apply the demonstrated states responsively |
 | Success state is not designed | Functional success feedback is required; presentation remains open |
 | Long-content examples are missing | Later design/spec must define wrapping and growth |
-| IndexedDB failure behavior is undefined | Must remain an explicit specification gap |
+| IndexedDB failure behavior was undefined | Resolved by user decision: show and announce failure, suppress success, and preserve entered values where technically possible |
 | Contrast remediation is deferred | Accepted accessibility risk |
 
 ## 15. Remaining non-blocking open questions
 
-1. What exact confirmation copy and visual treatment appear after IndexedDB storage succeeds?
-2. What error copy, announcement, and recovery behavior apply if IndexedDB storage fails?
-3. What fields and metadata constitute the IndexedDB record: identifier, selected plan, timestamp, schema version, or only entered values?
-4. How should provisional required-field rules be revisited before production/API integration?
-5. Which inclusive/exclusive media-query semantics map `24rem`, `48rem`, and `80rem` to the demonstrated compositions?
-6. Should the observed two-color focus treatment be normalized across every surface? This is deferred.
+1. What exact confirmation and storage-failure copy and visual treatment should be used?
+2. What fields and metadata constitute the IndexedDB record: identifier, selected plan, timestamp, schema version, or only entered values?
+3. How should provisional required-field rules be revisited before production/API integration?
+4. Which inclusive/exclusive media-query semantics map `24rem`, `48rem`, and `80rem` to the demonstrated compositions?
+5. Should the observed two-color focus treatment be normalized across every surface? This is deferred.
 
 ## 16. Evidence map
 
@@ -327,7 +328,8 @@ Completed:
 - Incorporated stakeholder decisions without turning deferred details into facts.
 - Added and verified `spacing/125 = 10` in Figma.
 - Distinguished current IndexedDB behavior from future API integration.
-- Distinguished required success feedback from undefined success copy/design.
+- Distinguished required success and storage-failure feedback from undefined message copy/design.
+- Confirmed Basic as the default Plan for generic and direct Sign Up navigation.
 
 ## 18. Review pass 2 — Consistency, traceability, and uncertainty
 
@@ -339,12 +341,13 @@ Completed:
 - Contrast deferral is documented as risk, not accessibility conformance.
 - Current and future persistence boundaries do not conflict.
 - Remaining questions are non-blocking for requirements but cannot be invented later.
+- IndexedDB failure feedback and the Basic generic default are confirmed decisions, not recommendations.
 
 ## 19. Stage completion
 
 - **File modified:** `FIGMA-AUDIT.md`
 - **Figma modified:** Added and verified `spacing/125 = 10` (`VariableID:2182:134`).
-- **Important findings:** Two responsive page flows, explicit default/hover/focus states, direct Home-to-Sign-Up navigation, IndexedDB persistence, plan preselection, and a future server-derived launch date are established.
+- **Important findings:** Two responsive page flows, explicit default/hover/focus states, direct Home-to-Sign-Up navigation, IndexedDB persistence and failure feedback, plan preselection, Basic as the generic default, and a future server-derived launch date are established.
 - **Accepted risks/deferrals:** Contrast remediation, exact feedback copy, IndexedDB record shape, focus-ring normalization, privacy/retention policy, and code token naming.
 - **Blockers:** None for Stage 2.
-- **Readiness:** **Ready for Stage 2 with documented non-blocking decisions and risks.**
+- **Readiness:** **Stage 2 decisions are fully incorporated; ready for Stage 3 with documented non-blocking questions and risks.**
