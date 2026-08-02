@@ -191,9 +191,9 @@ A new submit attempt may start from `idle`, `invalid`, or `storage-failure`. Pos
 | `SP-SUBMIT-007` | Confirmed | Current submission sends no form record to a remote endpoint. | Inspect network activity during submission. | `FR-007`, `BR-005`, `DR-004`, `CON-006`. |
 | `SP-SUBMIT-008` | Confirmed | Success and storage failure are shown in the existing Sign Up context without mandatory navigation. | Complete and fail a transaction; inspect page location. | `FR-008`, `FR-011`; `DESIGN.md` §12.6. |
 
-### 10.2 Pending and duplicate-action recommendation
+### 10.2 Pending and duplicate-action safeguard
 
-| Specification ID | Status | Proposed behavior | Verification | Requirement / design evidence |
+| Specification ID | Status | Required behavior | Verification | Requirement / design evidence |
 |---|---|---|---|---|
 | `SP-SUBMIT-009` | Confirmed technical safeguard | While a valid IndexedDB transaction is pending, additional submit activations do not start concurrent writes. The form exposes a programmatic busy state. No new loading animation or permanent disabled visual variant is required. | Delay a transaction, activate submit repeatedly, count write attempts, inspect busy state. | Duplicate-action coverage required by the workflow; preserves `NFR-001` and does not decide sequential duplicate-record policy. |
 
@@ -292,11 +292,11 @@ These are behavioral patterns, not mandatory source-code modules.
 
 ## 16. Responsive specification
 
-### 16.1 Reference-range recommendation
+### 16.1 Reference ranges
 
 The requirements confirm `24rem`, `48rem`, and `80rem` and delegate exact testable boundary behavior to this specification. Stage 5 resolves them using mobile-first inclusive lower bounds:
 
-| Range | Recommended inclusive/exclusive semantics | Composition |
+| Range | Inclusive/exclusive semantics | Composition |
 |---|---|---|
 | Narrow compact | `< 24rem` | Compact composition with additional content-fit wrapping when required. |
 | Standard compact | `>= 24rem` and `< 48rem` | Compact composition represented by the 375 px frames. |
