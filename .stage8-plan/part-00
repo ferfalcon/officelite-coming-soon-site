@@ -1,0 +1,99 @@
+# Officelite Coming Soon Site — Implementation Plan
+
+## 1. Document information
+
+- **Status:** Reviewed and refined — Stage 8 complete
+- **Version:** 0.2
+- **Last updated:** 2026-08-02
+- **Project:** Officelite coming soon site
+- **Repository:** `ferfalcon/officelite-coming-soon-site`
+- **Application root:** `frontend/`
+- **Design source:** [Officelite coming soon site](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3)
+- **Workflow stage:** Stage 8 — challenge and refine the implementation plan
+- **Primary sources:** `FIGMA-AUDIT.md`, `REQUIREMENTS.md`, `DESIGN.md`, `SPEC.md`, `DOCUMENT-REVIEW.md`, `ARCHITECTURE.md`, the current repository, and `Document-Guidelines-PLAN.md`
+
+## 2. Purpose and authority
+
+This document defines the ordered implementation approach for replacing the current Astro starter with the Officelite Home and Sign Up experience.
+
+It translates confirmed requirements, design intent, testable specifications, and architectural decisions into small implementation units with explicit:
+
+- file impact;
+- dependencies;
+- validation evidence;
+- decision gates;
+- migration and deployment work;
+- risks and completion criteria.
+
+`PLAN.md` does not redefine product behavior. When this plan and an upstream source conflict, the owning upstream document remains authoritative:
+
+- product outcomes and policy → `REQUIREMENTS.md`;
+- visual and interaction intent → `DESIGN.md`;
+- observable behavior → `SPEC.md`;
+- structural technical decisions → `ARCHITECTURE.md`.
+
+### Evidence classification
+
+- **Confirmed:** supported by project documentation or an explicit user decision.
+- **Observed:** directly verified in Figma or the repository.
+- **Implementation decision:** a concrete planning choice consistent with the architecture.
+- **Recommended:** useful work that is not currently a confirmed requirement.
+- **Open question / gate:** unresolved behavior that must not be silently implemented as final.
+
+## 3. Source review
+
+The plan is based on the following verified evidence:
+
+| Source | Planning use |
+|---|---|
+| Figma Home frames `2141:1599`, `2141:1724`, `2141:1813` | Large, medium, and compact Home compositions |
+| Figma Sign Up frames `2141:1680`, `2141:1896`, `2141:1940` | Large, medium, and compact Sign Up compositions |
+| Figma interaction section `2141:2949` and component sets | Default, hover, and focus visual states |
+| `FIGMA-AUDIT.md` | Factual design evidence, assets, tokens, inconsistencies, and source limitations |
+| `REQUIREMENTS.md` | Confirmed scope, requirements, non-goals, risks, and Definition of Done |
+| `DESIGN.md` | Visual hierarchy, responsive intent, component anatomy, and accepted deviations |
+| `SPEC.md` | Testable navigation, validation, countdown, persistence, state, accessibility, and edge behavior |
+| `DOCUMENT-REVIEW.md` | Resolved contradictions and remaining stakeholder decisions |
+| `ARCHITECTURE.md` | Astro MPA, framework-free TypeScript, query-string Plan context, IndexedDB schema, CSS, testing, and deployment boundaries |
+| Current repository | Existing files, scripts, dependency baseline, and starter implementation |
+
+## 4. Current implementation state
+
+### 4.1 Confirmed existing application
+
+The executable application is the nested `frontend/` project.
+
+```text
+frontend/
+├── public/
+│   ├── favicon.ico
+│   └── favicon.svg
+├── src/
+│   ├── assets/
+│   │   ├── astro.svg
+│   │   └── background.svg
+│   ├── components/
+│   │   └── Welcome.astro
+│   ├── layouts/
+│   │   └── Layout.astro
+│   └── pages/
+│       └── index.astro
+├── astro.config.mjs
+├── README.md             # generated Astro starter documentation
+├── package.json
+├── pnpm-lock.yaml
+├── pnpm-workspace.yaml
+└── tsconfig.json
+```
+
+### 4.2 Observed toolchain
+
+- Astro `^7.1.6`
+- Node.js `>=22.12.0`
+- ESM package configuration
+- strict Astro TypeScript configuration
+- default static Astro configuration
+- pnpm lockfile and local build-script allowlist
+- no client UI framework
+- no backend or server adapter
+- no test runner, browser-test framework, accessibility-test integration, lint script, CI workflow, or checked-in Vercel configuration
