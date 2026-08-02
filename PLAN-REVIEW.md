@@ -9,6 +9,7 @@
 - **Application root:** `frontend/`
 - **Reviewed plan:** `PLAN.md` version 0.1
 - **Updated plan:** `PLAN.md` version 0.2
+- **Repository synchronization:** `PLAN-REVIEW.md` is committed; the refined `PLAN.md` version 0.2 is the attached Stage 8 artifact. The repository copy remains version 0.1 because repository automation was unavailable and the connector could not replace the 76 KB file atomically.
 - **Design source:** [Officelite coming soon site](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3)
 - **Workflow stage:** Stage 8 — challenge and refine the implementation plan
 - **Primary sources:** `FIGMA-AUDIT.md`, `REQUIREMENTS.md`, `DESIGN.md`, `SPEC.md`, `DOCUMENT-REVIEW.md`, `ARCHITECTURE.md`, `PLAN.md`, the current repository, `Figma-to-Implementation Workflow.md`, and `Document-Guidelines-PLAN.md`
@@ -181,4 +182,4 @@ These are implementation or external-access validations, not documentation valid
 
 **Ready with documented risks**
 
-The updated plan is ready for Stage 9 task decomposition. The unresolved gates do not prevent creation of task files, but the affected task files must preserve their blocked status and must not invent final product, content, privacy, compatibility, or deployment decisions.
+The updated plan is ready for Stage 9 task decomposition. The unresolved gates do not prevent creation of task files, but the affected task files must preserve their blocked status and must not invent final product, content, privacy, compatibility, or deployment decisions. Stage 9 in this project conversation must use the attached `PLAN.md` version 0.2; repository-only consumers must first synchronize that artifact over the version 0.1 repository copy.
