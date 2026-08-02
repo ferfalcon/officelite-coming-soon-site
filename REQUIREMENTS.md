@@ -191,9 +191,9 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 - The record includes Name, Email Address, Plan, Phone Number, and Company.
 - Success is not reported until the write transaction completes.
 - No submitted record is sent to a remote API.
-- Database/store names, record key, timestamp, duplicate handling, and schema metadata remain open.
+- The database/store schema follows `DR-005`; duplicate and retention policy remain open under `DR-007`.
 
-**Evidence:** Explicit user decision.
+**Evidence:** Explicit user decision; `ARCHITECTURE.md` §12.
 
 ### FR-008 — Confirm successful local storage
 
@@ -368,13 +368,14 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 
 ## 14. Source conflicts and resolutions
 
-| Conflict | Resolution | Status |
-|---|---|---|
-| README originally required validation only for Name and Email; user later said all displayed fields are required for now. | The later user decision governs. README must be updated. | Resolved in requirements; repository summary remains to update. |
-| README says custom-styled select; user says behave like a Select form. | Use a native select with the closed-state visual intent. | Resolved. |
-| README says the countdown ticks every second; user says final date is server-derived. | These are compatible: the visible countdown updates every second; the target source is future server data. | Resolved. |
-| Figma contains no validation/error/success composition; requirements need those outcomes. | Require behavior and accessibility; defer final visual treatment and copy. | Open design/content work. |
-| Mobile frame carries a copied tablet grid. | Use actual 16 px / 24 px fluid insets; ignore stale grid. | Resolved audit conclusion. |
+| Conflict | Resolution and impact |
+|---|---|
+| README validated only Name and Email; user decision says all displayed fields are required. | Apply required validation to all five fields. README was corrected during Stage 5. |
+| README requested a custom-styled select; user decision requires native select behavior. | Use native interaction. Closed-state appearance may follow Figma without replacing native behavior. README was corrected during Stage 5. |
+| README requires one-second updates; launch date will eventually be server-derived. | Compatible: target-date source and client update frequency are separate concerns. |
+| Figma lacks error/success compositions; product behavior requires validation and success confirmation. | Functional behavior is required; detailed visual treatment and copy remain open. |
+| Accessibility intent conflicts with deferred contrast remediation. | Record the deviation and make no full WCAG AA claim. |
+| Mobile frames contain an impossible hidden grid. | Use observed 16 px/24 px inset containers, not the stale grid. |
 
 ## 15. Risks
 
@@ -386,7 +387,7 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 | Placeholder content mistaken for final | Medium | Medium | Mark placeholders and keep content replaceable. |
 | Long content breaks fixed-height layouts | Medium | Medium | Require flexible growth and long-string tests. |
 | Native select visuals vary by browser | Low | High | Prioritize behavior; document acceptable variance. |
-| Historical Astro source was not fully inspected during requirements work | Medium | Confirmed observation | Reinspect the current repository during Stage 6 before architectural decisions. |
+| Historical Astro source was not fully inspected during requirements work | Medium | Resolved | Stage 6 reinspection confirmed the nested `frontend/` Astro starter and recorded the target structure in `ARCHITECTURE.md`. |
 | Duplicate submissions accumulate | Unknown | Unknown | Decide record identity and duplicate policy. |
 | Post-success form behavior is undefined | Medium | Confirmed gap | Decide whether values remain, clear, disable, or are replaced before the success-state task is finalized. |
 
@@ -400,15 +401,14 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 
 ### Technical and future integration
 
-1. What browser-support matrix is required?
-2. What exact schema will the future date API use, and what timezone does its value represent?
+4. What browser-support matrix must the project meet?
+5. What timezone and payload shape will the future launch-date API use?
 
 ### Content and design
 
-1. What exact validation, success, and failure copy is approved?
-2. What visual pattern should field errors and form-level success/failure use?
-3. Should Pro and Ultimate display supporting price text inside the Plan control, and what exact `Pack` labels should each option use?
-4. At extreme copy lengths, is unrestricted vertical growth acceptable or should content limits be introduced?
+6. What are the approved validation, failure, and success messages?
+7. What visual pattern presents field errors, success, and storage-failure feedback?
+8. Should the Plan control’s supporting price text update for Pro and Ultimate, and what exact labels should be displayed?
 
 ## 17. Definition of Done
 
@@ -420,34 +420,31 @@ The current requirements are satisfied when:
 - Invalid required data is not stored.
 - Plan CTAs preselect their corresponding plan, and generic/direct Sign Up defaults to Basic.
 - The countdown updates once per second using the current placeholder-date boundary.
-- The page structures and responsive transformations match the supplied Figma intent at reference and intermediate widths.
-- Default, hover, and focus states are implemented for the applicable controls.
-- Navigation and form flow are keyboard operable.
-- Labels, errors, and result feedback are exposed programmatically.
-- Decorative assets are ignored by assistive technology.
-- Long content and messages do not clip, overlap, or cause primary-flow horizontal scrolling.
-- No sign-up record is sent remotely.
-- Known contrast deviations are documented and no unsupported conformance claim is made.
-- Implementation and validation evidence reference the applicable requirement IDs.
-- Final unresolved decisions are either approved or remain explicitly excluded from the completed scope.
+- Home and Sign Up implement the required transformations at and between the defined responsive ranges.
+- Keyboard operation, semantic controls, visible focus, labels, and status announcements are verified.
+- Decorative SVG content is excluded from redundant accessibility output.
+- Long-content and narrow-viewport behavior are verified.
+- Automated and manual checks defined by `SPEC.md` pass.
+- No current behavior depends on the future API.
+- Documentation is consistent or deviations are explicitly recorded.
+- No full WCAG AA claim is made while the contrast deviation remains.
 
 ## 18. Traceability
 
-| Requirement | Primary evidence | Downstream design/spec responsibility |
-|---|---|---|
-| FR-001, FR-002 | Home frames and prototype | Home structure, CTA behavior, responsive composition |
-| FR-003, FR-005, FR-012 | Pricing and Plan select; user decisions | Plan context and native select behavior |
-| FR-004, FR-010 | Sign Up frames and prototype | Sign Up structure and logo navigation |
-| FR-006 | User decision; README conflict | Validation rules, errors, labels |
-| FR-007, FR-008, FR-011 | User decisions | IndexedDB transaction, feedback, retry/failure |
-| FR-009 | Home/Sign Up countdown; README | Target source, update cycle, formatting, announcement policy |
-| AR-001–AR-010 | Quality decisions and Figma states | Semantic structure, focus, feedback, reflow, decorative treatment |
-| RR-001–RR-006 | User breakpoints and six responsive frames | Fluid transformations and intermediate widths |
-| CR/NFR/CON groups | User decisions, README, repository direction | Content resilience, technical constraints, deviations |
+| Requirement group | Evidence | Downstream owner | Status |
+|---|---|---|---|
+| FR-001–FR-005 | Home/Sign Up frames, components, prototype, user decisions | DESIGN/SPEC | Planned |
+| FR-006–FR-010 | README, user decisions, Figma countdown/logo | SPEC | Planned |
+| FR-011–FR-012 | Audit gaps, Figma default selection, explicit user approval | SPEC | Planned |
+| BR-001–BR-007 | Figma, README, user decisions | SPEC | Planned |
+| DR-001–DR-007 | User decisions, architecture-owned persistence choices, and future lifecycle boundary | SPEC/ARCHITECTURE | Planned/Open |
+| AR-001–AR-010 | Project accessibility principles, Figma, user decisions | DESIGN/SPEC | Planned/Deviation |
+| RR-001–RR-006 | Responsive frames and approved breakpoints | DESIGN/SPEC | Planned |
+| CR/NFR/CON groups | Figma, corrected README, repository observations, user decisions | DESIGN/SPEC/ARCHITECTURE | Planned/Open |
 
 ## 19. Review pass 1 — Completeness and correctness
 
-Completed checks:
+Completed:
 
 - Covered purpose, goals, non-goals, users, needs, functional behavior, rules, data, accessibility, responsiveness, content, constraints, dependencies, risks, assumptions, questions, and completion criteria.
 - Every functional requirement has classification, priority, rationale, evidence, and testable acceptance criteria.
@@ -457,12 +454,12 @@ Completed checks:
 
 ## 20. Review pass 2 — Consistency, traceability, and uncertainty
 
-Completed checks:
+Completed:
 
-- Later user decisions override the stale README statements and the conflict is recorded.
-- Product requirements remain separate from design treatment and implementation detail.
-- Plan preselection and Basic default are not confused with Pro visual emphasis.
-- Future server-derived date is not confused with current one-second visual updates.
+- Explicit user decisions take precedence over stale README statements and every conflict is recorded.
+- Server-derived target date and one-second visible updates are compatible.
+- Required success feedback is separated from unresolved design and copy.
+- Native select behavior is separated from closed-control appearance.
 - Accepted contrast risk is not presented as conformance.
 - Stale mobile-grid metadata is excluded from responsive requirements.
 - Stage 5 resolved breakpoint boundary semantics, focus-treatment scope, stale README requirements, and persistence-decision ownership.
