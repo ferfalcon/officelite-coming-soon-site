@@ -2,8 +2,8 @@
 
 ## 1. Document information
 
-- **Status:** Reviewed — Stage 5 consistency gate complete
-- **Version:** 0.3
+- **Status:** Reviewed — Stage 6 architecture linked
+- **Version:** 0.4
 - **Last updated:** 2026-08-01
 - **Owner:** Project owner
 - **Design source:** [Officelite coming soon site](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3)
@@ -295,7 +295,7 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 | DR-002 | Confirmed, provisional | Must | Validate required values, email syntax, and Plan membership. | Invalid values prevent storage. |
 | DR-003 | Confirmed | Must | Persist in browser IndexedDB. | A completed write can be read from the origin database. |
 | DR-004 | Confirmed | Must | Do not transmit the record remotely. | Network inspection shows no form-record request. |
-| DR-005 | Architecture decision required | Must | `ARCHITECTURE.md` must define the IndexedDB database name, object-store name, schema version, key strategy, and any record identifier or timestamp needed by the implementation. | Architecture records the choices, rationale, and migration implications before implementation tasks are finalized. |
+| DR-005 | Resolved architectural decision | Must | IndexedDB uses database `officelite`, schema version `1`, object store `signups`, key path `id` with auto-increment, and a UTC ISO `createdAt` timestamp. Version 1 defines no indexes. | `ARCHITECTURE.md` §12 and `AD-005` record the choices, rationale, transaction contract, and migration implications. |
 | DR-006 | Future dependency | Could | Keep field meaning mappable to a future API without defining an API schema now. | No current API contract is claimed. |
 | DR-007 | Open product/data decision | Could | Duplicate handling, retention duration, and any future update or deletion policy are undefined for the current release. | Later documents must keep these decisions visible and must not present an unapproved lifecycle policy as confirmed. |
 
@@ -368,14 +368,13 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 
 ## 14. Source conflicts and resolutions
 
-| Conflict | Resolution and impact |
-|---|---|
-| README validated only Name and Email; user decision says all displayed fields are required. | Apply required validation to all five fields. README was corrected during Stage 5. |
-| README requested a custom-styled select; user decision requires native select behavior. | Use native interaction. Closed-state appearance may follow Figma without replacing native behavior. README was corrected during Stage 5. |
-| README requires one-second updates; launch date will eventually be server-derived. | Compatible: target-date source and client update frequency are separate concerns. |
-| Figma lacks error/success compositions; product behavior requires validation and success confirmation. | Functional behavior is required; detailed visual treatment and copy remain open. |
-| Accessibility intent conflicts with deferred contrast remediation. | Record the deviation and make no full WCAG AA claim. |
-| Mobile frames contain an impossible hidden grid. | Use observed 16 px/24 px inset containers, not the stale grid. |
+| Conflict | Resolution | Status |
+|---|---|---|
+| README originally required validation only for Name and Email; user later said all displayed fields are required for now. | The later user decision governs. README must be updated. | Resolved in requirements; repository summary remains to update. |
+| README says custom-styled select; user says behave like a Select form. | Use a native select with the closed-state visual intent. | Resolved. |
+| README says the countdown ticks every second; user says final date is server-derived. | These are compatible: the visible countdown updates every second; the target source is future server data. | Resolved. |
+| Figma contains no validation/error/success composition; requirements need those outcomes. | Require behavior and accessibility; defer final visual treatment and copy. | Open design/content work. |
+| Mobile frame carries a copied tablet grid. | Use actual 16 px / 24 px fluid insets; ignore stale grid. | Resolved audit conclusion. |
 
 ## 15. Risks
 
@@ -401,14 +400,15 @@ Project stakeholders, UX/UI contributors, front-end contributors, and future API
 
 ### Technical and future integration
 
-4. What browser-support matrix must the project meet?
-5. What timezone and payload shape will the future launch-date API use?
+1. What browser-support matrix is required?
+2. What exact schema will the future date API use, and what timezone does its value represent?
 
 ### Content and design
 
-6. What are the approved validation, failure, and success messages?
-7. What visual pattern presents field errors, success, and storage-failure feedback?
-8. Should the Plan control’s supporting price text update for Pro and Ultimate, and what exact labels should be displayed?
+1. What exact validation, success, and failure copy is approved?
+2. What visual pattern should field errors and form-level success/failure use?
+3. Should Pro and Ultimate display supporting price text inside the Plan control, and what exact `Pack` labels should each option use?
+4. At extreme copy lengths, is unrestricted vertical growth acceptable or should content limits be introduced?
 
 ## 17. Definition of Done
 
@@ -420,31 +420,34 @@ The current requirements are satisfied when:
 - Invalid required data is not stored.
 - Plan CTAs preselect their corresponding plan, and generic/direct Sign Up defaults to Basic.
 - The countdown updates once per second using the current placeholder-date boundary.
-- Home and Sign Up implement the required transformations at and between the defined responsive ranges.
-- Keyboard operation, semantic controls, visible focus, labels, and status announcements are verified.
-- Decorative SVG content is excluded from redundant accessibility output.
-- Long-content and narrow-viewport behavior are verified.
-- Automated and manual checks defined by `SPEC.md` pass.
-- No current behavior depends on the future API.
-- Documentation is consistent or deviations are explicitly recorded.
-- No full WCAG AA claim is made while the contrast deviation remains.
+- The page structures and responsive transformations match the supplied Figma intent at reference and intermediate widths.
+- Default, hover, and focus states are implemented for the applicable controls.
+- Navigation and form flow are keyboard operable.
+- Labels, errors, and result feedback are exposed programmatically.
+- Decorative assets are ignored by assistive technology.
+- Long content and messages do not clip, overlap, or cause primary-flow horizontal scrolling.
+- No sign-up record is sent remotely.
+- Known contrast deviations are documented and no unsupported conformance claim is made.
+- Implementation and validation evidence reference the applicable requirement IDs.
+- Final unresolved decisions are either approved or remain explicitly excluded from the completed scope.
 
 ## 18. Traceability
 
-| Requirement group | Evidence | Downstream owner | Status |
-|---|---|---|---|
-| FR-001–FR-005 | Home/Sign Up frames, components, prototype, user decisions | DESIGN/SPEC | Planned |
-| FR-006–FR-010 | README, user decisions, Figma countdown/logo | SPEC | Planned |
-| FR-011–FR-012 | Audit gaps, Figma default selection, explicit user approval | SPEC | Planned |
-| BR-001–BR-007 | Figma, README, user decisions | SPEC | Planned |
-| DR-001–DR-007 | User decisions, architecture-owned persistence choices, and future lifecycle boundary | SPEC/ARCHITECTURE | Planned/Open |
-| AR-001–AR-010 | Project accessibility principles, Figma, user decisions | DESIGN/SPEC | Planned/Deviation |
-| RR-001–RR-006 | Responsive frames and approved breakpoints | DESIGN/SPEC | Planned |
-| CR/NFR/CON groups | Figma, corrected README, repository observations, user decisions | DESIGN/SPEC/ARCHITECTURE | Planned/Open |
+| Requirement | Primary evidence | Downstream design/spec responsibility |
+|---|---|---|
+| FR-001, FR-002 | Home frames and prototype | Home structure, CTA behavior, responsive composition |
+| FR-003, FR-005, FR-012 | Pricing and Plan select; user decisions | Plan context and native select behavior |
+| FR-004, FR-010 | Sign Up frames and prototype | Sign Up structure and logo navigation |
+| FR-006 | User decision; README conflict | Validation rules, errors, labels |
+| FR-007, FR-008, FR-011 | User decisions | IndexedDB transaction, feedback, retry/failure |
+| FR-009 | Home/Sign Up countdown; README | Target source, update cycle, formatting, announcement policy |
+| AR-001–AR-010 | Quality decisions and Figma states | Semantic structure, focus, feedback, reflow, decorative treatment |
+| RR-001–RR-006 | User breakpoints and six responsive frames | Fluid transformations and intermediate widths |
+| CR/NFR/CON groups | User decisions, README, repository direction | Content resilience, technical constraints, deviations |
 
 ## 19. Review pass 1 — Completeness and correctness
 
-Completed:
+Completed checks:
 
 - Covered purpose, goals, non-goals, users, needs, functional behavior, rules, data, accessibility, responsiveness, content, constraints, dependencies, risks, assumptions, questions, and completion criteria.
 - Every functional requirement has classification, priority, rationale, evidence, and testable acceptance criteria.
@@ -454,16 +457,17 @@ Completed:
 
 ## 20. Review pass 2 — Consistency, traceability, and uncertainty
 
-Completed:
+Completed checks:
 
-- Explicit user decisions take precedence over stale README statements and every conflict is recorded.
-- Server-derived target date and one-second visible updates are compatible.
-- Required success feedback is separated from unresolved design and copy.
-- Native select behavior is separated from closed-control appearance.
+- Later user decisions override the stale README statements and the conflict is recorded.
+- Product requirements remain separate from design treatment and implementation detail.
+- Plan preselection and Basic default are not confused with Pro visual emphasis.
+- Future server-derived date is not confused with current one-second visual updates.
 - Accepted contrast risk is not presented as conformance.
 - Stale mobile-grid metadata is excluded from responsive requirements.
 - Stage 5 resolved breakpoint boundary semantics, focus-treatment scope, stale README requirements, and persistence-decision ownership.
-- Remaining questions do not block architecture and planning, but the post-success form behavior, duplicate policy, and feedback design must be decided before their implementation tasks are closed.
+- Stage 6 resolved the delegated IndexedDB database, store, version, key, identifier, timestamp, index, and migration decisions in `ARCHITECTURE.md` while preserving duplicate and retention policy as open.
+- Remaining questions do not block planning, but the post-success form behavior, duplicate policy, and feedback design must be decided before their implementation tasks are closed.
 - FR-011 and FR-012 remain confirmed.
 
 ## 21. Stage completion
@@ -473,5 +477,5 @@ Completed:
 - **Newly confirmed requirements:** IndexedDB failure feedback and Basic as the generic CTA/direct-navigation default.
 - **Accepted risks:** Contrast deviation, incomplete data-governance policy, unresolved duplicate/retention behavior, post-success form behavior, and future browser/API decisions.
 - **Stage 5 review:** Corrections and remaining uncertainties are recorded in `DOCUMENT-REVIEW.md`.
-- **Blockers:** None for architecture and planning. Some product/design decisions remain implementation gates.
-- **Readiness:** **Ready for architecture and planning.**
+- **Blockers:** None for planning. Some product/design decisions remain implementation gates.
+- **Readiness:** **Ready for Stage 7 planning with `ARCHITECTURE.md` as the structural source of truth.**
