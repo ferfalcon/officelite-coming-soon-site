@@ -1,0 +1,100 @@
+|---|---|---|---|---|---|
+| `P7-01` | Implement pure validation for whitespace-only required values, supported Plan, and no extra phone/company format. The DOM adapter reads the email control’s native `ValidityState` (`valueMissing`/`typeMismatch`) and passes the result into the pure validator; do not introduce a custom email regular expression. | `FR-006`, `SP-VAL-001`–`005` | `validation.ts`, `validation.test.ts`, `initSignUpForm.ts` | Phase 6 | Unit tests inject native-validity outcomes; browser tests cover empty, malformed, and ordinary valid email plus all other field cases. |
+| `P7-02` | Define a validation result shape keyed by form control name so controller and markup do not parse strings. | `NFR-003`, `AD-004` | `validation.ts` | `P7-01` | Type checks and tests prove deterministic field mapping. |
+| `P7-03` | Add stable IDs and `aria-describedby`/equivalent relationships between controls and field messages. Toggle `aria-invalid` only for current invalid fields. | `AR-004`, `SP-VAL-006`–`008`, `SP-A11Y-004` | `SignUpForm.astro`, `initSignUpForm.ts` | `P7-01`, `P6-01` | Accessibility tree and browser tests show correct relationships; correcting/resubmitting clears stale state. |
+| `P7-04` | Render provisional non-empty field messages from trusted content data using text-content APIs, not `innerHTML`. Do not lock final wording or iconography. | `SP-VAL-009`, `SP-CONTENT-005`, `PD-008`, architecture §19.2 | `site.ts`, form controller | `P7-03` | Tests assert message presence, field identity, non-color indication, and absence of HTML interpretation rather than exact prose. |
+| `P7-05` | Ensure invalid submit prevents every persistence call. Use an injected/stubbed persistence function until Phase 8. | `SP-VAL-005`, `FR-007` | `initSignUpForm.ts`, browser/unit tests | `P7-03` | Spy/stub confirms zero calls for all invalid scenarios. |
+| `P7-06` | Preserve entered values after validation failure and keep keyboard focus stable. Do not implement first-invalid-field focus unless the recommendation is approved. | `SP-FORM-005`, `SP-KEY-006`, `SP-VAL-010` recommended | Controller/tests | `P7-03` | Values remain; focus does not move unexpectedly; recommendation status is documented. |
+| `P7-07` | Apply approved field-error and result-region styling when `G-003` is resolved. If unresolved, retain semantic structural styling and keep final visual task open. | `G-003`, `DESIGN.md` §12.6 | Form/component styles | `P7-03` | Approved design comparison or explicit unresolved gate. |
+
+### Phase completion evidence
+
+- Invalid values never reach persistence.
+- Every invalid field has visible, programmatically associated feedback.
+- Values remain after invalid submission.
+- Final styling remains clearly gated if not approved.
+
+## 17. Phase 8 — IndexedDB persistence and result flow
+
+### Goal
+
+Complete the current browser-only sign-up path with reliable transaction outcomes and recovery.
+
+| Task | Work | References | Files | Dependencies | Validation |
+|---|---|---|---|---|---|
+| `P8-01` | Define the typed submission input and persisted record; inject `createdAt` as UTC ISO when mapping a valid submission. Do not invent trimming/casing beyond validation. | `DR-001`, `DR-005`, `SP-DATA-*` | `record.ts`, `record.test.ts` | `site.ts`, `plan.ts` | Tests verify five values, Plan slug, timestamp, and no preassigned `id`. |
+| `P8-02` | Implement IndexedDB open/upgrade for `officelite` version `1`; create `signups` with key path `id`, auto-increment, and no indexes. | `AD-005`, `DR-005`, `SP-DATA-004` | `indexedDb.ts` | Phase 2 controlled IndexedDB test dependency | Integration test inspects database schema. |
+| `P8-03` | Implement one-record `readwrite` transaction and resolve only on transaction `complete`; map open, request, abort, and transaction failures to one stable application failure. | `FR-007`, `FR-011`, `SP-SUBMIT-002`–`009` | `indexedDb.ts`, `indexedDb.test.ts` | `P8-02` | Tests prove request success alone does not resolve and failures reject/map correctly. |
+| `P8-04` | Integrate valid submission with record mapping and persistence. Enter `pending`, expose `aria-busy` or equivalent, and suppress concurrent activation without requiring an unapproved disabled visual. | `SP-SUBMIT-001`, pending behavior, `AR-006` | `initSignUpForm.ts` | `P7-05`, `P8-01`, `P8-03` | Repeated activation during a pending transaction starts exactly one write. |
+| `P8-05` | On transaction success, remove stale failure, show one visible/politely announced success, and apply the approved `G-004` post-success behavior. | `FR-008`, `SP-FEEDBACK-001`, `SP-FEEDBACK-003`–`004`, `SP-A11Y-005`, `SP-FORM-006` | Controller, content/styles | `P8-04`, `G-004` | Real-browser test reads committed record, then verifies approved success and form state. |
+| `P8-06` | On storage failure, exit pending, keep entered values, remove stale success, show/announce failure once, and allow retry. | `FR-011`, `SP-FEEDBACK-002`–`004`, `SP-EDGE-004`, error table | Controller, `indexedDb.ts` | `P8-04` | Controlled module failure and real-browser induced failure preserve values and allow successful retry. |
+| `P8-07` | Apply approved sequential duplicate behavior from `G-005` at the controller/policy boundary without changing version-1 schema unless the approved policy requires a documented architecture change. | `DR-007`, `G-005`, `AD-005` | Controller and possibly architecture/docs | `P8-05` | E2E test verifies approved repeated-success outcome; schema change triggers documentation review. |
+| `P8-08` | Verify no form values are transmitted or logged and no third-party runtime scripts can access them through new dependencies. | `BR-005`, `DR-004`, `AD-006`, security architecture | Browser network inspection; source review | `P8-04` | Valid submit produces no form-record network request and no console output containing values. |
+| `P8-09` | Add deterministic browser-test isolation: use a fresh browser context, clear `officelite` before each persistence scenario, induce storage failure with `page.addInitScript` or equivalent browser override before application code runs, and verify a committed record remains after a normal page reload. Do not add production-only test switches. | `SP-DATA-002`, `SP-EDGE-004`, `AD-009` | `tests/e2e/helpers/indexeddb.ts`, `signup.spec.ts` | `P8-03`–`P8-06` | Tests are order-independent; reload retains the record; failure/retry works without production test hooks. |
+
+### Phase completion evidence
+
+- Valid data creates a version-1 IndexedDB record only after validation.
+- Success appears only after transaction completion.
+- Concurrent writes are prevented.
+- Failure preserves values and supports retry.
+- Approved post-success and sequential duplicate behavior are verified.
+- A committed record remains after reload, and browser tests are isolated from prior records.
+- No personal form data leaves the browser.
+
+## 18. Phase 9 — Fidelity, resilience, and accessibility hardening
+
+### Goal
+
+Close visual, responsive, keyboard, content-growth, and accessibility gaps across the complete flow.
+
+| Task | Work | References | Files | Dependencies | Validation |
+|---|---|---|---|---|---|
+| `P9-01` | Resolve `G-002` and implement approved Kumbh Sans delivery with fallbacks, preload only when justified, and no unapproved third-party request. | `DESIGN.md` §8, `G-002`, architecture §15.4 | `Layout.astro`, `tokens.css`, optional font assets | Approval | Network/font inspection and visual comparison. |
+| `P9-02` | Resolve `G-008`; either omit secondary Plan text or render approved supporting text as a non-interactive sibling within the closed-control wrapper that updates from the native select value. Do not attempt rich HTML inside `<option>` or replace the native popup. | `SP-SIGNUP-006`–`007`, `G-008` | `SignUpForm.astro`, controller/content | Approval | Selection changes display only approved sibling content; the actual select and opened menu remain native. |
+| `P9-03` | Run long-content scenarios across hero, Plans, labels, validation, success, and failure; adjust flexible sizing without adding unapproved truncation. | `CR-002`, `SP-CONTENT-002`, `SP-EDGE-001`, `SP-RWD-010` | Page/component CSS | Phases 4–8 | No overlap, clipping, or hidden controls at all ranges. |
+| `P9-04` | Test immediately below/at/above 24rem, 48rem, and 80rem plus reference widths and representative intermediate widths. Correct layout interpolation. | `RR-001`–`RR-006`, `SP-RWD-001`–`012` | `home.css`, `sign-up.css` | Complete pages | Browser screenshots and layout assertions show correct compositions and no horizontal scroll. |
+| `P9-05` | Verify default, hover, and focus variants on all CTA/control families across light, blue, and dark surfaces. Keep accepted contrast deviation documented. | `AR-003`, `AR-009`, `SP-A11Y-009` | Component styles | Complete pages | Keyboard/pointer state review against Figma interaction frames. |
+| `P9-06` | Verify semantic outline, names, labels, required/invalid states, error relationships, result announcements, countdown grouping, decorative hiding, and no keyboard traps. | `AR-001`–`AR-008`, `SP-A11Y-*`, `SP-KEY-*` | Markup/controller/tests | Phases 4–8 | Automated accessibility scan plus manual keyboard/accessibility-tree review. |
+| `P9-07` | Verify 200% zoom/text enlargement, reduced motion, unusually narrow widths, countdown wrapping, and focus-ring containment. | `AR-008`, `AR-010`, `SP-EDGE-005` | CSS/tests | `P9-04` | Manual and browser tests preserve all primary functionality. |
+| `P9-08` | Block or remove decorative asset requests during browser tests and verify no broken-image announcement or lost meaning. | `SP-EDGE-002`, `AR-005` | E2E tests | Complete pages | Page remains operable and understandable; decorative images are hidden from accessibility tree. |
+| `P9-09` | Recommended: disable JavaScript and verify static brand, marketing, pricing, and date-label content remains readable. Do not make this a release blocker unless the recommendation is approved. | `NFR-007`, `SP-EDGE-006` | Browser test/manual check | Static Astro pages | Result recorded as pass or documented recommendation gap. |
+| `P9-10` | Compare Home against compact, medium, and large production frames; fix structural fidelity deviations without restoring fixed-height assumptions. | `FIGMA-AUDIT.md`, `DESIGN.md`, `SP-HOME-*`, `SP-RWD-003`–`005` | Home UI files | `P9-01`–`P9-08` | Approved/reviewed screenshots at 375, 768, and 1440 px. |
+| `P9-11` | Compare Sign Up against compact, medium, and large production frames; fix structural fidelity deviations while preserving native form semantics and flexible feedback growth. | `FIGMA-AUDIT.md`, `DESIGN.md`, `SP-SIGNUP-*`, `SP-RWD-006`–`010` | Sign Up UI files | `P9-01`–`P9-08` | Approved/reviewed screenshots at 375, 768, and 1321 px. |
+| `P9-12` | Compare CTA, field, select, and submit default/hover/focus states against the interaction examples; document native-platform variance and accepted contrast risk. | Figma interaction section `2141:2949`, `AR-003`, `AR-009` | Shared/control styles | `P9-05`, `P9-10`, `P9-11` | Interaction-state review checklist and screenshots are complete. |
+
+### Phase completion evidence
+
+- Complete flow remains usable by keyboard and with enlarged text.
+- Home, Sign Up, and interaction-state fidelity are reviewed as separate evidence sets.
+- Long content and feedback grow safely.
+- Decorative failures remain nonessential.
+- Known contrast deviations remain documented rather than hidden.
+
+## 19. Phase 10 — Release validation, deployment, and documentation
+
+### Goal
+
+Produce reproducible implementation evidence and a verified static deployment without expanding scope.
+
+| Task | Work | References | Files / systems | Dependencies | Validation |
+|---|---|---|---|---|---|
+| `P10-01` | Run the complete local validation command from a clean install, including the documented Playwright browser-binary setup. | Definition of Done; `AD-009`, `AD-010` | `frontend/` | All implementation phases | Frozen lockfile install, browser setup, check, unit/integration tests, build, and browser tests pass. |
+| `P10-02` | Run exploratory browser-engine tests. Final required projects depend on `G-007`; do not claim unsupported browsers. | `NFR-006`, `G-007` | Playwright config/results | `P10-01` | Approved matrix passes or compatibility sign-off remains blocked. |
+| `P10-03` | Confirm `G-006` before treating the deployed form as production-ready for real personal data. Until resolved, use synthetic test data only, do not invite public submission, and label any deployment as demo/preview or block the form for production use. | Privacy architecture; `DR-007` | Deployment/content notice as approved | Product/data decision | Release record states the real-data disposition and synthetic-test-data restriction clearly. |
+| `P10-04` | Verify `G-009`, deploy a preview from `frontend/`, and smoke test both routes, query parameters, static assets, IndexedDB behavior, and direct URL loads using an isolated browser context and synthetic data only. | `AD-010`, `G-006` | Vercel project | Vercel access; `P10-01` | Preview URL passes critical smoke flows; output is static `frontend/dist/`; no real personal data is entered during verification. |
+| `P10-05` | If `G-010` is approved, enable CI and verify it runs the same locked commands from `frontend/`, including Playwright browser setup. If deferred, document the manual validation procedure. | Architecture §21.4 | Workflow or README | Stable local commands | CI pass with correct working directory or explicit deferral. |
+| `P10-06` | Update the repository README with actual application root, commands, architecture, local IndexedDB behavior, known contrast deviation, test commands, and deployment instructions. Replace or remove `frontend/README.md` so generated Astro starter paths and claims do not remain. | `NFR-003`, documentation responsibility | `README.md`, `frontend/README.md` | Commands proven | Both documentation entry points agree with the implemented structure and commands; no starter or unimplemented behavior is claimed. |
+| `P10-07` | Update upstream documentation only for actual implementation deviations or approved decisions; preserve IDs and create no duplicate “final” documents. | Workflow shared rules | `REQUIREMENTS.md`, `DESIGN.md`, `SPEC.md`, `ARCHITECTURE.md`, `PLAN.md` as needed | Implementation evidence | Traceability review shows code/tests/tasks map to stable IDs. |
+| `P10-08` | Record final validation evidence, accepted deviations, unresolved non-goals, and an executable rollback/recovery procedure. Static rollback restores a prior deployment or reverts the release commit. IndexedDB is never silently downgraded, deleted, or cleared; rollback code must remain compatible with schema version 1, and future schema upgrades require a forward-recovery plan. | `SP-NFR-001`, `AD-005`, risk sections | Release notes or implementation report | `P10-01`–`P10-07` | Reviewer can identify commands run, results, deployment SHA, known risks, rollback steps, and local-data implications. |
+
+### Phase completion evidence
+
+- Clean validation passes.
+- Preview deployment is verified from the correct nested root.
+- Documentation matches the implemented system.
+- Production readiness is not claimed while privacy, browser, or deployment gates remain unresolved.
+
+## 20. Dependencies and ordering
+
+### 20.1 Critical path
