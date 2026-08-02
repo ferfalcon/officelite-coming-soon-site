@@ -6,12 +6,17 @@ on:
       - main
     paths:
       - .github/workflows/apply-stage8-plan.yml
+  issues:
+    types:
+      - opened
 
 permissions:
   contents: write
+  issues: write
 
 jobs:
   apply-plan:
+    if: github.event_name == 'push' || github.event.issue.title == 'Apply Stage 8 plan'
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository
@@ -36,3 +41,10 @@ jobs:
           git add --all
           git commit -m "docs: apply Stage 8 plan refinements"
           git push
+
+      - name: Close trigger issue
+        if: github.event_name == 'issues'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: gh issue close "${{ github.event.issue.number }}" --comment "Stage 8 plan assembly completed."
