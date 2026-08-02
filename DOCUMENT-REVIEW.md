@@ -2,14 +2,14 @@
 
 ## 1. Document information
 
-- **Status:** Stage 5 consistency gate complete
+- **Status:** Stage 5 consistency gate complete — Stage 6 resolution linked
 - **Review date:** 2026-08-01
 - **Project:** Officelite coming soon site
 - **Design source:** [Officelite coming soon site](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3)
 - **Repository:** `ferfalcon/officelite-coming-soon-site`
 - **Reviewed sources:** Figma, `FIGMA-AUDIT.md`, `REQUIREMENTS.md`, `DESIGN.md`, `SPEC.md`, and the competing summary in `README.md`
 - **Workflow stage:** Stage 5 — documentation consistency gate
-- **Completion status:** **Ready for architecture and planning**
+- **Completion status:** **Architecture complete; ready for planning**
 
 ## 2. Review method
 
@@ -47,7 +47,7 @@ Every confirmed functional requirement `FR-001` through `FR-012` has specificati
 | `DOC-005` | Whitespace handling and precise email validity were recommendations, leaving required validation insufficiently testable. | High | SPEC | Made whitespace-only required values invalid for validation and used native email-control syntax validity without a stricter custom regex. Storage normalization remains separate and open. | Trimming/casing on storage is architecture-owned if needed. | Resolved |
 | `DOC-006` | Countdown decomposition, digit formatting, and timer catch-up were recommendations, leaving the live countdown under-specified. | High | SPEC | Made whole-unit decomposition, two-digit minimum display, and wall-clock recalculation normative technical resolutions. | Target timezone and future API contract remain future decisions. | Resolved |
 | `DOC-007` | Repeated activation during a pending IndexedDB write had no normative outcome. | Medium | DESIGN, SPEC | Prevent concurrent writes during one pending submission and expose a programmatic busy state without requiring a new loading animation or permanent disabled visual. | Sequential duplicate-record policy remains open. | Resolved |
-| `DOC-008` | IndexedDB schema choices and product lifecycle policy were combined into one open requirement that later documents were told not to define. | High | REQUIREMENTS, SPEC | Split ownership: Stage 6 must define database/store/version/key/identifier/timestamp choices; duplicate handling, retention, update, and deletion remain product/data decisions. | Duplicate and retention policy remain open. | Ready for Stage 6 |
+| `DOC-008` | IndexedDB names, keys, and migration rules were unresolved. | High | REQUIREMENTS, SPEC, ARCHITECTURE | Stage 6 defined database `officelite`, version `1`, store `signups`, auto-increment `id`, UTC `createdAt`, no version-1 indexes, and non-destructive migration rules without deciding duplicate or retention policy. | Duplicate and retention policy remain stakeholder-owned. | Resolved |
 | `DOC-009` | `SPEC.md` excluded user-facing local-record management while `REQUIREMENTS.md` still asked whether it was in scope. | Medium | REQUIREMENTS, SPEC | Added `NG-008`: listing, editing, exporting, or deleting local records is outside the current release. Lifecycle governance remains future work. | Future product scope may revisit it. | Resolved |
 | `DOC-010` | `DESIGN.md` left ultra-narrow countdown layout open while `SPEC.md` already required wrapping to prevent horizontal overflow. | Medium | DESIGN, SPEC | Propagated the confirmed behavior: retain one row when it fits and wrap when required by narrow widths or enlarged text. | Exact two-row styling is not fidelity-approved. | Resolved |
 | `DOC-011` | The audit’s state table omitted required field-validation errors and did not reflect pending submission behavior. | Low | FIGMA-AUDIT | Added required-field error coverage and documented pending as programmatic behavior without a new Figma visual state. | Error visuals remain open. | Resolved |
@@ -72,7 +72,7 @@ All confirmed functional requirements have direct specification coverage:
 ### Supporting requirement groups
 
 - Business, data, accessibility, responsive, content, non-functional, and constraint groups are referenced in `SPEC.md`.
-- `DR-005` is explicitly delegated to Stage 6 architecture.
+- `DR-005` is resolved by `ARCHITECTURE.md` §12 and `AD-005`.
 - `DR-007` preserves unresolved duplicate and lifecycle policy.
 - `NG-008` aligns the product scope with the existing specification exclusion.
 - Figma nodes and design sections remain mapped in `FIGMA-AUDIT.md`, `DESIGN.md`, and `SPEC.md`.
@@ -83,7 +83,7 @@ No confirmed specification behavior remains without a requirement, stakeholder d
 
 ### Stakeholder decisions
 
-| Decision | Owner | Impact | Blocks Stage 6? | Blocks implementation? |
+| Decision | Owner | Impact | Blocks Stage 7? | Blocks implementation? |
 |---|---|---|---:|---:|
 | Approved validation, success, and storage-failure copy | Product/content | Final content and tests that assert wording | No | Blocks final copy approval |
 | Visual pattern for field errors and form-level success/failure | Design/product | Form height, spacing, iconography, and fidelity validation | No | Blocks final feedback styling |
@@ -93,9 +93,9 @@ No confirmed specification behavior remains without a requirement, stakeholder d
 | Pro/Ultimate supporting price and `Pack` labels in Plan control | Design/content | Closed-control content fidelity | No | Blocks that optional secondary-content behavior |
 | Extreme content limits | Product/content | Whether unrestricted growth or authoring limits apply | No | Non-blocking for ordinary content |
 
-### Stage 6 architecture decision
+### Stage 6 architecture resolution
 
-`ARCHITECTURE.md` must define the IndexedDB database name, object-store name, schema version, key strategy, and any generated identifier or timestamp required for implementation. It must keep the duplicate and retention policy separate and unresolved unless a stakeholder decides it.
+`ARCHITECTURE.md` now defines database `officelite`, schema version `1`, object store `signups`, key path `id` with auto-increment, UTC ISO `createdAt`, no version-1 indexes, transaction-completion success semantics, and non-destructive versioned migrations. Duplicate and retention policy remain separate stakeholder-owned decisions.
 
 ### Recommendations still awaiting approval
 
@@ -114,7 +114,7 @@ No confirmed specification behavior remains without a requirement, stakeholder d
 | Placeholder content mistaken for final | Marked replaceable throughout requirements, design, and spec. |
 | Long content breaking Figma-height assumptions | Containers grow; meaningful content must not clip or overlap. |
 | Native select visual variance | Native behavior takes priority; closed-state intent is the fidelity target. |
-| Current repository architecture not yet re-inspected | Required first activity in Stage 6. |
+| Current repository architecture was re-inspected in Stage 6 | Resolved: executable app is the untouched nested `frontend/` Astro starter; architecture is recorded in `ARCHITECTURE.md`. |
 
 ## 8. Review pass 1 — Completeness and correctness
 
@@ -147,8 +147,9 @@ Completed after corrections:
 - `SPEC.md`
 - `README.md`
 - `DOCUMENT-REVIEW.md`
+- `ARCHITECTURE.md`
 
-No Figma content was modified during Stage 5.
+No Figma content was modified during Stages 5 or 6.
 
 ## 11. Validation and deviations
 
@@ -178,8 +179,25 @@ Those validations require implementation work and do not apply to this documenta
 - Sequential duplicate/retention policy is not approved.
 - Final content is not approved.
 
-## 12. Completion
+## 12. Stage 6 architecture linkage
 
-**Status: Ready for architecture and planning**
+Stage 6 inspected the current repository and created `ARCHITECTURE.md`.
 
-The documentation set can proceed to Stage 6. Architecture must resolve the delegated IndexedDB implementation decisions and preserve the remaining stakeholder decisions as explicit gates rather than assumptions.
+Resolved technical decisions include:
+
+- Astro static multi-page structure rooted at `frontend/`;
+- framework-free TypeScript enhancements;
+- query-string Plan context;
+- application-owned runtime assets;
+- IndexedDB database `officelite`, version `1`, object store `signups`, auto-increment `id`, UTC `createdAt`, and no version-1 indexes;
+- transaction completion as the persistence success boundary;
+- non-destructive versioned migration rules;
+- static Vercel deployment from the nested frontend application, pending external project-setting verification.
+
+Stage 6 did not resolve stakeholder-owned duplicate, retention, post-success, feedback-design, browser-support, or future-API decisions.
+
+## 13. Completion
+
+**Status: Architecture complete; ready for planning**
+
+The documentation set can proceed to Stage 7. `PLAN.md` must use `ARCHITECTURE.md` as the structural source of truth and preserve remaining stakeholder decisions as explicit implementation gates rather than assumptions.
