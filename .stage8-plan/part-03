@@ -1,0 +1,99 @@
+### 8.4 Proposed source modules
+
+| Proposed file | Responsibility | Primary traceability |
+|---|---|---|
+| `frontend/src/content/site.ts` | Typed placeholder copy, Plan data/slugs, launch display/config, provisional feedback strings | `CR-001`–`CR-005`, `BR-001`, `FR-009`; `SP-CONTENT-*` |
+| `frontend/src/components/BrandLogo.astro` | Render shared logo as static brand or named Home link | `FR-001`, `FR-004`, `FR-010`; `SP-GLOBAL-003`, `SP-SIGNUP-002` |
+| `frontend/src/components/SiteHeader.astro` | Shared header placement and logo behavior | `SP-HOME-001`, `SP-SIGNUP-001` |
+| `frontend/src/components/CtaLink.astro` | Primary, standard-pricing, and inverse-pricing anchor variants | Figma `10:526`, `10:531`, `10:567`; `SP-NAV-*` |
+| `frontend/src/components/Countdown.astro` | Static named countdown group and four labeled values | `FR-009`; `SP-COUNT-*`, `SP-A11Y-011` |
+| `frontend/src/components/PricingCard.astro` | Neutral/featured Plan structure and Plan CTA | `FR-001`, `FR-003`; `SP-HOME-002`–`004` |
+| `frontend/src/components/SignUpForm.astro` | Native fields/select, labels, field-message hooks, configurable form-result hook, submit button | `FR-004`–`FR-008`, `FR-011`; `SP-FORM-*`, `SP-VAL-*` |
+| `frontend/src/features/countdown/countdown.ts` | Pure duration calculation and two-digit formatting | `SP-COUNT-001`–`008` |
+| `frontend/src/features/countdown/initCountdown.ts` | Find countdown hooks, update values once per second, catch up from wall clock | `FR-009`; `SP-COUNT-*`, `AR-007` |
+| `frontend/src/features/signup/plan.ts` | Supported Plan type, query parsing, Basic fallback | `FR-003`, `FR-012`; `SP-NAV-001`–`004` |
+| `frontend/src/features/signup/validation.ts` | Required/whitespace/email/Plan validation result | `FR-006`; `SP-VAL-001`–`008` |
+| `frontend/src/features/signup/record.ts` | Map valid form values and inject `createdAt` | `DR-001`, `DR-005`; `SP-DATA-*` |
+| `frontend/src/features/signup/indexedDb.ts` | Open/upgrade `officelite`, write to `signups`, transaction-completion contract | `FR-007`, `FR-011`, `AD-005`; `SP-SUBMIT-*`, `SP-DATA-*` |
+| `frontend/src/features/signup/initSignUpForm.ts` | Plan initialization, validation rendering, submission state, pending protection, result announcements | `FR-003`, `FR-006`–`FR-008`, `FR-011`, `FR-012`; `SP-SUBMIT-*` |
+| `frontend/src/pages/sign-up/index.astro` | Sign Up route composition and feature initialization | `FR-004`, `FR-010`; `SP-SIGNUP-*` |
+| `frontend/src/styles/tokens.css` | Figma token mapping and breakpoint variables/documentation | `CON-002`, `CON-007`; `DESIGN.md` §§8–10, 17 |
+| `frontend/src/styles/global.css` | Reset, base document styles, global container and accessibility helpers | `SP-GLOBAL-*`, `AR-001`, `AR-008` |
+| `frontend/src/styles/home.css` | Home compact/medium/large composition and decorative positioning | `RR-001`–`RR-006`; `SP-RWD-003`–`005` |
+| `frontend/src/styles/sign-up.css` | Sign Up compact/medium/large composition and form overlap | `SP-RWD-006`–`008`, `SP-RWD-010` |
+
+### 8.5 Proposed test and quality files
+
+| Proposed file | Responsibility |
+|---|---|
+| `frontend/vitest.config.ts` | Unit and module-integration test configuration |
+| `frontend/playwright.config.ts` | Local web server, browser projects, viewport defaults, reports |
+| `frontend/src/features/countdown/countdown.test.ts` | Calculation and formatting tests |
+| `frontend/src/features/signup/plan.test.ts` | Query and fallback tests |
+| `frontend/src/features/signup/validation.test.ts` | Required, whitespace, email, and Plan validation tests |
+| `frontend/src/features/signup/record.test.ts` | Record-shape and timestamp injection tests |
+| `frontend/src/features/signup/indexedDb.test.ts` | Schema, transaction, and failure-mapping integration tests |
+| `frontend/tests/e2e/navigation.spec.ts` | Generic/Plan links, Basic fallback, logo navigation |
+| `frontend/tests/e2e/signup.spec.ts` | Form semantics, invalid/valid submission, IndexedDB outcomes, retry |
+| `frontend/tests/e2e/responsive.spec.ts` | Breakpoint, intermediate width, long content, zoom/reflow checks |
+| `frontend/tests/e2e/accessibility.spec.ts` | Keyboard, names, relationships, announcements, reduced motion, automated scan |
+| `frontend/tests/e2e/helpers/indexeddb.ts` | Read/clear the test database, isolate each test context, and induce failure through browser initialization overrides rather than production-only hooks |
+| `.github/workflows/frontend-ci.yml` | Recommended CI, only if `G-010` is approved; commands run with `frontend/` as the working directory |
+
+## 9. Phase overview
+
+| Phase | Verifiable result | Depends on |
+|---|---|---|
+| 1 — Decisions and baseline | Environment, baseline validation, deployment access, and gate ownership are recorded | None |
+| 2 — Quality/tooling foundation | Repeatable check, unit-test, build, and browser-test commands exist | Phase 1 technical checks |
+| 3 — Runtime foundations | Officelite shell, assets, tokens, and shared primitives render without starter branding | Phase 2 |
+| 4 — Home vertical slice | Home structure, responsive compositions, links, and CTA states are implemented; final typography/countdown sign-off remains gated | Phase 3 |
+| 5 — Countdown feature | Pure countdown behavior and DOM controller are tested; page integration closes after `G-001` | Phase 2; Phase 3 markup for page integration |
+| 6 — Sign Up and Plan context | Sign Up structure, responsive compositions, native form semantics, Plan initialization, and Home navigation are implemented | Phase 3; may proceed in parallel with Phase 4; Phase 5 controller only for live countdown integration |
+| 7 — Validation and accessible feedback shell | Invalid submissions are blocked and associated feedback is exposed | Phase 6; final visual treatment remains behind `G-003` |
+| 8 — IndexedDB and result flow | Valid data commits, pending repeats are blocked, failure/retry works, and persistence survives reload | Phase 7; `G-004` and `G-005` block final policy sign-off only |
+| 9 — Fidelity, resilience, and accessibility hardening | Six reference layouts and required states survive long content, narrow widths, keyboard use, and asset failure | Completed page slices and Phase 8 core behavior; `G-002`, `G-003`, `G-008` block final visual sign-off |
+| 10 — Release validation and deployment | Full validation, preview deployment, documentation, privacy disposition, and rollback evidence are complete | All required implementation work; `G-006`, `G-007`, `G-009` block production sign-off |
+
+## 10. Phase 1 — Decisions and baseline
+
+### Goal
+
+Create a safe implementation starting point and expose unresolved choices before they become code assumptions.
+
+| Task | Work | References | Files / systems | Dependencies | Validation |
+|---|---|---|---|---|---|
+| `P1-01` | Run the existing frontend install and build before changing source; start the preview server in a controlled background process, probe `/`, then terminate it. Record any baseline failure. | Repository baseline; `AD-010` | `frontend/package.json`, lockfile, local environment | None | `pnpm install --frozen-lockfile` and `pnpm build` complete; the preview responds once and is shut down cleanly, or failures are documented. |
+| `P1-02` | Confirm Node and pnpm versions used for implementation are compatible with the checked-in engine and lockfile. Do not invent a `packageManager` version. | `NFR-004`, repository engine | Local environment; optional package metadata update only after confirmation | `P1-01` | Record `node --version` and `pnpm --version`; install completes from lockfile. |
+| `P1-03` | Open a decision register for `G-001`–`G-010`; assign owner, current status, latest acceptable decision point, and the task that consumes the decision. | `DOCUMENT-REVIEW.md` §6; `ARCHITECTURE.md` §27 | Task tracking system or Stage 9 task index | None | Every gate has an owner, blocking task, decision deadline, and evidence link; `PLAN.md` remains the stable plan rather than a live status board. |
+| `P1-04` | Verify current Vercel project root/build/output settings or record the exact missing access. | `AD-010`, `G-009` | External Vercel project | Deployment access | Root `frontend`, install command, build command, and `dist` output are confirmed or deployment remains explicitly blocked. |
+| `P1-05` | Confirm test package compatibility before installation; choose compatible development-only versions and let pnpm update the lockfile. | `AD-009`; architecture §20.3 | Package registry during implementation; `frontend/package.json` | `P1-02` | Dependency resolution succeeds with Astro `^7.1.6` and Node engine; no runtime framework is added. |
+
+### Phase completion evidence
+
+- Baseline build status is recorded.
+- Gate ownership is visible.
+- No product behavior has been chosen implicitly.
+- Tool versions and deployment access are not guessed.
+
+## 11. Phase 2 — Quality and tooling foundation
+
+### Goal
+
+Create repeatable validation before replacing the starter so each later slice can be checked independently.
+
+| Task | Work | References | Files | Dependencies | Validation |
+|---|---|---|---|---|---|
+| `P2-01` | Add compatible development dependencies for Astro checking, TypeScript support, Vitest, controlled IndexedDB tests, Playwright, and Playwright-compatible accessibility checks. Install only development dependencies and document any required Playwright browser-binary command. | `AD-009`; `SP-NFR-001` | `frontend/package.json`, `frontend/pnpm-lock.yaml` | `P1-05` | pnpm install succeeds; required test browser binaries can be installed; dependency tree contains no new runtime UI framework. |
+| `P2-02` | Add scripts for `check`, unit tests, browser tests, and a combined validation command. Keep existing `dev`, `build`, `preview`, and `astro`. | `NFR-003`, `AD-009` | `frontend/package.json` | `P2-01` | Each script starts successfully; combined command fails when a deliberate test failure is introduced and passes after removal. |
+| `P2-03` | Add Vitest configuration and one minimal pure smoke test. | `AD-009` | `frontend/vitest.config.ts`, temporary or first real test file | `P2-01` | `pnpm test` passes. |
+| `P2-04` | Add Playwright configuration with a controlled Astro web-server lifecycle and one route smoke test against the current page. Keep the initial required project minimal until `G-007` defines the support matrix. | `AD-009`, `AD-010`, `G-007` | `frontend/playwright.config.ts`, `frontend/tests/e2e/` | `P2-01`, `P1-01` | The configured browser binary is installed; `pnpm test:e2e` starts the server, opens `/`, passes, and terminates the server without leaving a process running. |
+| `P2-05` | Add Astro static/template checking without weakening strict TypeScript. | `NFR-004`, `SP-NFR-003` | `frontend/package.json`; `tsconfig.json` only if necessary | `P2-01` | `pnpm check` passes against existing source. |
+| `P2-06` | Decide CI inclusion. When approved, add the root workflow after local commands are stable; otherwise record CI as deferred. | Recommended `ARCHITECTURE.md` §21.4; `G-010` | `.github/workflows/frontend-ci.yml` | `P2-02`–`P2-05` | Approved workflow runs install, browser setup, checks, tests, and build with `frontend/` as the working directory; otherwise no unused workflow is added. |
+
+### Phase completion evidence
+
+- Static checks, unit tests, browser tests, and production build can be run independently.
+- The starter still builds, proving later failures are introduced by later work rather than tooling setup.
+
+## 12. Phase 3 — Runtime foundations and shared shell
