@@ -1,0 +1,99 @@
+### 4.3 Current product gap
+
+The current page still renders the generated Astro `Welcome.astro` experience. The repository has no implemented:
+
+- Officelite Home page;
+- Sign Up route;
+- runtime Officelite asset ownership;
+- responsive pricing or sign-up composition;
+- countdown;
+- Plan-context navigation;
+- form validation;
+- IndexedDB persistence;
+- success or storage-failure feedback;
+- automated product tests;
+- current frontend documentation aligned with the product instead of the Astro starter.
+
+### 4.4 Reusable repository material
+
+`docs/starter-code/` contains matching Officelite SVG assets and starter HTML. It is reference material, not runtime source.
+
+Reusable assets include:
+
+- `assets/shared/logo.svg`;
+- `assets/home/illustration-charts.svg`;
+- `assets/home/bg-pattern-header.svg`;
+- `assets/home/bg-pattern-footer.svg`;
+- `assets/home/bg-pattern-pricing.svg`;
+- `assets/sign-up/bg-pattern-side.svg`;
+- `assets/sign-up/icon-arrow-down.svg`;
+- `assets/favicon-32x32.png`.
+
+`icon-check.svg` and `icon-cross.svg` remain reference-only until feedback iconography is approved.
+
+## 5. Scope
+
+### 5.1 Included
+
+- Replace the generated Astro starter UI.
+- Implement static Astro routes for `/` and `/sign-up/`.
+- Implement the six supplied responsive compositions and fluid intermediate behavior.
+- Migrate matching SVG assets into the runtime application boundary.
+- Add shared CSS tokens and component/page styles.
+- Implement direct link navigation and validated query-string Plan context.
+- Implement a visually updating countdown with a replaceable target source.
+- Implement the native Sign Up form and all confirmed validation behavior.
+- Implement IndexedDB `officelite` version `1`, object store `signups`, auto-increment `id`, UTC `createdAt`, and transaction-completion success semantics.
+- Implement pending-write protection, success feedback, and storage-failure recovery.
+- Implement semantic structure, keyboard behavior, visible focus, labels, relationships, announcements, reflow, and decorative-asset handling.
+- Add layered static, unit, persistence, browser, responsive, and accessibility validation.
+- Verify the static build and Vercel deployment configuration.
+- Update repository documentation after implementation.
+
+### 5.2 Excluded
+
+- Backend, serverless function, CRM, email, or remote API submission.
+- Future launch-date API integration.
+- Countdown zero-state behavior.
+- Authentication or user accounts.
+- User-facing listing, editing, exporting, or deleting of IndexedDB records.
+- Localization.
+- Analytics or tracking.
+- Custom scripted select popup.
+- New color values intended to remediate the accepted contrast deviation.
+- Unapproved duplicate, retention, deletion, or consent policies.
+- Unapproved feedback iconography or final feedback copy.
+
+## 6. Implementation decisions and gates
+
+### 6.1 Planning decisions
+
+| ID | Decision | Status | Rationale |
+|---|---|---|---|
+| `PD-001` | Keep Astro static output and normal document navigation. | Confirmed by `AD-001`, `AD-010` | Fits two routes and the current repository. |
+| `PD-002` | Use framework-free TypeScript and explicit `data-*` DOM hooks. | Implementation decision consistent with `AD-002` | Keeps runtime small and DOM contracts testable. |
+| `PD-003` | Store replaceable page, Plan, and launch-label content in one typed `src/content/site.ts` module. | Implementation decision | Prevents structural components from owning placeholder copy and gives the future date source one replacement boundary. |
+| `PD-004` | Use global token/base CSS plus page-level CSS and scoped component styles. | Implementation decision consistent with `AD-007` | Avoids one monolithic stylesheet without creating a CSS framework. |
+| `PD-005` | Test pure logic with Vitest, IndexedDB modules with a controlled test implementation, and browser behavior with Playwright. | Implementation decision consistent with `AD-009` | Matches responsibility boundaries and avoids a client DOM test framework unless later evidence requires one. |
+| `PD-006` | Do not add a lint tool in this scope unless separately approved. | Implementation decision | No lint convention exists; Astro checks, tests, and build provide the confirmed validation baseline. |
+| `PD-007` | Do not add runtime dependencies beyond Astro. Testing and static-analysis packages are development-only. | Implementation decision | Preserves the small-project architecture. |
+| `PD-008` | Use provisional non-empty validation/success/failure strings from `src/content/site.ts` until final copy is approved; tests assert meaning and relationships, not exact prose. | Implementation decision allowed by `SP-CONTENT-005` | Makes the behavior testable without presenting provisional content as final. |
+
+### 6.2 Decision gates
+
+| Gate | Decision owner | Blocks | Does not block | Required evidence |
+|---|---|---|---|---|
+| `G-001` — Placeholder launch timestamp and timezone | Product/technical owner | Countdown page integration and final date verification | Pure countdown calculation/controller implementation | Approved ISO timestamp or equivalent unambiguous target |
+| `G-002` — Kumbh Sans delivery | Project owner | Final typography and visual sign-off | Layout, semantics, fallback-font implementation | Approved self-hosted font files/source or approved external provider |
+| `G-003` — Field-error and form-result visual pattern | Design/product | Final form-state styling and pixel comparison | Semantic error/result slots and programmatic relationships | Approved placement, spacing, colors, and optional icons |
+| `G-004` — Post-success behavior | Product | Final success-state controller and E2E assertion | IndexedDB adapter and transaction success implementation | Keep values, clear, disable, or replace decision |
+| `G-005` — Sequential duplicate behavior | Product/data | Final repeated-success behavior | Prevention of concurrent writes | Allow, reject, update, or otherwise define sequential duplicates |
+| `G-006` — Retention/privacy production disposition | Product/data | Production sign-off with real personal data | Local preview implementation | Approved policy or explicit demo-only restriction |
+| `G-007` — Browser support matrix | Product/technical owner | Final compatibility claim and required browser matrix | Standards-based implementation and exploratory testing | Named browsers/versions or support policy |
+| `G-008` — Pro/Ultimate supporting Plan text | Design/content | Optional closed-select secondary text | Native selected Plan value | Approved labels/prices or explicit omission |
+| `G-009` — Vercel project settings | Deployment owner | Production/preview deployment completion | Local build | Verified root `frontend`, install command, build command, and output directory |
+| `G-010` — CI inclusion | Project owner | Only automated repository gating | Local/manual validation | Approve same-scope CI or defer to later infrastructure work |
+
+### 6.3 Gate handling rule
+
+Implementation may proceed around a gate only when the unresolved choice does not change the affected observable behavior. A phase cannot be marked complete when its acceptance evidence depends on an unresolved gate.
