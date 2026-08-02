@@ -7,10 +7,11 @@
 - [Overview](#overview)
   - [The job](#the-job)
   - [Links](#links)
+  - [Project documentation](#project-documentation)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [AI Collaboration](#ai-collaboration)
-  - [Figma to implementation workflow for AI](#figma-to-implementation-workflow-for-ai)
+  - [AI collaboration](#ai-collaboration)
+  - [Figma-to-implementation workflow for AI](#figma-to-implementation-workflow-for-ai)
   - [Useful resources](#useful-resources)
 - [Author](#author)
 
@@ -20,18 +21,34 @@
 
 Users should be able to:
 
-- View the optimal layout for the site depending on their device's screen size
-- See hover states for all interactive elements on the page
-- See error states when the contact form is submitted if:
-  - The `Name` and/or `Email Address` fields are empty
-  - The `Email Address` is not formatted correctly
-- See a live countdown timer that ticks down every second
-- See a custom-styled `select` form control in the sign-up form
+- View the responsive Home and Sign Up compositions across compact, medium, and large layouts.
+- Navigate from every Home call to action to Sign Up.
+- Preserve Basic, Pro, or Ultimate when entering Sign Up from a plan action; generic and direct entry default to Basic.
+- Use a native Plan select with standard pointer and keyboard behavior.
+- Submit Name, Email Address, Plan, Phone Number, and Company as required fields for the current release.
+- Receive field-specific feedback when required values are empty or the email address is syntactically invalid.
+- Store a valid sign-up record in browser IndexedDB without sending it to a remote API.
+- Receive visible and programmatically announced confirmation after a successful IndexedDB transaction.
+- Receive visible and programmatically announced failure feedback when IndexedDB storage cannot complete, without losing entered values where technically possible.
+- See a launch countdown that updates visually once per second.
+- Use all current navigation, selection, validation, submission, and feedback behavior by keyboard with visible focus.
+
+The marketing copy, pricing, plan features, and launch date are placeholders. A future API will provide the real launch date and process sign-up data, but those integrations are outside the current release.
 
 ### Links
 
 - Repository: [https://github.com/ferfalcon/officelite-coming-soon-site](https://github.com/ferfalcon/officelite-coming-soon-site)
-- Live Site URL: [https://officelite-coming-soon-site-ferfalcon.vercel.app/](https://officelite-coming-soon-site-ferfalcon.vercel.app/)
+- Live site: [https://officelite-coming-soon-site-ferfalcon.vercel.app/](https://officelite-coming-soon-site-ferfalcon.vercel.app/)
+
+### Project documentation
+
+The current documentation sources of truth are:
+
+- [`FIGMA-AUDIT.md`](./FIGMA-AUDIT.md) — inspected Figma evidence and decisions
+- [`REQUIREMENTS.md`](./REQUIREMENTS.md) — product outcomes, rules, and constraints
+- [`DESIGN.md`](./DESIGN.md) — visual, responsive, and interaction intent
+- [`SPEC.md`](./SPEC.md) — observable and testable behavior
+- [`DOCUMENT-REVIEW.md`](./DOCUMENT-REVIEW.md) — Stage 5 consistency review and remaining decisions
 
 ## My process
 
@@ -42,29 +59,30 @@ Users should be able to:
 - Flexbox
 - CSS Grid
 - Mobile-first workflow
-- [Astro](https://astro.build/) - Web framework
-- [TypeScript](https://www.typescriptlang.org/) - JavaScript with syntax for types
+- [Astro](https://astro.build/) — web framework
+- [TypeScript](https://www.typescriptlang.org/) — typed JavaScript
 
-### AI Collaboration
+### AI collaboration
 
 - ChatGPT
   - Inspect and analyze Figma files
-  - Figma to implementation workflow for AI
+  - Maintain the Figma-to-implementation documentation workflow
 - Codex
   - Project code implementation
 
-### Figma to implementation workflow for AI
+### Figma-to-implementation workflow for AI
 
 [https://github.com/ferfalcon/figma-to-implementation-workflow](https://github.com/ferfalcon/figma-to-implementation-workflow)
 
 ### Useful resources
 
-- [Google | Build with Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) - Modern Web Guidance is a set of skills that embed web platform expertise, best practices, and browser compatibility data directly into your coding agents.
+- [Google | Build with Modern Web Guidance](https://developer.chrome.com/docs/modern-web-guidance) — modern web-platform guidance for coding agents
+
 ```bash
 pnpm dlx skills add GoogleChrome/modern-web-guidance
 ```
 
 ## Author
 
-* Website - [ferfalcon.com](http://ferfalcon.com/)
-* LinkedIn - [Fernando Falcon](https://www.linkedin.com/in/fernandofalcon/)
+- Website — [ferfalcon.com](http://ferfalcon.com/)
+- LinkedIn — [Fernando Falcon](https://www.linkedin.com/in/fernandofalcon/)
