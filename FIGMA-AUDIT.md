@@ -2,9 +2,10 @@
 
 ## 1. Document information
 
-- **Status:** Stage 1 complete — stakeholder decisions incorporated
+- **Status:** Reviewed — Stage 5 consistency gate complete
 - **Audit date:** 2026-08-01
 - **Decision update:** 2026-08-01
+- **Consistency review:** 2026-08-01
 - **Design source:** [Officelite coming soon site](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3)
 - **Supplied node:** `4:3`
 - **Figma file key:** `L7MdLOW8usVUcPwV0cMQ1n`
@@ -98,7 +99,7 @@ The file contains 18 click reactions and no named prototype starting point.
 
 **User decision:** Use `24rem`, `48rem`, and `80rem`.
 
-The Figma reference widths demonstrate target compositions. Exact inclusive/exclusive media-query semantics remain a specification detail.
+The Figma reference widths demonstrate target compositions. Stage 5 resolves the specification ranges as below `24rem` narrow compact, `24rem` to below `48rem` compact, `48rem` to below `80rem` medium, and `80rem` and above large.
 
 ### 6.2 Home transformations
 
@@ -241,8 +242,8 @@ Observed pricing content:
 | Selected | Pro plan emphasis and selected plan value are shown |
 | Select open | Native-select behavior required; menu appearance follows the platform control |
 | Disabled | Not required in current design scope |
-| Loading | Not required in current design scope |
-| Invalid/error | IndexedDB storage failure feedback is required; exact visual treatment and copy remain undefined |
+| Pending/loading | No loading animation or additional visual variant is required; `SPEC.md` defines a programmatic busy state and suppresses concurrent submission while a write is pending |
+| Invalid/error | Required-field validation and IndexedDB storage failure feedback are required; exact visual treatment and copy remain undefined |
 | Success | Required after IndexedDB storage; visual treatment and copy remain undefined |
 
 ## 13. Accessibility observations and decisions
@@ -299,11 +300,13 @@ Countdown announcement frequency is not defined by Figma and must avoid announci
 
 ## 15. Remaining non-blocking open questions
 
-1. What exact confirmation and storage-failure copy and visual treatment should be used?
-2. What fields and metadata constitute the IndexedDB record: identifier, selected plan, timestamp, schema version, or only entered values?
-3. How should provisional required-field rules be revisited before production/API integration?
-4. Which inclusive/exclusive media-query semantics map `24rem`, `48rem`, and `80rem` to the demonstrated compositions?
-5. Should the observed two-color focus treatment be normalized across every surface? This is deferred.
+1. What exact validation, confirmation, and storage-failure copy and visual treatment should be used?
+2. How should provisional required-field rules be revisited before production/API integration?
+3. What happens to the form and entered values after successful storage?
+4. Should the Plan control show supporting price text for Pro and Ultimate, and what exact `Pack` labels should be used?
+5. What duplicate-handling and retention policy applies to locally stored records?
+
+**Stage 6 architecture decision required:** Define the IndexedDB database name, object-store name, schema version, key strategy, and any identifier/timestamp needed for implementation.
 
 ## 16. Evidence map
 
@@ -340,7 +343,8 @@ Completed:
 - The stale mobile grid and resolved spacing token are accurately recorded.
 - Contrast deferral is documented as risk, not accessibility conformance.
 - Current and future persistence boundaries do not conflict.
-- Remaining questions are non-blocking for requirements but cannot be invented later.
+- Stage 5 resolved mobile-first breakpoint boundaries and confirmed that each component family uses its supplied focus variant without additional global normalization.
+- Remaining questions are non-blocking for architecture and planning but cannot be invented during implementation.
 - IndexedDB failure feedback and the Basic generic default are confirmed decisions, not recommendations.
 
 ## 19. Stage completion
@@ -348,6 +352,7 @@ Completed:
 - **File modified:** `FIGMA-AUDIT.md`
 - **Figma modified:** Added and verified `spacing/125 = 10` (`VariableID:2182:134`).
 - **Important findings:** Two responsive page flows, explicit default/hover/focus states, direct Home-to-Sign-Up navigation, IndexedDB persistence and failure feedback, plan preselection, Basic as the generic default, and a future server-derived launch date are established.
-- **Accepted risks/deferrals:** Contrast remediation, exact feedback copy, IndexedDB record shape, focus-ring normalization, privacy/retention policy, and code token naming.
-- **Blockers:** None for Stage 2.
-- **Readiness:** **Stage 2 decisions are fully incorporated; ready for Stage 3 with documented non-blocking questions and risks.**
+- **Accepted risks/deferrals:** Contrast remediation, exact feedback copy and presentation, post-success form behavior, duplicate/retention policy, Plan supporting labels, and code token naming.
+- **Stage 5 review:** See `DOCUMENT-REVIEW.md` for corrections and remaining decision ownership.
+- **Blockers:** None for architecture and planning.
+- **Readiness:** **Ready for architecture and planning.**
