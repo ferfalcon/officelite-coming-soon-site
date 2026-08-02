@@ -2,8 +2,8 @@
 
 ## 1. Document information
 
-- **Status:** Draft — Stage 3 complete
-- **Version:** 0.1
+- **Status:** Reviewed — Stage 5 consistency gate complete
+- **Version:** 0.2
 - **Last updated:** 2026-08-01
 - **Owner:** Project owner
 - **Design source:** [Officelite coming soon site](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3)
@@ -11,6 +11,7 @@
 - **Analyzed page:** `4:2` — `👋 Overview`
 - **Supplied node:** `4:3` — `Border`
 - **Primary evidence:** `FIGMA-AUDIT.md`, `REQUIREMENTS.md`, Figma production frames, component sets, foundations, and interaction-state frames
+- **Review trail:** `DOCUMENT-REVIEW.md`
 - **Downstream documents:** `SPEC.md`, `ARCHITECTURE.md`, `PLAN.md`
 
 ## 2. Authority and evidence classification
@@ -363,9 +364,10 @@ Spacing should preserve these relationships when content grows; exact absolute h
 **Figma component set:** `10:512`
 
 - **Purpose:** Select Basic, Pro, or Ultimate.
-- **Closed appearance:** Selected plan, supporting price text, underline divider, and downward chevron.
+- **Observed closed appearance:** The supplied Basic state shows `Basic Pack`, supporting text `Free`, an underline divider, and a downward chevron.
 - **States shown:** Default, Hover, Focus.
-- **Confirmed behavior:** Uses a native select interaction and platform menu. The Figma component describes the closed-state visual intent, not a custom popup implementation.
+- **Confirmed behavior:** Uses a native select interaction and platform menu. The selected plan name changes with the native value. The Figma component describes the closed-state visual intent, not a custom popup implementation.
+- **Open content detail:** Figma does not show Pro or Ultimate closed states, so the exact supporting price text and `Pack` labels for those selections are not approved.
 - **Accepted variance:** Open-menu visuals may differ across browsers and operating systems.
 
 ### 11.10 Form panel
@@ -410,7 +412,7 @@ Spacing should preserve these relationships when content grows; exact absolute h
 - Focus is visually distinct from hover.
 - Figma uses a two-color ring system to remain visible across light, blue, and dark surfaces.
 - Focus treatment must remain visible at every responsive size.
-- **Open question:** Whether every control should use exactly the same two-ring construction remains deferred.
+- Use the supplied focus variant for each component family. No additional global normalization of the two-ring construction is required in the current scope.
 
 ### 12.4 Plan selection
 
@@ -445,9 +447,7 @@ Figma does not include validation, success, or storage-failure compositions.
 
 **Confirmed values:** `24rem`, `48rem`, and `80rem`.
 
-These are design reference thresholds for compact, medium, and large transformations. The 375 px Figma frames represent the compact range near 24rem; the 768 px frames represent 48rem; the large compositions represent the 80rem-and-above intent.
-
-**Open question:** Exact inclusive/exclusive media-query semantics belong in `SPEC.md`.
+These thresholds map to mobile-first ranges: below `24rem` is narrow compact, `24rem` to below `48rem` is compact, `48rem` to below `80rem` is medium, and `80rem` and above is large. The composition beginning at a threshold applies at that threshold.
 
 Below the compact reference, content must continue to shrink or wrap fluidly without horizontal scrolling in the primary flow. Between reference thresholds, spacing and widths interpolate fluidly rather than snapping to fixed Figma dimensions.
 
@@ -493,7 +493,7 @@ Below the compact reference, content must continue to shrink or wrap fluidly wit
 
 - Center the logo, heading, copy, date, and countdown.
 - Use 16 px primary content insets.
-- Keep four compact countdown tiles on one row.
+- Keep four compact countdown tiles on one row when they fit. At narrower widths or enlarged text sizes, wrap the group rather than causing horizontal scrolling.
 - Place the 327 px form inside 24 px outer insets.
 - Use 20 px internal horizontal form padding.
 - Let the form overlap the dark lower region.
@@ -530,14 +530,14 @@ Below the compact reference, content must continue to shrink or wrap fluidly wit
 | Active / pressed | No separate visual state is defined. Native activation feedback may occur. | Outside current design scope. |
 | Selected plan | Closed select displays the selected plan. Pro remains visually featured on Home. | Observed/confirmed. |
 | Select open | Use the native platform menu. | Confirmed decision. |
-| Disabled | No disabled state is required or designed. | Outside current design scope. |
-| Loading | No loading state is required or designed. | Outside current design scope. |
+| Disabled | No persistent disabled visual state is required or designed. | Outside current visual scope. |
+| Pending / loading | No loading animation or new visual variant is required. The implementation may expose a programmatic busy state and suppress repeated submission while an IndexedDB transaction is pending. | Stage 5 technical behavior; no Figma visual. |
 | Required-field error | Keep message associated with the field; exact appearance unapproved. | Functional requirement exists; design gap. |
 | Storage failure | Preserve values, suppress success, and show/announce a form-level error. | Confirmed behavior; visual pattern open. |
 | Success | Show/announce confirmation after the IndexedDB commit. | Confirmed behavior; visual pattern open. |
 | Long marketing copy | Wrap and grow containers; preserve hierarchy and spacing relationships. | Confirmed content requirement. |
 | Long feedback copy | Grow the form vertically; do not overlap fields or submit action. | Inferred from flexible-content requirement. |
-| Missing decorative SVG | Preserve layout and meaningful content without a broken-image placeholder. | Recommended resilience behavior. |
+| Missing decorative SVG | Preserve meaningful content and interaction without a broken-image announcement. Exact decorative spacing may simplify. | Confirmed resilience behavior derived from the artwork’s decorative role. |
 | Countdown at zero | No design is required. | Explicitly out of scope. |
 | JavaScript unavailable | Static product and pricing content should remain readable where feasible; dynamic behavior may not operate. | Inferred `NFR-007`, not a confirmed Must. |
 
@@ -643,7 +643,7 @@ The production frames repeat patterns that are not represented as standalone doc
 - There are no local paint, effect, or grid styles.
 - The mobile frames retain a stale hidden tablet grid.
 - Feedback and invalid states are required functionally but absent visually.
-- Focus-ring normalization is not decided.
+- Each component family uses its supplied focus variant; no additional global normalization is required in the current scope.
 - Semantic implementation token naming is deferred.
 
 ## 18. Requirement-to-design traceability
@@ -657,7 +657,7 @@ The production frames repeat patterns that are not represented as standalone doc
 | `FR-009` | Countdown anatomy, hierarchy, responsive placement | 5, 7, 11, 13, 15 |
 | `FR-010` | Sign Up logo navigation | 4, 11, 12 |
 | `BR-001`–`BR-007` | Plan structure, placeholder content, conversion flow | 3–5, 11, 12 |
-| `DR-001`–`DR-006` | Visible field set and storage-result feedback context; record metadata and API mapping are not design-owned | 5, 11, 12, 14 |
+| `DR-001`–`DR-007` | Visible field set and storage-result feedback context; persistence schema and lifecycle policy are not design-owned | 5, 11, 12, 14 |
 | `AR-001`–`AR-010` | Semantics, focus, labels, decoration, feedback, reflow | 12, 14, 15 |
 | `RR-001`–`RR-006` | Reference thresholds and responsive transformations | 6, 13 |
 | `CR-001`–`CR-005` | Replaceable copy, growth, date/label treatment | 3, 8, 11, 14 |
@@ -688,7 +688,6 @@ The production frames repeat patterns that are not represented as standalone doc
 
 - Use an in-form status region between fields and submit action for storage success/failure.
 - Keep field-validation messages directly adjacent to affected fields.
-- Preserve meaningful layout if decorative SVG assets fail to load.
 - Normalize repeated pricing, countdown, and form-panel structures as conceptual reusable patterns.
 
 ## 20. Open questions
@@ -697,10 +696,8 @@ The production frames repeat patterns that are not represented as standalone doc
 2. What visual pattern, iconography, color treatment, and exact placement should IndexedDB storage failure use?
 3. What approved copy is used for field validation, storage failure, and success?
 4. Does successful storage leave fields visible, clear them, disable them, or replace the form with confirmation?
-5. What are the exact inclusive/exclusive ranges for `24rem`, `48rem`, and `80rem`?
-6. Should every focusable control use the exact observed two-color focus ring, or may the treatment vary by surface?
-7. At widths too narrow for four countdown tiles, should the group compress further or wrap to two rows?
-8. What is the intended visual response when placeholder prices, plan names, or features become substantially longer?
+5. Should the Plan control’s supporting price text update for Pro and Ultimate, and what exact `Pack` labels should be displayed?
+6. What is the intended visual response when placeholder prices, plan names, or features become substantially longer?
 
 ## 21. Risks and potential inconsistencies
 
@@ -749,15 +746,16 @@ Completed checks:
 - Preserved current non-goals: countdown zero-state, production API behavior, localization, and final content approval.
 - Recorded conflicts and incomplete design-system patterns rather than silently resolving them.
 
-No contradiction blocks creation of `SPEC.md`. Feedback presentation and exact breakpoint semantics must remain explicitly unresolved until approved or specified with a documented recommendation.
+No contradiction blocks architecture and planning. Feedback presentation, post-success treatment, and Plan supporting-price labels remain explicitly unresolved; breakpoint semantics and component-family focus treatment are resolved.
 
 ## 24. Stage completion
 
-- **File created:** `DESIGN.md`
+- **File reviewed and modified:** `DESIGN.md`
 - **Important findings:** The experience uses a light-to-dark conversion narrative, a shared large content width, responsive re-composition of hero/pricing/form structures, consistent default/hover/focus component language, and decorative vector systems that must not carry meaning.
 - **Assumptions introduced:** Cards and the form grow vertically for longer content; static content remains readable without JavaScript where feasible; the shared 1110 px large content width is the governing desktop intent.
-- **Recommendations introduced:** In-form status region, adjacent field messages, graceful decorative-asset failure, and conceptual reuse of pricing/countdown/form patterns.
-- **Open questions:** Feedback visuals and copy, success aftermath, exact breakpoint boundaries, focus-ring normalization, ultra-narrow countdown behavior, and extreme content growth.
+- **Recommendations remaining:** In-form status region, adjacent field messages, Plan supporting-price mapping, and conceptual reuse of pricing/countdown/form patterns.
+- **Open questions:** Feedback visuals and copy, success aftermath, Plan supporting-price labels, and extreme content growth.
 - **Deviations:** Current contrast risk is preserved and full WCAG AA conformance is not claimed.
-- **Blockers:** None for Stage 4; unresolved items must remain visible in `SPEC.md`.
-- **Readiness:** **Ready for Stage 4 — create `SPEC.md` with documented non-blocking design questions and accepted deviations.**
+- **Stage 5 review:** Breakpoint ranges, narrow countdown wrapping, focus-variant scope, and decorative-asset resilience were normalized across documents. See `DOCUMENT-REVIEW.md`.
+- **Blockers:** None for architecture and planning. Feedback presentation and post-success form treatment remain implementation gates.
+- **Readiness:** **Ready for architecture and planning.**
