@@ -1,0 +1,100 @@
+- Copy source-reference SVGs into `frontend/src/assets/`.
+- Keep `docs/starter-code/` unchanged as historical/reference material.
+- Do not import runtime assets from `docs/`.
+- Do not depend on short-lived Figma asset URLs.
+
+### 22.3 IndexedDB schema
+
+- This release creates version `1`; no existing application schema migration is expected.
+- Upgrade code must create `signups` only when absent during version upgrade.
+- Future schema changes increment the database version and preserve readable records unless an approved migration says otherwise.
+- Do not add indexes or deduplication policy in version `1`.
+
+### 22.4 URL compatibility
+
+- `/` remains the Home route.
+- `/sign-up/` is new.
+- Query parameters are additive and direct-link-safe.
+- No SPA fallback or router rewrite is required.
+- Preview deployment must verify direct loading of `/sign-up/`.
+
+### 22.5 Deployment compatibility
+
+- Keep Astro static output.
+- Verify Vercel uses `frontend/` as project root and `dist/` as output.
+- No environment variables are required for the placeholder release.
+- Future API configuration requires a new architecture/specification review.
+
+### 22.6 Rollback and recovery
+
+- Keep release commits and preview/production deployment identifiers so static code can be reverted without rebuilding an unknown state.
+- A code rollback must remain compatible with IndexedDB schema version `1`; do not attempt a browser-side schema downgrade.
+- Never clear or delete user IndexedDB records as an automatic rollback step.
+- Future schema versions require a documented forward migration and recovery path before deployment.
+- Browser-test cleanup applies only to isolated test contexts and must not be exposed as a production control.
+
+## 23. Risks and mitigations
+
+| Risk | Impact | Likelihood | Mitigation / plan location |
+|---|---|---:|---|
+| Open feedback visuals produce late form rework | Medium | High | Build flexible semantic slots in Phases 6–7; gate final styling with `G-003`. |
+| Post-success/duplicate decisions arrive late | High | High | Isolate controller policy and block Phase 8 completion on `G-004`/`G-005`. |
+| Personal data ships without governance | High | Medium | `G-006` blocks production sign-off; preview may be demo-only. |
+| Placeholder date is ambiguous | High for countdown correctness | High | `G-001` blocks page integration; pure logic proceeds with injected test dates. |
+| Font source is unavailable or unapproved | Medium | Medium | Use fallback during structural work; `G-002` blocks final visual sign-off. |
+| Native select differs across platforms | Low/medium | High | Preserve native behavior; validate closed-state intent; document accepted menu variance. |
+| Accepted color contrast remains | Medium | Confirmed | Preserve documented deviation and do not claim full WCAG AA. |
+| Long content breaks Figma-height assumptions | Medium | Medium | Flexible containers and Phase 9 long-content matrix. |
+| Focus rings are clipped by decorative overflow | Medium | Medium | Keep interactive controls outside clipping containers; test every range. |
+| IndexedDB request success is mistaken for transaction success | High | Medium | Adapter resolves only on transaction complete; integration tests in Phase 8. |
+| IndexedDB unavailable in target browser | High | Unknown | Failure path and retry; `G-007` browser matrix before support claim. |
+| Test dependencies conflict with Astro/Node | Medium | Low/unknown | Compatibility verification in Phase 1; pin resolved versions in lockfile. |
+| Excess abstractions slow a small project | Medium | Medium | Use only listed genuine repeated components and feature boundaries. |
+| Vercel builds repository root instead of frontend | High | Medium | `G-009` and preview deployment verification. |
+| CI work expands scope | Low | Medium | Treat CI as `G-010` recommendation; local validation remains required. |
+| Visual baselines are approved too early | Medium | Medium | Establish snapshots only after first visual review. |
+| Native browser constraint validation bypasses custom associated feedback | High | Medium | Retain native attributes, use form `novalidate`, read `ValidityState`, and render controlled messages in Phases 6–7. |
+| Browser tests contaminate each other through persistent IndexedDB | Medium | High without isolation | Fresh contexts and database cleanup before each scenario; verify persistence only within the intended reload test. |
+| Code rollback conflicts with persistent browser schema/data | High | Low in version 1, higher after migrations | Never downgrade or clear IndexedDB automatically; record forward-recovery and compatibility rules in §22.6. |
+| Generated `frontend/README.md` remains stale | Low | High unless addressed | Replace or remove it during Phase 10 documentation work. |
+
+## 24. Open questions
+
+### Product/data
+
+1. What exact post-success form behavior is approved?
+2. What sequential duplicate behavior is approved?
+3. What retention/privacy disposition applies before real personal data is accepted?
+4. What exact launch timestamp and timezone should the placeholder use?
+
+### Design/content
+
+5. What are the approved validation, success, and failure strings?
+6. What field-error and form-result styling is approved?
+7. Should Pro and Ultimate show secondary price text in the closed Plan control?
+8. Which Kumbh Sans delivery source is approved?
+9. Are there authoring limits for extreme content length?
+
+### Technical/operational
+
+10. What browser-support matrix is required?
+11. Are Vercel root/build/output settings currently correct?
+12. Should CI be included in this implementation or deferred?
+13. Is static-content usability without JavaScript promoted from recommendation to release requirement?
+
+## 25. Definition of Done
+
+### 25.1 Functional
+
+- [ ] Home and Sign Up routes render all confirmed content and controls.
+- [ ] Generic and Plan-specific navigation produce the required Plan selection.
+- [ ] Sign Up logo returns Home.
+- [ ] Native Plan select exposes exactly Basic, Pro, and Ultimate.
+- [ ] All provisional required fields are validated according to `SPEC.md`.
+- [ ] Invalid data produces no IndexedDB write.
+- [ ] Valid data commits the required record to `officelite/signups` and remains present after a normal reload.
+- [ ] Success appears only after transaction completion.
+- [ ] Pending repeated activation creates no concurrent write.
+- [ ] Storage failure preserves values, suppresses success, announces failure, and allows retry.
+- [ ] Approved post-success and duplicate behavior is implemented.
+- [ ] Countdown uses the approved target and updates once per second from wall clock.
