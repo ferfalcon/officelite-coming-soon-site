@@ -1,0 +1,38 @@
+name: Apply Stage 8 plan
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/apply-stage8-plan.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply-plan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Assemble and verify PLAN.md
+        shell: bash
+        run: |
+          cat .stage8-plan/part-* > PLAN.md
+          test "$(wc -c < PLAN.md)" -eq 76441
+          echo "976b25dbf3a7e01c4df53836a93dc867f6fa04aa09aa27d46a34ea620a365716  PLAN.md" | sha256sum --check --strict
+          rm -rf .stage8-plan
+          rm .github/workflows/apply-stage8-plan.yml
+
+      - name: Commit reviewed plan and remove staging files
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add --all
+          git commit -m "docs: apply Stage 8 plan refinements"
+          git push
