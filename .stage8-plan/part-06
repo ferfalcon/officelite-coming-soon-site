@@ -1,0 +1,99 @@
+
+```text
+P1 baseline/gates
+  ↓
+P2 quality tooling
+  ↓
+P3 assets/tokens/layout
+  ├──→ P4 Home structure and responsive layout
+  ├──→ P5 pure countdown/controller
+  └──→ P6 Sign Up structure and Plan context
+              ↓
+          P7 validation
+              ↓
+          P8 IndexedDB/results
+              ↓
+        P9 complete hardening
+              ↓
+        P10 release/deployment
+```
+
+Home and Sign Up are parallel page slices after the shared foundation. Countdown logic is parallel pure work; an approved target is required only when each page is wired to live values.
+
+### 20.2 Parallel work
+
+- `P5-01`–`P5-03` may run in parallel with Home visual work after Phase 2 tooling is available.
+- Sign Up structure, Plan parsing, and responsive layout may begin after Phase 3 without waiting for Home completion or an approved countdown target.
+- Phase 9 long-content, responsive, and keyboard work may begin on completed page/state slices while `G-004` or `G-005` remains open; only the affected success/duplicate assertions remain blocked.
+- Unit tests are written with each pure module rather than deferred to hardening.
+- Browser tests expand with each completed vertical slice.
+- Final visual, content, privacy, compatibility, and deployment claims cannot close before their gates are approved.
+
+### 20.3 Ordering constraints
+
+1. Do not delete starter files before an Officelite replacement compiles.
+2. Do not implement persistence before validation can block invalid writes.
+3. Do not show success before transaction-completion behavior is tested.
+4. Do not finalize post-success or duplicate behavior before `G-004` and `G-005`.
+5. Do not establish visual screenshot baselines before first visual approval.
+6. Do not claim production readiness for personal data before `G-006`.
+7. Do not claim browser support before `G-007`.
+8. Do not add an IndexedDB uniqueness index or schema change without architecture and product review.
+
+## 21. Testing and validation matrix
+
+| Layer | Scope | Primary command/evidence | Introduced |
+|---|---|---|---|
+| Static/template | Astro syntax, types, imports, routes | `pnpm check` | Phase 2 |
+| Unit | Countdown, Plan parsing, validation, record mapping | `pnpm test` | Phases 2, 5, 6, 7, 8 |
+| IndexedDB module integration | Schema, key, transaction completion, failures | Vitest with controlled IndexedDB | Phase 8 |
+| Production build | Static route and asset output | `pnpm build` | Every phase |
+| Browser navigation | CTA link contracts, query context, route activation, logo link | `pnpm test:e2e` | Phases 4 and 6 |
+| Browser form flow | Validation, pending, success, failure, retry, reload persistence | Playwright | Phases 7 and 8 |
+| Responsive | Reference/boundary/intermediate widths, long content, zoom | Playwright plus screenshots/manual review | Phase 9 |
+| Accessibility automated | Common semantic and relationship failures | Playwright-compatible accessibility scan | Phase 9 |
+| Accessibility manual | Keyboard order, focus, announcements, native select, reflow | Recorded manual checklist | Phase 9 |
+| Visual fidelity | Six Figma frames and interaction examples | Side-by-side screenshot review | Phase 9 |
+| Deployment | Direct routes, assets, IndexedDB, no API submission | Preview smoke test | Phase 10 |
+
+### Required test scenarios
+
+At minimum, the completed implementation must cover:
+
+- generic Home CTA → Sign Up → Basic;
+- each Plan CTA → matching Plan;
+- direct Sign Up → Basic;
+- unsupported Plan query → Basic;
+- Sign Up logo → Home;
+- each required field invalid individually;
+- whitespace-only text invalid;
+- malformed and ordinary valid email;
+- unsupported Plan prevented from storage;
+- valid transaction commits expected record;
+- committed record remains after a normal reload;
+- each persistence scenario starts from an isolated/cleared test database;
+- success occurs after transaction completion;
+- repeated activation during pending creates one write;
+- storage unavailable/failure preserves values and permits retry;
+- approved post-success and sequential duplicate behavior;
+- countdown decomposition, formatting, tick, and catch-up;
+- compact, medium, large, and boundary compositions;
+- long content and feedback;
+- countdown wrapping at narrow/enlarged conditions;
+- keyboard-only completion;
+- visible focus across surfaces;
+- no continuous countdown announcement;
+- success/failure announced once;
+- decorative assets ignored and nonessential;
+- no form-record network request.
+
+## 22. Migration and compatibility work
+
+### 22.1 Starter replacement
+
+- Preserve project configuration and strict TypeScript.
+- Replace generated page, component, assets, metadata, and favicons.
+- Remove starter files only after no imports remain.
+- Avoid adapting starter CSS into product styles; it has no Officelite design value.
+
+### 22.2 Asset ownership
