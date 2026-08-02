@@ -2,13 +2,14 @@
 
 ## 1. Document information
 
-- **Status:** Draft — Stage 4 complete
-- **Version:** 0.1
+- **Status:** Reviewed — Stage 5 consistency gate complete
+- **Version:** 0.2
 - **Last updated:** 2026-08-01
 - **Owner:** Project owner
 - **Design source:** [Officelite coming soon site](https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3)
 - **Repository:** `ferfalcon/officelite-coming-soon-site`
 - **Source documents:** `FIGMA-AUDIT.md`, `REQUIREMENTS.md`, `DESIGN.md`, `Document-Guidelines-SPEC.md`
+- **Review trail:** `DOCUMENT-REVIEW.md`
 - **Downstream documents:** `ARCHITECTURE.md`, `PLAN.md`, implementation tasks, tests
 
 ## 2. Purpose and authority
@@ -19,7 +20,11 @@ The following terms describe normative status:
 
 - **Confirmed:** mandatory behavior supported by a requirement, stakeholder decision, or direct Figma evidence.
 - **Confirmed direction:** an approved technical direction that still requires repository verification before architecture is finalized.
+- **Confirmed technical resolution:** normative testable detail owned by `SPEC.md` because a confirmed requirement delegates or requires precise behavior.
+- **Confirmed technical safeguard:** normative protective behavior required to avoid concurrent actions or false outcomes without introducing an unapproved visual state.
 - **Confirmed deviation:** an explicitly accepted exception from a normal quality or conformance target.
+- **Architecture decision required:** a mandatory implementation choice delegated to Stage 6.
+- **Open product/data decision:** an unresolved stakeholder policy that architecture and implementation must not guess.
 - **Provisional:** mandatory for the current release but explicitly subject to later stakeholder revision.
 - **Recommended:** a testable proposed resolution to an unresolved requirement or design gap; it is not an approved product decision until accepted.
 - **Open:** behavior cannot be finalized from current evidence and must not be silently invented.
@@ -63,7 +68,7 @@ The following terms describe normative status:
 - A scripted custom Plan popup.
 - User-facing record listing, editing, deletion, or data export.
 
-**Requirements:** `NG-001`–`NG-007`, `CON-003`, `CON-004`, `CON-006`, `CON-007`.
+**Requirements:** `NG-001`–`NG-008`, `CON-003`, `CON-004`, `CON-006`, `CON-007`.
 
 ## 5. Terminology
 
@@ -113,7 +118,7 @@ The following terms describe normative status:
 | `SP-NAV-001` | Confirmed | Hero and final `Get Started` actions navigate to Sign Up with Basic selected. | Activate each action by pointer and keyboard; inspect Plan value. | `FR-002`, `FR-012`; prototype reactions; `DESIGN.md` §12.1. |
 | `SP-NAV-002` | Confirmed | Basic, Pro, and Ultimate Plan CTAs navigate to Sign Up with the corresponding plan selected. | Test all three CTAs and inspect Plan value. | `FR-002`, `FR-003`, `BR-002`; prototype reactions. |
 | `SP-NAV-003` | Confirmed | Missing plan context uses Basic. | Navigate directly with no plan context. | `FR-012`. |
-| `SP-NAV-004` | Recommended | Unsupported incoming plan context is ignored and Sign Up falls back to Basic rather than exposing or storing an unsupported value. | Navigate with an unsupported plan value. | Proposed safe resolution from `BR-001` and `FR-012`; not explicitly approved. |
+| `SP-NAV-004` | Confirmed | Unsupported incoming plan context is ignored and Sign Up falls back to Basic rather than exposing or storing an unsupported value. | Navigate with an unsupported plan value. | `FR-012` permits only a valid supplied plan to override the Basic default; `BR-001`. |
 | `SP-NAV-005` | Confirmed | Navigation works with standard pointer activation and keyboard link activation. | Activate links using pointer and Enter. | `FR-002`, `AR-002`. |
 | `SP-NAV-006` | Confirmed | The mechanism used to carry plan context is not prescribed, but personal form data must not be required to navigate from Home to Sign Up. | Verify correct selected plan without entering personal data. | `FR-003`, `FR-012`; architecture deferred. |
 | `SP-NAV-007` | Confirmed | Home-to-Sign-Up and Sign-Up-to-Home navigation requires no transition animation. Native page-transition behavior is acceptable. | Activate each navigation path with reduced motion and inspect for required animation dependencies. | Figma prototype uses direct navigation with no transition; `AR-010`. |
@@ -129,7 +134,8 @@ The following terms describe normative status:
 | `SP-SIGNUP-003` | Confirmed | Direct Sign Up entry and generic CTA entry initially select Basic. | Open Sign Up directly and from both generic CTA locations. | `FR-012`. |
 | `SP-SIGNUP-004` | Confirmed | A valid Plan CTA context overrides the Basic default. | Open Sign Up from each Plan CTA. | `FR-003`, `FR-012`. |
 | `SP-SIGNUP-005` | Confirmed | Plan uses native select semantics and exposes exactly Basic, Pro, and Ultimate. | Inspect role/options and exercise native pointer/keyboard behavior. | `FR-005`, `BR-001`, `CON-004`; Figma `10:512`. |
-| `SP-SIGNUP-006` | Confirmed | The closed Plan control shows the selected plan and its matching supporting price text; the opened option menu follows the browser/platform native appearance. | Compare closed state with Figma and open state with native platform behavior. | `FR-005`; `DESIGN.md` §11.9. |
+| `SP-SIGNUP-006` | Confirmed | The closed Plan control shows the selected plan; the opened option menu follows the browser/platform native appearance. The supplied Basic appearance includes supporting text `Free`, but no confirmed rule requires corresponding Pro or Ultimate supporting text. | Compare the selected plan with the native value and the Basic closed state with Figma. | `FR-005`; `DESIGN.md` §11.9. |
+| `SP-SIGNUP-007` | Recommended | When supporting price text is retained for all selections, map Basic to `Free`, Pro to `$9.99`, and Ultimate to `$19.99`; exact `Pack` display labels remain content/design decisions. | Change each Plan selection and inspect the secondary text. | Inferred from the pricing inventory; Pro and Ultimate select states are absent from Figma. |
 
 ### 8.2 Form control semantics
 
@@ -148,8 +154,8 @@ The following terms describe normative status:
 
 | Specification ID | Status | Required behavior | Verification | Requirement / design evidence |
 |---|---|---|---|---|
-| `SP-VAL-001` | Recommended | A required text value containing only whitespace is treated as empty for validation. | Submit spaces in Name, Phone, or Company. | Proposed interpretation of `FR-006` and `BR-003`; whitespace handling is not explicitly approved. |
-| `SP-VAL-002` | Recommended | Email Address is invalid when empty or when it fails the browser’s standard email-address validity rules. No stricter custom email policy is required. | Test empty, malformed, and ordinary valid addresses. | Proposed precise interpretation of `FR-006` and `DR-002`; the source does not define a formal email grammar. |
+| `SP-VAL-001` | Confirmed technical resolution | A required text value containing only whitespace is treated as empty for validation. This does not define storage trimming or casing. | Submit spaces in Name, Phone, or Company. | Testable interpretation required by `FR-006` and `BR-003`; storage normalization remains open. |
+| `SP-VAL-002` | Confirmed technical resolution | Email Address is invalid when empty or when the native email control reports a syntax error. No stricter custom email policy or separate regular expression is required. | Test empty, malformed, and ordinary valid addresses. | Precise browser-native interpretation of `FR-006`, `DR-002`, `AR-001`. |
 | `SP-VAL-003` | Confirmed | Plan is invalid when empty or not one of Basic, Pro, or Ultimate. | Attempt submission with missing or unsupported Plan. | `FR-006`, `BR-001`, `DR-002`. |
 | `SP-VAL-004` | Confirmed | Phone Number and Company are required but have no additional format validation. | Submit non-empty values in varied formats. | `FR-006`. |
 | `SP-VAL-005` | Confirmed | Any invalid field prevents every IndexedDB write attempt. | Spy on persistence boundary while submitting invalid data. | `FR-006`, `FR-007`. |
@@ -180,7 +186,7 @@ A new submit attempt may start from `idle`, `invalid`, or `storage-failure`. Pos
 | `SP-SUBMIT-002` | Confirmed | A valid submission creates one storage transaction attempt containing the five required values. | Submit valid data and inspect persistence call/record. | `FR-007`, `DR-001`, `DR-003`. |
 | `SP-SUBMIT-003` | Confirmed | Button activation alone never produces success. | Delay/reject the transaction and inspect feedback. | `FR-008`, `BR-004`, `NFR-001`. |
 | `SP-SUBMIT-004` | Confirmed | Success occurs only after the IndexedDB transaction completes successfully. A request-level event that precedes transaction completion is insufficient. | Control transaction completion and inspect status timing. | `FR-007`, `FR-008`, `BR-004`. |
-| `SP-SUBMIT-005` | Confirmed | A rejected, aborted, blocked, unavailable, or otherwise incomplete IndexedDB write produces storage-failure, never success. | Simulate each supported failure path. | `FR-011`, `NFR-001`. |
+| `SP-SUBMIT-005` | Confirmed | Any IndexedDB write that cannot complete successfully produces storage-failure, never success. Architecture determines how individual open, request, and transaction failures map to this outcome. | Simulate unavailable storage, open failure, request failure, and transaction abort as supported by the implementation. | `FR-011`, `NFR-001`. |
 | `SP-SUBMIT-006` | Confirmed | Storage failure preserves entered values where technically possible and allows a later retry. | Fail a write, inspect values, then retry successfully. | `FR-011`. |
 | `SP-SUBMIT-007` | Confirmed | Current submission sends no form record to a remote endpoint. | Inspect network activity during submission. | `FR-007`, `BR-005`, `DR-004`, `CON-006`. |
 | `SP-SUBMIT-008` | Confirmed | Success and storage failure are shown in the existing Sign Up context without mandatory navigation. | Complete and fail a transaction; inspect page location. | `FR-008`, `FR-011`; `DESIGN.md` §12.6. |
@@ -189,7 +195,7 @@ A new submit attempt may start from `idle`, `invalid`, or `storage-failure`. Pos
 
 | Specification ID | Status | Proposed behavior | Verification | Requirement / design evidence |
 |---|---|---|---|---|
-| `SP-SUBMIT-009` | Recommended | While a valid IndexedDB transaction is pending, additional submit activations do not start concurrent writes. The form exposes a programmatic busy state. No new loading animation is required. | Delay a transaction, activate submit repeatedly, count write attempts, inspect busy state. | Stage 4 duplicate-action resolution; loading visuals absent from Figma. |
+| `SP-SUBMIT-009` | Confirmed technical safeguard | While a valid IndexedDB transaction is pending, additional submit activations do not start concurrent writes. The form exposes a programmatic busy state. No new loading animation or permanent disabled visual variant is required. | Delay a transaction, activate submit repeatedly, count write attempts, inspect busy state. | Duplicate-action coverage required by the workflow; preserves `NFR-001` and does not decide sequential duplicate-record policy. |
 
 ### 10.3 Feedback behavior
 
@@ -219,8 +225,8 @@ A new submit attempt may start from `idle`, `invalid`, or `storage-failure`. Pos
 | `SP-DATA-001` | Confirmed | A successful record contains all five conceptual fields listed above. | Read the committed record from the origin’s IndexedDB. | `DR-001`, `FR-007`. |
 | `SP-DATA-002` | Confirmed | The record remains in browser IndexedDB for the same origin after a normal page reload unless the browser/user clears site data. | Submit, reload, and inspect IndexedDB. | `DR-003`, `CON-003`. |
 | `SP-DATA-003` | Confirmed | No API schema, remote identifier, server status, or remote synchronization field is required. | Inspect record and network behavior. | `DR-004`, `DR-006`, `CON-006`. |
-| `SP-DATA-004` | Open | Database name, object-store name, key strategy, generated identifier, timestamp, schema version, migration strategy, duplicate rule, retention, update, and deletion remain undefined. | Architecture/product review. | `DR-005`; `REQUIREMENTS.md` §16. |
-| `SP-DATA-005` | Open | Duplicate submissions may be allowed, rejected, or update an existing record; no behavior is approved beyond preventing concurrent pending writes if `SP-SUBMIT-009` is accepted. | Product decision required. | `DR-005`; `REQUIREMENTS.md` §16. |
+| `SP-DATA-004` | Architecture decision required | Stage 6 must define the database name, object-store name, schema version, key strategy, and any generated identifier or timestamp needed for a valid record. | Verify `ARCHITECTURE.md` records the choices, rationale, and migration implications before implementation tasks are finalized. | `DR-005`. |
+| `SP-DATA-005` | Open product/data decision | Duplicate submissions may be allowed, rejected, or update an existing record. Retention duration and future update/deletion policy are also unapproved. Concurrent pending activation remains independently prevented by `SP-SUBMIT-009`. | Product/data decision required. | `DR-007`; `REQUIREMENTS.md` §16. |
 
 ## 12. Countdown specification
 
@@ -231,8 +237,8 @@ A new submit attempt may start from `idle`, `invalid`, or `storage-failure`. Pos
 | `SP-COUNT-001` | Confirmed | Home and Sign Up each display the same launch target date and the units days, hours, min, and sec. | Compare both pages at the same instant. | `FR-009`, `CR-003`. |
 | `SP-COUNT-002` | Confirmed | The visible date uses English `DD Mon YYYY`, matching `31 Dec 2026`. Localization is not required. | Supply a known target and inspect output. | `FR-009`, `CR-003`, `CR-005`. |
 | `SP-COUNT-003` | Confirmed | Visible countdown values update once per second while the target is in the future and the countdown is active. | Observe value changes with a controlled clock. | `FR-009`; README. |
-| `SP-COUNT-004` | Recommended | Each unit is calculated from the remaining duration: whole days, remaining hours, remaining minutes, and remaining seconds. Values below 10 display with at least two digits; values above two digits are not truncated. | Test controlled durations. | Proposed precise interpretation of Figma values `47`, `07`, `56`, `14`; the formatting rule is not explicitly approved. |
-| `SP-COUNT-005` | Recommended | Each update reflects elapsed wall-clock time. After timer throttling or tab inactivity, the next visible update catches up rather than replaying missed ticks. | Pause/throttle execution, resume, and compare with target time. | Proposed accuracy rule supporting `FR-009`; not explicitly defined by the source. |
+| `SP-COUNT-004` | Confirmed technical resolution | Each unit is calculated from the remaining duration: whole days, remaining hours, remaining minutes, and remaining seconds. Values below 10 display with at least two digits; values above two digits are not truncated. | Test controlled durations. | Required to make `FR-009` objectively testable; supported by Figma values `47`, `07`, `56`, `14`. |
+| `SP-COUNT-005` | Confirmed technical resolution | Each update is recalculated from the target and current wall-clock time. After timer throttling or tab inactivity, the next visible update catches up rather than replaying missed ticks. | Pause/throttle execution, resume, and compare with target time. | Accuracy behavior required by `FR-009`. |
 | `SP-COUNT-006` | Confirmed | The countdown is not an assertive or one-second live announcement. Visual updates do not announce every tick. | Inspect live-region semantics and screen-reader behavior. | `AR-007`; `DESIGN.md` §15.4. |
 | `SP-COUNT-007` | Open | Target timezone, current placeholder timestamp, future API payload, request lifecycle, and failure fallback are undefined. | Future API specification required. | `DEP-003`, `A-003`. |
 | `SP-COUNT-008` | Out of scope | No required behavior is defined when the target is reached or is in the past. | Confirm no acceptance test claims a zero-state outcome. | `NG-002`, `FR-009`. |
@@ -251,7 +257,7 @@ These are behavioral patterns, not mandatory source-code modules.
 | Countdown | Date label, four labeled units, one-second visual updates, light/dark variants. | `FR-009`; `DESIGN.md` §11.7. |
 | Sign Up form | Five controls, validation, submission state, IndexedDB result feedback. | `FR-004`–`FR-008`, `FR-011`, `FR-012`. |
 | Text field | Label, control, divider, default/hover/focus, invalid relationship. | `FR-006`, `AR-004`; Figma `10:503`. |
-| Plan select | Label, native select, current selection, supporting price, chevron, default/hover/focus. | `FR-005`; Figma `10:512`. |
+| Plan select | Label, native select, current selection, chevron, default/hover/focus, and the observed Basic supporting text. Pro/Ultimate supporting text is optional pending approval. | `FR-005`; Figma `10:512`; `SP-SIGNUP-007`. |
 | Form status | Success or storage-failure message and announcement semantics. | `FR-008`, `FR-011`, `AR-006`; design gap/recommendation. |
 
 ## 14. Visual and interaction states
@@ -264,8 +270,8 @@ These are behavioral patterns, not mandatory source-code modules.
 | Active/pressed | Standard native activation feedback is permitted; no separate custom visual state is required. | Out of design scope. |
 | Selected | Plan select displays the selected supported plan; Pro remains visually featured on Home. | Confirmed. |
 | Select open | Browser/platform native menu and keyboard behavior. | Confirmed. |
-| Disabled | No persistent disabled state is required. A temporary behaviorally blocked pending submission is only recommended under `SP-SUBMIT-009`. | Not designed. |
-| Loading/pending | No spinner or loading animation is required. Programmatic busy behavior is recommended only while a write is pending. | Not designed / recommended behavior. |
+| Disabled | No persistent disabled visual state is required. While a valid write is pending, repeated submission is behaviorally blocked under `SP-SUBMIT-009`. | No persistent Figma state; confirmed technical safeguard. |
+| Loading/pending | No spinner or loading animation is required. The form exposes a programmatic busy state while a write is pending. | No Figma visual; confirmed technical safeguard. |
 | Empty | Text controls begin empty; Plan begins with resolved plan context or Basic. | Confirmed. |
 | Validation error | Invalid field is visibly identified, marked invalid, and associated with a field message. Exact visual treatment is open. | Confirmed behavior / design gap. |
 | Storage failure | Values remain, success is absent, and visible/programmatic failure feedback is provided. | Confirmed behavior / design gap. |
@@ -288,7 +294,7 @@ These are behavioral patterns, not mandatory source-code modules.
 
 ### 16.1 Reference-range recommendation
 
-The requirements confirm `24rem`, `48rem`, and `80rem`, but do not approve exact range semantics. The following mapping is a Stage 4 recommendation, not a confirmed product decision:
+The requirements confirm `24rem`, `48rem`, and `80rem` and delegate exact testable boundary behavior to this specification. Stage 5 resolves them using mobile-first inclusive lower bounds:
 
 | Range | Recommended inclusive/exclusive semantics | Composition |
 |---|---|---|
@@ -297,13 +303,13 @@ The requirements confirm `24rem`, `48rem`, and `80rem`, but do not approve exact
 | Medium | `>= 48rem` and `< 80rem` | Medium composition represented by the 768 px frames. |
 | Large | `>= 80rem` | Large composition represented by the desktop frames. |
 
-At exactly `24rem`, `48rem`, and `80rem`, the range beginning at that threshold applies. This mapping requires stakeholder approval under `SP-RWD-001`.
+At exactly `24rem`, `48rem`, and `80rem`, the range beginning at that threshold applies.
 
 ### 16.2 Responsive behavior
 
 | Specification ID | Status | Required behavior | Verification | Requirement / design evidence |
 |---|---|---|---|---|
-| `SP-RWD-001` | Recommended | Use the exact ranges in §16.1. | Test immediately below, at, and immediately above each threshold. | Resolves `RR-001`; `DESIGN.md` §20 open question. |
+| `SP-RWD-001` | Confirmed technical resolution | Use the exact ranges in §16.1. | Test immediately below, at, and immediately above each threshold. | `RR-001` delegates exact boundary behavior to SPEC; `DESIGN.md` §13.1. |
 | `SP-RWD-002` | Confirmed | Layout is fluid between reference widths; no meaningful content overlaps, clips, or forces primary-flow horizontal scrolling. | Test intermediate widths and long content. | `RR-002`, `AR-008`, `NFR-002`. |
 | `SP-RWD-003` | Confirmed | Compact Home centers the logo, places the decorative illustration before centered hero copy, stacks vertical pricing cards, and centers countdown/final CTA. | Compare with `2141:1813`. | `RR-003`; `DESIGN.md` §13.2. |
 | `SP-RWD-004` | Confirmed | Medium Home keeps a two-column hero, stacks pricing cards, and uses horizontal summary/features anatomy within each card. | Compare with `2141:1724`. | `RR-003`; `DESIGN.md` §13.3. |
@@ -365,8 +371,8 @@ The current release may use the following Figma copy while treating it as replac
 | Unsupported Plan value | Prevent storage; show associated Plan error; resolve to a supported option before storage. | User selects Basic, Pro, or Ultimate. |
 | IndexedDB unavailable or open failure | Show/announce storage failure; do not show success; keep values. | Retry if the environment later permits storage. |
 | IndexedDB transaction abort/rejection | Show/announce storage failure; do not show success; keep values. | Retry; duplicate policy remains open. |
-| Repeated activation during pending write | No confirmed behavior beyond avoiding false success; recommended behavior prevents concurrent writes. | Await current result. |
-| Decorative SVG unavailable | Meaningful content and interaction remain present; exact spacing fallback is recommended, not Figma-defined. | No user action required. |
+| Repeated activation during pending write | No concurrent IndexedDB write starts; expose programmatic busy state. | Await current result. |
+| Decorative SVG unavailable | Meaningful content and interaction remain present; exact spacing fallback is not Figma-defined. | No user action required. |
 | Future launch-date API slow/fails | Out of current scope; placeholder source remains the current boundary. | Future API specification required. |
 | Countdown reaches zero | Out of scope. | Future product decision required. |
 
@@ -375,13 +381,13 @@ The current release may use the following Figma copy while treating it as replac
 | Specification ID | Status | Required behavior | Verification | Requirement / design evidence |
 |---|---|---|---|---|
 | `SP-EDGE-001` | Confirmed | Long marketing, plan, field-label, validation, success, and failure text wraps without hiding controls or feedback. | Substitute long strings. | `CR-002`, `NFR-002`. |
-| `SP-EDGE-002` | Recommended | Missing decorative assets do not create a broken-image announcement or remove meaningful content. | Block asset loading. | `AR-005`; `DESIGN.md` recommendation, not an approved product requirement. |
-| `SP-EDGE-003` | Recommended | Unsupported incoming Plan context falls back to Basic. | Navigate with unsupported context. | Same proposed resolution as `SP-NAV-004`. |
+| `SP-EDGE-002` | Confirmed | Missing decorative assets do not create a broken-image announcement or remove meaningful content. | Block asset loading. | `AR-005`, `SP-GLOBAL-006`; decorative assets are not essential content. |
+| `SP-EDGE-003` | Confirmed | Unsupported incoming Plan context falls back to Basic. | Navigate with unsupported context. | Same confirmed resolution as `SP-NAV-004`. |
 | `SP-EDGE-004` | Confirmed | IndexedDB unavailable is handled as storage failure. | Disable/mock IndexedDB. | `FR-011`. |
 | `SP-EDGE-005` | Confirmed | No primary-flow horizontal scrolling appears at the 375 px reference or intermediate widths due to content, focus rings, or feedback. | Test reference/intermediate widths. | `AR-008`, `RR-002`, `RR-004`. |
 | `SP-EDGE-006` | Recommended | Static brand, product, pricing, date label, and page copy remain readable when JavaScript fails; countdown updates and IndexedDB submission may be unavailable. | Disable JavaScript and inspect static content. | `NFR-007`; `DESIGN.md` §19 inference. |
 | `SP-EDGE-007` | Open | Runtime behavior for missing required build-time content is undefined; required content should be treated as an authoring/configuration defect rather than silently invented. | Content pipeline decision. | No source defines runtime content fetching. |
-| `SP-EDGE-008` | Open | Duplicate submission identity and deduplication are undefined. | Product/data decision. | `DR-005`. |
+| `SP-EDGE-008` | Open | Duplicate submission identity and deduplication are undefined. | Product/data decision. | `DR-007`. |
 
 ## 21. Relevant non-functional requirements
 
@@ -394,7 +400,6 @@ The current release may use the following Figma copy while treating it as replac
 | `SP-NFR-005` | Open | No quantitative performance budget is approved. No numeric threshold is introduced here. | Documentation review. | `NFR-005`. |
 | `SP-NFR-006` | Open | No browser-support matrix is approved. IndexedDB and native-select assumptions must be evaluated in architecture/planning. | Browser-support decision. | `NFR-006`, `A-004`. |
 | `SP-NFR-007` | Confirmed deviation | Known contrast risks remain documented and prevent a full WCAG AA claim. | Accessibility report/documentation. | `AR-009`, `CON-007`. |
-| `SP-NFR-008` | Out of scope | No analytics behavior is specified for the current release. | Confirm no acceptance criteria depend on analytics. | No requirement or source defines analytics. |
 
 ## 22. Acceptance criteria
 
@@ -405,7 +410,7 @@ The current release may use the following Figma copy while treating it as replac
 - [ ] Both generic CTAs open Sign Up with Basic selected.
 - [ ] Each Plan CTA opens Sign Up with its matching plan selected.
 - [ ] Direct Sign Up entry selects Basic.
-- [ ] Unsupported-plan fallback is tested only after `SP-NAV-004` is approved.
+- [ ] Unsupported incoming plan context falls back to Basic.
 - [ ] All Home navigation is usable by keyboard.
 
 ### 22.2 Sign Up and validation
@@ -413,7 +418,7 @@ The current release may use the following Figma copy while treating it as replac
 - [ ] Sign Up contains the logo link, heading, copy, countdown, five fields, and submit button.
 - [ ] Plan uses a native select with exactly three supported options.
 - [ ] Every control has a persistent programmatic label.
-- [ ] Every current field is required; email uses standard syntax validation.
+- [ ] Every current field is required; whitespace-only text values are invalid; email uses native syntax validation.
 - [ ] Invalid values prevent every IndexedDB write attempt.
 - [ ] Invalid fields expose visible, field-specific, programmatically associated feedback.
 - [ ] Values persist through validation and storage failure.
@@ -426,15 +431,15 @@ The current release may use the following Figma copy while treating it as replac
 - [ ] Storage failure creates visible and announced failure, never success.
 - [ ] Storage failure preserves entered values and permits retry where technically possible.
 - [ ] No form record is sent to a remote endpoint.
-- [ ] Pending duplicate prevention is tested only after `SP-SUBMIT-009` is approved.
+- [ ] Repeated activation during a pending write starts no concurrent transaction and exposes a programmatic busy state.
 
 ### 22.4 Countdown
 
 - [ ] Home and Sign Up display the same target date and four units.
 - [ ] The date uses `DD Mon YYYY`; labels are `days`, `hours`, `min`, `sec`.
 - [ ] Values update visually once per second.
-- [ ] Wall-clock catch-up after timer throttling is tested only after `SP-COUNT-005` is approved.
-- [ ] Two-digit minimum formatting is tested only after `SP-COUNT-004` is approved.
+- [ ] The countdown recalculates from wall-clock time after timer throttling.
+- [ ] Values below 10 use at least two digits and values above two digits are not truncated.
 - [ ] One-second ticks are not announced as a live stream.
 - [ ] No zero-state behavior is claimed.
 
@@ -447,7 +452,7 @@ The current release may use the following Figma copy while treating it as replac
 - [ ] Default, hover, and focus states work at every responsive range.
 - [ ] Long content and feedback grow containers without clipping or primary-flow horizontal scrolling.
 - [ ] Countdown tiles wrap rather than overflow when one row cannot fit.
-- [ ] Exact threshold tests are normative only after `SP-RWD-001` is approved.
+- [ ] Exact threshold tests pass immediately below, at, and immediately above `24rem`, `48rem`, and `80rem`.
 
 ### 22.6 Accessibility
 
@@ -484,6 +489,7 @@ The current release may use the following Figma copy while treating it as replac
 | `NG-005` | Current copy, prices, features, and date remain placeholders in §18. |
 | `NG-006` | Current palette and accepted contrast deviation in §§17, 21. |
 | `NG-007` | No account, authentication, or authorization behavior in §4.2. |
+| `NG-008` | No user-facing local-record listing, editing, export, or deletion in §4.2. |
 | `DEP-001` | Figma and design evidence referenced throughout and summarized in §24. |
 | `DEP-002` | IndexedDB current persistence boundary in §§10–11. |
 | `DEP-003` | Future launch-date API remains open in §§12, 19, 25. |
@@ -507,7 +513,7 @@ The current release may use the following Figma copy while treating it as replac
 | `FR-011` | `SP-SUBMIT-005`, `SP-SUBMIT-006`, `SP-FEEDBACK-002`–`SP-FEEDBACK-004` |
 | `FR-012` | `SP-NAV-001`, `SP-NAV-003`, `SP-SIGNUP-003`, `SP-SIGNUP-004` |
 | `BR-001`–`BR-007` | §§7–12, 18–20 |
-| `DR-001`–`DR-006` | §§10–11, 19–20 |
+| `DR-001`–`DR-007` | §§10–11, 19–20 |
 | `AR-001`–`AR-010` | §§14–17, 22.6 |
 | `RR-001`–`RR-006` | §16, §22.5 |
 | `CR-001`–`CR-005` | §18, `SP-EDGE-001` |
@@ -540,29 +546,22 @@ The current release may use the following Figma copy while treating it as replac
 ### 25.2 Recommendations requiring approval
 
 1. `SP-VAL-010`: Move focus to the first invalid control after failed submission.
-2. `SP-SUBMIT-009`: Prevent concurrent writes and expose a busy state while storage is pending.
-3. `SP-FEEDBACK-006`: Use one form-level status region between fields and submit, with polite success and assertive failure semantics.
-4. `SP-RWD-001`: Use `<24rem`, `24–<48rem`, `48–<80rem`, and `>=80rem` exact ranges.
-5. `SP-EDGE-006`: Preserve static product and pricing content when JavaScript fails.
-6. `SP-NAV-004` / `SP-EDGE-003`: Fall back to Basic for unsupported incoming Plan context.
-7. `SP-VAL-001`: Treat whitespace-only required text values as empty.
-8. `SP-VAL-002`: Use standard browser email validity as the current precise email rule.
-9. `SP-COUNT-004`: Use whole-unit decomposition and a two-digit minimum display.
-10. `SP-COUNT-005`: Recalculate against wall-clock time after throttling.
-11. `SP-EDGE-002`: Preserve meaningful layout and accessibility when decorative assets fail.
+2. `SP-FEEDBACK-006`: Use one form-level status region between fields and submit, with polite success and assertive failure semantics.
+3. `SP-SIGNUP-007`: Update supporting Plan price text for Pro and Ultimate using the pricing inventory.
+4. `SP-EDGE-006`: Preserve static product and pricing content when JavaScript fails.
 
 ### 25.3 Open questions
 
 1. What exact validation, success, and storage-failure copy is approved?
 2. What visual styling, iconography, and spacing are approved for field errors, success, and storage failure?
 3. After successful storage, do fields remain visible, clear, disable, or get replaced?
-4. What IndexedDB database/store names, key strategy, identifier, timestamp, schema version, duplicate rule, retention, update, and deletion behavior are required?
-5. Should duplicate submissions be allowed, rejected, or update an existing record?
-6. What browser-support matrix is required?
-7. What timezone and payload shape will the future launch-date API provide?
-8. Should every control use the exact same two-color focus-ring construction, or only its supplied component-family variant?
-9. Is the recommended breakpoint mapping in `SP-RWD-001` approved?
-10. At extreme copy lengths, is unrestricted vertical growth acceptable or should content limits be introduced?
+4. Should duplicate submissions be allowed, rejected, or update an existing record, and what retention duration applies?
+5. What browser-support matrix is required?
+6. What timezone and payload shape will the future launch-date API provide?
+7. Should the Plan control show supporting price text for Pro and Ultimate, and what exact `Pack` labels should be used?
+8. At extreme copy lengths, is unrestricted vertical growth acceptable or should content limits be introduced?
+
+**Stage 6 architecture decision required:** Define the IndexedDB database name, object-store name, schema version, key strategy, and any identifier/timestamp needed for implementation under `SP-DATA-004`.
 
 ## 26. Review pass 1 — Completeness and correctness
 
@@ -573,7 +572,7 @@ Completed checks:
 - Tied IndexedDB success to transaction completion and storage failure to rejected/incomplete transactions.
 - Preserved native Plan behavior and did not specify a custom popup.
 - Defined field validation without inventing phone, company, name, or character-limit rules.
-- Defined confirmed one-second display and non-announcement behavior, while labeling unit formatting and wall-clock catch-up as recommendations.
+- Defined one-second display, non-announcement, whole-unit formatting, and wall-clock catch-up behavior.
 - Kept countdown zero-state, production APIs, final content, data governance, browser matrix, and quantitative performance outside confirmed scope.
 - Covered default, hover, focus, active, selected, disabled, pending/loading, empty, error, and success states with explicit evidence status.
 
@@ -582,8 +581,8 @@ Corrections made during this pass:
 - Separated confirmed validation/error semantics from unapproved visual treatment.
 - Separated concurrent-pending protection from the unresolved duplicate-record policy.
 - Kept post-success form treatment open rather than assuming fields clear or disappear.
-- Reclassified unsupported Plan fallback as a recommendation while preserving the confirmed Basic default for missing context.
-- Treated `24rem` breakpoint semantics as a recommendation rather than a confirmed interpretation.
+- Confirmed unsupported Plan fallback from the existing Basic-default rule.
+- Resolved `24rem`, `48rem`, and `80rem` boundary semantics as a SPEC-owned technical decision.
 
 ## 27. Review pass 2 — Consistency, traceability, and uncertainty
 
@@ -594,18 +593,20 @@ Completed checks:
 - Preserved Pro visual emphasis while keeping Basic as the generic/direct default.
 - Preserved the stale-mobile-grid exclusion and actual compact inset relationships.
 - Preserved the accepted contrast deviation and avoided a WCAG AA claim.
-- Kept recommended focus movement, pending protection, status-region placement, JavaScript fallback, breakpoint ranges, whitespace handling, email-validity rule, unsupported-Plan fallback, countdown formatting/catch-up, and asset-failure behavior visibly unapproved.
-- Kept data-key, duplicate, retention, future API, browser-support, feedback-copy, and post-success decisions open.
+- Kept recommended focus movement, status-region placement, Plan supporting-price mapping, and JavaScript fallback visibly unapproved.
+- Confirmed technical resolutions for whitespace handling, native email validity, unsupported-Plan fallback, pending duplicate protection, countdown calculation/catch-up, breakpoint boundaries, and decorative-asset failure.
+- Delegated IndexedDB names, version, key, and identifier/timestamp choices to Stage 6; kept duplicate, retention, future API, browser-support, feedback-copy, and post-success decisions open.
 - Avoided repository paths, concrete modules, database names, or implementation sequence.
 
-No contradiction prevents Stage 5 document review. The recommended breakpoint mapping and form-feedback recommendations require approval before they become implementation-ready normative behavior.
+No contradiction prevents architecture and planning. Breakpoint mapping is now normative; the remaining form-feedback placement and Plan supporting-price recommendations still require approval before they become fidelity requirements.
 
 ## 28. Stage completion
 
-- **File created:** `SPEC.md`
+- **File reviewed and modified:** `SPEC.md`
 - **Important findings:** The confirmed behavior is sufficient to specify navigation, native Plan selection, current validation, IndexedDB transaction outcomes, countdown updates, responsive compositions, keyboard operation, and accessible feedback semantics.
-- **Recommendations introduced:** Standard email validity, whitespace-only handling, unsupported-Plan fallback, countdown formatting and wall-clock catch-up, first-invalid focus, pending duplicate protection, form-level status region, explicit breakpoint ranges, graceful decorative-asset failure, and static-content resilience without JavaScript.
-- **Open questions:** Final feedback copy/visuals, post-success form treatment, IndexedDB identity/schema/duplicate policy, browser support, future date API contract, exact focus-ring normalization, and extreme content limits.
+- **Recommendations remaining:** First-invalid focus, form-level status-region placement, Plan supporting-price mapping, and static-content resilience without JavaScript.
+- **Open questions:** Final feedback copy/visuals, post-success form treatment, duplicate/retention policy, browser support, future date API contract, Plan supporting labels, and extreme content limits.
 - **Deviations:** Current color contrast risk remains accepted; full WCAG AA conformance is not claimed.
-- **Blockers:** None for Stage 5 document review. Approval is required before recommended specifications become implementation requirements.
-- **Readiness:** **Ready for Stage 5 — review the documentation set for completeness, consistency, traceability, risk, and unresolved decisions.**
+- **Stage 5 review:** Cross-document corrections and remaining uncertainties are recorded in `DOCUMENT-REVIEW.md`.
+- **Blockers:** None for architecture and planning. Product/design choices remain implementation gates for their related tasks.
+- **Readiness:** **Ready for architecture and planning.**
