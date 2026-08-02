@@ -1,0 +1,99 @@
+## 7. Technical approach
+
+### 7.1 Route composition
+
+- `src/pages/index.astro` becomes the Home route.
+- `src/pages/sign-up/index.astro` becomes the Sign Up route.
+- `Layout.astro` owns document metadata, favicon links, global CSS imports, and the page slot.
+- Home CTAs are anchors. Plan CTAs include `?plan=basic|pro|ultimate`.
+- Sign Up logo is an anchor to `/`.
+
+### 7.2 Shared presentational components
+
+Use Astro components for genuine repeated visual structures:
+
+- brand/logo and site header;
+- CTA link variants;
+- countdown markup;
+- pricing card variants;
+- Sign Up form markup.
+
+Do not place validation, query parsing, timers, or IndexedDB calls inside presentational components.
+
+### 7.3 Browser feature modules
+
+- Countdown logic is split between a pure calculation module and a DOM initializer.
+- Sign Up logic is split into Plan parsing, validation, record mapping, persistence, and one controller.
+- The controller owns submission state and accessible DOM updates.
+- The IndexedDB module owns database creation/upgrades and resolves only on transaction completion.
+
+### 7.4 Styling
+
+- `tokens.css` maps the documented color, spacing, radius, typography, and breakpoint foundations to CSS custom properties.
+- `global.css` provides reset/base semantics, background, type defaults, and shared container behavior.
+- `home.css` and `sign-up.css` own page-level composition and responsive transformations.
+- Component-specific visual variants remain scoped to their Astro components where practical.
+- Use mobile-first media queries at `24rem`, `48rem`, and `80rem`.
+- Do not reproduce the hidden copied tablet grid on compact frames.
+
+### 7.5 Content and configuration
+
+`src/content/site.ts` should expose typed values for:
+
+- Home and Sign Up placeholder copy;
+- Plan records and lower-case slugs;
+- CTA labels;
+- countdown labels and display date;
+- the approved placeholder target timestamp after `G-001`;
+- provisional validation, success, and failure strings.
+
+The module is a build-time/local source, not an API abstraction.
+
+### 7.6 Testing
+
+- Static checks: Astro check and production build.
+- Unit tests: Plan parsing, validation, countdown decomposition/formatting, record mapping.
+- Persistence tests: database upgrade, object store shape, auto-increment key, transaction completion/failure mapping.
+- Browser tests: navigation, form semantics, validation, IndexedDB success/failure, keyboard, responsive layouts, reduced motion, missing decorative assets, zoom/text growth.
+- Accessibility: Playwright-compatible automated checks plus manual keyboard and screen-reader-oriented review.
+- Visual validation: compare rendered reference widths and state examples with Figma; establish screenshot baselines only after first visual approval.
+
+## 8. Files and modules
+
+### 8.1 Existing files to preserve or modify
+
+| File | Action | Responsibility | Notes |
+|---|---|---|---|
+| `frontend/package.json` | Modify | Add validation/test scripts and development dependencies | Preserve Astro and Node constraints; do not add a runtime framework. |
+| `frontend/pnpm-lock.yaml` | Modify through pnpm | Lock compatible development dependencies | Never hand-edit. |
+| `frontend/pnpm-workspace.yaml` | Preserve unless pnpm requires a documented change | Existing build-script allowlist | Reinspect after dependency installation. |
+| `frontend/astro.config.mjs` | Verify; change only if required by confirmed static behavior or test tooling | Astro build configuration | No server adapter is planned. |
+| `frontend/tsconfig.json` | Verify; modify only if test/config files require explicit inclusion/exclusion | Strict TypeScript configuration | Preserve strict mode. |
+| `frontend/src/layouts/Layout.astro` | Replace starter content | Shared document shell, metadata, favicons, global styles | Add title/description props. |
+| `frontend/src/pages/index.astro` | Replace starter content | Home route composition | Remove `Welcome` import. |
+| `frontend/public/favicon.ico` | Remove or replace | Current Astro starter favicon | Do not leave Astro branding. |
+| `frontend/public/favicon.svg` | Remove or replace | Current Astro starter favicon | Use supplied Officelite favicon material. |
+| `README.md` | Modify after implementation | Repository-level commands, architecture summary, validation, and deployment notes | Do not update before commands are real. |
+| `frontend/README.md` | Replace or remove after implementation | Generated Astro starter documentation | Do not leave starter paths or commands that contradict the implemented application. |
+
+### 8.2 Existing starter files to remove
+
+| File | Action | Validation |
+|---|---|---|
+| `frontend/src/components/Welcome.astro` | Delete after replacement pages compile | Search confirms no imports. |
+| `frontend/src/assets/astro.svg` | Delete | Search confirms no runtime references. |
+| `frontend/src/assets/background.svg` | Delete | Search confirms no runtime references. |
+
+### 8.3 Proposed runtime assets
+
+| Proposed file | Source | Responsibility |
+|---|---|---|
+| `frontend/src/assets/logo.svg` | `docs/starter-code/assets/shared/logo.svg` | Shared brand asset |
+| `frontend/src/assets/illustration-charts.svg` | `docs/starter-code/assets/home/illustration-charts.svg` | Decorative hero illustration |
+| `frontend/src/assets/bg-pattern-header.svg` | `docs/starter-code/assets/home/bg-pattern-header.svg` | Decorative Home hero orbits |
+| `frontend/src/assets/bg-pattern-footer.svg` | `docs/starter-code/assets/home/bg-pattern-footer.svg` | Decorative Home dark-region orbits |
+| `frontend/src/assets/bg-pattern-pricing.svg` | `docs/starter-code/assets/home/bg-pattern-pricing.svg` | Decorative featured Plan pattern |
+| `frontend/src/assets/bg-pattern-side.svg` | `docs/starter-code/assets/sign-up/bg-pattern-side.svg` | Decorative Sign Up dark-region pattern |
+| `frontend/src/assets/icon-arrow-down.svg` | `docs/starter-code/assets/sign-up/icon-arrow-down.svg` | Closed native-select affordance |
+| `frontend/public/favicon-32x32.png` | `docs/starter-code/assets/favicon-32x32.png` | Officelite favicon |
+| `frontend/src/assets/fonts/*` | Location depends on `G-002` | Optional approved self-hosted Kumbh Sans files |
