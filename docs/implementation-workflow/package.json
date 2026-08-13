@@ -1,0 +1,43 @@
+{
+  "name": "@ferfalcon/design-workflow",
+  "version": "0.3.0",
+  "description": "Dependency-free CLI and workflow toolkit for evidence-driven design-to-implementation projects.",
+  "type": "module",
+  "license": "UNLICENSED",
+  "bin": {
+    "design-workflow": "./cli/design-workflow.mjs"
+  },
+  "files": [
+    "AGENTS.md",
+    "AGENTS-instructions.md",
+    "AGENTS-PROMPT-Figma-file-preparation.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "QUICKSTART.md",
+    "README.md",
+    "cli",
+    "examples",
+    "guidelines",
+    "prompts",
+    "schemas",
+    "scripts",
+    "source-adapters",
+    "templates",
+    "tests",
+    "workflow"
+  ],
+  "scripts": {
+    "validate": "node scripts/generate-workflow-schema.mjs --check && node scripts/validate-workflow.mjs && node scripts/test-workflow-record.mjs && node scripts/test-stage-gates.mjs && node scripts/test-generated-state.mjs && node scripts/test-artifact-renderer.mjs && node scripts/test-orchestration.mjs && node scripts/test-cli.mjs && node scripts/test-package-manifest.mjs",
+    "test:records": "node scripts/test-workflow-record.mjs",
+    "test:gates": "node scripts/test-stage-gates.mjs",
+    "test:state": "node scripts/test-generated-state.mjs",
+    "test:render": "node scripts/test-artifact-renderer.mjs",
+    "test:orchestration": "node scripts/test-orchestration.mjs",
+    "test:cli": "node scripts/test-cli.mjs",
+    "test:package": "node scripts/test-package-manifest.mjs"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

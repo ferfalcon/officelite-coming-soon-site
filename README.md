@@ -7,7 +7,6 @@
 - [Overview](#overview)
   - [The job](#the-job)
   - [Links](#links)
-  - [Project documentation](#project-documentation)
 - [My process](#my-process)
   - [Built with](#built-with)
   - [AI collaboration](#ai-collaboration)
@@ -39,16 +38,6 @@ The marketing copy, pricing, plan features, and launch date are placeholders. A 
 
 - Repository: [https://github.com/ferfalcon/officelite-coming-soon-site](https://github.com/ferfalcon/officelite-coming-soon-site)
 - Live site: [https://officelite-coming-soon-site-ferfalcon.vercel.app/](https://officelite-coming-soon-site-ferfalcon.vercel.app/)
-
-### Project documentation
-
-The current documentation sources of truth are:
-
-- [`FIGMA-AUDIT.md`](./FIGMA-AUDIT.md) — inspected Figma evidence and decisions
-- [`REQUIREMENTS.md`](./REQUIREMENTS.md) — product outcomes, rules, and constraints
-- [`DESIGN.md`](./DESIGN.md) — visual, responsive, and interaction intent
-- [`SPEC.md`](./SPEC.md) — observable and testable behavior
-- [`DOCUMENT-REVIEW.md`](./DOCUMENT-REVIEW.md) — Stage 5 consistency review and remaining decisions
 
 ## My process
 
