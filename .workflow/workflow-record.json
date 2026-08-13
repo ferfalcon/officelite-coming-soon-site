@@ -1,0 +1,1393 @@
+{
+  "schemaVersion": 2,
+  "project": {
+    "name": "Officelite coming soon site",
+    "profile": "Standard",
+    "executionMode": "Gated"
+  },
+  "state": {
+    "stage": 9,
+    "status": "In progress",
+    "activeInputs": [
+      "SRC-DS-001",
+      "SRC-REPO-001",
+      "SRC-DOC-001",
+      "SRC-ASSET-001"
+    ],
+    "currentTask": null,
+    "latestOutput": null,
+    "latestValidationRuntime": null,
+    "architectureDecision": {
+      "result": "Required",
+      "reason": "Required after two-pass applicability review: the approved scope introduces a second Astro route, URL-carried plan intent across routes, shared countdown behavior, native-form validation orchestration, and browser-local IndexedDB transaction/error/concurrency ownership into a repository that currently contains only the Astro starter. These are meaningful routing, shared-state, persistence, accessibility, and test-boundary decisions. Standard remains sufficient because there is no backend, authentication, service integration, migration, deployment change, or multi-runtime trust boundary.",
+      "recordedAt": "2026-08-13T22:09:33.674Z"
+    }
+  },
+  "snapshots": [
+    {
+      "id": "SRC-DS-001",
+      "role": "Input baseline",
+      "pinStrength": "Time-bound",
+      "status": "Active",
+      "reference": "https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3"
+    },
+    {
+      "id": "SRC-REPO-001",
+      "role": "Input baseline",
+      "pinStrength": "Immutable",
+      "status": "Active",
+      "reference": "/home/fer/code/Officelite coming soon site/officelite-coming-soon-site",
+      "commit": "7119e9b8c7e5b483b8aeb8c1330e507c42bac11f"
+    },
+    {
+      "id": "SRC-DOC-001",
+      "role": "Supporting source",
+      "pinStrength": "Immutable",
+      "status": "Active",
+      "reference": "https://github.com/ferfalcon/officelite-coming-soon-site/blob/7119e9b8c7e5b483b8aeb8c1330e507c42bac11f/README.md"
+    },
+    {
+      "id": "SRC-ASSET-001",
+      "role": "Supporting source",
+      "pinStrength": "Immutable",
+      "status": "Active",
+      "reference": "https://github.com/google/fonts/tree/73fc2ff52147e34a74804b500cf89ca219eac55d/ofl/kumbhsans",
+      "commit": "73fc2ff52147e34a74804b500cf89ca219eac55d"
+    }
+  ],
+  "verifications": [
+    {
+      "id": "VER-001",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Figma MCP file-key, page-node, section, responsive-frame, component-dependency, library, and screenshot inspection",
+      "evidence": "At 2026-08-13T04:36:58-03:00, file key L7MdLOW8usVUcPwV0cMQ1n and page 4:3 (Workflow) were accessible. Home, Sign Up, Interaction States, Foundations, and Components matched the Stage 0 scope inventory. The normal Figma URL has no named version or checksum-backed export and remains mutable and Time-bound.",
+      "checkedAt": "2026-08-13T07:37:37.238Z"
+    },
+    {
+      "id": "VER-002",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Git HEAD, branch, origin, submodule, worktree, and frontend configuration inspection",
+      "evidence": "HEAD remains 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f on main. The worktree was clean before initialization; current untracked differences are only expected Stage 0 workflow control files. No frontend implementation file changed.",
+      "checkedAt": "2026-08-13T07:37:37.286Z"
+    },
+    {
+      "id": "VER-003",
+      "snapshot": "SRC-DOC-001",
+      "result": "Unchanged",
+      "method": "Pinned Git commit path and SHA-256 comparison",
+      "evidence": "README.md at commit 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f matched the working copy; both SHA-256 values were 72bee1d93b40d80643935b254499a9d3c0f3fd280392ad94eb4f4c6cf57fb1af.",
+      "checkedAt": "2026-08-13T07:37:37.328Z"
+    },
+    {
+      "id": "VER-004",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Authenticated read-only Figma page, scoped-frame, screenshot, component, variant, variable, style, dependency, and prototype-reaction inspection",
+      "evidence": "On 2026-08-13, file key L7MdLOW8usVUcPwV0cMQ1n page 4:3 and all Stage 0 section/frame IDs remained present and matched the recorded scope. The mutable URL still has no named version or checksum-backed export, so verification is time-bound rather than immutable.",
+      "checkedAt": "2026-08-13T08:21:04.786Z"
+    },
+    {
+      "id": "VER-005",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Git HEAD, scoped worktree, frontend path, and supplied-asset checksum inspection",
+      "evidence": "HEAD remains 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f. Current untracked changes are CLI-managed workflow files and Stage 0/Stage 1 narrative artifacts; frontend/ remains unchanged. Supplied assets remain at their pinned repository paths.",
+      "checkedAt": "2026-08-13T08:27:28.058Z"
+    },
+    {
+      "id": "VER-006",
+      "snapshot": "SRC-DOC-001",
+      "result": "Unchanged",
+      "method": "Pinned Git commit path and SHA-256 comparison",
+      "evidence": "README.md still matches the pinned commit checksum 72bee1d93b40d80643935b254499a9d3c0f3fd280392ad94eb4f4c6cf57fb1af; no newer documentation content was adopted.",
+      "checkedAt": "2026-08-13T08:27:28.319Z"
+    },
+    {
+      "id": "VER-007",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Authenticated read-only Figma Plugin API inspection of page, scoped sections, responsive/state frames, components, styles, and variables",
+      "evidence": "On 2026-08-13, file key L7MdLOW8usVUcPwV0cMQ1n page 4:3 remained named 🤖 Workflow. All 5 scoped sections, 6 default frames, 4 state frames, and 9 recorded local components/component sets were present with recorded names and dimensions; 38 local variables in one collection and 7 local text styles remained. The URL has no named version or checksum-backed export, so this remains Time-bound.",
+      "checkedAt": "2026-08-13T21:19:58.799Z"
+    },
+    {
+      "id": "VER-008",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Git HEAD, branch, scoped worktree, and submodule inspection",
+      "evidence": "HEAD remains 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f on main. frontend/, README.md, and docs/starter-code/ have no tracked or untracked changes; the repository has no submodules. Workflow narrative and CLI-managed files are expected documentation-stage output.",
+      "checkedAt": "2026-08-13T21:20:08.144Z"
+    },
+    {
+      "id": "VER-009",
+      "snapshot": "SRC-DOC-001",
+      "result": "Unchanged",
+      "method": "Pinned Git commit path and SHA-256 comparison",
+      "evidence": "README.md remains at the pinned repository commit and retains SHA-256 72bee1d93b40d80643935b254499a9d3c0f3fd280392ad94eb4f4c6cf57fb1af; no newer documentation content was adopted.",
+      "checkedAt": "2026-08-13T21:20:19.122Z"
+    },
+    {
+      "id": "VER-010",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Authenticated read-only Figma metadata inspection of page, sections, responsive frames, and interaction-state frames",
+      "evidence": "On 2026-08-13, file L7MdLOW8usVUcPwV0cMQ1n page 4:3 remained named 🤖 Workflow. Sections 2141:2383, 2141:2386, 2141:2949, 2141:938, and 2141:935; responsive frames 2141:1599, 2141:1724, 2141:1813, 2141:1680, 2141:1896, and 2141:1940; and state frames 2141:2441, 2141:2542, 2141:2387, and 2141:2638 retained their recorded names and dimensions. Existing dependency evidence remains applicable. No named version or checksum-backed export exists, so the source remains Time-bound.",
+      "checkedAt": "2026-08-13T22:01:13.960Z"
+    },
+    {
+      "id": "VER-011",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Git HEAD, branch, scoped worktree, and submodule inspection before Stage 5 closure",
+      "evidence": "HEAD remains 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f on main. frontend/, README.md, and docs/starter-code/ have no tracked or untracked changes, and no submodules are registered. Only expected CLI-managed workflow and narrative documentation outputs are untracked; no implementation file changed.",
+      "checkedAt": "2026-08-13T22:01:23.634Z"
+    },
+    {
+      "id": "VER-012",
+      "snapshot": "SRC-DOC-001",
+      "result": "Unchanged",
+      "method": "Pinned Git commit path and working-copy SHA-256 comparison before Stage 5 closure",
+      "evidence": "README.md at commit 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f and the working copy both retain SHA-256 72bee1d93b40d80643935b254499a9d3c0f3fd280392ad94eb4f4c6cf57fb1af. No newer documentation content was adopted.",
+      "checkedAt": "2026-08-13T22:01:33.908Z"
+    },
+    {
+      "id": "VER-013",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Authenticated read-only Figma metadata inspection of page 4:3 and exact scoped section/frame IDs",
+      "evidence": "Page 4:3 still contains Home 2141:2383, Sign Up 2141:2386, Interaction States 2141:2949, Foundations 2141:938, Components 2141:935; all six responsive frames and four state frames retain their recorded IDs, names, and dimensions. Mutable source remains Time-bound.",
+      "checkedAt": "2026-08-13T22:34:47.798Z"
+    },
+    {
+      "id": "VER-014",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Git HEAD, branch, origin, submodule, worktree, and frontend-scope inspection",
+      "evidence": "HEAD is 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f on main with the recorded origin; no submodules or frontend changes exist. Untracked files are expected workflow documentation outputs only.",
+      "checkedAt": "2026-08-13T22:34:47.852Z"
+    },
+    {
+      "id": "VER-015",
+      "snapshot": "SRC-DOC-001",
+      "result": "Unchanged",
+      "method": "Pinned commit-path and working-copy SHA-256 comparison",
+      "evidence": "README.md at commit 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f and the working copy both hash to 72bee1d93b40d80643935b254499a9d3c0f3fd280392ad94eb4f4c6cf57fb1af.",
+      "checkedAt": "2026-08-13T22:34:47.898Z"
+    },
+    {
+      "id": "VER-016",
+      "snapshot": "SRC-ASSET-001",
+      "result": "Unchanged",
+      "method": "Official Google Fonts immutable commit and directory/API inspection",
+      "evidence": "At google/fonts commit 73fc2ff52147e34a74804b500cf89ca219eac55d, ofl/kumbhsans contains KumbhSans[YOPQ,wght].ttf blob df9fce2d04d53f54686933581c76e94222274609 and OFL.txt blob 678f3f2ae0626d9750bea8b5df1c52dfc28b8999. METADATA.pb identifies Kumbh Sans, normal variable weight 100-900, and OFL licensing.",
+      "checkedAt": "2026-08-13T22:42:46.714Z"
+    },
+    {
+      "id": "VER-017",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Authenticated read-only Stage 7 Figma metadata inspection of all exact scoped section/responsive/state IDs",
+      "evidence": "Home, Sign Up, Interaction States, Foundations, and Components retain recorded IDs/names; six responsive frames and four state frames retain recorded IDs/names/dimensions. Source remains mutable and Time-bound.",
+      "checkedAt": "2026-08-13T22:56:29.913Z"
+    },
+    {
+      "id": "VER-018",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Stage 7 Git HEAD, branch, worktree, and frontend-scope inspection",
+      "evidence": "HEAD remains 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f on main; no tracked or untracked frontend change exists. Current untracked files are workflow documentation outputs only.",
+      "checkedAt": "2026-08-13T22:56:29.988Z"
+    },
+    {
+      "id": "VER-019",
+      "snapshot": "SRC-DOC-001",
+      "result": "Unchanged",
+      "method": "Stage 7 pinned commit-path and working-copy SHA-256 comparison",
+      "evidence": "Pinned and working README.md both hash to 72bee1d93b40d80643935b254499a9d3c0f3fd280392ad94eb4f4c6cf57fb1af.",
+      "checkedAt": "2026-08-13T22:56:30.077Z"
+    },
+    {
+      "id": "VER-020",
+      "snapshot": "SRC-ASSET-001",
+      "result": "Unchanged",
+      "method": "Immutable Google Fonts commit-directory API and exact blob inspection",
+      "evidence": "At commit 73fc2ff52147e34a74804b500cf89ca219eac55d, KumbhSans[YOPQ,wght].ttf remains blob df9fce2d04d53f54686933581c76e94222274609, OFL.txt remains 678f3f2ae0626d9750bea8b5df1c52dfc28b8999, and METADATA.pb remains 6f2ad27358e64d77c9d7c5785f38c8525b0aa750.",
+      "checkedAt": "2026-08-13T22:56:30.162Z"
+    },
+    {
+      "id": "VER-021",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Authenticated read-only Stage 8 Figma metadata inspection of exact scoped sections and frames",
+      "evidence": "All five scoped sections, six responsive frames, and four interaction-state frames retain recorded IDs, names, and dimensions. Mutable design source remains Time-bound.",
+      "checkedAt": "2026-08-13T23:09:33.946Z"
+    },
+    {
+      "id": "VER-022",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Stage 8 Git HEAD, branch, tracked diff, and untracked frontend inspection",
+      "evidence": "HEAD remains 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f on main; no tracked or untracked frontend change exists.",
+      "checkedAt": "2026-08-13T23:09:34.132Z"
+    },
+    {
+      "id": "VER-023",
+      "snapshot": "SRC-DOC-001",
+      "result": "Unchanged",
+      "method": "Stage 8 pinned commit-path and working-copy SHA-256 comparison",
+      "evidence": "Pinned and working README.md both hash to 72bee1d93b40d80643935b254499a9d3c0f3fd280392ad94eb4f4c6cf57fb1af.",
+      "checkedAt": "2026-08-13T23:09:34.281Z"
+    },
+    {
+      "id": "VER-024",
+      "snapshot": "SRC-ASSET-001",
+      "result": "Unchanged",
+      "method": "Stage 8 immutable Google Fonts directory and exact blob inspection",
+      "evidence": "At commit 73fc2ff52147e34a74804b500cf89ca219eac55d, the Kumbh Sans font, OFL license, and metadata retain blobs df9fce2d04d53f54686933581c76e94222274609, 678f3f2ae0626d9750bea8b5df1c52dfc28b8999, and 6f2ad27358e64d77c9d7c5785f38c8525b0aa750.",
+      "checkedAt": "2026-08-13T23:09:34.498Z"
+    },
+    {
+      "id": "VER-025",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Authenticated read-only Stage 9 Figma metadata inspection of exact page, sections, responsive frames, and interaction-state frames",
+      "evidence": "Page 4:3 remains Workflow; sections 2141:2383 Home, 2141:2386 Sign Up, 2141:2949 Interaction States, 2141:938 Foundations, and 2141:935 Components remain present. Home frames 2141:1599/1724/1813 remain 1440/768/375; Sign Up frames 2141:1680/1896/1940 remain 1321/768/375; four hover/focus frames retain IDs and dimensions. Mutable source remains Time-bound.",
+      "checkedAt": "2026-08-13T23:26:27.487Z"
+    },
+    {
+      "id": "VER-026",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Stage 9 Git HEAD, branch, tracked frontend diff, and untracked frontend inspection",
+      "evidence": "HEAD remains 7119e9b8c7e5b483b8aeb8c1330e507c42bac11f on main; no tracked or untracked frontend change exists. Root workflow artifacts are expected documentation output.",
+      "checkedAt": "2026-08-13T23:26:27.572Z"
+    },
+    {
+      "id": "VER-027",
+      "snapshot": "SRC-DOC-001",
+      "result": "Unchanged",
+      "method": "Stage 9 pinned commit-path and working-copy SHA-256 comparison",
+      "evidence": "Pinned and working README.md both hash to 72bee1d93b40d80643935b254499a9d3c0f3fd280392ad94eb4f4c6cf57fb1af.",
+      "checkedAt": "2026-08-13T23:26:27.650Z"
+    },
+    {
+      "id": "VER-028",
+      "snapshot": "SRC-ASSET-001",
+      "result": "Unchanged",
+      "method": "Stage 9 immutable GitHub tree and exact blob inspection",
+      "evidence": "At commit 73fc2ff52147e34a74804b500cf89ca219eac55d the Kumbh Sans tree resolves; font, OFL, and metadata blobs remain df9fce2d04d53f54686933581c76e94222274609, 678f3f2ae0626d9750bea8b5df1c52dfc28b8999, and 6f2ad27358e64d77c9d7c5785f38c8525b0aa750.",
+      "checkedAt": "2026-08-13T23:26:27.773Z"
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "ART-SOURCE-BASELINE",
+      "type": "SOURCE-BASELINE",
+      "path": "SOURCE-BASELINE.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "statusChangedAt": "2026-08-13T08:09:02.060Z",
+      "statusEvidence": "Human approval explicitly supplied in this task for the reviewed Stage 0 Source Baseline.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-PROJECT-CONTEXT",
+      "type": "PROJECT-CONTEXT",
+      "path": "PROJECT-CONTEXT.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "statusChangedAt": "2026-08-13T08:09:08.840Z",
+      "statusEvidence": "Human approval explicitly supplied in this task for the reviewed Stage 0 Project Context.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-WORKFLOW-STATE",
+      "type": "WORKFLOW-STATE",
+      "path": "WORKFLOW-STATE.md",
+      "status": "Reviewed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "statusChangedAt": "2026-08-13T07:43:07.234Z",
+      "statusEvidence": "Re-reviewed after recording actual final validation outcomes. The narrative matches CLI evidence, preserves the human-approval blocker, and does not claim a passing gate or advancement."
+    },
+    {
+      "id": "ART-DESIGN-AUDIT",
+      "type": "DESIGN-AUDIT",
+      "path": "DESIGN-AUDIT.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "statusChangedAt": "2026-08-13T08:36:17.762Z",
+      "statusEvidence": "Human approver ferfalcon explicitly approved the reviewed Stage 1 Design Audit and instructed continuation.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-REQUIREMENTS",
+      "type": "REQUIREMENTS",
+      "path": "REQUIREMENTS.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "statusChangedAt": "2026-08-13T21:13:02.838Z",
+      "statusEvidence": "Explicit human approval received in the Codex task after two-pass review and successful workflow validation.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-DESIGN",
+      "type": "DESIGN",
+      "path": "DESIGN.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "statusChangedAt": "2026-08-13T21:24:52.210Z",
+      "statusEvidence": "Explicit human approval received in the Codex task after two-pass review, fresh source verification, and successful workflow validation.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-SPEC",
+      "type": "SPEC",
+      "path": "SPEC.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "statusChangedAt": "2026-08-13T21:47:06.560Z",
+      "statusEvidence": "Explicit human approval received in the Codex task after two-pass review, reference audit, current source verification, and successful workflow validation.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-DOCUMENT-REVIEW",
+      "type": "DOCUMENT-REVIEW",
+      "path": "DOCUMENT-REVIEW.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "statusChangedAt": "2026-08-13T22:07:33.289Z",
+      "statusEvidence": "ferfalcon explicitly approved the reviewed Stage 5 documentation consistency artifact and requested continuation on 2026-08-13.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-ARCHITECTURE",
+      "type": "ARCHITECTURE",
+      "path": "ARCHITECTURE.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "statusChangedAt": "2026-08-13T22:38:53.429Z",
+      "statusEvidence": "Human owner approved the reviewed Stage 6 architecture and instructed the workflow to continue.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-PLAN",
+      "type": "PLAN",
+      "path": "PLAN.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:21:43.587Z",
+      "statusEvidence": "Human approval explicitly supplied for the corrected implementation plan at the Stage 8 gate.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-PLAN-REVIEW",
+      "type": "PLAN-REVIEW",
+      "path": "PLAN-REVIEW.md",
+      "status": "Approved",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:21:43.639Z",
+      "statusEvidence": "Human approval explicitly supplied for the completed adversarial plan review at the Stage 8 gate.",
+      "statusBy": "ferfalcon"
+    },
+    {
+      "id": "ART-TASKS-INDEX",
+      "type": "TASKS-INDEX",
+      "path": "TASKS-INDEX.md",
+      "status": "Reviewed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:40:23.286Z",
+      "statusEvidence": "Stage 9 two-pass review complete. Pass 1 corrected explicit SRC-REPO-001 references in P02-T01/P02-T04 and repaired missing canonical PLAN definitions discovered by safe task-create rejection. Pass 2 found seven acyclic tasks, 34 required validation contracts, all PLAN items with task/validation paths, all 35 REQ/23 DES/27 SPEC/47 AC covered, no unresolved references or file-ownership conflicts, and no frontend changes."
+    },
+    {
+      "id": "ART-TASK-P01-T01",
+      "type": "TASK",
+      "path": "Phase-01--Task-01.md",
+      "status": "Reviewed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:40:22.708Z",
+      "statusEvidence": "Reviewed: coherent shared-foundation objective, exact file ownership, source/provenance checks, four required validations, acceptance criteria, risks, and downstream contracts are complete."
+    },
+    {
+      "id": "ART-TASK-P01-T02",
+      "type": "TASK",
+      "path": "Phase-01--Task-02.md",
+      "status": "Reviewed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:40:22.779Z",
+      "statusEvidence": "Reviewed: coherent plan/countdown rules objective, expected prerequisite-output handling, deterministic tests, three required validations, expiry/accessibility behavior, and downstream APIs are complete."
+    },
+    {
+      "id": "ART-TASK-P02-T01",
+      "type": "TASK",
+      "path": "Phase-02--Task-01.md",
+      "status": "Reviewed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:40:22.857Z",
+      "statusEvidence": "Reviewed: coherent Home-route result, ordered starter deletion, navigation/responsive/accessibility/fidelity work, six required validations, and acceptance mapping are complete."
+    },
+    {
+      "id": "ART-TASK-P02-T02",
+      "type": "TASK",
+      "path": "Phase-02--Task-02.md",
+      "status": "Reviewed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:40:22.952Z",
+      "statusEvidence": "Reviewed: coherent IndexedDB boundary, exact schema/settlement/privacy contract, deterministic failure coverage, three required validations, and downstream interface are complete."
+    },
+    {
+      "id": "ART-TASK-P02-T03",
+      "type": "TASK",
+      "path": "Phase-02--Task-03.md",
+      "status": "Reviewed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:40:23.033Z",
+      "statusEvidence": "Reviewed: coherent static Sign Up result, stable native form hooks, responsive/accessibility states, five required validations, and strict sequential ownership before integration are complete."
+    },
+    {
+      "id": "ART-TASK-P02-T04",
+      "type": "TASK",
+      "path": "Phase-02--Task-04.md",
+      "status": "Reviewed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:40:23.117Z",
+      "statusEvidence": "Reviewed: coherent Sign Up orchestration result, native validation ownership, immutable capture, concurrency/status/persistence behavior, six required validations, and exact acceptance matrix are complete."
+    },
+    {
+      "id": "ART-TASK-P03-T01",
+      "type": "TASK",
+      "path": "Phase-03--Task-01.md",
+      "status": "Reviewed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "statusChangedAt": "2026-08-13T23:40:23.193Z",
+      "statusEvidence": "Reviewed: coherent integrated regression result, exact test/build/preview order, complete AC-001 through AC-047 evidence matrix, seven required validations, and scope-limited correction rules are complete."
+    }
+  ],
+  "traceItems": [
+    {
+      "id": "PLAN-001",
+      "owner": "ART-PLAN",
+      "status": "Active",
+      "required": true,
+      "references": []
+    },
+    {
+      "id": "PLAN-002",
+      "owner": "ART-PLAN",
+      "status": "Active",
+      "required": true,
+      "references": []
+    },
+    {
+      "id": "PLAN-003",
+      "owner": "ART-PLAN",
+      "status": "Active",
+      "required": true,
+      "references": []
+    },
+    {
+      "id": "PLAN-004",
+      "owner": "ART-PLAN",
+      "status": "Active",
+      "required": true,
+      "references": []
+    },
+    {
+      "id": "PLAN-005",
+      "owner": "ART-PLAN",
+      "status": "Active",
+      "required": true,
+      "references": []
+    },
+    {
+      "id": "PLAN-006",
+      "owner": "ART-PLAN",
+      "status": "Active",
+      "required": true,
+      "references": []
+    }
+  ],
+  "gates": [
+    {
+      "id": "GATE-001",
+      "stage": 0,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "verifications": [
+        "VER-001",
+        "VER-002",
+        "VER-003"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE"
+      ],
+      "evidence": "Human approver ferfalcon explicitly approved Stage 0 and instructed continuation after all Stage 0 checks passed with no findings.",
+      "recordedAt": "2026-08-13T08:11:21.733Z",
+      "approvedBy": "ferfalcon"
+    },
+    {
+      "id": "GATE-002",
+      "stage": 1,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "verifications": [
+        "VER-004",
+        "VER-005",
+        "VER-006"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT"
+      ],
+      "evidence": "Human approver ferfalcon approved the reviewed Stage 1 Design Audit and instructed continuation after clean synchronization, validation, and stage preflight.",
+      "recordedAt": "2026-08-13T08:36:59.374Z",
+      "approvedBy": "ferfalcon"
+    },
+    {
+      "id": "GATE-003",
+      "stage": 2,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "verifications": [
+        "VER-004",
+        "VER-005",
+        "VER-006"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT",
+        "ART-REQUIREMENTS"
+      ],
+      "evidence": "ART-REQUIREMENTS approved by ferfalcon after two-pass review; sync and validation passed; Stage 2 preflight returned recordable with no findings.",
+      "recordedAt": "2026-08-13T21:13:16.494Z",
+      "approvedBy": "ferfalcon"
+    },
+    {
+      "id": "GATE-004",
+      "stage": 3,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "verifications": [
+        "VER-007",
+        "VER-008",
+        "VER-009"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT",
+        "ART-REQUIREMENTS",
+        "ART-DESIGN"
+      ],
+      "evidence": "ART-DESIGN approved by ferfalcon after two-pass review; sources VER-007 through VER-009 unchanged; sync, validation, and Stage 3 preflight passed without findings.",
+      "recordedAt": "2026-08-13T21:25:04.494Z",
+      "approvedBy": "ferfalcon"
+    },
+    {
+      "id": "GATE-005",
+      "stage": 4,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "verifications": [
+        "VER-007",
+        "VER-008",
+        "VER-009"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT",
+        "ART-REQUIREMENTS",
+        "ART-DESIGN",
+        "ART-SPEC"
+      ],
+      "evidence": "ART-SPEC approved by ferfalcon after two-pass review; exact identifier/reference audit, sync, validation, and Stage 4 preflight passed without findings.",
+      "recordedAt": "2026-08-13T21:47:22.174Z",
+      "approvedBy": "ferfalcon"
+    },
+    {
+      "id": "GATE-006",
+      "stage": 5,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "verifications": [
+        "VER-010",
+        "VER-011",
+        "VER-012"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT",
+        "ART-REQUIREMENTS",
+        "ART-DESIGN",
+        "ART-SPEC",
+        "ART-DOCUMENT-REVIEW"
+      ],
+      "evidence": "ferfalcon approved ART-DOCUMENT-REVIEW. Stage 5 corrected six cross-document findings; active snapshots VER-010 through VER-012 are Unchanged; sync --check and validate passed; stage preflight is recordable with no findings.",
+      "recordedAt": "2026-08-13T22:07:48.328Z",
+      "approvedBy": "ferfalcon"
+    },
+    {
+      "id": "GATE-007",
+      "stage": 6,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001"
+      ],
+      "verifications": [
+        "VER-013",
+        "VER-014",
+        "VER-015"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT",
+        "ART-REQUIREMENTS",
+        "ART-DESIGN",
+        "ART-SPEC",
+        "ART-DOCUMENT-REVIEW",
+        "ART-ARCHITECTURE"
+      ],
+      "evidence": "ART-ARCHITECTURE is Approved; Review passes 1 and 2 are complete; VER-013 through VER-015 are Unchanged; sync and validate passed; stage check is recordable and passing with no findings.",
+      "recordedAt": "2026-08-13T22:39:20.161Z",
+      "approvedBy": "ferfalcon"
+    },
+    {
+      "id": "GATE-008",
+      "stage": 7,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "verifications": [
+        "VER-017",
+        "VER-018",
+        "VER-019",
+        "VER-020"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT",
+        "ART-REQUIREMENTS",
+        "ART-DESIGN",
+        "ART-SPEC",
+        "ART-DOCUMENT-REVIEW",
+        "ART-ARCHITECTURE",
+        "ART-PLAN"
+      ],
+      "evidence": "ART-PLAN is Reviewed; two planning reviews are complete; VER-017 through VER-020 are Unchanged; sync and validate passed; stage check is recordable and passing with no findings.",
+      "recordedAt": "2026-08-13T23:03:06.625Z",
+      "approvedBy": "ferfalcon"
+    },
+    {
+      "id": "GATE-009",
+      "stage": 8,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001",
+        "SRC-DOC-001",
+        "SRC-ASSET-001"
+      ],
+      "verifications": [
+        "VER-021",
+        "VER-022",
+        "VER-023",
+        "VER-024"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT",
+        "ART-REQUIREMENTS",
+        "ART-DESIGN",
+        "ART-SPEC",
+        "ART-DOCUMENT-REVIEW",
+        "ART-ARCHITECTURE",
+        "ART-PLAN",
+        "ART-PLAN-REVIEW"
+      ],
+      "evidence": "ferfalcon approved ART-PLAN and ART-PLAN-REVIEW after the Stage 8 adversarial review corrected all five findings; workflow validation and stage check passed with no findings.",
+      "recordedAt": "2026-08-13T23:22:26.608Z",
+      "approvedBy": "ferfalcon"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "P01-T01",
+      "status": "Ready",
+      "baseline": "SRC-REPO-001",
+      "prerequisites": [],
+      "references": [
+        "PLAN-001"
+      ],
+      "output": null,
+      "blocker": null,
+      "validation": [
+        {
+          "name": "Build",
+          "kind": "Build",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Production build succeeds while the starter route remains functional",
+          "command": "pnpm build",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-001"
+          ]
+        },
+        {
+          "name": "Provenance",
+          "kind": "Security",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Vendored Kumbh Sans/OFL bytes match SRC-ASSET-001 and no runtime font CDN is present",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-001"
+          ]
+        },
+        {
+          "name": "Semantics",
+          "kind": "Accessibility",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Shared shell and primitives have correct language, metadata, native semantics, accessible names, and visible focus",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-001"
+          ]
+        },
+        {
+          "name": "Responsive primitives",
+          "kind": "Responsive",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Shared primitives render without clipping or layout-caused overflow at compact, medium, and large widths",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-001"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P01-T02",
+      "status": "Ready",
+      "baseline": "SRC-REPO-001",
+      "prerequisites": [
+        "P01-T01"
+      ],
+      "references": [
+        "PLAN-002"
+      ],
+      "output": null,
+      "blocker": null,
+      "validation": [
+        {
+          "name": "Rule tests",
+          "kind": "Test",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Plan and countdown deterministic suites pass including target and expiry boundaries",
+          "command": "pnpm test",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-002"
+          ]
+        },
+        {
+          "name": "Build",
+          "kind": "Build",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Production build succeeds with the shared rule/controller modules",
+          "command": "pnpm build",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-002"
+          ]
+        },
+        {
+          "name": "Timer accessibility",
+          "kind": "Accessibility",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Multiple countdown instances update without per-second announcements and stop at zero",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-002"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P02-T01",
+      "status": "Ready",
+      "baseline": "SRC-REPO-001",
+      "prerequisites": [
+        "P01-T01",
+        "P01-T02"
+      ],
+      "references": [
+        "PLAN-003"
+      ],
+      "output": null,
+      "blocker": null,
+      "validation": [
+        {
+          "name": "Logic regression",
+          "kind": "Test",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Shared plan/countdown suites remain passing",
+          "command": "pnpm test",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-003"
+          ]
+        },
+        {
+          "name": "Build",
+          "kind": "Build",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Production build succeeds with the completed Home route and no starter imports",
+          "command": "pnpm build",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-003"
+          ]
+        },
+        {
+          "name": "Navigation",
+          "kind": "Manual",
+          "required": true,
+          "status": "Not executed",
+          "expected": "All five Home actions work by pointer and keyboard with exact destinations, queries, and native history",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-003"
+          ]
+        },
+        {
+          "name": "Responsive",
+          "kind": "Responsive",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Home matches supplied outcomes and recorded first-failure transitions without clipping or layout scroll",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-003"
+          ]
+        },
+        {
+          "name": "Fidelity",
+          "kind": "Visual",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Home hierarchy, assets, typography, spacing, cards, countdown, and states have no unexplained material divergence",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-003"
+          ]
+        },
+        {
+          "name": "Accessibility",
+          "kind": "Accessibility",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Home semantics, keyboard order, focus, image alternatives, and non-live countdown pass manual inspection",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-003"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P02-T02",
+      "status": "Ready",
+      "baseline": "SRC-REPO-001",
+      "prerequisites": [
+        "P01-T01"
+      ],
+      "references": [
+        "PLAN-004"
+      ],
+      "output": null,
+      "blocker": null,
+      "validation": [
+        {
+          "name": "Repository tests",
+          "kind": "Test",
+          "required": true,
+          "status": "Not executed",
+          "expected": "IndexedDB schema, exact values, settlement ordering, failures, abort, and close suites pass",
+          "command": "pnpm test",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-004"
+          ]
+        },
+        {
+          "name": "Build",
+          "kind": "Build",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Production build succeeds with the IndexedDB repository module",
+          "command": "pnpm build",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-004"
+          ]
+        },
+        {
+          "name": "Privacy boundary",
+          "kind": "Security",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Repository contains no remote fallback, form-value logging, extra schema, or unsupported retention behavior",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-004"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P02-T03",
+      "status": "Ready",
+      "baseline": "SRC-REPO-001",
+      "prerequisites": [
+        "P01-T01",
+        "P01-T02"
+      ],
+      "references": [
+        "PLAN-005"
+      ],
+      "output": null,
+      "blocker": null,
+      "validation": [
+        {
+          "name": "Logic regression",
+          "kind": "Test",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Shared plan/countdown suites remain passing",
+          "command": "pnpm test",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        },
+        {
+          "name": "Build",
+          "kind": "Build",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Production build succeeds with the static Sign Up route and form hooks",
+          "command": "pnpm build",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        },
+        {
+          "name": "Semantics",
+          "kind": "Accessibility",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Native controls, labels, constraints, options, inactive error/status hooks, keyboard order, and focus are correct",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        },
+        {
+          "name": "Responsive",
+          "kind": "Responsive",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Sign Up matches supplied and first-failure-derived stacked/split outcomes including long feedback placeholders",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        },
+        {
+          "name": "Fidelity",
+          "kind": "Visual",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Static Sign Up hierarchy, form proportions, decoration, and default/hover/focus roles have no unexplained divergence",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P02-T04",
+      "status": "Ready",
+      "baseline": "SRC-REPO-001",
+      "prerequisites": [
+        "P01-T02",
+        "P02-T02",
+        "P02-T03"
+      ],
+      "references": [
+        "PLAN-005"
+      ],
+      "output": null,
+      "blocker": null,
+      "validation": [
+        {
+          "name": "Regression tests",
+          "kind": "Test",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Plan, countdown, and IndexedDB repository suites pass after controller integration",
+          "command": "pnpm test",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        },
+        {
+          "name": "Build",
+          "kind": "Build",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Production build succeeds with complete Sign Up orchestration",
+          "command": "pnpm build",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        },
+        {
+          "name": "Behavior matrix",
+          "kind": "Manual",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Query, validation, focus, pending, concurrency, success, failure, retry, edits, and value preservation match the specification",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        },
+        {
+          "name": "Accessibility",
+          "kind": "Accessibility",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Errors, busy state, announcements, native operation, focus recovery, and feedback reflow pass in the recorded browser",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        },
+        {
+          "name": "Persistence and privacy",
+          "kind": "Security",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Exactly one immutable local record is accepted on completion and no form data is transmitted or logged",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        },
+        {
+          "name": "Feedback responsiveness",
+          "kind": "Responsive",
+          "required": true,
+          "status": "Not executed",
+          "expected": "All active error/status states remain readable and operable at supplied and stress widths",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-005"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "P03-T01",
+      "status": "Ready",
+      "baseline": "SRC-REPO-001",
+      "prerequisites": [
+        "P01-T01",
+        "P01-T02",
+        "P02-T01",
+        "P02-T02",
+        "P02-T03",
+        "P02-T04"
+      ],
+      "references": [
+        "PLAN-006"
+      ],
+      "output": null,
+      "blocker": null,
+      "validation": [
+        {
+          "name": "Tests",
+          "kind": "Test",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Complete deterministic suite passes against the integrated implementation",
+          "command": "pnpm test",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-006"
+          ]
+        },
+        {
+          "name": "Build",
+          "kind": "Build",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Integrated production build exits successfully",
+          "command": "pnpm build",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-006"
+          ]
+        },
+        {
+          "name": "Built output",
+          "kind": "Manual",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Existing preview command serves built Home and Sign Up routes for the complete AC-001 through AC-047 matrix",
+          "command": "pnpm preview",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-006"
+          ]
+        },
+        {
+          "name": "Accessibility",
+          "kind": "Accessibility",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Complete keyboard, semantics, focus, relationship, announcement, image, and reflow matrix passes in recorded environments",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-006"
+          ]
+        },
+        {
+          "name": "Responsive",
+          "kind": "Responsive",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Home and Sign Up supplied, transition-adjacent, narrow, intermediate, and wide matrices pass",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-006"
+          ]
+        },
+        {
+          "name": "Fidelity",
+          "kind": "Visual",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Supplied-width and interaction/feedback screenshots show no unexplained material divergence",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-006"
+          ]
+        },
+        {
+          "name": "Privacy and provenance",
+          "kind": "Security",
+          "required": true,
+          "status": "Not executed",
+          "expected": "IndexedDB/network/privacy, pinned asset/license, and repository hygiene checks pass",
+          "evidence": [],
+          "reason": "Pending implementation",
+          "references": [
+            "PLAN-006"
+          ]
+        }
+      ]
+    }
+  ],
+  "profileTransitions": [],
+  "implementationReviews": []
+}
