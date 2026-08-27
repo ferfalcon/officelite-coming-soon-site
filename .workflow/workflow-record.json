@@ -207,13 +207,13 @@
       "id": "ART-SPEC",
       "type": "SPEC",
       "path": "SPEC.md",
-      "status": "Approved",
+      "status": "Draft",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T23:04:55.556Z",
-      "statusEvidence": "User explicitly approved Stage 4 / SPEC.md in ChatGPT on 2026-08-27 and instructed not to start the next stage.",
+      "statusChangedAt": "2026-08-27T23:24:04.068Z",
+      "statusEvidence": "Stage 5 consistency review requires corrections to SPEC.md; artifact reopened from its approved revision before applying the corrected narrative.",
       "statusBy": "ferfalcon",
       "approvedRevision": {
         "algorithm": "sha256",
