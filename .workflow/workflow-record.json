@@ -6,8 +6,8 @@
     "executionMode": "Gated"
   },
   "state": {
-    "stage": 5,
-    "status": "Ready",
+    "stage": 6,
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -236,6 +236,16 @@
         "algorithm": "sha256",
         "digest": "acd891970dce3fc9b93450b8e6aea6c3b5deef8ef4989f1c520c6ce8f445168a"
       }
+    },
+    {
+      "id": "ART-ARCHITECTURE",
+      "type": "ARCHITECTURE",
+      "path": "ARCHITECTURE.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [],
