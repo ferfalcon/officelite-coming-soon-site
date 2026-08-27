@@ -6,8 +6,8 @@
     "executionMode": "Gated"
   },
   "state": {
-    "stage": 2,
-    "status": "Ready",
+    "stage": 3,
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -153,6 +153,16 @@
         "algorithm": "sha256",
         "digest": "f7355e35b539254ba4936271d178b0e5ede1d0f89164204c2ab18d48717530b9"
       }
+    },
+    {
+      "id": "ART-DESIGN",
+      "type": "DESIGN",
+      "path": "DESIGN.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [],
