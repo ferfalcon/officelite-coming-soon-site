@@ -191,13 +191,18 @@
       "id": "ART-SPEC",
       "type": "SPEC",
       "path": "SPEC.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T22:54:27.600Z",
-      "statusEvidence": "Stage 4 review pass 1 verified complete observable coverage for Home and Sign Up content hierarchy, navigation, deterministic plan context/defaulting, native plan selection, form submission, required-field/email validation, IndexedDB persistence, success/failure/recovery, once-per-second countdown behavior while target is future, supplied/intermediate responsive behavior, long-content resilience, keyboard/focus, programmatic labels/validation relationships, status announcements, and browser-local data boundaries. Review pass 2 verified 24 canonical SPEC-BEH/SPEC-INT/SPEC-ACC/SPEC-DATA/SPEC-VAL identifiers; AC-037 through AC-110 are complete with no collision with REQUIREMENTS.md AC-001 through AC-036; all referenced REQ-* and DES-* identifiers resolve; no arbitrary breakpoint, modal/menu focus rule, browser matrix, numeric performance threshold, retention/privacy rule, or countdown terminal behavior was invented; open questions remain explicit and no Stage 4 blocker remains."
+      "statusChangedAt": "2026-08-27T23:04:55.556Z",
+      "statusEvidence": "User explicitly approved Stage 4 / SPEC.md in ChatGPT on 2026-08-27 and instructed not to start the next stage.",
+      "statusBy": "ferfalcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "6402f2756d77ff5abf1921e9158f965bbd2549883d92ab5cb5c7706be5938940"
+      }
     }
   ],
   "traceItems": [],
