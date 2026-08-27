@@ -370,7 +370,7 @@ The current release has a confirmed **data boundary**—browser IndexedDB only, 
 - Home and Sign Up must preserve the supplied content hierarchy and required interactions across the compact, medium, and large compositions represented by `EVD-002` and `EVD-003`.
 - Layout transformation intent is supported by `EVD-011` and `EVD-012`; exact CSS breakpoints are not requirements at this stage.
 - The current content includes the supplied hero copy, pricing content, Sign Up intro, field names, and launch-date presentation, but `REQ-BR-005` prevents those values from becoming permanent business rules.
-- Validation, success, and failure message copy is not supplied by Figma (`AUD-014`) and remains a non-blocking content decision for downstream design/specification work.
+- Validation, success, and failure message copy is not supplied by Figma (`AUD-014`). Approved design/specification work defines the feedback behavior and visual language but intentionally leaves exact wording as a non-blocking content decision.
 - Long-content, localization, empty-content, and alternate-content variants are not established by the active sources.
 
 ## 12. Constraints
@@ -433,12 +433,15 @@ The current release has a confirmed **data boundary**—browser IndexedDB only, 
 
 No Stage 2 blocking product question is identified from the active sources.
 
+### Resolved downstream decisions
+
+- Responsive interpolation is governed by content-fit outcomes in `DES-RWD-007`, `SPEC-BEH-006`, and `SPEC-BEH-007`; exact CSS breakpoint numbers are implementation choices rather than open product requirements.
+- The native Plan Select uses platform/browser open-menu presentation under `DES-INT-005` and `SPEC-INT-003`; no bespoke open-menu design is required.
+- No additional disabled or loading state is required for the current release by active sources; `SPEC.md` preserves that boundary instead of inventing one.
+
 ### Non-blocking questions
 
-- What exact layout interpolation and breakpoint rules should be used between the supplied responsive compositions? (`AUD-002`)
-- What exact open-menu visual treatment should accompany the native plan select? (`AUD-006`)
 - What final user-facing copy should be used for validation, persistence success, and persistence failure? (`AUD-014`)
-- Should any additional disabled, loading, error, or success component variants be added to Figma, or should downstream design extend the existing visual language? (`AUD-005`)
 - Which browsers/devices are formally supported? No matrix is currently documented.
 - Are retention, deletion, privacy, or encryption rules required for IndexedDB records? No such policy is currently documented.
 - What behavior should the countdown use once the current target is reached? The active sources do not define a terminal state.
@@ -448,8 +451,8 @@ No Stage 2 blocking product question is identified from the active sources.
 | Risk | Impact | Likelihood | Mitigation | Blocking |
 |---|---|---|---|---|
 | Mutable Figma source changes after audit | Downstream requirements/design could reference stale evidence | Medium | Reverify `SRC-DS-001` before material stage transitions | No |
-| Intermediate responsive behavior is unspecified | Layout may diverge between supplied reference widths | Medium | Keep `REQ-NFR-002` explicit and resolve interpolation in design/specification | No |
-| Error/success/select-open states are missing from Figma | Runtime states could drift visually | Medium | Preserve requirements here; define visual treatment in downstream design/specification using existing tokens/states | No |
+| Intermediate responsive transition points remain implementation-dependent | Different implementations could choose different switch points while still matching supplied references | Medium | Enforce the content-fit outcomes in `DES-RWD-007`, `SPEC-BEH-006`, and `SPEC-BEH-007`; validate representative intermediate widths | No |
+| Invalid/success/failure compositions are missing from Figma | Runtime feedback could drift visually | Medium | Use the approved visual extensions in `DES-008`, `DES-009`, and `SPEC.md`; keep exact copy open until content authority supplies it | No |
 | IndexedDB is unavailable or a transaction fails | User cannot persist current-release sign-up | Medium | `REQ-FR-010` requires explicit failure feedback and value preservation where possible | No |
 | Placeholder content is treated as permanent | Future API/content replacement becomes brittle or misleading | Medium | Enforce `REQ-BR-005` and `REQ-CON-004` | No |
 | No browser-support matrix exists | Compatibility acceptance remains incomplete | Medium | Keep the gap visible until a product/technical authority defines support | No |
