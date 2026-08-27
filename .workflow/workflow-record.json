@@ -74,6 +74,14 @@
       "method": "Stage 3 Figma configured-scope metadata and frame-render reverification",
       "evidence": "Live Stage 3 Figma inspection on 2026-08-27 confirmed configured file key L7MdLOW8usVUcPwV0cMQ1n and node 4:3 still contain the expected Workflow canvas, Design System — Components 2141:935, Design System — Foundations 2141:938, Home and Sign Up responsive compositions, and audited component structure. Screenshot rendering also succeeded for all six product frames; the current runtime still cannot retrieve the short-lived PNG URLs, so no new pixel-level comparison is claimed. No unexpected material design-source change was detected.",
       "checkedAt": "2026-08-27T22:39:53.614Z"
+    },
+    {
+      "id": "VER-006",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Stage 4 Figma configured-scope metadata reverification",
+      "evidence": "Live Stage 4 Figma metadata inspection on 2026-08-27 confirmed configured file key L7MdLOW8usVUcPwV0cMQ1n and node 4:3 still contain the expected Workflow canvas, Design System — Components 2141:935, Design System — Foundations 2141:938, responsive Home and Sign Up compositions, and audited Default/Hover/Focus component structure. No unexpected material design-source change was detected.",
+      "checkedAt": "2026-08-27T22:53:52.108Z"
     }
   ],
   "artifacts": [
