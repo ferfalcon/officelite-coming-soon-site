@@ -6,8 +6,8 @@
     "executionMode": "Gated"
   },
   "state": {
-    "stage": 1,
-    "status": "Ready",
+    "stage": 2,
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -128,6 +128,16 @@
         "algorithm": "sha256",
         "digest": "e4fb7958ef228bd0fbb5e5e951c10087d0ac7e55ed2a68fd7cebfeec3ee30cf1"
       }
+    },
+    {
+      "id": "ART-REQUIREMENTS",
+      "type": "REQUIREMENTS",
+      "path": "REQUIREMENTS.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [],
