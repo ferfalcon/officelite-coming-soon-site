@@ -207,13 +207,13 @@
       "id": "ART-SPEC",
       "type": "SPEC",
       "path": "SPEC.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T23:24:04.068Z",
-      "statusEvidence": "Stage 5 consistency review requires corrections to SPEC.md; artifact reopened from its approved revision before applying the corrected narrative.",
+      "statusChangedAt": "2026-08-27T23:25:45.667Z",
+      "statusEvidence": "Stage 5 cross-document review confirmed SPEC.md now preserves the five required product values without forbidding implementation metadata, defines objective HTML single-address email validity semantics, retains stable SPEC-* and AC-* identifiers, and removes stale Stage 4-forward wording.",
       "statusBy": "ferfalcon",
       "approvedRevision": {
         "algorithm": "sha256",
