@@ -126,6 +126,14 @@
       "method": "Stage 7 GitHub immutable-baseline and implementation-root reverification",
       "evidence": "Compared pinned repository baseline commit 602d0e987bacea61f81f4d8f159510e220e97af4 with Stage 7 PLAN.md commit 03fcc20acbce28920da53293a4840fe83c4bc007. GitHub compare reports only workflow and documentation files changed; no frontend/ file differs from SRC-REPO-001. The implementation-root baseline remains unchanged.",
       "checkedAt": "2026-08-27T23:57:38.957Z"
+    },
+    {
+      "id": "VER-012",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Stage 7 Figma configured-scope structural reverification",
+      "evidence": "Live Stage 7 Figma metadata inspection on 2026-08-27 confirmed configured file L7MdLOW8usVUcPwV0cMQ1n and node 4:3 still contain the expected Design System — Components, Design System — Foundations, Home, and Sign Up sections, including the audited Home compact/medium/large compositions and shared component instances used by PLAN.md. No material design-source drift affecting the Stage 7 implementation plan was detected.",
+      "checkedAt": "2026-08-27T23:58:00.617Z"
     }
   ],
   "artifacts": [
