@@ -15,7 +15,11 @@
     "currentTask": null,
     "latestOutput": null,
     "latestValidationRuntime": null,
-    "architectureDecision": null
+    "architectureDecision": {
+      "result": "Required",
+      "reason": "Architecture is required because the current release has two routes, cross-route plan context, shared countdown state, browser-local IndexedDB persistence, validation and accessibility contracts, responsive design-system integration, and a static deployment boundary that require explicit ownership and dependency rules.",
+      "recordedAt": "2026-08-27T23:42:56.837Z"
+    }
   },
   "snapshots": [
     {
