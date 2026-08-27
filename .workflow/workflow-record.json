@@ -6,8 +6,8 @@
     "executionMode": "Gated"
   },
   "state": {
-    "stage": 6,
-    "status": "Ready",
+    "stage": 7,
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -273,6 +273,16 @@
         "algorithm": "sha256",
         "digest": "49a0c125f47777645780d7bd25716ceb91ffe0220a9efa3841ffe99816c6c4f3"
       }
+    },
+    {
+      "id": "ART-PLAN",
+      "type": "PLAN",
+      "path": "PLAN.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [],
