@@ -57,13 +57,18 @@
       "id": "ART-SOURCE-BASELINE",
       "type": "SOURCE-BASELINE",
       "path": "SOURCE-BASELINE.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T21:14:56.927Z",
-      "statusEvidence": "Stage 0 review pass 1 checked completeness and correctness; pass 2 checked source integrity, authority, traceability, uncertainty, and risks against current Figma metadata and the immutable repository baseline."
+      "statusChangedAt": "2026-08-27T21:27:15.431Z",
+      "statusEvidence": "User explicitly approved Stage 0 in ChatGPT on 2026-08-27 after review of the Stage 0 source baseline, project context, and workflow state.",
+      "statusBy": "ferfalcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "526d933520848f6692cc591c9b85c177c00b72115381e37e4c12f1789352a5b1"
+      }
     },
     {
       "id": "ART-PROJECT-CONTEXT",
