@@ -261,13 +261,18 @@
       "id": "ART-ARCHITECTURE",
       "type": "ARCHITECTURE",
       "path": "ARCHITECTURE.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T23:43:25.920Z",
-      "statusEvidence": "Stage 6 ARCHITECTURE.md replaces the scaffold with project-specific current, target, and transitional architecture; defines route, plan-context, shared configuration, IndexedDB, accessibility, responsive CSS, privacy, deployment, and testing boundaries; records ten traceable ADRs; preserves all approved exclusions; and completes both required review passes with no blocking architecture question."
+      "statusChangedAt": "2026-08-27T23:47:03.043Z",
+      "statusEvidence": "Human approval received for Stage 6 / ARCHITECTURE.md in ChatGPT on 2026-08-27. The user explicitly instructed not to start the next stage.",
+      "statusBy": "Fernando Falcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "49a0c125f47777645780d7bd25716ceb91ffe0220a9efa3841ffe99816c6c4f3"
+      }
     }
   ],
   "traceItems": [],
