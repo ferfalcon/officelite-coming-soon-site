@@ -7,7 +7,7 @@
   },
   "state": {
     "stage": 3,
-    "status": "In progress",
+    "status": "Ready",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -337,6 +337,75 @@
           "revision": {
             "algorithm": "sha256",
             "digest": "f7355e35b539254ba4936271d178b0e5ede1d0f89164204c2ab18d48717530b9"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GATE-004",
+      "stage": 3,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ],
+      "verifications": [
+        "VER-005",
+        "VER-002"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT",
+        "ART-REQUIREMENTS",
+        "ART-DESIGN"
+      ],
+      "evidence": "User explicitly approved Stage 3 / DESIGN.md in ChatGPT on 2026-08-27. ART-DESIGN is Approved, SRC-DS-001 is freshly verified Unchanged through VER-005, Stage 3 review passes are complete, and canonical Stage 3 preflight returned recordable=true, passing=true, recommendedResult=Passed with no findings.",
+      "recordedAt": "2026-08-27T22:49:46.659Z",
+      "approvedBy": "ferfalcon",
+      "artifactRevisions": [
+        {
+          "artifact": "ART-SOURCE-BASELINE",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "526d933520848f6692cc591c9b85c177c00b72115381e37e4c12f1789352a5b1"
+          }
+        },
+        {
+          "artifact": "ART-PROJECT-CONTEXT",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "6a78d88869c2e97b615c068043601379ec352604db0aba4355f11c1f298c8160"
+          }
+        },
+        {
+          "artifact": "ART-WORKFLOW-STATE",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "5217c4de5c5e8a111a26b9f7a82da2c90df26756787dc511c131486f5201fa68"
+          }
+        },
+        {
+          "artifact": "ART-DESIGN-AUDIT",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "e4fb7958ef228bd0fbb5e5e951c10087d0ac7e55ed2a68fd7cebfeec3ee30cf1"
+          }
+        },
+        {
+          "artifact": "ART-REQUIREMENTS",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "f7355e35b539254ba4936271d178b0e5ede1d0f89164204c2ab18d48717530b9"
+          }
+        },
+        {
+          "artifact": "ART-DESIGN",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "efe833f52624cb6668a39cfc5241eabc3732138cab7c2d4feed91c35c9afaa41"
           }
         }
       ]
