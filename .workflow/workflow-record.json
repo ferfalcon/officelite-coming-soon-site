@@ -69,11 +69,13 @@
       "id": "ART-PROJECT-CONTEXT",
       "type": "PROJECT-CONTEXT",
       "path": "PROJECT-CONTEXT.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-27T21:15:26.116Z",
+      "statusEvidence": "Stage 0 project context review checked scope, Full-profile rationale, repository constraints, source authority, release boundaries, quality expectations, and explicit uncertainty against the active source baseline."
     },
     {
       "id": "ART-WORKFLOW-STATE",
