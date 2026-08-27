@@ -513,7 +513,7 @@ Recommended visual direction:
 
 - No empty marketing/content state is defined by active sources.
 - Decorative orbit artwork must never be required for comprehension.
-- If the dashboard illustration cannot be loaded, primary hero copy and CTA should still retain their hierarchy; exact fallback rendering belongs to Stage 4/implementation planning.
+- If the dashboard illustration cannot be loaded, primary hero copy and CTA should still retain their hierarchy; `SPEC.md` preserves that content fallback, while exact implementation belongs to planning.
 
 ### Countdown terminal state
 
@@ -615,24 +615,24 @@ No external Figma library dependency is established. The repository baseline con
 - Are any additional disabled/loading states required for the current release? Active requirements do not currently require them.
 - What browser/device support matrix will later define the exact native-select and responsive validation surface?
 
-None of these questions blocks Stage 3 documentation; the first two must remain visible for Stage 4/specification and later validation.
+None of these questions blocks the approved design intent. They remain visible in `SPEC.md` where applicable and continue as non-blocking inputs for architecture, planning, content decisions, and final validation.
 
 ## 15. Risks and Inconsistencies
 
 | Finding | Evidence | Impact | Resolution owner |
 |---|---|---|---|
-| Different large reference widths for Home and Sign Up | AUD-001 | A shared desktop breakpoint cannot be inferred from frame labels | Stage 4/7 |
-| Intermediate responsive behavior not explicitly demonstrated | AUD-002 | Layout could diverge between supplied examples | DES-RWD-007, then Stage 4/7 |
-| Plan preservation not encoded in Figma prototype | AUD-003, AUD-004 | Visual source alone is insufficient | REQUIREMENTS.md + DES-INT-002 |
-| No invalid/success/failure component states in Figma | AUD-005, AUD-007 | Runtime feedback could visually drift | DES-008, DES-009, DES-INT-006 |
-| No open Plan Select composition | AUD-006 | Bespoke menu appearance cannot be derived | REQ-FR-005 + DES-INT-005 |
-| Visible field text does not prove persistent labels | AUD-008 | Accessible naming cannot be inferred | REQ-AR-004 + Stage 4 |
-| Countdown behavior is not demonstrated visually | AUD-009 | Live behavior comes from requirements, not design source | REQ-FR-011 + DES-INT-007 |
+| Different large reference widths for Home and Sign Up | AUD-001 | A shared desktop breakpoint cannot be inferred from frame labels | `SPEC-BEH-006` / `SPEC-BEH-007`; Stage 7 chooses implementation details |
+| Intermediate responsive behavior not explicitly demonstrated | AUD-002 | Layout could diverge between supplied examples | `DES-RWD-007`, `SPEC-BEH-006`, `SPEC-BEH-007` |
+| Plan preservation not encoded in Figma prototype | AUD-003, AUD-004 | Visual source alone is insufficient | `REQUIREMENTS.md` + `DES-INT-002` + `SPEC-BEH-003` |
+| No invalid/success/failure component states in Figma | AUD-005, AUD-007 | Runtime feedback could visually drift | `DES-008`, `DES-009`, `DES-INT-006`, and Stage 4 state specifications |
+| No open Plan Select composition | AUD-006 | Bespoke menu appearance cannot be derived | `REQ-FR-005` + `DES-INT-005` + `SPEC-INT-003` |
+| Visible field text does not prove persistent labels | AUD-008 | Accessible naming cannot be inferred | `REQ-AR-004` + `SPEC-ACC-003` |
+| Countdown behavior is not demonstrated visually | AUD-009 | Live behavior comes from requirements, not design source | `REQ-FR-011` + `DES-INT-007` + `SPEC-BEH-004` / `SPEC-ACC-005` |
 | Figma source is mutable/time-bound | AUD-010 | Later work can become stale | Canonical snapshot verification |
 | Screenshot URLs cannot be fetched in current runtime | AUD-011 plus Stage 3 retry | No new pixel-level review claim is possible | Preserve limitation; rely on approved audit + metadata |
 | Pricing/countdown repeats are not Figma components | AUD-012 | Code boundaries must not be copied mechanically | Stage 6/7 |
 | Token collection is generic and single-mode | AUD-013 | Semantic implementation mapping needs later interpretation | Stage 6/7 |
-| Long/localized/feedback copy variants are absent | AUD-014 | Content robustness needs explicit later specification | Stage 4 |
+| Long/localized/feedback copy variants are absent | AUD-014 | Content robustness and exact wording need explicit handling | `SPEC-BEH-005` and Stage 4 state/content specifications; exact copy remains open |
 
 ## 16. Requirement Traceability
 
