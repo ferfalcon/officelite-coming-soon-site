@@ -57,11 +57,13 @@
       "id": "ART-SOURCE-BASELINE",
       "type": "SOURCE-BASELINE",
       "path": "SOURCE-BASELINE.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-27T21:14:56.927Z",
+      "statusEvidence": "Stage 0 review pass 1 checked completeness and correctness; pass 2 checked source integrity, authority, traceability, uncertainty, and risks against current Figma metadata and the immutable repository baseline."
     },
     {
       "id": "ART-PROJECT-CONTEXT",
