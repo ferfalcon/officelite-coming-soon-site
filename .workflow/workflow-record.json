@@ -58,6 +58,14 @@
       "method": "Stage 1 Figma metadata and read-only Plugin API audit",
       "evidence": "Configured file key L7MdLOW8usVUcPwV0cMQ1n and page 4:3 matched SRC-DS-001. Stage 1 inspected the four top-level sections, six responsive product frames, local components, 38 variables, seven text styles, prototype reactions, layout geometry, visual state properties, exports, and screenshot render metadata without detecting an unexpected upstream design change.",
       "checkedAt": "2026-08-27T21:37:58.263Z"
+    },
+    {
+      "id": "VER-004",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Stage 2 Figma configured-scope metadata reverification",
+      "evidence": "Live Figma metadata for file key L7MdLOW8usVUcPwV0cMQ1n and configured node 4:3 on 2026-08-27 matched the approved Stage 1 audited scope, including Workflow canvas 4:3, Design System — Components 2141:935, Design System — Foundations 2141:938, and expected responsive product descendants. No unexpected material design-source change was detected.",
+      "checkedAt": "2026-08-27T21:56:59.216Z"
     }
   ],
   "artifacts": [
