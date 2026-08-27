@@ -166,13 +166,18 @@
       "id": "ART-DESIGN",
       "type": "DESIGN",
       "path": "DESIGN.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T22:41:14.086Z",
-      "statusEvidence": "Stage 3 review pass 1 verified complete coverage of purpose and hierarchy, Home and Sign Up structure, typography/color/spacing/elevation, component anatomy and supplied states, interaction intent, responsive transformations, requirements-defined state extensions, content edges, accessibility intent, assets, and design-system mapping without introducing implementation architecture. Review pass 2 verified 25 canonical DES-/DES-RWD-/DES-INT- identifiers; all referenced REQ-, EVD-, and AUD- identifiers resolve; Observed, Confirmed, Inferred, Recommended, and Open classifications remain distinct; supplied frame widths are not presented as CSS breakpoints; the required native Plan Select is not replaced by an invented bespoke menu; mutable-source and screenshot-retrieval limitations remain explicit; and no Stage 3 blocking design question remains."
+      "statusChangedAt": "2026-08-27T22:48:57.596Z",
+      "statusEvidence": "User explicitly approved Stage 3 / DESIGN.md in ChatGPT on 2026-08-27.",
+      "statusBy": "ferfalcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "efe833f52624cb6668a39cfc5241eabc3732138cab7c2d4feed91c35c9afaa41"
+      }
     }
   ],
   "traceItems": [],
