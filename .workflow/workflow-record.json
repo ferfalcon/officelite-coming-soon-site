@@ -173,13 +173,13 @@
       "id": "ART-REQUIREMENTS",
       "type": "REQUIREMENTS",
       "path": "REQUIREMENTS.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T23:23:21.457Z",
-      "statusEvidence": "Stage 5 consistency review requires corrections to REQUIREMENTS.md; artifact reopened from its approved revision before applying the corrected narrative.",
+      "statusChangedAt": "2026-08-27T23:24:53.884Z",
+      "statusEvidence": "Stage 5 cross-document review confirmed REQUIREMENTS.md corrections remove downstream-resolved questions from the open list, update stale responsive/runtime-state risk wording, preserve all 31 stable REQ-* IDs and AC-001 through AC-036, and introduce no new product requirement or policy.",
       "statusBy": "ferfalcon",
       "approvedRevision": {
         "algorithm": "sha256",
