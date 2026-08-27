@@ -90,6 +90,14 @@
       "method": "Stage 5 Figma configured-scope structural reverification",
       "evidence": "Live Stage 5 Figma inspection on 2026-08-27 confirmed configured file L7MdLOW8usVUcPwV0cMQ1n, page 4:3 (🤖 Workflow), the four expected top-level sections (Design System — Components 2141:935, Design System — Foundations 2141:938, Home 2141:2383, Sign Up 2141:2386), all six responsive product frames at the audited widths, five component sets, 38 local variables, and seven local text styles. No unexpected material design-source change was detected.",
       "checkedAt": "2026-08-27T23:14:31.635Z"
+    },
+    {
+      "id": "VER-008",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Stage 5 GitHub immutable-baseline and implementation-root reverification",
+      "evidence": "GitHub comparison from pinned repository baseline commit 602d0e987bacea61f81f4d8f159510e220e97af4 to current main on 2026-08-27 shows no changed files under frontend/. The branch is ahead only through workflow-control and documentation artifacts, so the implementation-root baseline remains unchanged.",
+      "checkedAt": "2026-08-27T23:15:01.142Z"
     }
   ],
   "artifacts": [
