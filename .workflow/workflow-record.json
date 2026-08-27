@@ -29,7 +29,7 @@
       "id": "SRC-REPO-001",
       "role": "Input baseline",
       "pinStrength": "Immutable",
-      "status": "Unverified",
+      "status": "Active",
       "reference": "https://github.com/ferfalcon/officelite-coming-soon-site",
       "commit": "602d0e987bacea61f81f4d8f159510e220e97af4"
     }
@@ -42,6 +42,14 @@
       "method": "Figma configured-scope metadata inspection",
       "evidence": "File key L7MdLOW8usVUcPwV0cMQ1n and configured node 4:3 matched the initialized source; current metadata inspection confirmed the expected Workflow scope and nested design-system/responsive content.",
       "checkedAt": "2026-08-27T21:12:30.289Z"
+    },
+    {
+      "id": "VER-002",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "GitHub immutable commit and implementation-root inspection",
+      "evidence": "Pinned repository commit 602d0e987bacea61f81f4d8f159510e220e97af4 exists and the inspected frontend implementation matches the recorded Astro starter baseline; subsequent workflow/documentation commits do not change the pinned implementation baseline.",
+      "checkedAt": "2026-08-27T21:13:50.019Z"
     }
   ],
   "artifacts": [
