@@ -173,13 +173,13 @@
       "id": "ART-REQUIREMENTS",
       "type": "REQUIREMENTS",
       "path": "REQUIREMENTS.md",
-      "status": "Approved",
+      "status": "Draft",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T22:05:30.582Z",
-      "statusEvidence": "User explicitly approved Stage 2 / REQUIREMENTS.md in ChatGPT on 2026-08-27.",
+      "statusChangedAt": "2026-08-27T23:23:21.457Z",
+      "statusEvidence": "Stage 5 consistency review requires corrections to REQUIREMENTS.md; artifact reopened from its approved revision before applying the corrected narrative.",
       "statusBy": "ferfalcon",
       "approvedRevision": {
         "algorithm": "sha256",
