@@ -118,6 +118,14 @@
       "method": "Stage 6 Figma configured-scope structural reverification",
       "evidence": "Live Stage 6 Figma metadata inspection on 2026-08-27 confirmed configured file L7MdLOW8usVUcPwV0cMQ1n and page 4:3 (🤖 Workflow) still contain the expected Design System — Components 2141:935, Design System — Foundations 2141:938, Home 2141:2383, Sign Up 2141:2386, and the audited shared Brand/Logo, buttons, text-field, plan-select, illustration, and decorative component families with Default/Hover/Focus states. No unexpected material design-source change was detected.",
       "checkedAt": "2026-08-27T23:42:06.591Z"
+    },
+    {
+      "id": "VER-011",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Stage 7 GitHub immutable-baseline and implementation-root reverification",
+      "evidence": "Compared pinned repository baseline commit 602d0e987bacea61f81f4d8f159510e220e97af4 with Stage 7 PLAN.md commit 03fcc20acbce28920da53293a4840fe83c4bc007. GitHub compare reports only workflow and documentation files changed; no frontend/ file differs from SRC-REPO-001. The implementation-root baseline remains unchanged.",
+      "checkedAt": "2026-08-27T23:57:38.957Z"
     }
   ],
   "artifacts": [
