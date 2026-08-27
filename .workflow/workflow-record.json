@@ -1,0 +1,79 @@
+{
+  "schemaVersion": 2,
+  "project": {
+    "name": "Officelite coming soon site",
+    "profile": "Full",
+    "executionMode": "Gated"
+  },
+  "state": {
+    "stage": 0,
+    "status": "In progress",
+    "activeInputs": [
+      "SRC-DS-001",
+      "SRC-REPO-001"
+    ],
+    "currentTask": null,
+    "latestOutput": null,
+    "latestValidationRuntime": null,
+    "architectureDecision": null
+  },
+  "snapshots": [
+    {
+      "id": "SRC-DS-001",
+      "role": "Input baseline",
+      "pinStrength": "Time-bound",
+      "status": "Unverified",
+      "reference": "https://www.figma.com/design/L7MdLOW8usVUcPwV0cMQ1n/officelite-coming-soon-site?node-id=4-3"
+    },
+    {
+      "id": "SRC-REPO-001",
+      "role": "Input baseline",
+      "pinStrength": "Immutable",
+      "status": "Unverified",
+      "reference": "https://github.com/ferfalcon/officelite-coming-soon-site",
+      "commit": "602d0e987bacea61f81f4d8f159510e220e97af4"
+    }
+  ],
+  "verifications": [],
+  "artifacts": [
+    {
+      "id": "ART-SOURCE-BASELINE",
+      "type": "SOURCE-BASELINE",
+      "path": "SOURCE-BASELINE.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
+    },
+    {
+      "id": "ART-PROJECT-CONTEXT",
+      "type": "PROJECT-CONTEXT",
+      "path": "PROJECT-CONTEXT.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
+    },
+    {
+      "id": "ART-WORKFLOW-STATE",
+      "type": "WORKFLOW-STATE",
+      "path": "WORKFLOW-STATE.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
+    }
+  ],
+  "traceItems": [],
+  "gates": [],
+  "tasks": [],
+  "profileTransitions": [],
+  "implementationReviews": [],
+  "toolkit": {
+    "repository": "ferfalcon/figma-to-implementation-workflow",
+    "revision": "7d63188242a09656fe02f621606712b42fbe6b4d"
+  }
+}
