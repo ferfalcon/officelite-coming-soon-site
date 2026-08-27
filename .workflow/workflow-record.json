@@ -7,7 +7,7 @@
   },
   "state": {
     "stage": 4,
-    "status": "In progress",
+    "status": "Ready",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -431,6 +431,83 @@
           "revision": {
             "algorithm": "sha256",
             "digest": "efe833f52624cb6668a39cfc5241eabc3732138cab7c2d4feed91c35c9afaa41"
+          }
+        }
+      ]
+    },
+    {
+      "id": "GATE-005",
+      "stage": 4,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ],
+      "verifications": [
+        "VER-006",
+        "VER-002"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE",
+        "ART-DESIGN-AUDIT",
+        "ART-REQUIREMENTS",
+        "ART-DESIGN",
+        "ART-SPEC"
+      ],
+      "evidence": "User explicitly approved Stage 4 / SPEC.md in ChatGPT on 2026-08-27 and explicitly instructed not to start the next stage. ART-SPEC is Approved, SRC-DS-001 is freshly verified Unchanged through VER-006, and canonical Stage 4 preflight returned recordable=true, passing=true, recommendedResult=Passed with no findings.",
+      "recordedAt": "2026-08-27T23:05:53.798Z",
+      "approvedBy": "ferfalcon",
+      "artifactRevisions": [
+        {
+          "artifact": "ART-SOURCE-BASELINE",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "526d933520848f6692cc591c9b85c177c00b72115381e37e4c12f1789352a5b1"
+          }
+        },
+        {
+          "artifact": "ART-PROJECT-CONTEXT",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "6a78d88869c2e97b615c068043601379ec352604db0aba4355f11c1f298c8160"
+          }
+        },
+        {
+          "artifact": "ART-WORKFLOW-STATE",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "5217c4de5c5e8a111a26b9f7a82da2c90df26756787dc511c131486f5201fa68"
+          }
+        },
+        {
+          "artifact": "ART-DESIGN-AUDIT",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "e4fb7958ef228bd0fbb5e5e951c10087d0ac7e55ed2a68fd7cebfeec3ee30cf1"
+          }
+        },
+        {
+          "artifact": "ART-REQUIREMENTS",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "f7355e35b539254ba4936271d178b0e5ede1d0f89164204c2ab18d48717530b9"
+          }
+        },
+        {
+          "artifact": "ART-DESIGN",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "efe833f52624cb6668a39cfc5241eabc3732138cab7c2d4feed91c35c9afaa41"
+          }
+        },
+        {
+          "artifact": "ART-SPEC",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "6402f2756d77ff5abf1921e9158f965bbd2549883d92ab5cb5c7706be5938940"
           }
         }
       ]
