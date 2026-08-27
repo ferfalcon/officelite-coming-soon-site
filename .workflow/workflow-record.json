@@ -91,13 +91,18 @@
       "id": "ART-WORKFLOW-STATE",
       "type": "WORKFLOW-STATE",
       "path": "WORKFLOW-STATE.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T21:15:49.807Z",
-      "statusEvidence": "Stage 0 workflow-state review checked consistency with the canonical record, Full/Gated mode, verified input baseline, blockers, assumptions, deviation history, and the required human gate boundary."
+      "statusChangedAt": "2026-08-27T21:28:23.428Z",
+      "statusEvidence": "User explicitly approved Stage 0 in ChatGPT on 2026-08-27 after review of the Stage 0 source baseline, project context, and workflow state.",
+      "statusBy": "ferfalcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "5217c4de5c5e8a111a26b9f7a82da2c90df26756787dc511c131486f5201fa68"
+      }
     }
   ],
   "traceItems": [],
