@@ -98,6 +98,14 @@
       "method": "Stage 5 GitHub immutable-baseline and implementation-root reverification",
       "evidence": "GitHub comparison from pinned repository baseline commit 602d0e987bacea61f81f4d8f159510e220e97af4 to current main on 2026-08-27 shows no changed files under frontend/. The branch is ahead only through workflow-control and documentation artifacts, so the implementation-root baseline remains unchanged.",
       "checkedAt": "2026-08-27T23:15:01.142Z"
+    },
+    {
+      "id": "VER-009",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Stage 6 GitHub immutable-baseline and implementation-root reverification",
+      "evidence": "Compared pinned repository baseline commit 602d0e987bacea61f81f4d8f159510e220e97af4 with current main after the Stage 6 ARCHITECTURE.md narrative update. GitHub reports no changed files under frontend/; current differences are workflow/documentation only, so the implementation-root baseline remains unchanged.",
+      "checkedAt": "2026-08-27T23:41:40.687Z"
     }
   ],
   "artifacts": [
