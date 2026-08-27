@@ -141,11 +141,13 @@
       "id": "ART-REQUIREMENTS",
       "type": "REQUIREMENTS",
       "path": "REQUIREMENTS.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-27T21:57:23.021Z",
+      "statusEvidence": "Stage 2 review pass 1 verified complete and testable coverage for Home, Sign Up, navigation, plan preservation/defaulting, native plan selection, required-field and email validation, IndexedDB persistence, success/failure feedback, countdown behavior, accessibility, responsive outcomes, data boundaries, and repository constraints. Review pass 2 verified canonical REQ-*/AC-* identifiers, traceability to SRC-DS-001/SRC-REPO-001 and EVD-/AUD- evidence, explicit separation of Figma-observed versus repository-confirmed behavior, visible Recommended classifications, no invented browser/performance/security/retention policy, and no blocking Stage 2 question."
     }
   ],
   "traceItems": [],
