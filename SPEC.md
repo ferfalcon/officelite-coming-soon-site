@@ -342,14 +342,14 @@ This specification converts the approved requirements and design intent into obs
 
 ## 8. Data and Interface Specifications
 
-### SPEC-DATA-001 — Sign-up record contains exactly the required current-release values
+### SPEC-DATA-001 — Sign-up record contains the five required current-release values
 
 - **Requirement references:** `REQ-DR-001`, `REQ-BR-003`.
 - **Source snapshots:** `SRC-REPO-001`.
 - **Inputs:** Name, Email Address, Plan, Phone Number, Company.
 - **Required fields:** All five.
-- **Optional fields:** No additional optional record fields are established by active sources.
-- **Output:** One browser-local sign-up record representing the submitted values after successful persistence.
+- **Additional fields:** No additional product-required record fields are established by active sources. Implementation metadata is not prohibited by this specification provided it does not change the five required product values or introduce a new product requirement.
+- **Output:** One browser-local sign-up record containing the submitted required values after successful persistence.
 - **Acceptance criteria:** `AC-096`, `AC-097`.
 
 ### SPEC-DATA-002 — Plan value belongs to the approved domain
@@ -390,7 +390,7 @@ This specification converts the approved requirements and design intent into obs
 - **User feedback:** Email receives visible field-specific feedback.
 - **Programmatic relationship:** Feedback is associated with Email Address.
 - **Recovery:** User can correct the value and submit again.
-- **Validation algorithm:** Active sources do not prescribe a specific regular expression or library. Validation must consistently reject clearly malformed values and accept conventional syntactically valid addresses.
+- **Validation semantics:** For acceptance, email syntax is evaluated using HTML single-address email constraint semantics (equivalent to an `input type="email"` value without `multiple`). The implementation may use native constraint validation or an equivalent mechanism that produces the same observable validity outcome; no specific regular expression or library is required.
 - **Acceptance criteria:** `AC-105`–`AC-107`.
 
 ### SPEC-VAL-003 — Persistence failure is not reported as success
@@ -496,8 +496,8 @@ No independent `REQ-SEC-*` exists. The only confirmed current-release data bound
 | AC-102 | One required field has no value | Submit is activated | Persistence is prevented | SPEC-VAL-001 | Validation test |
 | AC-103 | Multiple required fields have no value | Submit is activated | Each affected field receives field-specific visible feedback | SPEC-VAL-001 | Validation UI test |
 | AC-104 | Missing values are supplied | Submit is activated again | Required-field validation no longer blocks those corrected fields | SPEC-VAL-001 | Recovery test |
-| AC-105 | Email is clearly malformed | Submit is activated | Email validation blocks persistence and shows field feedback | SPEC-VAL-002 | Validation test |
-| AC-106 | Email is conventional and syntactically valid | Other required fields are valid and submit is activated | Email syntax validation does not itself block persistence | SPEC-VAL-002 | Validation test |
+| AC-105 | Email value fails HTML single-address email constraint semantics | Submit is activated | Email validation blocks persistence and shows field feedback | SPEC-VAL-002 | Validation test |
+| AC-106 | Email value satisfies HTML single-address email constraint semantics | Other required fields are valid and submit is activated | Email syntax validation does not itself block persistence | SPEC-VAL-002 | Validation test |
 | AC-107 | Invalid email is corrected | Submit is activated again | Email validation no longer blocks the corrected value | SPEC-VAL-002 | Recovery test |
 | AC-108 | IndexedDB is made unavailable/failing | Valid submit is activated | Failure status is shown/announced; success is not shown | SPEC-VAL-003 | Forced-failure test |
 | AC-109 | Persistence fails | Form state is inspected | Entered values remain available where technically possible | SPEC-VAL-003 | Recovery inspection |
@@ -510,7 +510,7 @@ No independent `REQ-SEC-*` exists. The only confirmed current-release data bound
 - The supplied widths are evidence points, not breakpoint mandates.
 - "Reasonable replacement content" means content that preserves the same information roles; no localization length threshold is approved.
 - Native select platform differences are acceptable because the approved requirement explicitly calls for a native select.
-- The application may choose an email-validation mechanism, but it must satisfy the observable syntax outcomes in this specification.
+- The application may choose an email-validation mechanism, but its acceptance outcome must match the HTML single-address email constraint semantics defined by `SPEC-VAL-002`.
 - Values are preserved after success because no approved reset behavior exists and approved design intent advises against unrequired clearing. A later approved requirement may change this behavior.
 
 ### Risks
@@ -520,7 +520,7 @@ No independent `REQ-SEC-*` exists. The only confirmed current-release data bound
 - Exact validation/status copy remains undefined and could affect layout.
 - IndexedDB failure behavior can vary by browser/runtime; forced-failure validation is required to exercise the outcome.
 - Countdown terminal behavior remains undefined and could require a later specification change before/at launch date.
-- Mutable Figma source requires fresh workflow verification before Stage 4 closure.
+- Mutable Figma source requires fresh workflow verification at material later stage transitions; Stage 5 reverified it before this consistency review.
 
 ### Blocking questions
 
