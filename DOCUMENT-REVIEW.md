@@ -200,9 +200,9 @@ Stage 5 corrections were made in the owning document rather than being accepted 
 - **Affected documents:** `REQUIREMENTS.md`, `DESIGN.md`, `SPEC.md`, workflow artifact lifecycle
 - **Decision owner:** Canonical workflow CLI + Gated human approval
 - **Resolution:** Reopen/review the corrected artifacts through the canonical CLI; after the user approves Stage 5, bind approval to the corrected revisions before recording the Stage 5 gate.
-- **Changes applied:** Narrative corrections are complete; canonical lifecycle refresh is the remaining gate-control action.
-- **Remaining uncertainty:** None about content; human approval is still required by Gated mode.
-- **Status:** Open pending canonical lifecycle/gate approval
+- **Changes applied:** `ART-REQUIREMENTS`, `ART-DESIGN`, and `ART-SPEC` were canonically reopened from their approved revisions, the Stage 5 corrections were reapplied, and all three corrected revisions were moved to Reviewed.
+- **Remaining uncertainty:** None about content; human approval is still required by Gated mode before the corrected revisions can return to Approved.
+- **Status:** Corrected; approval pending
 
 ## 9. Traceability and Source Problems
 
@@ -213,7 +213,7 @@ Stage 5 corrections were made in the owning document rather than being accepted 
 | DOC-003 | `SPEC-DATA-001` | “Exactly” stronger than `REQ-DR-001` | Preserve five required values without forbidding metadata | Corrected |
 | DOC-004 | `SPEC-VAL-002` / `AC-105`–`106` | Subjective syntax terms | Use one reproducible HTML email validity semantic | Corrected |
 | DOC-005 | Design/spec review notes | Stale Stage 4-forward references | Point to existing Stage 4 IDs / later owners | Corrected |
-| DOC-006 | Artifact registry | Historical approval digests predate Stage 5 corrections | Refresh artifact lifecycle canonically | Pending human gate process |
+| DOC-006 | Artifact registry | Historical approval digests predated Stage 5 corrections | Reopen/review corrected revisions canonically, then approve after human gate decision | Corrected to Reviewed; approval pending |
 
 Post-correction identifier checks found no unresolved `REQ-*`, `DES-*`, `AUD-*`, or `EVD-*` references in the reviewed documents. Existing `AC-001`–`AC-036` remain stable in requirements; Stage 4 criteria remain `AC-037`–`AC-110`.
 
@@ -272,14 +272,14 @@ Post-correction identifier checks found no unresolved `REQ-*`, `DES-*`, `AUD-*`,
 
 `Ready with documented non-blocking assumptions`
 
-This is the documentation-readiness result. The Gated workflow still requires canonical artifact lifecycle refresh for the corrected revisions and explicit human approval before Stage 5 can be recorded as Passed and advanced.
+This is the documentation-readiness result. The corrected upstream artifacts are canonically Reviewed; Gated mode still requires explicit human approval before those revisions and `DOCUMENT-REVIEW.md` can be approved and Stage 5 can be recorded as Passed.
 
 ## 15. Completion Summary
 
 - **Files created or modified:** `REQUIREMENTS.md`, `DESIGN.md`, `SPEC.md`, `DOCUMENT-REVIEW.md`.
 - **Snapshot IDs reviewed:** `SRC-DS-001`, `SRC-REPO-001`.
 - **Source verification performed:** `VER-007 = Unchanged`; `VER-008 = Unchanged`.
-- **Important findings:** six findings recorded; five content/baseline issues corrected, one canonical lifecycle item remains pending the Gated approval process.
+- **Important findings:** six findings recorded; all identified content/baseline/lifecycle corrections are complete through Reviewed status, with approval intentionally pending the Gated human decision.
 - **Assumptions introduced:** no new product assumptions; existing bounded interpretations remain visibly labeled.
 - **Open questions or blockers:** five non-blocking product/content/policy questions remain; explicit human gate approval is still required.
 - **Recommended next stage:** Stage 6 — Define architecture, after the Stage 5 gate is approved and recorded.
