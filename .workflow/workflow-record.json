@@ -74,13 +74,18 @@
       "id": "ART-PROJECT-CONTEXT",
       "type": "PROJECT-CONTEXT",
       "path": "PROJECT-CONTEXT.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T21:15:26.116Z",
-      "statusEvidence": "Stage 0 project context review checked scope, Full-profile rationale, repository constraints, source authority, release boundaries, quality expectations, and explicit uncertainty against the active source baseline."
+      "statusChangedAt": "2026-08-27T21:27:54.589Z",
+      "statusEvidence": "User explicitly approved Stage 0 in ChatGPT on 2026-08-27 after review of the Stage 0 source baseline, project context, and workflow state.",
+      "statusBy": "ferfalcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "6a78d88869c2e97b615c068043601379ec352604db0aba4355f11c1f298c8160"
+      }
     },
     {
       "id": "ART-WORKFLOW-STATE",
