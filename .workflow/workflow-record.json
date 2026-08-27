@@ -6,8 +6,8 @@
     "executionMode": "Gated"
   },
   "state": {
-    "stage": 0,
-    "status": "Ready",
+    "stage": 1,
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -103,6 +103,16 @@
         "algorithm": "sha256",
         "digest": "5217c4de5c5e8a111a26b9f7a82da2c90df26756787dc511c131486f5201fa68"
       }
+    },
+    {
+      "id": "ART-DESIGN-AUDIT",
+      "type": "DESIGN-AUDIT",
+      "path": "DESIGN-AUDIT.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [],
