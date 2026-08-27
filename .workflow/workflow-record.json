@@ -190,13 +190,13 @@
       "id": "ART-DESIGN",
       "type": "DESIGN",
       "path": "DESIGN.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T23:23:42.839Z",
-      "statusEvidence": "Stage 5 consistency review requires corrections to DESIGN.md; artifact reopened from its approved revision before applying the corrected narrative.",
+      "statusChangedAt": "2026-08-27T23:25:20.138Z",
+      "statusEvidence": "Stage 5 cross-document review confirmed DESIGN.md corrections replace stale Stage 4-forward references with actual SPEC identifiers/later owners, preserve all stable DES-* identifiers, and keep remaining visual/accessibility uncertainty explicitly non-blocking.",
       "statusBy": "ferfalcon",
       "approvedRevision": {
         "algorithm": "sha256",
