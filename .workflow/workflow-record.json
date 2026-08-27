@@ -6,8 +6,8 @@
     "executionMode": "Gated"
   },
   "state": {
-    "stage": 4,
-    "status": "Ready",
+    "stage": 5,
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -203,6 +203,16 @@
         "algorithm": "sha256",
         "digest": "6402f2756d77ff5abf1921e9158f965bbd2549883d92ab5cb5c7706be5938940"
       }
+    },
+    {
+      "id": "ART-DOCUMENT-REVIEW",
+      "type": "DOCUMENT-REVIEW",
+      "path": "DOCUMENT-REVIEW.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [],
