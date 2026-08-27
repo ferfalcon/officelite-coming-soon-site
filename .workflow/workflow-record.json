@@ -7,7 +7,7 @@
   },
   "state": {
     "stage": 0,
-    "status": "In progress",
+    "status": "Ready",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -106,7 +106,53 @@
     }
   ],
   "traceItems": [],
-  "gates": [],
+  "gates": [
+    {
+      "id": "GATE-001",
+      "stage": 0,
+      "status": "Active",
+      "result": "Passed",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ],
+      "verifications": [
+        "VER-001",
+        "VER-002"
+      ],
+      "artifacts": [
+        "ART-SOURCE-BASELINE",
+        "ART-PROJECT-CONTEXT",
+        "ART-WORKFLOW-STATE"
+      ],
+      "evidence": "User explicitly approved Stage 0 in ChatGPT on 2026-08-27. All Stage 0 control artifacts are Approved, active design and repository snapshots are verified Unchanged, and canonical stage preflight returned recordable=true, passing=true, recommendedResult=Passed with no findings.",
+      "recordedAt": "2026-08-27T21:29:46.582Z",
+      "approvedBy": "ferfalcon",
+      "artifactRevisions": [
+        {
+          "artifact": "ART-SOURCE-BASELINE",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "526d933520848f6692cc591c9b85c177c00b72115381e37e4c12f1789352a5b1"
+          }
+        },
+        {
+          "artifact": "ART-PROJECT-CONTEXT",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "6a78d88869c2e97b615c068043601379ec352604db0aba4355f11c1f298c8160"
+          }
+        },
+        {
+          "artifact": "ART-WORKFLOW-STATE",
+          "revision": {
+            "algorithm": "sha256",
+            "digest": "5217c4de5c5e8a111a26b9f7a82da2c90df26756787dc511c131486f5201fa68"
+          }
+        }
+      ]
+    }
+  ],
   "tasks": [],
   "profileTransitions": [],
   "implementationReviews": [],
