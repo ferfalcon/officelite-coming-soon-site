@@ -261,11 +261,13 @@
       "id": "ART-ARCHITECTURE",
       "type": "ARCHITECTURE",
       "path": "ARCHITECTURE.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-27T23:43:25.920Z",
+      "statusEvidence": "Stage 6 ARCHITECTURE.md replaces the scaffold with project-specific current, target, and transitional architecture; defines route, plan-context, shared configuration, IndexedDB, accessibility, responsive CSS, privacy, deployment, and testing boundaries; records ten traceable ADRs; preserves all approved exclusions; and completes both required review passes with no blocking architecture question."
     }
   ],
   "traceItems": [],
