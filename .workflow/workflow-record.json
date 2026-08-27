@@ -116,13 +116,18 @@
       "id": "ART-DESIGN-AUDIT",
       "type": "DESIGN-AUDIT",
       "path": "DESIGN-AUDIT.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-27T21:38:26.762Z",
-      "statusEvidence": "Stage 1 audit review pass 1 verified full authorized scope coverage, six responsive screens, components, states, variables, text styles, flows, content, assets, responsive transformations, and accessibility implications. Review pass 2 verified snapshot/source authority separation, node-reference traceability, explicit uncertainty, no invented product rules, and documented the screenshot URL retrieval limitation."
+      "statusChangedAt": "2026-08-27T21:43:11.975Z",
+      "statusEvidence": "User explicitly approved Stage 1 / DESIGN-AUDIT.md in ChatGPT on 2026-08-27 and explicitly instructed not to start the next stage.",
+      "statusBy": "ferfalcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "e4fb7958ef228bd0fbb5e5e951c10087d0ac7e55ed2a68fd7cebfeec3ee30cf1"
+      }
     }
   ],
   "traceItems": [],
