@@ -6,8 +6,8 @@
     "executionMode": "Gated"
   },
   "state": {
-    "stage": 3,
-    "status": "Ready",
+    "stage": 4,
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -178,6 +178,16 @@
         "algorithm": "sha256",
         "digest": "efe833f52624cb6668a39cfc5241eabc3732138cab7c2d4feed91c35c9afaa41"
       }
+    },
+    {
+      "id": "ART-SPEC",
+      "type": "SPEC",
+      "path": "SPEC.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [],
