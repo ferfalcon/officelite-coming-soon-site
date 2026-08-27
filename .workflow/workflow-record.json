@@ -81,11 +81,13 @@
       "id": "ART-WORKFLOW-STATE",
       "type": "WORKFLOW-STATE",
       "path": "WORKFLOW-STATE.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-27T21:15:49.807Z",
+      "statusEvidence": "Stage 0 workflow-state review checked consistency with the canonical record, Full/Gated mode, verified input baseline, blockers, assumptions, deviation history, and the required human gate boundary."
     }
   ],
   "traceItems": [],
