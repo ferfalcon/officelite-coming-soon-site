@@ -11,7 +11,7 @@ on:
       - '.github/workflows/frontend-validation.yml'
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   validate:
@@ -38,12 +38,15 @@ jobs:
       - name: Generate dependency lockfile
         run: pnpm install --no-frozen-lockfile
 
-      - name: Upload generated lockfile
-        uses: actions/upload-artifact@v4
-        with:
-          name: p01-t01-pnpm-lock
-          path: frontend/pnpm-lock.yaml
-          if-no-files-found: error
+      - name: Commit generated lockfile
+        run: |
+          if ! git diff --quiet -- pnpm-lock.yaml; then
+            git config user.name "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add pnpm-lock.yaml
+            git commit -m "Generate P01-T01 lockfile [skip ci]"
+            git push
+          fi
 
       - name: Run Astro diagnostics
         run: pnpm check
