@@ -1,9 +1,68 @@
 ---
+import BrandLogo from '../components/BrandLogo.astro';
+import HomeHero from '../components/HomeHero.astro';
+import PricingPlans from '../components/PricingPlans.astro';
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout>
-  <main id="main-content" class="site-shell">
-    <h1 class="visually-hidden">Officelite</h1>
-  </main>
+<Layout
+  title="Officelite"
+  description="Officelite is a collaboration platform designed to simplify complex tasks and improve team productivity."
+>
+  <div class="home site-shell">
+    <header class="home__header container">
+      <BrandLogo />
+    </header>
+
+    <main id="main-content">
+      <div class="home__hero">
+        <HomeHero />
+      </div>
+
+      <PricingPlans />
+    </main>
+  </div>
 </Layout>
+
+<style>
+  .home {
+    --page-gutter: 1rem;
+
+    position: relative;
+    overflow: clip;
+    background: var(--color-neutral-50);
+  }
+
+  .home__header {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    padding-block-start: var(--space-500);
+  }
+
+  .home__hero {
+    margin-block-start: var(--space-1000);
+  }
+
+  @media (min-width: 48rem) {
+    .home {
+      --page-gutter: 2.5rem;
+    }
+
+    .home__header {
+      justify-content: flex-start;
+      padding-block-start: var(--space-1000);
+    }
+
+    .home__hero {
+      margin-block-start: 7rem;
+    }
+  }
+
+  @media (min-width: 74.375rem) {
+    .home__hero {
+      margin-block-start: var(--space-1800);
+    }
+  }
+</style>
