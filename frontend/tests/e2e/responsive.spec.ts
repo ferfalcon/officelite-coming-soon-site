@@ -67,6 +67,10 @@ test('both routes remain reflow-safe below, between, and above the supplied Figm
   }
 });
 
+// Content-fit rationale: 704px is the first medium-layout width after the compact
+// composition, and the suite brackets 703/704 so the transition is evidence-based.
+// At 1190px, 40px page gutters leave 1110px of content width, exactly matching
+// the approved large composition; 1189/1190 is bracketed for the same reason.
 test('content-fit transitions switch immediately across the 704px and 1190px boundaries', async ({
   page,
 }) => {
