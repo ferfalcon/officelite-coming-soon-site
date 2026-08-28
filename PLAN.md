@@ -225,9 +225,9 @@ Use the smallest test tool set that covers the approved behaviors:
 
 Playwright is selected because current Astro documentation explicitly supports it for end-to-end testing and its browser automation can cover navigation, URL plan state, native form behavior, IndexedDB, keyboard flow, responsive viewport checks, and network assertions without adding a UI framework-specific test layer.
 
-Automated coverage may execute Chromium, Firefox, and WebKit as engineering regression coverage, but this does not create a formal product browser-support matrix. If CI resource cost becomes disproportionate, Chromium remains the minimum blocking automated project while the other engines can remain scheduled/manual until product support policy is defined.
+Automated coverage may execute Chromium, Firefox, and WebKit as engineering regression coverage, but this does not create a formal product browser-support matrix. Chromium is the minimum blocking automated project; Firefox and WebKit may remain additional engineering coverage without creating a product support policy.
 
-A minimal repo-wide GitHub Actions workflow may be added only to execute frontend diagnostics/build/E2E checks on frontend changes. This is the one planned edit outside frontend/ and is allowed as repository integration; it must not alter the design-workflow command workflow.
+Because the current connected execution environment has no direct local frontend-command runner, create one minimal repo-wide GitHub Actions workflow as the remote validation transport for frontend diagnostics, build, and E2E checks. It must run application commands from `frontend/`, trigger only for relevant `frontend/**` changes (plus its own workflow definition when needed), and must not alter or couple to the canonical design-workflow command workflow. This is the one required repo-wide integration outside `frontend/`, permitted by `REQ-CON-001`.
 
 ## 5. Files and Modules
 
@@ -267,7 +267,7 @@ The paths below are repository-aware proposals. “Existing” means the path ex
 | frontend/tests/e2e/navigation.spec.ts | Create | Proposed | CTA, logo, and plan-context regression coverage | No test suite exists |
 | frontend/tests/e2e/signup.spec.ts | Create | Proposed | validation, persistence, failure, network-safety coverage | No test suite exists |
 | frontend/tests/e2e/responsive.spec.ts | Create | Proposed | required viewport/reflow assertions and smoke checks | No test suite exists |
-| .github/workflows/frontend-validation.yml | Create if CI execution is selected during PLAN-001 | Proposed repo-wide integration | Run frontend check/build/Playwright on frontend changes | Only design-workflow command workflow exists at baseline |
+| .github/workflows/frontend-validation.yml | Create | Proposed repo-wide integration | Provide the remote frontend check/build/Playwright validation transport for relevant `frontend/**` changes | Only design-workflow command workflow exists at baseline; current connected environment has no local frontend-command runner |
 
 The exact number of Astro components may be reduced during task decomposition if a proposed boundary proves to add no independent responsibility. The plan does not require creating empty wrapper components merely to match this table.
 
@@ -278,9 +278,9 @@ The exact number of Astro components may be reduced during task decomposition if
 - **Objective:** Convert the starter foundation into an Officelite-ready Astro shell and install the smallest approved build/test dependencies before feature work.
 - **Requirement and specification references:** REQ-CON-001, REQ-CON-002, REQ-NFR-001, REQ-AR-002; SPEC-ACC-002, SPEC-ACC-006; ADR-002, ADR-007, ADR-010.
 - **Source snapshots:** SRC-REPO-001, SRC-DS-001.
-- **File impact:** package.json, pnpm-lock.yaml, Layout.astro, global.css, product assets, starter files, Playwright config, optional frontend-validation workflow.
+- **File impact:** package.json, pnpm-lock.yaml, Layout.astro, global.css, product assets, starter files, Playwright config, and `.github/workflows/frontend-validation.yml`.
 - **Dependencies:** None.
-- **Implementation approach:** remove starter-only assets/UI; self-host Kumbh Sans; map Figma foundations to CSS custom properties; establish product metadata/favicon; add @astrojs/check, typescript, @playwright/test; add check and test:e2e scripts; configure Playwright against Astro preview; copy only used product assets into frontend/.
+- **Implementation approach:** remove starter-only assets/UI; self-host Kumbh Sans; map Figma foundations to CSS custom properties; establish product metadata/favicon; add @astrojs/check, typescript, @playwright/test; add check and test:e2e scripts; configure Playwright against Astro preview; copy only used product assets into frontend/; add the minimal path-filtered frontend validation workflow required to execute those commands in the current remote-only connected environment.
 - **Integrated accessibility, responsive, state, and error work:** base focus-visible token/ring; base typography and fluid container rules; decorative asset treatment; no app-created horizontal overflow from the shell.
 - **Validation:** pnpm check; pnpm build; Playwright configuration starts the preview server; / renders without starter content; product font/assets resolve.
 - **Risks:** dependency/version drift; font bundle size; accidental changes to design-workflow CI. Mitigation: lockfile update, import only required font axis/subset, keep validation workflow isolated.
@@ -288,7 +288,7 @@ The exact number of Astro components may be reduced during task decomposition if
 ### PLAN-002 — Implement shared product configuration, plan-context helpers, and Countdown
 
 - **Objective:** Create one source for approved plans/current launch target and one reusable countdown behavior shared by both routes.
-- **Requirement and specification references:** REQ-FR-004, REQ-FR-005, REQ-FR-011, REQ-BR-001, REQ-BR-002, REQ-BR-005, REQ-CON-004; SPEC-BEH-003, SPEC-BEH-004, SPEC-BEH-005, SPEC-DATA-002, SPEC-ACC-005; ADR-003, ADR-006.
+- **Requirement and specification references:** REQ-FR-004, REQ-FR-005, REQ-FR-011, REQ-BR-001, REQ-BR-002, REQ-BR-005, REQ-DR-002, REQ-CON-004; SPEC-BEH-003, SPEC-BEH-004, SPEC-BEH-005, SPEC-DATA-002, SPEC-ACC-005; ADR-003, ADR-006.
 - **Source snapshots:** SRC-DS-001, SRC-REPO-001.
 - **File impact:** product.ts, plan-context.ts, countdown.ts, Countdown.astro.
 - **Dependencies:** PLAN-001.
@@ -340,7 +340,7 @@ The exact number of Astro components may be reduced during task decomposition if
 - **Source snapshots:** SRC-REPO-001.
 - **File impact:** signup-store.ts, signup-controller.ts, SignUpForm.astro status region, signup E2E tests.
 - **Dependencies:** PLAN-005.
-- **Implementation approach:** define a small IndexedDB database/object-store version; persist the five required values and only implementation metadata that is technically useful; return an application-level success/failure result; render a stable non-modal status region; never clear values solely due to success; leave values available on failure.
+- **Implementation approach:** define a small IndexedDB database/object-store version; persist the five required product values. Add implementation metadata only when a concrete storage need is documented in the task, it does not alter product-required values, and it does not imply a new retention/privacy/product policy; return an application-level success/failure result; render a stable non-modal status region; never clear values solely due to success; leave values available on failure.
 - **Integrated accessibility, responsive, state, and error work:** programmatically announced status without focus movement; failure uses red/text; success uses approved blue/neutral language; status wraps/grows; no loading/disabled state invented.
 - **Validation:** inspect IndexedDB record; force open/write failure; verify visible/programmatic success or failure as appropriate; verify values survive failure; retry via normal submit; intercept network to prove no sign-up request; disable/fail client initialization and confirm the static form cannot leak data through navigation.
 - **Risks:** IndexedDB failure mechanics vary by engine. Mitigation: adapter isolation and deterministic forced-failure test hook/mocking at browser-test boundary without product-only debug UI.
@@ -360,11 +360,11 @@ The exact number of Astro components may be reduced during task decomposition if
 ### PLAN-008 — Lock regression coverage and repository validation
 
 - **Objective:** Ensure all approved critical flows and static checks are reproducible before final implementation review.
-- **Requirement and specification references:** all Must requirements; AC-037 through AC-110 as applicable; Architecture Section 21.
+- **Requirement and specification references:** REQ-FR-001 through REQ-FR-012, REQ-BR-001 through REQ-BR-005, REQ-DR-001 through REQ-DR-003, REQ-AR-001 through REQ-AR-005, REQ-NFR-001 through REQ-NFR-002, REQ-CON-001 through REQ-CON-004; all applicable acceptance criteria AC-001 through AC-110; all Stage 4 specification IDs; Architecture Section 21.
 - **Source snapshots:** SRC-DS-001, SRC-REPO-001.
-- **File impact:** package scripts, Playwright config/specs, optional frontend-validation workflow.
+- **File impact:** package scripts, Playwright config/specs, and the frontend validation workflow.
 - **Dependencies:** PLAN-003 through PLAN-007.
-- **Implementation approach:** complete E2E coverage for navigation, plan state, form validity, IndexedDB success/failure, network safety, keyboard, focus, countdown ticking, representative responsive widths, and critical accessible relationships; ensure check and build are blocking validation commands.
+- **Implementation approach:** complete E2E coverage for navigation, plan state, form validity, IndexedDB success/failure, network safety, keyboard, focus, countdown ticking, representative responsive widths, and critical accessible relationships; ensure check and build are blocking validation commands in the remote frontend-validation workflow; map AC-001 through AC-110 to automated or explicitly manual validation so the final suite does not silently omit Stage 2 acceptance criteria.
 - **Integrated accessibility, responsive, state, and error work:** automated tests protect previously implemented behavior; manual screen-reader/status checks and visual comparison remain required where browser assertions are insufficient.
 - **Validation:** pnpm check; pnpm build; pnpm test:e2e; manual keyboard-only flow; manual assistive-status check; Figma visual review.
 - **Risks:** test suite may imply unsupported browser policy. Mitigation: label engines as engineering regression coverage and keep product support matrix open.
