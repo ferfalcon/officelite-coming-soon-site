@@ -294,13 +294,13 @@
       "id": "ART-PLAN",
       "type": "PLAN",
       "path": "PLAN.md",
-      "status": "Approved",
+      "status": "Draft",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-28T00:00:24.181Z",
-      "statusEvidence": "Human approval received for Stage 7 / PLAN.md in ChatGPT on 2026-08-27. The user explicitly instructed not to start the next stage.",
+      "statusChangedAt": "2026-08-28T00:10:38.331Z",
+      "statusEvidence": "Stage 8 adversarial review corrected PLAN.md traceability, full acceptance-criteria validation coverage, remote validation transport, and IndexedDB metadata boundaries. Reopen the previously approved Stage 7 plan so lifecycle integrity can bind to the corrected revision before Stage 8 approval.",
       "statusBy": "Fernando Falcon",
       "approvedRevision": {
         "algorithm": "sha256",
