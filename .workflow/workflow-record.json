@@ -1707,6 +1707,18 @@
           "references": [
             "PLAN-004"
           ]
+        },
+        {
+          "name": "Production and design verification",
+          "kind": "Manual",
+          "required": true,
+          "status": "Not executed",
+          "expected": "The exact implementation output deploys successfully and the Sign Up shell preserves the approved Figma hierarchy, native-control accessibility, and responsive compositions",
+          "evidence": [],
+          "reason": "Pending final implementation-output commit and production verification",
+          "references": [
+            "PLAN-004"
+          ]
         }
       ]
     },
