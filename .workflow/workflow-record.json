@@ -356,11 +356,13 @@
       "id": "ART-TASK-P01-T01",
       "type": "TASK",
       "path": "Phase-01--Task-01.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-28T01:24:19.797Z",
+      "statusEvidence": "Stage 9 two-pass review completed against PLAN-001 and current repository/design baselines: objective, scoped files, ordered non-code steps, accessibility/responsive/error/testing work, validation, acceptance criteria, risks, discoveries/deviations, and DoD are implementation-ready."
     },
     {
       "id": "ART-TASK-P01-T02",
