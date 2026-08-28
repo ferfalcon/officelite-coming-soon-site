@@ -1,0 +1,172 @@
+---
+import { LAUNCH } from '../data/product';
+import {
+  COUNTDOWN_UNITS,
+  formatCountdownValue,
+  getCountdownParts,
+  type CountdownUnit,
+} from '../lib/countdown';
+
+interface Props {
+  tone?: 'light' | 'dark';
+  class?: string;
+}
+
+const { tone = 'light', class: className = '' } = Astro.props;
+const initialParts = getCountdownParts(LAUNCH.instant);
+
+if (!initialParts) {
+  throw new Error(
+    'The current launch target is no longer in the future. Countdown terminal behavior requires a product decision.',
+  );
+}
+
+const labels: Record<
+  CountdownUnit,
+  { visible: string; accessible: string }
+> = {
+  days: { visible: 'days', accessible: 'days' },
+  hours: { visible: 'hours', accessible: 'hours' },
+  minutes: { visible: 'min', accessible: 'minutes' },
+  seconds: { visible: 'sec', accessible: 'seconds' },
+};
+---
+
+<div
+  class:list={['countdown', `countdown--${tone}`, className]}
+  data-countdown
+  data-countdown-target={LAUNCH.instant}
+>
+  <p class="countdown__launch">
+    <span>Coming </span>
+    <time datetime={LAUNCH.instant}>{LAUNCH.label}</time>
+  </p>
+
+  <div
+    class="countdown__values"
+    aria-label={`Time remaining until ${LAUNCH.label}`}
+  >
+    {
+      COUNTDOWN_UNITS.map((unit) => (
+        <div class="countdown__unit">
+          <span class="countdown__value" data-countdown-value={unit}>
+            {formatCountdownValue(initialParts[unit])}
+          </span>
+          <span class="countdown__label">
+            <span aria-hidden="true">{labels[unit].visible}</span>
+            <span class="visually-hidden">{labels[unit].accessible}</span>
+          </span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  import {
+    COUNTDOWN_UNITS,
+    formatCountdownValue,
+    startCountdown,
+  } from '../lib/countdown';
+
+  const countdowns = document.querySelectorAll<HTMLElement>('[data-countdown]');
+
+  countdowns.forEach((countdown) => {
+    if (countdown.dataset.countdownReady === 'true') {
+      return;
+    }
+
+    const target = countdown.dataset.countdownTarget;
+
+    if (!target) {
+      return;
+    }
+
+    countdown.dataset.countdownReady = 'true';
+
+    startCountdown(target, (parts) => {
+      COUNTDOWN_UNITS.forEach((unit) => {
+        const value = countdown.querySelector<HTMLElement>(
+          `[data-countdown-value="${unit}"]`,
+        );
+
+        if (value) {
+          value.textContent = formatCountdownValue(parts[unit]);
+        }
+      });
+    });
+  });
+</script>
+
+<style>
+  .countdown {
+    --countdown-overline-color: var(--color-neutral-800);
+    --countdown-card-color: var(--color-blue-100);
+    --countdown-value-color: var(--color-blue-500);
+    --countdown-label-color: var(--color-neutral-800);
+
+    width: min(100%, 28rem);
+    font-weight: 700;
+  }
+
+  .countdown--dark {
+    --countdown-overline-color: var(--color-neutral-0);
+    --countdown-card-color: var(--color-neutral-800);
+    --countdown-value-color: var(--color-neutral-0);
+    --countdown-label-color: var(--color-neutral-0);
+  }
+
+  .countdown__launch {
+    margin: 0 0 var(--space-250);
+    color: var(--countdown-overline-color);
+    font-size: var(--font-label-size);
+    line-height: var(--line-height-label);
+    letter-spacing: var(--letter-spacing-overline);
+    text-transform: uppercase;
+  }
+
+  .countdown__launch time {
+    color: var(--color-blue-500);
+  }
+
+  .countdown__values {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--space-200);
+    width: 100%;
+  }
+
+  .countdown__unit {
+    display: flex;
+    min-width: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-050);
+    padding: var(--space-200) var(--space-150);
+    border-radius: var(--radius-12);
+    background: var(--countdown-card-color);
+    text-align: center;
+  }
+
+  .countdown__value {
+    width: 100%;
+    color: var(--countdown-value-color);
+    font-size: var(--font-display-medium-size);
+    line-height: var(--line-height-display);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .countdown__label {
+    width: 100%;
+    color: var(--countdown-label-color);
+    font-size: var(--font-label-size);
+    line-height: var(--line-height-label);
+    opacity: 0.5;
+  }
+
+  @media (min-width: 28rem) {
+    .countdown__value {
+      font-size: var(--font-display-large-size);
+    }
+  }
+</style>
