@@ -344,13 +344,18 @@
       "id": "ART-TASKS-INDEX",
       "type": "TASKS-INDEX",
       "path": "TASKS-INDEX.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-28T01:23:54.609Z",
-      "statusEvidence": "Stage 9 review pass 1 and pass 2 completed: phase sequencing, plan coverage, dependency/parallelization rules, cross-cutting concerns, source integrity, risks, and canonical task/trace references are complete and consistent."
+      "statusChangedAt": "2026-08-28T01:28:01.059Z",
+      "statusEvidence": "Human approval received in ChatGPT for Stage 9 task decomposition on 2026-08-27; the user explicitly instructed not to start the next stage.",
+      "statusBy": "Fernando Falcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "afb915f260f75746c05f0d29c1afb64fd94e49ec66e55e709ed25f2aa8299ba6"
+      }
     },
     {
       "id": "ART-TASK-P01-T01",
