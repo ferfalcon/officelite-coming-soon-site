@@ -1845,17 +1845,17 @@
           "required": true,
           "status": "Passed",
           "expected": "Astro diagnostics, static build, and Playwright persistence coverage pass for valid five-value IndexedDB writes, storage failure/retry, status feedback, focus retention, compact reflow, and network-inert submission.",
-          "actual": "GitHub Actions Frontend Validation run #27 (33192853433) passed pnpm check with 0 errors, pnpm build, and all 47 Playwright tests on repaired implementation output commit 98a51c25744370e2ac722d113e0e3f8227853fa0. Coverage includes exact five-value IndexedDB persistence, approved plan values, deterministic first-open failure, visible/programmatic failure feedback, retained values, ordinary retry, compact reflow, focus retention, no success field clearing, and no submission network requests.",
+          "actual": "GitHub Actions Frontend Validation run #28 (33193194190) passed pnpm check with 0 errors, pnpm build, and all 47 Playwright tests on clean frontend-only implementation output commit 9f1245533900fa8b4646bc23ab387b1c4110f635. Coverage includes exact five-value IndexedDB persistence, approved plan values, deterministic first-open failure, visible/programmatic failure feedback, retained values, ordinary retry, compact reflow, focus retention, no success field clearing, no submission network requests, and robust closure if a blocked database open later succeeds.",
           "command": "pnpm check && pnpm build && pnpm test:e2e",
-          "executedAt": "2026-08-28T17:03:50Z",
+          "executedAt": "2026-08-28T17:08:08Z",
           "evidence": [
-            "GitHub Actions Frontend Validation run #27 (33192853433) passed pnpm check with 0 errors, pnpm build, and all 47 Playwright tests on repaired implementation output commit 98a51c25744370e2ac722d113e0e3f8227853fa0. Coverage includes exact five-value IndexedDB persistence, approved plan values, deterministic first-open failure, visible/programmatic failure feedback, retained values, ordinary retry, compact reflow, focus retention, no success field clearing, and no submission network requests."
+            "GitHub Actions Frontend Validation run #28 (33193194190) passed pnpm check with 0 errors, pnpm build, and all 47 Playwright tests on clean frontend-only implementation output commit 9f1245533900fa8b4646bc23ab387b1c4110f635. Coverage includes exact five-value IndexedDB persistence, approved plan values, deterministic first-open failure, visible/programmatic failure feedback, retained values, ordinary retry, compact reflow, focus retention, no success field clearing, no submission network requests, and robust closure if a blocked database open later succeeds."
           ],
           "references": [
             "PLAN-006"
           ],
           "subject": {
-            "commit": "98a51c25744370e2ac722d113e0e3f8227853fa0"
+            "commit": "9f1245533900fa8b4646bc23ab387b1c4110f635"
           }
         },
         {
