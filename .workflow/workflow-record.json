@@ -1779,6 +1779,18 @@
           "references": [
             "PLAN-005"
           ]
+        },
+        {
+          "name": "Validation accessibility and design inspection",
+          "kind": "Manual",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Field errors are visibly and programmatically associated with their controls, invalid treatment uses text plus the approved red accent without hiding the established focus ring, focus is not forcibly moved, and validation messages reflow without clipping or horizontal overflow at compact widths.",
+          "evidence": [],
+          "reason": "Pending manual inspection against the final P03-T02 implementation output and current Figma field/select evidence.",
+          "references": [
+            "PLAN-005"
+          ]
         }
       ]
     },
