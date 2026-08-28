@@ -182,3 +182,27 @@ test('Home uses the large three-card pricing composition at 1440px', async ({
   expect(boxes[1]?.x).toBeGreaterThan((boxes[0]?.x ?? 0) + (boxes[0]?.width ?? 0));
   expect(boxes[2]?.x).toBeGreaterThan((boxes[1]?.x ?? 0) + (boxes[1]?.width ?? 0));
 });
+
+test('every Home conversion action exposes visible keyboard focus', async ({ page }) => {
+  await page.goto('/');
+
+  const focusSequence = [
+    page.getByRole('link', { name: 'Skip to content' }),
+    page.getByRole('link', { name: 'Officelite home' }),
+    page.getByRole('link', { name: 'Get Started' }).nth(0),
+    page.getByRole('link', { name: 'Try for Free' }).nth(0),
+    page.getByRole('link', { name: 'Try for Free' }).nth(1),
+    page.getByRole('link', { name: 'Try for Free' }).nth(2),
+    page.getByRole('link', { name: 'Get Started' }).nth(1),
+  ];
+
+  for (const link of focusSequence) {
+    await page.keyboard.press('Tab');
+    await expect(link).toBeFocused();
+
+    const focusShadow = await link.evaluate(
+      (element) => getComputedStyle(element).boxShadow,
+    );
+    expect(focusShadow).not.toBe('none');
+  }
+});
