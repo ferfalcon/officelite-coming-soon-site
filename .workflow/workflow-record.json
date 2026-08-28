@@ -380,11 +380,13 @@
       "id": "ART-TASK-P02-T01",
       "type": "TASK",
       "path": "Phase-02--Task-01.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-28T01:25:07.954Z",
+      "statusEvidence": "Stage 9 two-pass review completed against PLAN-003: Home scope, repository context, shared-contract dependencies, semantic/responsive/accessibility behavior, CTA/plan navigation validation, visual checks, risks, and DoD are complete and implementation-ready."
     },
     {
       "id": "ART-TASK-P03-T01",
