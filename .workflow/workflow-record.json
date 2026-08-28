@@ -134,6 +134,14 @@
       "method": "Stage 7 Figma configured-scope structural reverification",
       "evidence": "Live Stage 7 Figma metadata inspection on 2026-08-27 confirmed configured file L7MdLOW8usVUcPwV0cMQ1n and node 4:3 still contain the expected Design System — Components, Design System — Foundations, Home, and Sign Up sections, including the audited Home compact/medium/large compositions and shared component instances used by PLAN.md. No material design-source drift affecting the Stage 7 implementation plan was detected.",
       "checkedAt": "2026-08-27T23:58:00.617Z"
+    },
+    {
+      "id": "VER-013",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Stage 8 GitHub immutable-baseline and implementation-root reverification",
+      "evidence": "Compared pinned repository baseline commit 602d0e987bacea61f81f4d8f159510e220e97af4 with current Stage 8 head 3ed5c97c1dc65986431c3b6d4563d2f4cf0a34ff after PLAN.md/PLAN-REVIEW.md corrections and ART-PLAN reopen. GitHub comparison reports workflow/documentation changes only and no changed file under frontend/. The implementation-root baseline remains unchanged.",
+      "checkedAt": "2026-08-28T00:11:17.121Z"
     }
   ],
   "artifacts": [
