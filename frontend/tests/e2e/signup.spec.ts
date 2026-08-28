@@ -210,7 +210,6 @@ test('the initialized shell does not put personal values in the URL or network',
   expect(serialized).not.toContain('598');
 });
 
-
 test('valid submission persists exactly five values locally and announces success without moving focus', async ({
   page,
 }) => {

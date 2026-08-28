@@ -125,14 +125,11 @@ No check is considered passed until it executes successfully against the task ou
 
 ## 15. Implementation Discoveries
 
-- The task-start repository snapshot contains the completed P03-T02 validated-record boundary with only canonical workflow bookkeeping after that implementation output; no unexpected frontend drift was found.
-- The existing Sign Up form already contains the stable empty role=status region introduced by the preceding shell work, so this task extends that hook rather than adding a competing feedback container.
-- Reverification of Figma scope 4:3 confirms the supplied Sign Up forms and Default/Hover/Focus field/select components remain unchanged and do not add persistence success/failure visual states. The approved DESIGN/SPEC feedback contract therefore remains the authority for contextual status treatment.
-- IndexedDB uses one auto-increment object store whose stored value is exactly the approved five-field product record; the generated object-store key is storage infrastructure and no lifecycle metadata or policy was added.
+None at decomposition. Record source/documentation discrepancies during implementation and update the owning upstream artifact instead of silently working around them.
 
 ## 16. Deviations
 
-None. The implementation remains browser-local, network-free, preserves form values after both success and failure, and introduces no retention, deletion, encryption, consent, loading, disabled, or duplicate-submission product policy.
+None planned. Any deviation from approved scope, architecture, source baseline, or validation contract requires evidence and the appropriate workflow update.
 
 ## 18. Definition of Done
 
@@ -147,9 +144,4 @@ None. The implementation remains browser-local, network-free, preserves form val
 
 ## 19. Completion Report
 
-- Affected implementation files: frontend/src/lib/signup-store.ts, frontend/src/scripts/signup-controller.ts, frontend/src/components/SignUpForm.astro, frontend/src/data/product.ts, and frontend/tests/e2e/signup.spec.ts.
-- Behavior implemented: valid five-value records are persisted through an isolated IndexedDB adapter; success/failure is rendered in the stable form status region; failure preserves entered values and permits ordinary retry; no form values are cleared on success; the submission path performs no remote request.
-- Source verification: SRC-DS-001 remains structurally unchanged for the relevant Sign Up/form components, and SRC-REPO-012 resolves to the expected completed P03-T02 implementation lineage.
-- Validation ownership: automated/manual result state and output lineage are recorded canonically through the workflow controller after this implementation commit; they are not duplicated as mutable task state here.
-- Deviations: none.
-- Remaining risk: IndexedDB availability varies by browser/runtime and no formal support matrix or data-lifecycle policy is defined upstream; both remain documented non-blocking project risks.
+Complete during Stage 10 with affected files, input/output snapshots, behavior implemented, validation evidence, deviations, remaining risks, documentation updates, and next unblocked task.
