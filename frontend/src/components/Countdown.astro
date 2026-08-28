@@ -42,10 +42,7 @@ const labels: Record<
     <time datetime={LAUNCH.instant}>{LAUNCH.label}</time>
   </p>
 
-  <div
-    class="countdown__values"
-    aria-label={`Time remaining until ${LAUNCH.label}`}
-  >
+  <div class="countdown__values">
     {
       COUNTDOWN_UNITS.map((unit) => (
         <div class="countdown__unit">
