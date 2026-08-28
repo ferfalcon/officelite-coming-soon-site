@@ -150,6 +150,14 @@
       "method": "Stage 8 Figma configured-scope structural reverification",
       "evidence": "Live Stage 8 Figma metadata inspection on 2026-08-27 confirmed configured file L7MdLOW8usVUcPwV0cMQ1n and node 4:3 (🤖 Workflow) still contain Design System — Components 2141:935, Design System — Foundations 2141:938, the audited Home and Sign Up responsive compositions, and shared Brand/Logo, button, text-field, native-plan-select visual states, illustration, and decorative families used by the corrected PLAN.md. No material design-source drift affecting Stage 8 plan review was detected.",
       "checkedAt": "2026-08-28T00:11:44.463Z"
+    },
+    {
+      "id": "VER-015",
+      "snapshot": "SRC-REPO-001",
+      "result": "Unchanged",
+      "method": "Stage 9 GitHub immutable-baseline and implementation-root comparison",
+      "evidence": "Compared SRC-REPO-001 commit 602d0e987bacea61f81f4d8f159510e220e97af4 with current Stage 9 head f88a57ca2237cb12db450f45664fc74fafb1c624. GitHub reports no changed file under frontend/; all current differences are workflow/documentation/task-decomposition artifacts, so the implementation-root baseline remains unchanged.",
+      "checkedAt": "2026-08-28T01:32:31.836Z"
     }
   ],
   "artifacts": [
