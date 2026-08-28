@@ -130,7 +130,11 @@ test('the Sign Up logo returns to Home with native keyboard activation', async (
   await expect(logo).toBeFocused();
 
   await page.keyboard.press('Enter');
-  await expect(page).toHaveURL(/\/$/);
+  await expect(page).toHaveURL('http://127.0.0.1:4321/');
+
+  await page.goto('/sign-up/');
+  await page.getByRole('link', { name: 'Officelite home' }).click();
+  await expect(page).toHaveURL('http://127.0.0.1:4321/');
 });
 
 test('keyboard order follows the logical Sign Up form order with visible focus', async ({
@@ -157,27 +161,31 @@ test('keyboard order follows the logical Sign Up form order with visible focus',
     await page.keyboard.press('Tab');
     await expect(control).toBeFocused();
 
-    if (index === 2) {
-      const nameFocusShadow = await control.evaluate(
-        (element) => getComputedStyle(element).boxShadow,
-      );
-      expect(nameFocusShadow).not.toBe('none');
-    }
+    const focusShadow =
+      index === 4
+        ? await page
+            .locator('.form-field__select-shell')
+            .evaluate((element) => getComputedStyle(element).boxShadow)
+        : await control.evaluate((element) => getComputedStyle(element).boxShadow);
 
-    if (index === 4) {
-      const planFocusShadow = await page
-        .locator('.form-field__select-shell')
-        .evaluate((element) => getComputedStyle(element).boxShadow);
-      expect(planFocusShadow).not.toBe('none');
-    }
-
-    if (index === 7) {
-      const buttonFocusShadow = await control.evaluate(
-        (element) => getComputedStyle(element).boxShadow,
-      );
-      expect(buttonFocusShadow).not.toBe('none');
-    }
+    expect(focusShadow).not.toBe('none');
   }
+});
+
+test('native plan selection changes through keyboard input and keeps URL state stable', async ({
+  page,
+}) => {
+  await page.goto('/sign-up/?plan=basic');
+
+  const plan = page.getByLabel('Plan');
+  await plan.focus();
+  await expect(plan).toBeFocused();
+
+  await page.keyboard.press('ArrowDown');
+
+  await expect(plan).toHaveValue('Pro');
+  await expect(page.locator('[data-plan-name]')).toHaveText('Pro Pack');
+  await expect(page).toHaveURL(/\/sign-up\/\?plan=basic$/);
 });
 
 test('the initialized shell does not put personal values in the URL or network', async ({
@@ -208,6 +216,63 @@ test('the initialized shell does not put personal values in the URL or network',
   expect(serialized).not.toContain('ada%40example.test');
   expect(serialized).not.toContain('Analytical');
   expect(serialized).not.toContain('598');
+});
+
+test('invalid submissions never attempt IndexedDB persistence and a corrected valid submission does', async ({
+  page,
+}) => {
+  await page.addInitScript(() => {
+    const originalOpen = IDBFactory.prototype.open;
+    const testWindow = window as typeof window & {
+      __officeliteIndexedDbOpenCount?: number;
+    };
+
+    testWindow.__officeliteIndexedDbOpenCount = 0;
+
+    IDBFactory.prototype.open = function (name: string, version?: number) {
+      testWindow.__officeliteIndexedDbOpenCount =
+        (testWindow.__officeliteIndexedDbOpenCount ?? 0) + 1;
+
+      return version === undefined
+        ? originalOpen.call(this, name)
+        : originalOpen.call(this, name, version);
+    };
+  });
+
+  await page.goto('/sign-up/?plan=pro');
+
+  const getOpenCount = () =>
+    page.evaluate(
+      () =>
+        (window as typeof window & {
+          __officeliteIndexedDbOpenCount?: number;
+        }).__officeliteIndexedDbOpenCount ?? -1,
+    );
+
+  const submit = page.getByRole('button', { name: 'Get on the list' });
+
+  await submit.click();
+  expect(await getOpenCount()).toBe(0);
+
+  await page.getByLabel('Name').fill('Ada Lovelace');
+  await page.getByLabel('Email Address').fill('not-an-email');
+  await page.getByLabel('Phone Number').fill('+598 99 123 456');
+  await page.getByLabel('Company').fill('Analytical Engines');
+
+  await submit.click();
+  expect(await getOpenCount()).toBe(0);
+  await expect(page.getByLabel('Email Address')).toHaveAttribute(
+    'aria-invalid',
+    'true',
+  );
+
+  await page.getByLabel('Email Address').fill('ada@example.test');
+  await submit.click();
+
+  await expect(page.getByRole('status')).toHaveText(
+    'Thanks. Your sign-up was saved on this device.',
+  );
+  expect(await getOpenCount()).toBeGreaterThan(0);
 });
 
 test('valid submission persists exactly five values locally and announces success without moving focus', async ({
@@ -464,6 +529,24 @@ test('required validation exposes contextual and programmatically associated fee
     await expect(page.locator(`#${field.errorId}`)).toHaveText(field.message);
     await expect(page.locator(`#${field.errorId}`)).toBeVisible();
   }
+
+  const name = page.getByLabel('Name');
+  for (let step = 0; step < 5; step += 1) {
+    await page.keyboard.press('Shift+Tab');
+  }
+
+  await expect(name).toBeFocused();
+  const nameState = await name.evaluate((element) => {
+    const styles = getComputedStyle(element);
+
+    return {
+      borderBottomColor: styles.borderBottomColor,
+      boxShadow: styles.boxShadow,
+    };
+  });
+
+  expect(nameState.borderBottomColor).toBe('rgb(240, 91, 91)');
+  expect(nameState.boxShadow).not.toBe('none');
 });
 
 test('a missing required field recovers as soon as it becomes valid', async ({

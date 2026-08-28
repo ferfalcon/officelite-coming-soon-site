@@ -49,6 +49,113 @@ test('Home exposes the approved hierarchy and CTA destinations', async ({ page }
   );
 });
 
+test('every Home conversion action navigates to Sign Up with the expected plan context', async ({
+  page,
+}) => {
+  const entries = [
+    {
+      name: 'hero generic CTA',
+      locate: () => page.getByRole('link', { name: 'Get Started' }).nth(0),
+      expectedUrl: /\/sign-up\/$/,
+      expectedPlan: 'Basic',
+    },
+    {
+      name: 'Basic pricing CTA',
+      locate: () =>
+        page
+          .locator('[data-plan-key="Basic"]')
+          .getByRole('link', { name: 'Try for Free' }),
+      expectedUrl: /\/sign-up\/\?plan=basic$/,
+      expectedPlan: 'Basic',
+    },
+    {
+      name: 'Pro pricing CTA',
+      locate: () =>
+        page
+          .locator('[data-plan-key="Pro"]')
+          .getByRole('link', { name: 'Try for Free' }),
+      expectedUrl: /\/sign-up\/\?plan=pro$/,
+      expectedPlan: 'Pro',
+    },
+    {
+      name: 'Ultimate pricing CTA',
+      locate: () =>
+        page
+          .locator('[data-plan-key="Ultimate"]')
+          .getByRole('link', { name: 'Try for Free' }),
+      expectedUrl: /\/sign-up\/\?plan=ultimate$/,
+      expectedPlan: 'Ultimate',
+    },
+    {
+      name: 'countdown generic CTA',
+      locate: () => page.getByRole('link', { name: 'Get Started' }).nth(1),
+      expectedUrl: /\/sign-up\/$/,
+      expectedPlan: 'Basic',
+    },
+  ] as const;
+
+  for (const entry of entries) {
+    await page.goto('/');
+    await entry.locate().click();
+
+    await expect(page, entry.name).toHaveURL(entry.expectedUrl);
+    await expect(page.getByLabel('Plan'), entry.name).toHaveValue(entry.expectedPlan);
+  }
+});
+
+test('countdown ticks from one shared target without network requests or repetitive live-region semantics', async ({
+  page,
+}) => {
+  await page.goto('/');
+
+  const runtimeRequests: string[] = [];
+  page.on('request', (request) => {
+    if (request.resourceType() === 'fetch' || request.resourceType() === 'xhr') {
+      runtimeRequests.push(request.url());
+    }
+  });
+
+  const homeCountdown = page.locator('[data-countdown]').first();
+  const homeValues = homeCountdown.locator('[data-countdown-value]');
+  const homeTarget = await homeCountdown.getAttribute('data-countdown-target');
+  const homeDateTime = await homeCountdown.locator('time').getAttribute('datetime');
+  const homeTargetLabel = (await homeCountdown.locator('time').textContent())?.trim();
+  const initialValues = (await homeValues.allTextContents()).join(':');
+
+  expect(homeTarget).toBeTruthy();
+  expect(homeDateTime).toBe(homeTarget);
+  expect(await homeCountdown.getAttribute('aria-live')).toBeNull();
+  expect(await homeCountdown.getAttribute('role')).toBeNull();
+  expect(
+    await homeValues.evaluateAll((values) =>
+      values.map((value) => ({
+        ariaLive: value.getAttribute('aria-live'),
+        role: value.getAttribute('role'),
+      })),
+    ),
+  ).toEqual([
+    { ariaLive: null, role: null },
+    { ariaLive: null, role: null },
+    { ariaLive: null, role: null },
+    { ariaLive: null, role: null },
+  ]);
+
+  await expect
+    .poll(
+      async () => (await homeValues.allTextContents()).join(':'),
+      { timeout: 3_000 },
+    )
+    .not.toBe(initialValues);
+
+  await page.goto('/sign-up/');
+
+  const signupCountdown = page.locator('[data-countdown]').first();
+  await expect(signupCountdown).toHaveAttribute('data-countdown-target', homeTarget!);
+  await expect(signupCountdown.locator('time')).toHaveAttribute('datetime', homeDateTime!);
+  await expect(signupCountdown.locator('time')).toHaveText(homeTargetLabel!);
+  expect(runtimeRequests).toEqual([]);
+});
+
 test('keyboard focus reaches and activates the Home primary action', async ({ page }) => {
   await page.goto('/');
 
