@@ -1286,7 +1286,7 @@
     },
     {
       "id": "P03-T03",
-      "status": "Not started",
+      "status": "Ready",
       "baseline": "SRC-REPO-001",
       "prerequisites": [
         "P03-T02"
