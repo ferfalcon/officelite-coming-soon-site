@@ -2066,19 +2066,20 @@
           "name": "Vercel deployment and static-runtime verification",
           "kind": "Manual",
           "required": true,
-          "status": "Passed",
-          "expected": "Production is READY, builds from frontend/ with compatible Node/pnpm through Astro static mode into frontend/dist/, serves / and /sign-up/, and introduces no server adapter or server runtime.",
-          "actual": "Vercel project prj_OMY7sPOGx5D2RN6EgjxFVDmCql6R reports Node 24.x. Production deployment dpl_GXZ8h4W2kxa7LjNbvEqnSMmg5bDj is READY with configured aliases. Build logs run pnpm 10.28.0 and astro build from /vercel/path0/frontend, report output and mode static, emit /vercel/path0/frontend/dist/, and generate /index.html plus /sign-up/index.html. Authenticated Vercel fetch returns HTTP 200 for both routes. astro.config.mjs has no adapter and runtime-log grouping returns no server/edge entries.",
+          "status": "Failed",
+          "expected": "Production is READY for the exact P04-T03 output commit, builds from frontend/ with compatible Node/pnpm through Astro static mode into frontend/dist/, serves / and /sign-up/, and introduces no server adapter or server runtime.",
+          "actual": "The exact P04-T03 output commit 1fd4016c2ef8492620344c01c8a4e4afe534f00d did not receive a production deployment. GitHub combined status reports Vercel=failure with target https://vercel.com/fer-falcons-team?upgradeToPro=build-rate-limit. Earlier equivalent production artifacts remain READY and verified, but the task contract requires deployment validation against the exact output commit, so this check cannot pass yet.",
           "evidence": [
-            "Vercel project/deployment inspection for dpl_GXZ8h4W2kxa7LjNbvEqnSMmg5bDj; 2026-08-28 build logs; authenticated production fetch of / and /sign-up/; GitHub frontend/package.json and frontend/astro.config.mjs; GitHub lineage comparison shows no runtime frontend changes after the validated implementation."
+            "GitHub combined commit status for 1fd4016c2ef8492620344c01c8a4e4afe534f00d: context Vercel, state failure, target_url https://vercel.com/fer-falcons-team?upgradeToPro=build-rate-limit."
           ],
+          "reason": "Vercel Hobby build-rate limit prevented deployment of the exact task-output commit.",
           "references": [
             "PLAN-009"
           ],
           "subject": {
-            "commit": "23bdc549b50b1e047eebe8112dfc292027206962"
+            "commit": "1fd4016c2ef8492620344c01c8a4e4afe534f00d"
           },
-          "executedAt": "2026-08-28T18:48:27.518Z"
+          "executedAt": "2026-08-28T18:53:15.708Z"
         },
         {
           "name": "Production critical-flow equivalence",
