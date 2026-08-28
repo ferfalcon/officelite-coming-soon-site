@@ -142,6 +142,14 @@
       "method": "Stage 8 GitHub immutable-baseline and implementation-root reverification",
       "evidence": "Compared pinned repository baseline commit 602d0e987bacea61f81f4d8f159510e220e97af4 with current Stage 8 head 3ed5c97c1dc65986431c3b6d4563d2f4cf0a34ff after PLAN.md/PLAN-REVIEW.md corrections and ART-PLAN reopen. GitHub comparison reports workflow/documentation changes only and no changed file under frontend/. The implementation-root baseline remains unchanged.",
       "checkedAt": "2026-08-28T00:11:17.121Z"
+    },
+    {
+      "id": "VER-014",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Stage 8 Figma configured-scope structural reverification",
+      "evidence": "Live Stage 8 Figma metadata inspection on 2026-08-27 confirmed configured file L7MdLOW8usVUcPwV0cMQ1n and node 4:3 (🤖 Workflow) still contain Design System — Components 2141:935, Design System — Foundations 2141:938, the audited Home and Sign Up responsive compositions, and shared Brand/Logo, button, text-field, native-plan-select visual states, illustration, and decorative families used by the corrected PLAN.md. No material design-source drift affecting Stage 8 plan review was detected.",
+      "checkedAt": "2026-08-28T00:11:44.463Z"
     }
   ],
   "artifacts": [
