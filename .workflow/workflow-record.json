@@ -346,6 +346,14 @@
       "method": "Stage 9 Figma configured-scope structural reverification",
       "evidence": "Live Stage 9 Figma metadata inspection confirmed file L7MdLOW8usVUcPwV0cMQ1n node 4:3 still contains the expected Workflow canvas, Design System — Components 2141:935, Design System — Foundations 2141:938, responsive Home and Sign Up compositions, and the audited shared logo/button/text-field/native-plan-select/illustration/decorative families used by the task set. No material design-source drift affecting Stage 9 decomposition was detected.",
       "checkedAt": "2026-08-28T01:33:00.565Z"
+    },
+    {
+      "id": "VER-017",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Stage 11 Figma configured-scope structural reverification",
+      "evidence": "Fresh Figma metadata inspection on 2026-08-28 confirmed file L7MdLOW8usVUcPwV0cMQ1n node 4:3 remains the expected Workflow scope, including Design System — Components 2141:935, Design System — Foundations 2141:938, the responsive Home and Sign Up compositions, and the approved shared Default/Hover/Focus component-state families. No unexpected material design-source change affecting final implementation review was detected.",
+      "checkedAt": "2026-08-28T19:48:28.170Z"
     }
   ],
   "artifacts": [
