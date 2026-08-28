@@ -1766,7 +1766,21 @@
       ],
       "output": null,
       "blocker": null,
-      "validation": []
+      "validation": [
+        {
+          "name": "Sign Up validation automation",
+          "kind": "Test",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Astro diagnostics, static build, and Playwright validation coverage pass for required fields, single-address email validity, correction/retry, keyboard-only submission, field relationships, and compact error reflow.",
+          "command": "pnpm check && pnpm build && pnpm test:e2e",
+          "evidence": [],
+          "reason": "Pending validation on the final P03-T02 implementation output.",
+          "references": [
+            "PLAN-005"
+          ]
+        }
+      ]
     },
     {
       "id": "P03-T03",
