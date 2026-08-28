@@ -404,11 +404,13 @@
       "id": "ART-TASK-P03-T02",
       "type": "TASK",
       "path": "Phase-03--Task-02.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-28T01:25:57.408Z",
+      "statusEvidence": "Stage 9 two-pass review completed against PLAN-005: required/email validity, field-specific feedback, accessible relationships, recovery behavior, storage-boundary blocking, validation checks, risks, and DoD are complete and implementation-ready."
     },
     {
       "id": "ART-TASK-P03-T03",
