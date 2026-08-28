@@ -9,6 +9,50 @@ async function expectNoHorizontalOverflow(page: Page) {
   expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth);
 }
 
+const SIGN_UP_DATABASE_NAME = 'officelite-signups';
+const SIGN_UP_STORE_NAME = 'signups';
+
+async function readStoredSignUps(page: Page) {
+  return page.evaluate(
+    ({ databaseName, storeName }) =>
+      new Promise<Record<string, string>[]>((resolve, reject) => {
+        const request = indexedDB.open(databaseName, 1);
+
+        request.onupgradeneeded = () => {
+          const database = request.result;
+
+          if (!database.objectStoreNames.contains(storeName)) {
+            database.createObjectStore(storeName, { autoIncrement: true });
+          }
+        };
+
+        request.onerror = () => {
+          reject(request.error);
+        };
+
+        request.onsuccess = () => {
+          const database = request.result;
+          const transaction = database.transaction(storeName, 'readonly');
+          const records = transaction.objectStore(storeName).getAll();
+
+          records.onerror = () => {
+            database.close();
+            reject(records.error);
+          };
+
+          records.onsuccess = () => {
+            database.close();
+            resolve(records.result as Record<string, string>[]);
+          };
+        };
+      }),
+    {
+      databaseName: SIGN_UP_DATABASE_NAME,
+      storeName: SIGN_UP_STORE_NAME,
+    },
+  );
+}
+
 test('Sign Up exposes the approved content hierarchy and accessible form shell', async ({
   page,
 }) => {
@@ -154,6 +198,9 @@ test('the initialized shell does not put personal values in the URL or network',
   page.on('request', (request) => requests.push(request.url()));
 
   await page.getByRole('button', { name: 'Get on the list' }).click();
+  await expect(page.getByRole('status')).toHaveText(
+    'Thanks. Your sign-up was saved on this device.',
+  );
 
   await expect(page).toHaveURL(/\/sign-up\/\?plan=pro$/);
   const serialized = [page.url(), ...requests].join('\n');
@@ -161,6 +208,126 @@ test('the initialized shell does not put personal values in the URL or network',
   expect(serialized).not.toContain('ada%40example.test');
   expect(serialized).not.toContain('Analytical');
   expect(serialized).not.toContain('598');
+});
+
+
+test('valid submission persists exactly five values locally and announces success without moving focus', async ({
+  page,
+}) => {
+  await page.goto('/sign-up/?plan=pro');
+
+  await page.getByLabel('Name').fill('Ada Lovelace');
+  await page.getByLabel('Email Address').fill('ada@example.test');
+  await page.getByLabel('Phone Number').fill('+598 99 123 456');
+  await page.getByLabel('Company').fill('Analytical Engines');
+
+  const requests: string[] = [];
+  page.on('request', (request) => requests.push(request.url()));
+
+  const submit = page.getByRole('button', { name: 'Get on the list' });
+  await submit.click();
+
+  const status = page.getByRole('status');
+  await expect(status).toHaveText('Thanks. Your sign-up was saved on this device.');
+  await expect(status).toHaveAttribute('data-status', 'success');
+  await expect(status).toHaveAttribute('aria-live', 'polite');
+  await expect(status).toHaveAttribute('aria-atomic', 'true');
+  await expect(submit).toBeFocused();
+
+  await expect(page.getByLabel('Name')).toHaveValue('Ada Lovelace');
+  await expect(page.getByLabel('Email Address')).toHaveValue('ada@example.test');
+  await expect(page.getByLabel('Plan')).toHaveValue('Pro');
+  await expect(page.getByLabel('Phone Number')).toHaveValue('+598 99 123 456');
+  await expect(page.getByLabel('Company')).toHaveValue('Analytical Engines');
+
+  await expect
+    .poll(() => readStoredSignUps(page))
+    .toEqual([
+      {
+        name: 'Ada Lovelace',
+        email: 'ada@example.test',
+        plan: 'Pro',
+        phone: '+598 99 123 456',
+        company: 'Analytical Engines',
+      },
+    ]);
+
+  expect(requests).toEqual([]);
+  await expect(page).toHaveURL(/\/sign-up\/\?plan=pro$/);
+});
+
+test('storage failure is announced, retains values, reflows, and succeeds on ordinary retry', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.addInitScript(() => {
+    const originalOpen = IDBFactory.prototype.open;
+    let failNextOpen = true;
+
+    IDBFactory.prototype.open = function (name: string, version?: number) {
+      if (failNextOpen) {
+        failNextOpen = false;
+        throw new DOMException('Forced IndexedDB test failure.', 'UnknownError');
+      }
+
+      return version === undefined
+        ? originalOpen.call(this, name)
+        : originalOpen.call(this, name, version);
+    };
+  });
+
+  await page.goto('/sign-up/?plan=ultimate');
+
+  await page.getByLabel('Name').fill('Grace Hopper');
+  await page.getByLabel('Email Address').fill('grace@example.test');
+  await page.getByLabel('Phone Number').fill('+1 555 0100');
+  await page.getByLabel('Company').fill('Compiler Co');
+
+  const requests: string[] = [];
+  page.on('request', (request) => requests.push(request.url()));
+
+  const submit = page.getByRole('button', { name: 'Get on the list' });
+  await submit.click();
+
+  const status = page.getByRole('status');
+  await expect(status).toHaveText(
+    'We couldn’t save your sign-up on this device. Please try again.',
+  );
+  await expect(status).toHaveAttribute('data-status', 'failure');
+  await expect(submit).toBeFocused();
+
+  await expect(page.getByLabel('Name')).toHaveValue('Grace Hopper');
+  await expect(page.getByLabel('Email Address')).toHaveValue('grace@example.test');
+  await expect(page.getByLabel('Plan')).toHaveValue('Ultimate');
+  await expect(page.getByLabel('Phone Number')).toHaveValue('+1 555 0100');
+  await expect(page.getByLabel('Company')).toHaveValue('Compiler Co');
+  await expectNoHorizontalOverflow(page);
+
+  const failureColor = await status.evaluate(
+    (element) => getComputedStyle(element).color,
+  );
+  expect(failureColor).toBe('rgb(240, 91, 91)');
+
+  await submit.click();
+
+  await expect(status).toHaveText('Thanks. Your sign-up was saved on this device.');
+  await expect(status).toHaveAttribute('data-status', 'success');
+  await expect(submit).toBeFocused();
+
+  await expect
+    .poll(() => readStoredSignUps(page))
+    .toEqual([
+      {
+        name: 'Grace Hopper',
+        email: 'grace@example.test',
+        plan: 'Ultimate',
+        phone: '+1 555 0100',
+        company: 'Compiler Co',
+      },
+    ]);
+
+  expect(requests).toEqual([]);
+  await expectNoHorizontalOverflow(page);
 });
 
 test('the static shell cannot submit personal values before the controller initializes', async ({

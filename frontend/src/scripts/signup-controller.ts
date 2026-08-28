@@ -1,16 +1,18 @@
-import { DEFAULT_PLAN_KEY, PLANS, type PlanKey } from '../data/product';
+import {
+  DEFAULT_PLAN_KEY,
+  PLANS,
+  SIGN_UP_STATUS_COPY,
+  type PlanKey,
+} from '../data/product';
 import { constrainPlanKey, parsePlanFromUrl } from '../lib/plan-context';
+import {
+  persistSignUpRecord,
+  type SignUpRecord,
+  type SignUpStoreResult,
+} from '../lib/signup-store';
 
 type SignUpFieldName = 'name' | 'email' | 'plan' | 'phone' | 'company';
 type SignUpControl = HTMLInputElement | HTMLSelectElement;
-
-interface SignUpRecordInput {
-  name: string;
-  email: string;
-  plan: PlanKey;
-  phone: string;
-  company: string;
-}
 
 const FIELD_NAMES: readonly SignUpFieldName[] = [
   'name',
@@ -122,7 +124,7 @@ function validateField(
 
 function readValidSignUpRecord(
   form: HTMLFormElement,
-): SignUpRecordInput | null {
+): SignUpRecord | null {
   const controls = new Map<SignUpFieldName, SignUpControl>();
   let isValid = true;
 
@@ -159,9 +161,32 @@ function readValidSignUpRecord(
   };
 }
 
-function acceptValidatedRecord(_record: SignUpRecordInput) {
-  // P03-T03 owns IndexedDB persistence. The validated five-value record
-  // deliberately stops at this boundary until that task attaches storage.
+function clearPersistenceStatus(form: HTMLFormElement) {
+  const status = form.querySelector<HTMLElement>('[data-signup-status]');
+
+  if (!status) {
+    return;
+  }
+
+  status.textContent = '';
+  delete status.dataset.status;
+}
+
+function showPersistenceStatus(
+  form: HTMLFormElement,
+  result: SignUpStoreResult,
+) {
+  const status = form.querySelector<HTMLElement>('[data-signup-status]');
+
+  if (!status) {
+    return;
+  }
+
+  status.dataset.status = result.status;
+  status.textContent =
+    result.status === 'success'
+      ? SIGN_UP_STATUS_COPY.success
+      : SIGN_UP_STATUS_COPY.failure;
 }
 
 function initializeSignUpForm(form: HTMLFormElement) {
@@ -181,8 +206,9 @@ function initializeSignUpForm(form: HTMLFormElement) {
   // The static shell cannot submit. Once initialized, this controller owns
   // validation and keeps the current release network-inert.
   form.noValidate = true;
-  form.addEventListener('submit', (event) => {
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    clearPersistenceStatus(form);
 
     const record = readValidSignUpRecord(form);
 
@@ -190,7 +216,8 @@ function initializeSignUpForm(form: HTMLFormElement) {
       return;
     }
 
-    acceptValidatedRecord(record);
+    const result = await persistSignUpRecord(record);
+    showPersistenceStatus(form, result);
   });
 
   for (const fieldName of FIELD_NAMES) {

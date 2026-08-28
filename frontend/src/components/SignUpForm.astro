@@ -145,6 +145,7 @@ const defaultPlan = PLANS.find((plan) => plan.key === DEFAULT_PLAN_KEY) ?? PLANS
     id="signup-status"
     role="status"
     aria-live="polite"
+    aria-atomic="true"
     data-signup-status
   ></p>
 </form>
@@ -325,6 +326,15 @@ const defaultPlan = PLANS.find((plan) => plan.key === DEFAULT_PLAN_KEY) ?? PLANS
     color: var(--color-neutral-800);
     font-size: var(--font-body-medium-size);
     line-height: var(--line-height-body-medium);
+    overflow-wrap: anywhere;
+  }
+
+  .signup-form__status[data-status='success'] {
+    color: var(--color-blue-500);
+  }
+
+  .signup-form__status[data-status='failure'] {
+    color: var(--color-red-400);
   }
 
   @media (min-width: 28rem) {

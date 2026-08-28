@@ -60,3 +60,8 @@ export const LAUNCH = {
   label: '31 Dec 2026',
   instant: '2026-12-31T00:00:00Z',
 } as const;
+
+export const SIGN_UP_STATUS_COPY = {
+  success: 'Thanks. Your sign-up was saved on this device.',
+  failure: 'We couldn’t save your sign-up on this device. Please try again.',
+} as const;
