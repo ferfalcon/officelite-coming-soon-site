@@ -412,13 +412,18 @@
       "id": "ART-TASK-P03-T01",
       "type": "TASK",
       "path": "Phase-03--Task-01.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-28T01:25:33.014Z",
-      "statusEvidence": "Stage 9 two-pass review completed against PLAN-004: Sign Up route/native form scope, plan initialization, network-inert progressive enhancement, accessibility/responsive requirements, validation evidence, risks, and DoD are complete and implementation-ready."
+      "statusChangedAt": "2026-08-28T01:29:41.768Z",
+      "statusEvidence": "Human approval received in ChatGPT for Stage 9 on 2026-08-27 after task-set review; user instructed not to start Stage 10.",
+      "statusBy": "Fernando Falcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "c35f7df6974418a5d590c13f132ecadfb70e9ce40529873d52bfd58efa3b915a"
+      }
     },
     {
       "id": "ART-TASK-P03-T02",
