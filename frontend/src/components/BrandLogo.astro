@@ -1,0 +1,31 @@
+---
+import logo from '../assets/shared/logo.svg';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className = '' } = Astro.props;
+---
+
+<a
+  class:list={['brand-logo', className]}
+  href="/"
+  aria-label="Officelite home"
+>
+  <img src={logo.src} width="155" height="30" alt="" />
+</a>
+
+<style>
+  .brand-logo {
+    display: inline-flex;
+    width: fit-content;
+    border-radius: var(--radius-4);
+    text-decoration: none;
+  }
+
+  .brand-logo img {
+    width: 9.6875rem;
+    height: 1.875rem;
+  }
+</style>
