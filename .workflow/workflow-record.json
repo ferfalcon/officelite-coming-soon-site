@@ -1913,7 +1913,27 @@
       ],
       "output": null,
       "blocker": null,
-      "validation": []
+      "validation": [
+        {
+          "name": "Responsive hardening automation",
+          "kind": "Test",
+          "required": true,
+          "status": "Passed",
+          "expected": "Astro diagnostics, static build, and the full Playwright suite pass with cross-route viewport, content-fit transition, Figma shell-height, long-content reflow, keyboard/focus, persistence, validation, and network-safety coverage.",
+          "actual": "GitHub Actions Frontend Validation run #30 (33194885390) passed pnpm check, pnpm build, and all 52 Playwright tests on implementation commit 664471cf2b8cd01ffd090b197e4a8dcd349c848a. The suite includes 320–1800px cross-route smoke coverage, explicit 703/704 and 1189/1190 transition checks, exact 489px Sign Up shell checks at 375/768/1321, long marketing/error/status reflow, and all existing interaction/accessibility/persistence regressions.",
+          "command": "pnpm check && pnpm build && pnpm test:e2e",
+          "executedAt": "2026-08-28T17:30:15Z",
+          "evidence": [
+            "GitHub Actions Frontend Validation run #30 (33194885390) passed pnpm check, pnpm build, and all 52 Playwright tests on implementation commit 664471cf2b8cd01ffd090b197e4a8dcd349c848a."
+          ],
+          "references": [
+            "PLAN-007"
+          ],
+          "subject": {
+            "commit": "664471cf2b8cd01ffd090b197e4a8dcd349c848a"
+          }
+        }
+      ]
     },
     {
       "id": "P04-T02",
