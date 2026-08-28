@@ -1857,6 +1857,24 @@
           "subject": {
             "commit": "98a51c25744370e2ac722d113e0e3f8227853fa0"
           }
+        },
+        {
+          "name": "Persistence accessibility and deployment inspection",
+          "kind": "Manual",
+          "required": true,
+          "status": "Passed",
+          "expected": "Success and failure feedback remain visible and programmatically announced inside the form, do not steal focus, use approved visual language, reflow at compact widths, preserve values after failure, and the exact implementation output is production-deployable without remote sign-up transmission.",
+          "actual": "Vercel deployment dpl_FomUrivQjvbhqPTbvHzrcxKdqKx6 is READY in production for repaired implementation output commit 98a51c25744370e2ac722d113e0e3f8227853fa0, and the public /sign-up/?plan=pro route returns HTTP 200 with a stable role=status, aria-live=polite, aria-atomic=true region. The shipped controller updates that existing region without calling focus(), preserves all field values on failure and success, and maps success to the approved blue token and failure to the approved red token. Playwright run #27 additionally verifies submit focus retention and 320px failure-message reflow/no horizontal overflow. Current Figma Sign Up and Form Text Field/Plan Select evidence remains unchanged and contains no competing persistence-status state.",
+          "executedAt": "2026-08-28T17:05:10Z",
+          "evidence": [
+            "Vercel deployment dpl_FomUrivQjvbhqPTbvHzrcxKdqKx6 is READY in production for repaired implementation output commit 98a51c25744370e2ac722d113e0e3f8227853fa0, and the public /sign-up/?plan=pro route returns HTTP 200 with a stable role=status, aria-live=polite, aria-atomic=true region. The shipped controller updates that existing region without calling focus(), preserves all field values on failure and success, and maps success to the approved blue token and failure to the approved red token. Playwright run #27 additionally verifies submit focus retention and 320px failure-message reflow/no horizontal overflow. Current Figma Sign Up and Form Text Field/Plan Select evidence remains unchanged and contains no competing persistence-status state."
+          ],
+          "references": [
+            "PLAN-006"
+          ],
+          "subject": {
+            "commit": "84a7dd09559894b5703a42413fed546a8f8ee537"
+          }
         }
       ]
     },
