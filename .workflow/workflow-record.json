@@ -368,11 +368,13 @@
       "id": "ART-TASK-P01-T02",
       "type": "TASK",
       "path": "Phase-01--Task-02.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-28T01:24:42.108Z",
+      "statusEvidence": "Stage 9 two-pass review completed against PLAN-002: shared plan/launch contracts, query safety, countdown behavior, source verification, accessibility/responsive requirements, validation, acceptance criteria, risks, and downstream interfaces are complete and consistent."
     },
     {
       "id": "ART-TASK-P02-T01",
