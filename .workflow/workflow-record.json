@@ -158,6 +158,14 @@
       "method": "Stage 9 GitHub immutable-baseline and implementation-root comparison",
       "evidence": "Compared SRC-REPO-001 commit 602d0e987bacea61f81f4d8f159510e220e97af4 with current Stage 9 head f88a57ca2237cb12db450f45664fc74fafb1c624. GitHub reports no changed file under frontend/; all current differences are workflow/documentation/task-decomposition artifacts, so the implementation-root baseline remains unchanged.",
       "checkedAt": "2026-08-28T01:32:31.836Z"
+    },
+    {
+      "id": "VER-016",
+      "snapshot": "SRC-DS-001",
+      "result": "Unchanged",
+      "method": "Stage 9 Figma configured-scope structural reverification",
+      "evidence": "Live Stage 9 Figma metadata inspection confirmed file L7MdLOW8usVUcPwV0cMQ1n node 4:3 still contains the expected Workflow canvas, Design System — Components 2141:935, Design System — Foundations 2141:938, responsive Home and Sign Up compositions, and the audited shared logo/button/text-field/native-plan-select/illustration/decorative families used by the task set. No material design-source drift affecting Stage 9 decomposition was detected.",
+      "checkedAt": "2026-08-28T01:33:00.565Z"
     }
   ],
   "artifacts": [
