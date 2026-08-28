@@ -358,6 +358,13 @@
       "status": "Active",
       "required": true,
       "references": []
+    },
+    {
+      "id": "PLAN-002",
+      "owner": "ART-PLAN",
+      "status": "Active",
+      "required": true,
+      "references": []
     }
   ],
   "gates": [
