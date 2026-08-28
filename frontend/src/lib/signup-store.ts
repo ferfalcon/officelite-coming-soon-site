@@ -19,6 +19,7 @@ const STORE_NAME = 'signups';
 function openSignUpDatabase(): Promise<IDBDatabase> {
   return new Promise((resolve, reject) => {
     const request = indexedDB.open(DATABASE_NAME, DATABASE_VERSION);
+    let rejectedWhileBlocked = false;
 
     request.onupgradeneeded = () => {
       const database = request.result;
@@ -29,6 +30,11 @@ function openSignUpDatabase(): Promise<IDBDatabase> {
     };
 
     request.onsuccess = () => {
+      if (rejectedWhileBlocked) {
+        request.result.close();
+        return;
+      }
+
       resolve(request.result);
     };
 
@@ -37,6 +43,7 @@ function openSignUpDatabase(): Promise<IDBDatabase> {
     };
 
     request.onblocked = () => {
+      rejectedWhileBlocked = true;
       reject(new Error('The sign-up database is blocked.'));
     };
   });
