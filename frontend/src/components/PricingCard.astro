@@ -1,0 +1,228 @@
+---
+import type { ProductPlan } from '../data/product';
+
+interface Props {
+  plan: ProductPlan;
+  href: string;
+}
+
+const { plan, href } = Astro.props;
+const featured = plan.key === 'Pro';
+const titleId = `plan-${plan.urlKey}-title`;
+---
+
+<article
+  class:list={['pricing-card', { 'pricing-card--featured': featured }]}
+  data-plan-key={plan.key}
+  aria-labelledby={titleId}
+>
+  <div class="pricing-card__details">
+    <h2 id={titleId}>{plan.key}</h2>
+
+    <div class="pricing-card__price">
+      <p class="pricing-card__amount">{plan.price}</p>
+      <p class="pricing-card__billing">{plan.billingSummary}</p>
+    </div>
+  </div>
+
+  <ul class="pricing-card__features">
+    {plan.features.map((feature) => <li>{feature}</li>)}
+  </ul>
+
+  <a class="pricing-card__cta" href={href}>{plan.ctaLabel}</a>
+</article>
+
+<style>
+  .pricing-card {
+    display: grid;
+    grid-template-areas:
+      'details'
+      'features'
+      'cta';
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-600);
+    min-height: 30.0625rem;
+    padding: var(--space-500) var(--space-300);
+    border-radius: 0.8125rem;
+    background: var(--color-neutral-0);
+    box-shadow: 0 50px 50px -25px rgb(75 92 154 / 25%);
+    text-align: center;
+  }
+
+  .pricing-card--featured {
+    min-height: 31.0625rem;
+    padding: var(--space-600) var(--space-400);
+    background-color: var(--color-blue-500);
+    background-image: url('../assets/home/bg-pattern-pricing.svg');
+    background-repeat: no-repeat;
+    background-position: center -23.75rem;
+    color: var(--color-neutral-0);
+  }
+
+  .pricing-card__details {
+    grid-area: details;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-200);
+    min-width: 0;
+  }
+
+  .pricing-card h2,
+  .pricing-card__amount,
+  .pricing-card__billing {
+    margin: 0;
+  }
+
+  .pricing-card h2 {
+    color: var(--color-neutral-800);
+    font-size: var(--font-heading-small-size);
+    line-height: var(--line-height-heading);
+  }
+
+  .pricing-card--featured h2 {
+    color: var(--color-neutral-0);
+  }
+
+  .pricing-card__price {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-100);
+  }
+
+  .pricing-card__amount {
+    color: var(--color-neutral-900);
+    font-size: var(--font-display-large-size);
+    font-weight: 700;
+    line-height: var(--line-height-display);
+  }
+
+  .pricing-card__billing {
+    color: var(--color-neutral-800);
+    font-size: var(--font-body-medium-size);
+    line-height: var(--line-height-body-medium);
+  }
+
+  .pricing-card--featured .pricing-card__amount,
+  .pricing-card--featured .pricing-card__billing {
+    color: var(--color-neutral-0);
+  }
+
+  .pricing-card__features {
+    grid-area: features;
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-200);
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    color: var(--color-neutral-500);
+    font-size: var(--font-body-medium-size);
+    line-height: var(--line-height-body-medium);
+    list-style: none;
+  }
+
+  .pricing-card--featured .pricing-card__features {
+    color: var(--color-neutral-0);
+    opacity: 0.75;
+  }
+
+  .pricing-card__cta {
+    grid-area: cta;
+    display: inline-flex;
+    min-height: 3.125rem;
+    align-items: center;
+    justify-content: center;
+    justify-self: center;
+    padding: var(--space-150) var(--space-500);
+    border-radius: var(--radius-full);
+    background: var(--color-blue-100);
+    color: var(--color-blue-500);
+    font-size: var(--font-label-size);
+    font-weight: 700;
+    line-height: var(--line-height-label);
+    text-decoration: none;
+  }
+
+  .pricing-card__cta:hover {
+    background: var(--color-blue-500);
+    color: var(--color-neutral-0);
+  }
+
+  .pricing-card--featured .pricing-card__cta {
+    background: var(--color-neutral-0);
+    color: var(--color-blue-500);
+  }
+
+  .pricing-card--featured .pricing-card__cta:hover {
+    background: var(--color-blue-100);
+    color: var(--color-blue-500);
+  }
+
+  .pricing-card--featured .pricing-card__cta:focus-visible {
+    box-shadow:
+      0 0 0 3px var(--color-blue-500),
+      0 0 0 5px var(--color-neutral-0);
+  }
+
+  @media (min-width: 48rem) {
+    .pricing-card,
+    .pricing-card--featured {
+      grid-template-areas:
+        'details features'
+        'cta features';
+      grid-template-columns: minmax(0, 1fr) 15rem;
+      grid-template-rows: auto 3.125rem;
+      column-gap: 0;
+      row-gap: var(--space-300);
+      min-height: 19.6875rem;
+      padding: var(--space-600);
+      text-align: start;
+    }
+
+    .pricing-card--featured {
+      background-position: -20.8125rem -17.625rem;
+    }
+
+    .pricing-card__features {
+      align-self: center;
+      text-align: start;
+    }
+
+    .pricing-card__cta {
+      justify-self: start;
+    }
+  }
+
+  @media (min-width: 74.375rem) {
+    .pricing-card,
+    .pricing-card--featured {
+      grid-template-areas:
+        'details'
+        'features'
+        'cta';
+      grid-template-columns: minmax(0, 1fr);
+      grid-template-rows: auto auto 3.125rem;
+      gap: var(--space-500);
+      min-height: 30.5625rem;
+      padding: var(--space-500) var(--space-250);
+      text-align: center;
+    }
+
+    .pricing-card--featured {
+      background-position: center -23.75rem;
+    }
+
+    .pricing-card__details {
+      gap: var(--space-500);
+    }
+
+    .pricing-card__features {
+      align-self: auto;
+      text-align: center;
+    }
+
+    .pricing-card__cta {
+      justify-self: center;
+    }
+  }
+</style>
