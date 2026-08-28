@@ -30,6 +30,8 @@ function openSignUpDatabase(): Promise<IDBDatabase> {
     };
 
     request.onsuccess = () => {
+      // A blocked open can still succeed later; close that late connection
+      // because this persistence attempt has already reported failure.
       if (rejectedWhileBlocked) {
         request.result.close();
         return;
