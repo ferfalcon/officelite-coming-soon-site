@@ -480,13 +480,18 @@
       "id": "ART-TASK-P04-T02",
       "type": "TASK",
       "path": "Phase-04--Task-02.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-28T01:27:10.048Z",
-      "statusEvidence": "Stage 9 two-pass review completed against PLAN-008: AC-001–AC-110 coverage, diagnostics/build/E2E blocking validation, keyboard/accessibility/responsive/manual checks, network-safety regression protection, risks, and DoD are complete and implementation-ready."
+      "statusChangedAt": "2026-08-28T01:31:28.064Z",
+      "statusEvidence": "Human approval received in ChatGPT for Stage 9 on 2026-08-27 after task-set review; user instructed not to start Stage 10.",
+      "statusBy": "Fernando Falcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "f5ef92d1413e0fa84eda239303fc4c0cdeeab5ab64933f21d803d1e220782cc4"
+      }
     },
     {
       "id": "ART-TASK-P04-T03",
