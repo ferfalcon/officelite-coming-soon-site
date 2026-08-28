@@ -463,13 +463,18 @@
       "id": "ART-TASK-P04-T01",
       "type": "TASK",
       "path": "Phase-04--Task-01.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-28T01:26:47.513Z",
-      "statusEvidence": "Stage 9 two-pass review completed against PLAN-007: cross-route responsive/content/visual hardening, content-fit breakpoint process, accessibility/state regression protection, Figma comparison, risks, and DoD are complete and implementation-ready."
+      "statusChangedAt": "2026-08-28T01:31:00.103Z",
+      "statusEvidence": "Human approval received in ChatGPT for Stage 9 on 2026-08-27 after task-set review; user instructed not to start Stage 10.",
+      "statusBy": "Fernando Falcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "0f33944432ed9fdc64b3718a535dc141ceb0056ce9cfc224b4be19a753f184e2"
+      }
     },
     {
       "id": "ART-TASK-P04-T02",
