@@ -1838,7 +1838,27 @@
       ],
       "output": null,
       "blocker": null,
-      "validation": []
+      "validation": [
+        {
+          "name": "Sign Up persistence automation",
+          "kind": "Test",
+          "required": true,
+          "status": "Passed",
+          "expected": "Astro diagnostics, static build, and Playwright persistence coverage pass for valid five-value IndexedDB writes, storage failure/retry, status feedback, focus retention, compact reflow, and network-inert submission.",
+          "actual": "GitHub Actions Frontend Validation run #27 (33192853433) passed pnpm check with 0 errors, pnpm build, and all 47 Playwright tests on repaired implementation output commit 98a51c25744370e2ac722d113e0e3f8227853fa0. Coverage includes exact five-value IndexedDB persistence, approved plan values, deterministic first-open failure, visible/programmatic failure feedback, retained values, ordinary retry, compact reflow, focus retention, no success field clearing, and no submission network requests.",
+          "command": "pnpm check && pnpm build && pnpm test:e2e",
+          "executedAt": "2026-08-28T17:03:50Z",
+          "evidence": [
+            "GitHub Actions Frontend Validation run #27 (33192853433) passed pnpm check with 0 errors, pnpm build, and all 47 Playwright tests on repaired implementation output commit 98a51c25744370e2ac722d113e0e3f8227853fa0. Coverage includes exact five-value IndexedDB persistence, approved plan values, deterministic first-open failure, visible/programmatic failure feedback, retained values, ordinary retry, compact reflow, focus retention, no success field clearing, and no submission network requests."
+          ],
+          "references": [
+            "PLAN-006"
+          ],
+          "subject": {
+            "commit": "98a51c25744370e2ac722d113e0e3f8227853fa0"
+          }
+        }
+      ]
     },
     {
       "id": "P04-T01",
