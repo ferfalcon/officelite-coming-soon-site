@@ -395,13 +395,18 @@
       "id": "ART-TASK-P02-T01",
       "type": "TASK",
       "path": "Phase-02--Task-01.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-28T01:25:07.954Z",
-      "statusEvidence": "Stage 9 two-pass review completed against PLAN-003: Home scope, repository context, shared-contract dependencies, semantic/responsive/accessibility behavior, CTA/plan navigation validation, visual checks, risks, and DoD are complete and implementation-ready."
+      "statusChangedAt": "2026-08-28T01:29:13.489Z",
+      "statusEvidence": "Human approval received in ChatGPT for Stage 9 on 2026-08-27 after task-set review; user instructed not to start Stage 10.",
+      "statusBy": "Fernando Falcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "7e41c0a11bb28c131dc540dc0e4d8ff022636003c4c4f8482167e200353d972e"
+      }
     },
     {
       "id": "ART-TASK-P03-T01",
