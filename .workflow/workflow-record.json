@@ -2006,6 +2006,24 @@
           "subject": {
             "commit": "6775a7391d51464ea9b07b59e3bd7ad1ee0ca841"
           }
+        },
+        {
+          "name": "Acceptance coverage and manual accessibility/design review",
+          "kind": "Manual",
+          "required": true,
+          "status": "Passed",
+          "expected": "AC-001 through AC-110 have an explicit automated or justified manual validation path; keyboard/focus, validation relationships, persistence status, countdown announcement behavior, responsive/Figma fidelity, and unsupported-scope leakage are reviewed without inventing browser-support or product policy.",
+          "actual": "The acceptance map was audited end-to-end against REQUIREMENTS.md and SPEC.md. Current source inspection confirms stable labels and aria-describedby error relationships for all five Sign Up controls; a persistent role=status region with aria-live=polite and aria-atomic=true for success/failure; no forced focus movement in the controller; a non-live countdown subtree whose one-second value updates are not marked as status/live announcements; and focus styling that remains visually distinct alongside invalid red treatment. The six current Figma reference frames rendered successfully at their approved natural sizes: Home 375 (2141:1813), Home 768 (2141:1724), Home 1440 (2141:1599), Sign Up 375 (2141:1940), Sign Up 768 (2141:1896), and Sign Up 1321 (2141:1680). GitHub comparison from the passed P04-T01 output 9f9759d81fbf23ca3e935b00ba1df191002637d2 to P04-T02 implementation commit 6775a7391d51464ea9b07b59e3bd7ad1ee0ca841 shows no runtime UI source changes, only canonical workflow state plus navigation/signup E2E files, so the previously passed visual-fidelity result remains applicable while the current Figma source is unchanged.",
+          "evidence": [
+            "Manual source/semantic inspection of frontend/src/components/SignUpForm.astro, frontend/src/scripts/signup-controller.ts, frontend/src/components/Countdown.astro, and frontend/src/styles/global.css; live Figma node 4:3 metadata plus successful screenshots of Home 2141:1813/2141:1724/2141:1599 and Sign Up 2141:1940/2141:1896/2141:1680; GitHub compare 9f9759d81fbf23ca3e935b00ba1df191002637d2...6775a7391d51464ea9b07b59e3bd7ad1ee0ca841 confirms tests/workflow-only delta."
+          ],
+          "references": [
+            "PLAN-008"
+          ],
+          "subject": {
+            "commit": "83d38c538d7e1974ebbd26c8ca5365b834883973"
+          },
+          "executedAt": "2026-08-28T18:09:11.721Z"
         }
       ]
     },
