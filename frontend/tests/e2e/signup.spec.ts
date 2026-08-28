@@ -57,6 +57,22 @@ for (const entry of [
   });
 }
 
+test('native plan selection updates the closed presentation without rewriting the URL', async ({
+  page,
+}) => {
+  await page.goto('/sign-up/?plan=basic');
+
+  const plan = page.getByLabel('Plan');
+  await expect(plan).toHaveValue('Basic');
+
+  await plan.selectOption('Ultimate');
+
+  await expect(plan).toHaveValue('Ultimate');
+  await expect(page.locator('[data-plan-name]')).toHaveText('Ultimate Pack');
+  await expect(page.locator('[data-plan-price]')).toHaveText('$19.99');
+  await expect(page).toHaveURL(/\/sign-up\/\?plan=basic$/);
+});
+
 test('the Sign Up logo returns to Home with native keyboard activation', async ({
   page,
 }) => {
