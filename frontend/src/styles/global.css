@@ -1,0 +1,141 @@
+:root {
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #fafafa;
+  --color-neutral-500: #747b95;
+  --color-neutral-800: #333950;
+  --color-neutral-900: #25293a;
+  --color-blue-100: #e4eaff;
+  --color-blue-300: #829cff;
+  --color-blue-500: #5175ff;
+  --color-red-400: #f05b5b;
+
+  --space-0: 0;
+  --space-025: 0.125rem;
+  --space-050: 0.25rem;
+  --space-075: 0.375rem;
+  --space-100: 0.5rem;
+  --space-125: 0.625rem;
+  --space-150: 0.75rem;
+  --space-200: 1rem;
+  --space-250: 1.25rem;
+  --space-300: 1.5rem;
+  --space-400: 2rem;
+  --space-500: 2.5rem;
+  --space-600: 3rem;
+  --space-800: 4rem;
+  --space-1000: 5rem;
+  --space-1200: 6rem;
+  --space-1400: 7rem;
+  --space-1600: 8rem;
+  --space-1800: 8.75rem;
+
+  --radius-0: 0;
+  --radius-4: 0.25rem;
+  --radius-6: 0.375rem;
+  --radius-8: 0.5rem;
+  --radius-10: 0.625rem;
+  --radius-12: 0.75rem;
+  --radius-16: 1rem;
+  --radius-20: 1.25rem;
+  --radius-24: 1.5rem;
+  --radius-full: 999px;
+
+  --font-family-sans: 'Kumbh Sans', Arial, sans-serif;
+  --font-display-large-size: 3.5rem;
+  --font-display-medium-size: 2.5rem;
+  --font-heading-small-size: 1.25rem;
+  --font-body-large-size: 1.125rem;
+  --font-body-medium-size: 1rem;
+  --font-label-size: 1rem;
+  --line-height-display: 1.2;
+  --line-height-heading: 1.4;
+  --line-height-body-large: 1.5;
+  --line-height-body-medium: 1.6;
+  --line-height-label: 1.6;
+  --letter-spacing-overline: 0.3125rem;
+
+  --content-max: 69.375rem;
+  --page-gutter: clamp(1.5rem, 6vw, 5rem);
+  --focus-separation: 0 0 0 3px var(--color-neutral-0);
+  --focus-ring: 0 0 0 5px var(--color-blue-500);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: var(--font-family-sans);
+  color: var(--color-neutral-800);
+  background: var(--color-neutral-50);
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+
+img,
+picture,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+:where(a, button, input, select, textarea, [tabindex]):focus-visible {
+  outline: 0;
+  box-shadow: var(--focus-separation), var(--focus-ring);
+}
+
+.container {
+  width: min(calc(100% - (var(--page-gutter) * 2)), var(--content-max));
+  margin-inline: auto;
+}
+
+.site-shell {
+  min-height: 100vh;
+  min-height: 100svh;
+  width: 100%;
+}
+
+.skip-link {
+  position: fixed;
+  inset-block-start: var(--space-200);
+  inset-inline-start: var(--space-200);
+  z-index: 1000;
+  padding: var(--space-125) var(--space-200);
+  border-radius: var(--radius-6);
+  background: var(--color-neutral-0);
+  color: var(--color-neutral-900);
+  font-weight: 700;
+  line-height: var(--line-height-label);
+  text-decoration: none;
+  transform: translateY(calc(-100% - var(--space-400)));
+}
+
+.skip-link:focus-visible {
+  transform: translateY(0);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+  border: 0;
+}
