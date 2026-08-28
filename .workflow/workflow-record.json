@@ -327,11 +327,13 @@
       "id": "ART-PLAN-REVIEW",
       "type": "PLAN-REVIEW",
       "path": "PLAN-REVIEW.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-28T00:12:40.541Z",
+      "statusEvidence": "Stage 8 PLAN-REVIEW.md records the exact active baseline, repository/Figma/Vercel/tooling evidence, two explicit adversarial review passes, full requirement/specification coverage, five findings with corrections applied to PLAN.md or the review artifact, dependency and cross-cutting checks, residual non-blocking risks, and final readiness status Ready with documented risks. Corrected PLAN.md is canonically Reviewed and both active snapshots are verified Unchanged."
     }
   ],
   "traceItems": [],
