@@ -161,7 +161,7 @@ const defaultPlan = PLANS.find((plan) => plan.key === DEFAULT_PLAN_KEY) ?? PLANS
     display: flex;
     width: 100%;
     flex-direction: column;
-    gap: var(--space-500);
+    gap: 0;
     padding: var(--space-500) var(--space-250);
     border-radius: var(--radius-12);
     background: var(--color-neutral-0);
@@ -296,6 +296,7 @@ const defaultPlan = PLANS.find((plan) => plan.key === DEFAULT_PLAN_KEY) ?? PLANS
 
   .signup-form__submit {
     display: inline-flex;
+    margin-block-start: var(--space-500);
     width: 100%;
     min-height: 3.125rem;
     align-items: center;
@@ -322,11 +323,15 @@ const defaultPlan = PLANS.find((plan) => plan.key === DEFAULT_PLAN_KEY) ?? PLANS
   }
 
   .signup-form__status {
-    margin: 0;
+    margin: var(--space-500) 0 0;
     color: var(--color-neutral-800);
     font-size: var(--font-body-medium-size);
     line-height: var(--line-height-body-medium);
     overflow-wrap: anywhere;
+  }
+
+  .signup-form__status:empty {
+    margin-block-start: 0;
   }
 
   .signup-form__status[data-status='success'] {
