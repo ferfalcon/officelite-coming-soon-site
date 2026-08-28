@@ -1564,6 +1564,18 @@
           "references": [
             "PLAN-002"
           ]
+        },
+        {
+          "name": "Shared contract manual inspection",
+          "kind": "Manual",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Plan URLs and parsing stay within Basic/Pro/Ultimate with Basic fallback; one shared launch target is network-inert; countdown order is Days, Hours, Minutes, Seconds and per-second changes are not live-announced.",
+          "evidence": [],
+          "reason": "Pending inspection against the final implementation output.",
+          "references": [
+            "PLAN-002"
+          ]
         }
       ]
     },
