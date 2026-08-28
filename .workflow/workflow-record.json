@@ -400,6 +400,13 @@
       "status": "Active",
       "required": true,
       "references": []
+    },
+    {
+      "id": "PLAN-008",
+      "owner": "ART-PLAN",
+      "status": "Active",
+      "required": true,
+      "references": []
     }
   ],
   "gates": [
