@@ -7,12 +7,12 @@
   },
   "state": {
     "stage": 10,
-    "status": "Ready",
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
     ],
-    "currentTask": null,
+    "currentTask": "P01-T02",
     "latestOutput": "SRC-REPO-003",
     "latestValidationRuntime": null,
     "architectureDecision": {
@@ -56,6 +56,16 @@
       "commit": "1bfa26665daa87f1e2fee1e54cfda83a4ac7d3fa",
       "parent": "SRC-REPO-002",
       "task": "P01-T01"
+    },
+    {
+      "id": "SRC-REPO-004",
+      "role": "Task start",
+      "pinStrength": "Immutable",
+      "status": "Active",
+      "reference": "https://github.com/ferfalcon/officelite-coming-soon-site",
+      "commit": "93ef39e43abfc42e2e308b7163390191a66c1173",
+      "parent": "SRC-REPO-003",
+      "task": "P01-T02"
     }
   ],
   "verifications": [
@@ -1531,8 +1541,8 @@
     },
     {
       "id": "P01-T02",
-      "status": "Ready",
-      "baseline": "SRC-REPO-001",
+      "status": "In progress",
+      "baseline": "SRC-REPO-004",
       "prerequisites": [
         "P01-T01"
       ],
