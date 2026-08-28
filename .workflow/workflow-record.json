@@ -446,13 +446,18 @@
       "id": "ART-TASK-P03-T03",
       "type": "TASK",
       "path": "Phase-03--Task-03.md",
-      "status": "Reviewed",
+      "status": "Approved",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-28T01:26:19.538Z",
-      "statusEvidence": "Stage 9 two-pass review completed against PLAN-006: IndexedDB boundary, five-value record, success/failure handling, value preservation, accessible status, retry/network-safety validation, privacy constraints, risks, and DoD are complete and implementation-ready."
+      "statusChangedAt": "2026-08-28T01:30:32.374Z",
+      "statusEvidence": "Human approval received in ChatGPT for Stage 9 on 2026-08-27 after task-set review; user instructed not to start Stage 10.",
+      "statusBy": "Fernando Falcon",
+      "approvedRevision": {
+        "algorithm": "sha256",
+        "digest": "947b511379697139c769299c7b59a597cd2f6cd41a2ae72418f983922a8061f6"
+      }
     },
     {
       "id": "ART-TASK-P04-T01",
