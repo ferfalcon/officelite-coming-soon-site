@@ -1695,7 +1695,20 @@
       ],
       "output": null,
       "blocker": null,
-      "validation": []
+      "validation": [
+        {
+          "name": "Frontend validation",
+          "kind": "Test",
+          "required": true,
+          "status": "Not executed",
+          "expected": "pnpm check, pnpm build, and the Playwright suite pass for the exact implementation output",
+          "evidence": [],
+          "reason": "Pending final implementation-output commit after validation contract declaration",
+          "references": [
+            "PLAN-004"
+          ]
+        }
+      ]
     },
     {
       "id": "P03-T02",
