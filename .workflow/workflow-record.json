@@ -6,8 +6,8 @@
     "executionMode": "Gated"
   },
   "state": {
-    "stage": 8,
-    "status": "Ready",
+    "stage": 9,
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -339,6 +339,16 @@
         "algorithm": "sha256",
         "digest": "e8b9c4853af7f1a0921be0881477e218883e971f57c5c066389e2549017f5fc9"
       }
+    },
+    {
+      "id": "ART-TASKS-INDEX",
+      "type": "TASKS-INDEX",
+      "path": "TASKS-INDEX.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [],
