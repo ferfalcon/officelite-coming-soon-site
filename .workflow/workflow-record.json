@@ -429,6 +429,16 @@
         "SRC-DS-001",
         "SRC-REPO-001"
       ]
+    },
+    {
+      "id": "ART-TASK-P04-T03",
+      "type": "TASK",
+      "path": "Phase-04--Task-03.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [
@@ -1298,6 +1308,20 @@
       ],
       "references": [
         "PLAN-008"
+      ],
+      "output": null,
+      "blocker": null,
+      "validation": []
+    },
+    {
+      "id": "P04-T03",
+      "status": "Not started",
+      "baseline": "SRC-REPO-001",
+      "prerequisites": [
+        "P04-T02"
+      ],
+      "references": [
+        "PLAN-009"
       ],
       "output": null,
       "blocker": null,
