@@ -416,11 +416,13 @@
       "id": "ART-TASK-P03-T03",
       "type": "TASK",
       "path": "Phase-03--Task-03.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
-      ]
+      ],
+      "statusChangedAt": "2026-08-28T01:26:19.538Z",
+      "statusEvidence": "Stage 9 two-pass review completed against PLAN-006: IndexedDB boundary, five-value record, success/failure handling, value preservation, accessible status, retry/network-safety validation, privacy constraints, risks, and DoD are complete and implementation-ready."
     },
     {
       "id": "ART-TASK-P04-T01",
