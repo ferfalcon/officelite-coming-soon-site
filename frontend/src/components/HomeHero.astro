@@ -1,0 +1,186 @@
+---
+import headerPattern from '../assets/home/bg-pattern-header.svg';
+import illustration from '../assets/home/illustration-charts.svg';
+import { buildSignUpUrl } from '../lib/plan-context';
+
+const signUpUrl = buildSignUpUrl();
+---
+
+<img
+  class="hero-decoration"
+  src={headerPattern.src}
+  width="1134"
+  height="1134"
+  alt=""
+  aria-hidden="true"
+/>
+
+<section class="hero container" aria-labelledby="home-heading">
+  <div class="hero__content">
+    <div class="hero__copy">
+      <h1 id="home-heading">A simple solution to complex tasks is coming soon</h1>
+      <p>
+        Say goodbye to inefficient juggling of multiple apps, teams, and projects.
+        Officelite is the new collaboration platform built with an intuitive
+        interface to improve productivity.
+      </p>
+    </div>
+
+    <a class="hero__cta" href={signUpUrl}>Get Started</a>
+  </div>
+
+  <div class="hero__illustration" aria-hidden="true">
+    <img
+      src={illustration.src}
+      width="475"
+      height="531"
+      alt=""
+    />
+  </div>
+</section>
+
+<style>
+  .hero-decoration {
+    position: absolute;
+    inset-block-start: -10.875rem;
+    inset-inline-start: 50%;
+    width: 28.75rem;
+    max-width: none;
+    height: 28.75rem;
+    pointer-events: none;
+    transform: translateX(-50%);
+  }
+
+  .hero {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero__content {
+    order: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-300);
+    text-align: center;
+  }
+
+  .hero__copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-300);
+    width: 100%;
+  }
+
+  .hero__copy h1,
+  .hero__copy p {
+    margin: 0;
+  }
+
+  .hero__copy h1 {
+    color: var(--color-neutral-900);
+    font-size: var(--font-display-medium-size);
+    line-height: var(--line-height-display);
+  }
+
+  .hero__copy p {
+    color: var(--color-neutral-500);
+    font-size: var(--font-body-medium-size);
+    line-height: 1.625;
+  }
+
+  .hero__cta {
+    display: inline-flex;
+    min-height: 3.125rem;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-150) var(--space-500);
+    border-radius: var(--radius-full);
+    background: var(--color-blue-500);
+    box-shadow: 0 25px 12.5px rgb(63 91 194 / 25%);
+    color: var(--color-neutral-0);
+    font-size: var(--font-label-size);
+    font-weight: 700;
+    line-height: var(--line-height-label);
+    text-align: center;
+    text-decoration: none;
+  }
+
+  .hero__cta:hover {
+    background: var(--color-blue-300);
+  }
+
+  .hero__illustration {
+    order: 1;
+    width: min(12.5rem, 70vw);
+    aspect-ratio: 475 / 531;
+    margin-inline: auto;
+    margin-block-end: var(--space-600);
+  }
+
+  .hero__illustration img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  @media (min-width: 48rem) {
+    .hero-decoration {
+      inset-block-start: -9.875rem;
+      inset-inline-start: calc(50% - 0.5rem);
+      width: 41.625rem;
+      height: 41.625rem;
+      transform: none;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+      align-items: center;
+      gap: clamp(3rem, 6vw, 5.9375rem);
+    }
+
+    .hero__content {
+      order: initial;
+      align-items: flex-start;
+      text-align: start;
+    }
+
+    .hero__illustration {
+      order: initial;
+      width: 100%;
+      max-width: 29.6875rem;
+      margin: 0;
+      justify-self: end;
+    }
+  }
+
+  @media (min-width: 74.375rem) {
+    .hero-decoration {
+      inset-block-start: -26.25rem;
+      inset-inline-start: calc(50% - 3.4375rem);
+      width: 70.875rem;
+      height: 70.875rem;
+    }
+
+    .hero {
+      grid-template-columns: 33.75rem 29.6875rem;
+      gap: 5.9375rem;
+    }
+
+    .hero__content {
+      gap: var(--space-400);
+    }
+
+    .hero__copy h1 {
+      font-size: var(--font-display-large-size);
+    }
+
+    .hero__copy p {
+      font-size: var(--font-body-large-size);
+      line-height: var(--line-height-body-large);
+    }
+  }
+</style>
