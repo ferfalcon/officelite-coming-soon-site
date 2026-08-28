@@ -1,0 +1,327 @@
+---
+import arrowIcon from '../assets/sign-up/icon-arrow-down.svg';
+import { DEFAULT_PLAN_KEY, PLANS } from '../data/product';
+
+const defaultPlan = PLANS.find((plan) => plan.key === DEFAULT_PLAN_KEY) ?? PLANS[0];
+---
+
+<form class="signup-form" data-signup-form>
+  <div class="signup-form__fields">
+    <div class="form-field" data-field="name">
+      <label class="visually-hidden" for="signup-name">Name</label>
+      <input
+        class="form-field__input"
+        id="signup-name"
+        name="name"
+        type="text"
+        autocomplete="name"
+        placeholder="Name"
+        aria-describedby="signup-name-error"
+        required
+      />
+      <p
+        class="form-field__error"
+        id="signup-name-error"
+        data-field-error="name"
+        hidden
+      ></p>
+    </div>
+
+    <div class="form-field" data-field="email">
+      <label class="visually-hidden" for="signup-email">Email Address</label>
+      <input
+        class="form-field__input"
+        id="signup-email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        placeholder="Email Address"
+        aria-describedby="signup-email-error"
+        required
+      />
+      <p
+        class="form-field__error"
+        id="signup-email-error"
+        data-field-error="email"
+        hidden
+      ></p>
+    </div>
+
+    <div class="form-field form-field--plan" data-field="plan">
+      <label class="visually-hidden" for="signup-plan">Plan</label>
+      <div class="form-field__select-shell">
+        <select
+          class="form-field__select"
+          id="signup-plan"
+          name="plan"
+          aria-describedby="signup-plan-error"
+          required
+          data-plan-select
+        >
+          {
+            PLANS.map((plan) => (
+              <option value={plan.key} selected={plan.key === DEFAULT_PLAN_KEY}>
+                {plan.key}
+              </option>
+            ))
+          }
+        </select>
+
+        <div class="form-field__select-visual" aria-hidden="true">
+          <span class="form-field__plan-name" data-plan-name>
+            {defaultPlan.key} Pack
+          </span>
+          <span class="form-field__plan-price" data-plan-price>
+            {defaultPlan.price}
+          </span>
+          <img
+            class="form-field__select-arrow"
+            src={arrowIcon.src}
+            width="12"
+            height="8"
+            alt=""
+          />
+        </div>
+      </div>
+      <p
+        class="form-field__error"
+        id="signup-plan-error"
+        data-field-error="plan"
+        hidden
+      ></p>
+    </div>
+
+    <div class="form-field" data-field="phone">
+      <label class="visually-hidden" for="signup-phone">Phone Number</label>
+      <input
+        class="form-field__input"
+        id="signup-phone"
+        name="phone"
+        type="tel"
+        autocomplete="tel"
+        placeholder="Phone Number"
+        aria-describedby="signup-phone-error"
+        required
+      />
+      <p
+        class="form-field__error"
+        id="signup-phone-error"
+        data-field-error="phone"
+        hidden
+      ></p>
+    </div>
+
+    <div class="form-field" data-field="company">
+      <label class="visually-hidden" for="signup-company">Company</label>
+      <input
+        class="form-field__input"
+        id="signup-company"
+        name="company"
+        type="text"
+        autocomplete="organization"
+        placeholder="Company"
+        aria-describedby="signup-company-error"
+        required
+      />
+      <p
+        class="form-field__error"
+        id="signup-company-error"
+        data-field-error="company"
+        hidden
+      ></p>
+    </div>
+  </div>
+
+  <button
+    class="signup-form__submit"
+    type="button"
+    data-submit-control
+  >
+    Get on the list
+  </button>
+
+  <p
+    class="signup-form__status"
+    id="signup-status"
+    role="status"
+    aria-live="polite"
+    data-signup-status
+  ></p>
+</form>
+
+<script>
+  import { initializeSignUpForms } from '../scripts/signup-controller';
+
+  initializeSignUpForms();
+</script>
+
+<style>
+  .signup-form {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: var(--space-500);
+    padding: var(--space-500) var(--space-250);
+    border-radius: var(--radius-12);
+    background: var(--color-neutral-0);
+    box-shadow: 0 50px 25px rgb(75 92 154 / 16%);
+  }
+
+  .signup-form__fields {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: var(--space-300);
+  }
+
+  .form-field {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .form-field__input {
+    display: block;
+    width: 100%;
+    height: 2.8125rem;
+    padding: 0 var(--space-200) var(--space-200);
+    border: 0;
+    border-bottom: 1px solid rgb(116 123 149 / 50%);
+    border-radius: 0;
+    background: transparent;
+    color: var(--color-neutral-800);
+    font-size: var(--font-body-medium-size);
+    line-height: 1.75rem;
+  }
+
+  .form-field__input::placeholder {
+    color: rgb(116 123 149 / 70%);
+    opacity: 1;
+  }
+
+  .form-field__input:hover {
+    border-bottom-color: var(--color-blue-500);
+  }
+
+  .form-field__input:focus-visible {
+    position: relative;
+    z-index: 1;
+    border-bottom-color: rgb(116 123 149 / 50%);
+    background: var(--color-neutral-0);
+  }
+
+  .form-field__select-shell {
+    position: relative;
+    width: 100%;
+    height: 2.6875rem;
+    border-bottom: 1px solid rgb(116 123 149 / 50%);
+    background: transparent;
+  }
+
+  .form-field__select-shell:hover {
+    border-bottom-color: var(--color-blue-500);
+  }
+
+  .form-field__select-shell:focus-within {
+    z-index: 1;
+    border-bottom-color: rgb(116 123 149 / 50%);
+    background: var(--color-neutral-0);
+    box-shadow: var(--focus-separation), var(--focus-ring);
+  }
+
+  .form-field__select {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    cursor: pointer;
+    opacity: 0;
+  }
+
+  .form-field__select-visual {
+    display: flex;
+    height: 100%;
+    align-items: flex-start;
+    gap: var(--space-125);
+    padding: 0 var(--space-200) var(--space-200);
+    pointer-events: none;
+  }
+
+  .form-field__plan-name,
+  .form-field__plan-price {
+    min-width: 0;
+    color: var(--color-neutral-800);
+    font-size: var(--font-label-size);
+    font-weight: 700;
+    line-height: var(--line-height-label);
+  }
+
+  .form-field__plan-name {
+    flex: 0 0 auto;
+    white-space: nowrap;
+  }
+
+  .form-field__plan-price {
+    flex: 1;
+    opacity: 0.4;
+  }
+
+  .form-field__select-arrow {
+    width: 0.75rem;
+    height: 0.5rem;
+    margin-block-start: 0.5625rem;
+    flex: 0 0 auto;
+  }
+
+  .form-field__error {
+    margin: var(--space-100) var(--space-200) 0;
+    color: var(--color-red-400);
+    font-size: 0.875rem;
+    line-height: 1.4;
+  }
+
+  .signup-form__submit {
+    display: inline-flex;
+    width: 100%;
+    min-height: 3.125rem;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-150) var(--space-500);
+    border: 0;
+    border-radius: var(--radius-full);
+    background: var(--color-blue-500);
+    box-shadow: 0 25px 12.5px rgb(63 91 194 / 25%);
+    color: var(--color-neutral-0);
+    cursor: pointer;
+    font-size: var(--font-label-size);
+    font-weight: 700;
+    line-height: var(--line-height-label);
+    text-align: center;
+  }
+
+  .signup-form__submit:hover {
+    background: var(--color-blue-300);
+  }
+
+  .signup-form__submit:focus-visible {
+    box-shadow: var(--focus-separation), var(--focus-ring);
+  }
+
+  .signup-form__status {
+    margin: 0;
+    color: var(--color-neutral-800);
+    font-size: var(--font-body-medium-size);
+    line-height: var(--line-height-body-medium);
+  }
+
+  @media (min-width: 28rem) {
+    .signup-form {
+      padding-inline: var(--space-500);
+    }
+
+    .signup-form__fields {
+      width: calc(100% - 0.3125rem);
+    }
+  }
+</style>

@@ -1,0 +1,208 @@
+---
+import sidePattern from '../assets/sign-up/bg-pattern-side.svg';
+import BrandLogo from '../components/BrandLogo.astro';
+import Countdown from '../components/Countdown.astro';
+import SignUpForm from '../components/SignUpForm.astro';
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Sign Up | Officelite"
+  description="Join the Officelite early-access list and choose the plan that fits your team."
+>
+  <div class="sign-up site-shell">
+    <div class="sign-up__background" aria-hidden="true">
+      <img
+        src={sidePattern.src}
+        width="2036"
+        height="2036"
+        alt=""
+      />
+    </div>
+
+    <header class="sign-up__header container">
+      <BrandLogo />
+    </header>
+
+    <main id="main-content" class="sign-up__main container">
+      <section class="sign-up__intro" aria-labelledby="sign-up-heading">
+        <div class="sign-up__copy">
+          <h1 id="sign-up-heading">Work smarter. Save time.</h1>
+          <p>
+            Easily manage your projects. Get on the list and receive in-app
+            perks available only to early subscribers. We are moving into final
+            development and getting ready for official launch soon.
+          </p>
+        </div>
+
+        <Countdown class="sign-up__countdown" />
+      </section>
+
+      <div class="sign-up__form-area">
+        <SignUpForm />
+      </div>
+    </main>
+  </div>
+</Layout>
+
+<style>
+  .sign-up {
+    --page-gutter: 1rem;
+
+    position: relative;
+    overflow: clip;
+    padding-block-end: 5.125rem;
+    background: var(--color-neutral-50);
+  }
+
+  .sign-up__background {
+    position: absolute;
+    z-index: 0;
+    inset-inline: 0;
+    inset-block-end: 0;
+    height: 19.75rem;
+    overflow: hidden;
+    background: var(--color-neutral-900);
+    pointer-events: none;
+  }
+
+  .sign-up__background img {
+    position: absolute;
+    inset-block-start: -35.3125rem;
+    inset-inline-start: calc(50% - 45.4375rem);
+    width: 127.25rem;
+    max-width: none;
+    height: 127.25rem;
+  }
+
+  .sign-up__header,
+  .sign-up__main {
+    position: relative;
+    z-index: 1;
+  }
+
+  .sign-up__header {
+    display: flex;
+    justify-content: center;
+    padding-block-start: var(--space-400);
+  }
+
+  .sign-up__main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-1000);
+    margin-block-start: var(--space-1000);
+  }
+
+  .sign-up__intro {
+    display: flex;
+    width: 100%;
+    max-width: 33.75rem;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-500);
+    text-align: center;
+  }
+
+  .sign-up__copy {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    gap: var(--space-300);
+  }
+
+  .sign-up__copy h1,
+  .sign-up__copy p {
+    margin: 0;
+  }
+
+  .sign-up__copy h1 {
+    color: var(--color-neutral-800);
+    font-size: var(--font-display-medium-size);
+    line-height: var(--line-height-display);
+  }
+
+  .sign-up__copy p {
+    color: var(--color-neutral-500);
+    font-size: var(--font-body-large-size);
+    line-height: var(--line-height-body-large);
+  }
+
+  .sign-up__form-area {
+    position: relative;
+    z-index: 1;
+    width: calc(100% - 1rem);
+    max-width: 27.8125rem;
+  }
+
+  @media (min-width: 44rem) {
+    .sign-up {
+      --page-gutter: 2.5rem;
+
+      padding-block-end: 7.4375rem;
+    }
+
+    .sign-up__background {
+      height: 29.5625rem;
+    }
+
+    .sign-up__background img {
+      inset-block-start: -27.1875rem;
+    }
+
+    .sign-up__header {
+      justify-content: flex-start;
+      padding-block-start: var(--space-800);
+    }
+
+    .sign-up__main {
+      margin-block-start: var(--space-1000);
+    }
+
+    .sign-up__form-area {
+      width: 27.8125rem;
+    }
+  }
+
+  @media (min-width: 74.375rem) {
+    .sign-up {
+      min-height: 64rem;
+      padding-block-end: 0;
+    }
+
+    .sign-up__background {
+      inset-block: 0;
+      inset-inline-start: auto;
+      width: 31.8%;
+      height: auto;
+    }
+
+    .sign-up__background img {
+      inset-block-start: -48.8125rem;
+      inset-inline-start: -47.6875rem;
+    }
+
+    .sign-up__header {
+      padding-block-start: var(--space-1000);
+    }
+
+    .sign-up__main {
+      display: grid;
+      grid-template-columns: 33.75rem 27.8125rem;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0;
+      margin-block-start: var(--space-1800);
+    }
+
+    .sign-up__intro {
+      align-items: flex-start;
+      text-align: start;
+    }
+
+    .sign-up__copy h1 {
+      font-size: var(--font-display-large-size);
+    }
+  }
+</style>
