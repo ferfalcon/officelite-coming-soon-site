@@ -310,13 +310,13 @@
       "id": "ART-PLAN",
       "type": "PLAN",
       "path": "PLAN.md",
-      "status": "Draft",
+      "status": "Reviewed",
       "baseline": [
         "SRC-DS-001",
         "SRC-REPO-001"
       ],
-      "statusChangedAt": "2026-08-28T00:10:38.331Z",
-      "statusEvidence": "Stage 8 adversarial review corrected PLAN.md traceability, full acceptance-criteria validation coverage, remote validation transport, and IndexedDB metadata boundaries. Reopen the previously approved Stage 7 plan so lifecycle integrity can bind to the corrected revision before Stage 8 approval.",
+      "statusChangedAt": "2026-08-28T00:12:14.788Z",
+      "statusEvidence": "Stage 8 adversarial review corrected PLAN.md after two review passes: REQ-DR-002 is now explicitly traced; PLAN-008 maps all approved requirements and AC-001 through AC-110 to validation; the minimal path-filtered GitHub Actions frontend validation workflow is a concrete remote execution transport permitted by REQ-CON-001; and IndexedDB metadata is constrained to the approved architecture/privacy boundary. Stage 8 repository and Figma verifications are Unchanged, current Astro/Playwright guidance confirms the selected diagnostics/E2E mechanisms, and no blocking technical decision remains.",
       "statusBy": "Fernando Falcon",
       "approvedRevision": {
         "algorithm": "sha256",
