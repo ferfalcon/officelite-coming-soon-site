@@ -209,6 +209,12 @@ const defaultPlan = PLANS.find((plan) => plan.key === DEFAULT_PLAN_KEY) ?? PLANS
     background: var(--color-neutral-0);
   }
 
+  .form-field--invalid .form-field__input,
+  .form-field--invalid .form-field__input:hover,
+  .form-field--invalid .form-field__input:focus-visible {
+    border-bottom-color: var(--color-red-400);
+  }
+
   .form-field__select-shell {
     position: relative;
     width: 100%;
@@ -226,6 +232,12 @@ const defaultPlan = PLANS.find((plan) => plan.key === DEFAULT_PLAN_KEY) ?? PLANS
     border-bottom-color: rgb(116 123 149 / 50%);
     background: var(--color-neutral-0);
     box-shadow: var(--focus-separation), var(--focus-ring);
+  }
+
+  .form-field--invalid .form-field__select-shell,
+  .form-field--invalid .form-field__select-shell:hover,
+  .form-field--invalid .form-field__select-shell:focus-within {
+    border-bottom-color: var(--color-red-400);
   }
 
   .form-field__select {

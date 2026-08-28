@@ -257,3 +257,133 @@ test('Sign Up uses the split composition at the 1321px reference', async ({
   expect(form?.y).toBeLessThan((intro?.y ?? 0) + (intro?.height ?? 0));
   expect((form?.y ?? 0) + (form?.height ?? 0)).toBeGreaterThan(intro?.y ?? 0);
 });
+
+
+test('required validation exposes contextual and programmatically associated feedback', async ({
+  page,
+}) => {
+  await page.goto('/sign-up/');
+
+  const plan = page.getByLabel('Plan');
+  await plan.evaluate((element) => {
+    (element as HTMLSelectElement).value = '';
+  });
+
+  const submit = page.getByRole('button', { name: 'Get on the list' });
+  await submit.click();
+  await expect(submit).toBeFocused();
+
+  for (const field of [
+    { label: 'Name', errorId: 'signup-name-error', message: 'Name is required.' },
+    {
+      label: 'Email Address',
+      errorId: 'signup-email-error',
+      message: 'Email address is required.',
+    },
+    { label: 'Plan', errorId: 'signup-plan-error', message: 'Select a plan.' },
+    {
+      label: 'Phone Number',
+      errorId: 'signup-phone-error',
+      message: 'Phone number is required.',
+    },
+    {
+      label: 'Company',
+      errorId: 'signup-company-error',
+      message: 'Company is required.',
+    },
+  ]) {
+    const control = page.getByLabel(field.label);
+    await expect(control).toHaveAttribute('aria-invalid', 'true');
+    await expect(control).toHaveAttribute('aria-describedby', field.errorId);
+    await expect(page.locator(`#${field.errorId}`)).toHaveText(field.message);
+    await expect(page.locator(`#${field.errorId}`)).toBeVisible();
+  }
+});
+
+test('a missing required field recovers as soon as it becomes valid', async ({
+  page,
+}) => {
+  await page.goto('/sign-up/?plan=pro');
+
+  await page.getByLabel('Name').fill('Ada Lovelace');
+  await page.getByLabel('Email Address').fill('ada@example.test');
+  await page.getByLabel('Phone Number').fill('+598 99 123 456');
+
+  const submit = page.getByRole('button', { name: 'Get on the list' });
+  await submit.click();
+
+  const company = page.getByLabel('Company');
+  await expect(company).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#signup-company-error')).toHaveText(
+    'Company is required.',
+  );
+
+  for (const label of ['Name', 'Email Address', 'Plan', 'Phone Number']) {
+    await expect(page.getByLabel(label)).not.toHaveAttribute('aria-invalid', 'true');
+  }
+
+  await company.fill('Analytical Engines');
+  await expect(company).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#signup-company-error')).toBeHidden();
+
+  await submit.click();
+  await expect(page.locator('.form-field__error:visible')).toHaveCount(0);
+});
+
+test('email validation follows single-address HTML semantics and recovers on correction', async ({
+  page,
+}) => {
+  await page.goto('/sign-up/');
+
+  await page.getByLabel('Name').fill('Grace Hopper');
+  const email = page.getByLabel('Email Address');
+  await email.fill('grace@example.test,ada@example.test');
+  await page.getByLabel('Phone Number').fill('+1 555 0100');
+  await page.getByLabel('Company').fill('Compiler Co');
+
+  const submit = page.getByRole('button', { name: 'Get on the list' });
+  await submit.click();
+
+  await expect(email).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#signup-email-error')).toHaveText(
+    'Enter a valid email address.',
+  );
+
+  await email.fill('grace@example.test');
+  await expect(email).not.toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#signup-email-error')).toBeHidden();
+
+  await submit.click();
+  await expect(page.locator('.form-field__error:visible')).toHaveCount(0);
+});
+
+test('keyboard-only submit keeps focus and compact validation feedback does not overflow', async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 320, height: 900 });
+  await page.goto('/sign-up/');
+
+  const focusSequence = [
+    page.getByRole('link', { name: 'Skip to content' }),
+    page.getByRole('link', { name: 'Officelite home' }),
+    page.getByLabel('Name'),
+    page.getByLabel('Email Address'),
+    page.getByLabel('Plan'),
+    page.getByLabel('Phone Number'),
+    page.getByLabel('Company'),
+    page.getByRole('button', { name: 'Get on the list' }),
+  ];
+
+  for (const control of focusSequence) {
+    await page.keyboard.press('Tab');
+    await expect(control).toBeFocused();
+  }
+
+  const submit = page.getByRole('button', { name: 'Get on the list' });
+  await page.keyboard.press('Enter');
+
+  await expect(submit).toBeFocused();
+  await expect(page.getByLabel('Name')).toHaveAttribute('aria-invalid', 'true');
+  await expect(page.locator('#signup-name-error')).toBeVisible();
+  await expectNoHorizontalOverflow(page);
+});
