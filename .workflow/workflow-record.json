@@ -393,6 +393,13 @@
       "status": "Active",
       "required": true,
       "references": []
+    },
+    {
+      "id": "PLAN-007",
+      "owner": "ART-PLAN",
+      "status": "Active",
+      "required": true,
+      "references": []
     }
   ],
   "gates": [
