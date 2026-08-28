@@ -1864,16 +1864,16 @@
           "required": true,
           "status": "Passed",
           "expected": "Success and failure feedback remain visible and programmatically announced inside the form, do not steal focus, use approved visual language, reflow at compact widths, preserve values after failure, and the exact implementation output is production-deployable without remote sign-up transmission.",
-          "actual": "Vercel deployment dpl_FomUrivQjvbhqPTbvHzrcxKdqKx6 is READY in production for repaired implementation output commit 98a51c25744370e2ac722d113e0e3f8227853fa0, and the public /sign-up/?plan=pro route returns HTTP 200 with a stable role=status, aria-live=polite, aria-atomic=true region. The shipped controller updates that existing region without calling focus(), preserves all field values on failure and success, and maps success to the approved blue token and failure to the approved red token. Playwright run #27 additionally verifies submit focus retention and 320px failure-message reflow/no horizontal overflow. Current Figma Sign Up and Form Text Field/Plan Select evidence remains unchanged and contains no competing persistence-status state.",
-          "executedAt": "2026-08-28T17:05:10Z",
+          "actual": "Vercel deployment dpl_5BhhDhD7cotVNG4kZbxNE45wv5fZ is READY in production for clean frontend-only implementation output commit 9f1245533900fa8b4646bc23ab387b1c4110f635. The public /sign-up/?plan=pro route returns HTTP 200 with the stable role=status, aria-live=polite, aria-atomic=true region. The controller keeps focus on the submit path and preserves entered values for both failure and success; status styling uses approved blue for success and red for failure, and Playwright run #28 verifies 320px status reflow/no horizontal overflow and deterministic failure/retry without network transmission. Current Figma Sign Up and form component evidence remains unchanged with no competing persistence-status design state.",
+          "executedAt": "2026-08-28T17:08:40Z",
           "evidence": [
-            "Vercel deployment dpl_FomUrivQjvbhqPTbvHzrcxKdqKx6 is READY in production for repaired implementation output commit 98a51c25744370e2ac722d113e0e3f8227853fa0, and the public /sign-up/?plan=pro route returns HTTP 200 with a stable role=status, aria-live=polite, aria-atomic=true region. The shipped controller updates that existing region without calling focus(), preserves all field values on failure and success, and maps success to the approved blue token and failure to the approved red token. Playwright run #27 additionally verifies submit focus retention and 320px failure-message reflow/no horizontal overflow. Current Figma Sign Up and Form Text Field/Plan Select evidence remains unchanged and contains no competing persistence-status state."
+            "Vercel deployment dpl_5BhhDhD7cotVNG4kZbxNE45wv5fZ is READY in production for clean frontend-only implementation output commit 9f1245533900fa8b4646bc23ab387b1c4110f635. The public /sign-up/?plan=pro route returns HTTP 200 with the stable role=status, aria-live=polite, aria-atomic=true region. The controller keeps focus on the submit path and preserves entered values for both failure and success; status styling uses approved blue for success and red for failure, and Playwright run #28 verifies 320px status reflow/no horizontal overflow and deterministic failure/retry without network transmission. Current Figma Sign Up and form component evidence remains unchanged with no competing persistence-status design state."
           ],
           "references": [
             "PLAN-006"
           ],
           "subject": {
-            "commit": "84a7dd09559894b5703a42413fed546a8f8ee537"
+            "commit": "86523d98c71f0c1dd18498f9723750312f665569"
           }
         }
       ]
