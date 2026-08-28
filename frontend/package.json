@@ -20,6 +20,7 @@
   "devDependencies": {
     "@astrojs/check": "0.9.10",
     "@playwright/test": "1.62.1",
-    "typescript": "5.9.3"
+    "typescript": "5.9.3",
+    "@types/node": "^24.0.0"
   }
 }
