@@ -1,13 +1,13 @@
 ---
 artifact: TASK
 id: P02-T01
+baseline:
   design:
     - SRC-DS-001
   repository:
     - SRC-REPO-001
   runtime: []
-  documentation:
-    - SRC-DOC-001
+  documentation: []
   assets: []
 created: 2026-08-28
 updated: 2026-08-28
@@ -16,213 +16,136 @@ profile: Full
 execution_mode: Gated
 ---
 
-The repository snapshot in metadata is the task-start state. Record the Implementation output snapshot after the task is committed.
+The canonical task registry owns mutable status, prerequisites, baseline changes, output lineage, and structured validation state.
 
 # Phase 02 — Task 01: Build the complete Home route
 
-
-
 ## 2. Objective
 
-Describe the single concrete result this task must produce.
+Deliver the complete Home conversion experience with approved hierarchy, pricing data, CTA plan context, interactive states, logical semantics, and responsive transformations.
 
 ## 3. Source References
 
 - Source baseline: `SOURCE-BASELINE.md`
-- Design inputs: `SRC-DS-*`
-- Task-start repository snapshot: `SRC-REPO-*`
-- Supporting runtime inputs: `SRC-RUN-*` / None
-- Documentation inputs: `SRC-DOC-*` / None
-- Asset inputs: `SRC-ASSET-*` / None
-- `PLAN.md`:
-- `PLAN-REVIEW.md`:
-- Requirement IDs:
-- Specification IDs or sections:
-- `DESIGN.md` references:
-- Design-source evidence:
-- `ARCHITECTURE.md` references, when applicable:
-- Related tasks:
+- Planned design input: `SRC-DS-001`
+- Planned repository baseline: `SRC-REPO-001`; canonical `task start` may advance this to an expected previous-task output/current checkpoint.
+- `PLAN.md`: `PLAN-003`
+- `PLAN-REVIEW.md`: Stage 8 corrections and residual-risk table
+- Requirement IDs: `REQ-FR-001`, `REQ-FR-003`, `REQ-BR-001`, `REQ-NFR-001`, `REQ-NFR-002`, `REQ-AR-001`, `REQ-AR-002`
+- Specification/design references: `SPEC-BEH-001`, `SPEC-BEH-005`, `SPEC-BEH-006`, `SPEC-INT-001`, `SPEC-ACC-001/002/006`; `DES-001/003/004`, `DES-RWD-001–004/007`
+- Architecture references: `ADR-002`, `ADR-003`, `ADR-007`
+- Related tasks: Prerequisite `P01-T02`; may execute in parallel with `P03-T01`
 
 ## 4. Snapshot Verification
 
-Complete before implementation begins.
-
-- Verification date and method:
-- Design inputs applicable: Yes / No / Unverified
-- Task-start repository commit checked out: Yes / No / Unverified
-- Difference classification: Unchanged / Expected previous-task output / Unexpected concurrent change / Unavailable
-- Upstream rebaseline required: Yes / No
-- Action or limitation:
-
-An approved previous-task output may become this task's start snapshot without reopening upstream stages. Do not begin affected implementation when an unexpected material change remains unresolved.
+Before implementation:
+- Reverify the applicable Figma evidence when this task depends on visual/state intent.
+- Start through the canonical CLI so repository HEAD is classified as the planned baseline, expected previous-task output, or a task-start checkpoint.
+- Treat workflow/documentation-only commits as expected lineage only when canonical task-start diagnostics accept them.
+- Stop and rebaseline upstream if a material Figma or `frontend/` change is unexpected.
 
 ## 5. Prerequisites
 
-List tasks, repository conditions, assets, decisions, access requirements, and required snapshot verification.
-
-- ...
-
-Use `None` when no prerequisite exists.
+`P01-T02` Complete. Shared plan data, plan URL helper, countdown, shell, assets, tokens, and validation surface must be stable.
 
 ## 6. Scope
 
 ### Included
-
-- Work required to produce the objective
-- Relevant accessibility, responsive, state, error, and testing work
+- Semantic Home regions and brand link.
+- Hero content/illustration/action.
+- Data-driven Basic/Pro/Ultimate pricing cards and plan-specific CTAs.
+- Shared countdown use.
+- Large/medium/compact layout transformations and content-fit transition evidence.
+- Focused Home navigation/CTA browser regression tests.
 
 ### Excluded
-
-- Nearby work assigned to other tasks
-- Deferred or unapproved capabilities
-- Unrelated refactoring
+- Sign Up form behavior/persistence.
+- New marketing content or pricing rules.
+- Breakpoints chosen solely from common device widths.
 
 ## 7. Repository Context
 
-Record current state at the task-start `SRC-REPO-*` commit:
-
-- Existing files and modules
-- Established patterns and conventions
-- Reusable components, utilities, tokens, or tests
-- Confirmed scripts and commands
-- Constraints or technical debt
-
-Distinguish observed paths from proposed paths and unrelated later changes.
+Baseline Home is the Astro starter. Approved assets include logo, Home background patterns and dashboard illustration. Figma supplies 375/768/1440 reference compositions; these are evidence points, not CSS breakpoint mandates.
 
 ## 8. Files and Modules
 
-| Path | Action | Existing or proposed | Responsibility | Repository evidence |
-|---|---|---|---|---|
-| `path/to/file` | Create / Modify / Delete | Existing / Proposed | ... | task-start `SRC-REPO-*` |
+| Path | Action | Responsibility |
+|---|---|---|
+| `frontend/src/pages/index.astro` | Modify | Compose Home route |
+| `frontend/src/components/BrandLogo.astro` | Create/Reuse | Shared brand link/presentation |
+| `frontend/src/components/HomeHero.astro` | Create | Hero hierarchy/action/illustration |
+| `frontend/src/components/PricingPlans.astro` | Create | Plan-list composition |
+| `frontend/src/components/PricingCard.astro` | Create | Reusable plan card/CTA variants |
+| Home-scoped styles/assets | Modify/Use | Figma-aligned composition/states |
+| `frontend/tests/e2e/navigation.spec.ts` | Create/Modify | Home CTA/logo/plan-context coverage |
 
 ## 9. Dependencies and Interfaces
 
-Document module and task dependencies, public interfaces, data or component contracts, compatibility requirements, and downstream effects.
+Consume plan data, plan URL builder, Countdown, global tokens, and shared assets from Phase 01. All navigation remains native anchors; only plan-specific CTAs add `?plan=<key>`.
 
 ## 10. Implementation Steps
 
-1. Verify input and task-start snapshots.
-2. Inspect affected files and confirm repository assumptions.
-3. ...
-4. Update relevant tests and documentation.
-5. Run required validation.
-6. Commit the approved result and create an Implementation output `SRC-REPO-*` record.
-
-Do not include implementation code during task decomposition.
+1. Reverify Home Figma structures and start from canonical Phase 01 output.
+2. Build semantic Home DOM in logical reading order, using shared BrandLogo and Countdown.
+3. Render plan cards from shared configuration; wire generic versus plan-specific Sign Up anchors correctly.
+4. Implement default/hover/focus visual states and decorative/illustrative asset treatment.
+5. Implement large/medium/compact layouts using content-fit transition testing; record actual transition rationale.
+6. Add focused Playwright navigation/keyboard/responsive smoke assertions and run check/build/tests relevant to Home.
 
 ## 11. State, Responsive, and Accessibility Requirements
 
-### States and errors
-
-- Default:
-- Loading:
-- Empty:
-- Error:
-- Success:
-- Disabled or unavailable:
-- Other:
-
-### Responsive behavior
-
-- Small viewports:
-- Intermediate widths:
-- Large viewports:
-- Content and overflow edge cases:
-
-### Accessibility
-
-- Semantic structure:
-- Keyboard interaction:
-- Focus behavior:
-- Accessible names and relationships:
-- Announcements:
-- Contrast, reflow, touch targets, or reduced motion:
-
-Use `Not applicable` only with a reason.
+- Default/Hover/Focus CTA states follow approved visual language and never remove visible focus.
+- DOM/read order stays logical even where grid/flex changes visual placement.
+- Dashboard illustration is initially non-essential; decorative patterns stay out of the accessibility tree.
+- Content can wrap/grow; no required-content horizontal page scroll at supplied or intermediate widths.
 
 ## 12. Validation
 
-List only commands and checks supported by the task-start repository snapshot.
+### Automated
+- `pnpm check`, `pnpm build`, and Home-focused Playwright navigation tests.
+- Verify each Home CTA reaches `/sign-up/` with correct generic/plan-specific query state.
+- Responsive smoke at 375, 768, 1440 plus representative intermediate/narrow/wide widths; assert no page-level horizontal overflow.
+### Manual
+- Keyboard activation/focus visibility.
+- Side-by-side visual comparison with Home Figma evidence.
+- Inspect heading/landmark order and decorative image semantics.
 
-### Automated validation
-
-- Unit tests:
-- Component or integration tests:
-- End-to-end tests:
-- Type checking:
-- Linting:
-- Build:
-- Other:
-
-### Manual validation
-
-- Interaction checks:
-- Responsive checks:
-- Accessibility checks:
-- Visual comparison against `SRC-DS-*`:
-- Error and edge-case checks:
-- Regression checks:
-
-For each check, define the expected result. Do not claim a check passed until it ran successfully.
+No check is considered passed until it executes successfully against the task output.
 
 ## 13. Acceptance Criteria
 
-- [ ] `[Requirement or specification ID]` Objective result is observable and correct.
-- [ ] Required accessibility behavior is verified.
-- [ ] Required responsive and state behavior is verified.
-- [ ] Relevant automated and manual validation passes.
-- [ ] Snapshot verification or approved upstream rebaseline is complete.
-- [ ] The committed result has an Implementation output snapshot.
-- [ ] Documentation and task status are updated.
+- [ ] `REQ-FR-001/003`: Home displays the approved conversion content and actions.
+- [ ] `SPEC-INT-001`: native links preserve correct plan context.
+- [ ] `SPEC-ACC-001/002/006`: semantics, focus, and reflow remain usable.
+- [ ] `DES-RWD-001–004/007`: supplied responsive compositions and justified in-between transitions are represented.
 
 ## 14. Risks and Considerations
 
-| Risk or assumption | Impact | Mitigation or validation |
-|---|---|---|
-| ... | ... | ... |
+| Risk | Mitigation |
+|---|---|
+| Unsupplied breakpoints | Derive transitions from content failure, record evidence |
+| Component over-fragmentation | Keep only boundaries with independent responsibility |
+| Parallel Sign Up work touching shared files | Treat Phase 01 contracts as stable; coordinate any shared-file change |
 
 ## 15. Implementation Discoveries
 
-| Discovery | Impact | Owning artifact | Required update |
-|---|---|---|---|
-| ... | ... | `SOURCE-BASELINE.md` / `REQUIREMENTS.md` / `DESIGN.md` / `SPEC.md` / `ARCHITECTURE.md` / `PLAN.md` / Task | ... |
-
-Do not silently work around documentation or source-baseline errors.
+None at decomposition. Record any source/documentation discrepancy here during implementation and update the owning upstream artifact instead of silently working around it.
 
 ## 16. Deviations
 
-| Planned approach or baseline | Actual approach or baseline | Reason | Approval or evidence | Impact |
-|---|---|---|---|---|
-| ... | ... | ... | ... | ... |
-
-Use `None` when implementation followed the task exactly.
-
-
+None planned. Any deviation from the approved task scope, architecture, source baseline, or validation contract requires evidence and the appropriate workflow update.
 
 ## 18. Definition of Done
 
-- [ ] The objective is implemented within scope.
-- [ ] Acceptance criteria pass.
-- [ ] Required validation executed successfully.
-- [ ] No required validation remains failing or unverified.
-- [ ] Input snapshot references remain valid or an approved upstream rebaseline was completed.
-- [ ] The implementation output snapshot and parent lineage are recorded.
-- [ ] Relevant documentation was updated.
-- [ ] `TASKS-INDEX.md` and `WORKFLOW-STATE.md` reflect current status and lineage.
-- [ ] Deviations and remaining risks are recorded.
-- [ ] Downstream tasks have the information they need.
+- [ ] The objective is implemented without scope expansion.
+- [ ] Task-specific acceptance criteria pass.
+- [ ] Required automated/manual validation executes successfully.
+- [ ] Accessibility, responsive/state/error requirements owned by this task are verified.
+- [ ] Snapshot verification is complete or an approved rebaseline was performed.
+- [ ] An implementation output commit/snapshot is recorded separately from workflow bookkeeping.
+- [ ] Relevant documentation/discoveries/deviations are updated.
+- [ ] Downstream tasks have a stable contract.
 
 ## 19. Completion Report
 
-- Files created, modified, or deleted:
-- Input snapshot IDs used:
-- Task-start repository snapshot:
-- Implementation-output repository snapshot:
-- Source verification performed:
-- Behavior implemented:
-- Validation executed:
-- Validation results:
-- Deviations:
-- Remaining risks:
-- Documentation updated:
-- Next unblocked task:
+Complete during Stage 10 with affected files, input/output snapshots, behavior implemented, validation evidence, deviations, remaining risks, documentation updates, and next unblocked task.

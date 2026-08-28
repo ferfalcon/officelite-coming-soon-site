@@ -1,13 +1,13 @@
 ---
 artifact: TASK
 id: P01-T01
+baseline:
   design:
     - SRC-DS-001
   repository:
     - SRC-REPO-001
   runtime: []
-  documentation:
-    - SRC-DOC-001
+  documentation: []
   assets: []
 created: 2026-08-28
 updated: 2026-08-28
@@ -16,213 +16,138 @@ profile: Full
 execution_mode: Gated
 ---
 
-The repository snapshot in metadata is the task-start state. Record the Implementation output snapshot after the task is committed.
+The canonical task registry owns mutable status, prerequisites, baseline changes, output lineage, and structured validation state.
 
 # Phase 01 — Task 01: Establish product foundation and remote validation
 
-
-
 ## 2. Objective
 
-Describe the single concrete result this task must produce.
+Replace the starter foundation with an Officelite-ready Astro shell, design foundations, approved runtime assets, self-hosted typography, and a reproducible diagnostics/E2E validation transport without implementing route-specific product behavior.
 
 ## 3. Source References
 
 - Source baseline: `SOURCE-BASELINE.md`
-- Design inputs: `SRC-DS-*`
-- Task-start repository snapshot: `SRC-REPO-*`
-- Supporting runtime inputs: `SRC-RUN-*` / None
-- Documentation inputs: `SRC-DOC-*` / None
-- Asset inputs: `SRC-ASSET-*` / None
-- `PLAN.md`:
-- `PLAN-REVIEW.md`:
-- Requirement IDs:
-- Specification IDs or sections:
-- `DESIGN.md` references:
-- Design-source evidence:
-- `ARCHITECTURE.md` references, when applicable:
-- Related tasks:
+- Planned design input: `SRC-DS-001`
+- Planned repository baseline: `SRC-REPO-001`; canonical `task start` may advance this to an expected previous-task output/current checkpoint.
+- `PLAN.md`: `PLAN-001`
+- `PLAN-REVIEW.md`: Stage 8 corrections and residual-risk table
+- Requirement IDs: `REQ-CON-001`, `REQ-CON-002`, `REQ-NFR-001`, `REQ-AR-002`
+- Specification/design references: `SPEC-ACC-002`, `SPEC-ACC-006`; Figma foundations/assets in node `4:3`
+- Architecture references: `ADR-002`, `ADR-007`, `ADR-010`
+- Related tasks: Downstream `P01-T02`
 
 ## 4. Snapshot Verification
 
-Complete before implementation begins.
-
-- Verification date and method:
-- Design inputs applicable: Yes / No / Unverified
-- Task-start repository commit checked out: Yes / No / Unverified
-- Difference classification: Unchanged / Expected previous-task output / Unexpected concurrent change / Unavailable
-- Upstream rebaseline required: Yes / No
-- Action or limitation:
-
-An approved previous-task output may become this task's start snapshot without reopening upstream stages. Do not begin affected implementation when an unexpected material change remains unresolved.
+Before implementation:
+- Reverify the applicable Figma evidence when this task depends on visual/state intent.
+- Start through the canonical CLI so repository HEAD is classified as the planned baseline, expected previous-task output, or a task-start checkpoint.
+- Treat workflow/documentation-only commits as expected lineage only when canonical task-start diagnostics accept them.
+- Stop and rebaseline upstream if a material Figma or `frontend/` change is unexpected.
 
 ## 5. Prerequisites
 
-List tasks, repository conditions, assets, decisions, access requirements, and required snapshot verification.
-
-- ...
-
-Use `None` when no prerequisite exists.
+None. Confirm `frontend/AGENTS.md`, current package/lockfile state, approved source assets, and canonical source verification before editing.
 
 ## 6. Scope
 
 ### Included
-
-- Work required to produce the objective
-- Relevant accessibility, responsive, state, error, and testing work
+- Remove starter-only UI/assets and establish product document shell/metadata/favicon.
+- Add global tokens/base styles/focus-visible treatment and self-hosted Kumbh Sans.
+- Copy only approved runtime-used source assets from `docs/starter-code/assets/` into `frontend/`.
+- Add Astro diagnostics, Playwright configuration/scripts, and the path-scoped `frontend-validation.yml` workflow.
+- Pin pnpm only if execution-time repository/Vercel evidence still supports the approved PLAN-001 interpretation.
 
 ### Excluded
-
-- Nearby work assigned to other tasks
-- Deferred or unapproved capabilities
-- Unrelated refactoring
+- Home/Sign Up feature composition.
+- Plan parsing/countdown business behavior.
+- Any backend, remote API, server adapter, analytics, or change to the canonical design-workflow caller.
 
 ## 7. Repository Context
 
-Record current state at the task-start `SRC-REPO-*` commit:
-
-- Existing files and modules
-- Established patterns and conventions
-- Reusable components, utilities, tokens, or tests
-- Confirmed scripts and commands
-- Constraints or technical debt
-
-Distinguish observed paths from proposed paths and unrelated later changes.
+At `SRC-REPO-001`, `frontend/` is the Astro 7 starter: `index.astro` renders `Welcome.astro`; `Layout.astro` has starter metadata; package scripts are dev/build/preview/astro only; no product styles/tests exist. Node is `>=22.12.0`; Astro config is static/default. The approved product assets exist under `docs/starter-code/assets/`.
 
 ## 8. Files and Modules
 
-| Path | Action | Existing or proposed | Responsibility | Repository evidence |
-|---|---|---|---|---|
-| `path/to/file` | Create / Modify / Delete | Existing / Proposed | ... | task-start `SRC-REPO-*` |
+| Path | Action | Responsibility |
+|---|---|---|
+| `frontend/package.json` / `frontend/pnpm-lock.yaml` | Modify | Font, diagnostics, Playwright, scripts, reproducibility |
+| `frontend/src/layouts/Layout.astro` | Modify | Product shell, metadata, global imports |
+| `frontend/src/styles/global.css` | Create | Tokens, base styles, focus/container helpers |
+| `frontend/src/components/Welcome.astro` | Delete | Remove starter UI |
+| `frontend/src/assets/astro.svg` / `background.svg` | Delete | Remove starter assets |
+| `frontend/src/assets/{shared,home,sign-up}/...` | Create from approved sources | Runtime product assets |
+| `frontend/public/favicon.png` | Create | Product favicon |
+| `frontend/playwright.config.ts` | Create | E2E preview/browser configuration |
+| `.github/workflows/frontend-validation.yml` | Create | Remote check/build/E2E transport scoped to frontend changes |
 
 ## 9. Dependencies and Interfaces
 
-Document module and task dependencies, public interfaces, data or component contracts, compatibility requirements, and downstream effects.
+Preserve Astro static rendering and strict TypeScript. Global tokens/styles become the stable presentation foundation for later tasks. The validation workflow must run application commands from `frontend/` and remain independent of `.github/workflows/design-workflow-command.yml`.
 
 ## 10. Implementation Steps
 
-1. Verify input and task-start snapshots.
-2. Inspect affected files and confirm repository assumptions.
-3. ...
-4. Update relevant tests and documentation.
-5. Run required validation.
-6. Commit the approved result and create an Implementation output `SRC-REPO-*` record.
-
-Do not include implementation code during task decomposition.
+1. Reverify baseline and inspect package/lockfile, layout, starter files, asset sources, and nested instructions.
+2. Resolve execution-time versions before changing package metadata; add only the approved dependencies/scripts and update the lockfile.
+3. Copy approved runtime assets and replace starter metadata/favicon/font/global styling.
+4. Remove starter-only component/assets while keeping a valid static `/` route shell.
+5. Configure Playwright preview and the isolated path-filtered GitHub validation workflow.
+6. Run diagnostics/build plus a smoke check that starter content is gone and product font/assets resolve; record evidence.
 
 ## 11. State, Responsive, and Accessibility Requirements
 
-### States and errors
-
-- Default:
-- Loading:
-- Empty:
-- Error:
-- Success:
-- Disabled or unavailable:
-- Other:
-
-### Responsive behavior
-
-- Small viewports:
-- Intermediate widths:
-- Large viewports:
-- Content and overflow edge cases:
-
-### Accessibility
-
-- Semantic structure:
-- Keyboard interaction:
-- Focus behavior:
-- Accessible names and relationships:
-- Announcements:
-- Contrast, reflow, touch targets, or reduced motion:
-
-Use `Not applicable` only with a reason.
+- Base focus-visible styling must be clearly visible and survive later error states.
+- Base layout must not create page-level horizontal scrolling; containers remain fluid.
+- Decorative background assets are presentational; the shell must not create misleading accessible names.
+- No loading/success/error product state is introduced here.
 
 ## 12. Validation
 
-List only commands and checks supported by the task-start repository snapshot.
+### Automated
+- Existing/final Astro build: `pnpm build` must emit static output.
+- Newly established diagnostics: `pnpm check` must pass after the task adds the script/dependencies.
+- Validate Playwright configuration can resolve the preview server; no feature-flow pass is claimed before tests exist.
+### Manual
+- `/` renders without Astro starter branding/content.
+- Product favicon/font/assets resolve from runtime paths.
+- Inspect the new GitHub workflow for `frontend/**`-scoped application validation and no edits to the canonical workflow caller.
+- Verify global focus and container primitives at narrow/large widths.
 
-### Automated validation
-
-- Unit tests:
-- Component or integration tests:
-- End-to-end tests:
-- Type checking:
-- Linting:
-- Build:
-- Other:
-
-### Manual validation
-
-- Interaction checks:
-- Responsive checks:
-- Accessibility checks:
-- Visual comparison against `SRC-DS-*`:
-- Error and edge-case checks:
-- Regression checks:
-
-For each check, define the expected result. Do not claim a check passed until it ran successfully.
+No check is considered passed until it executes successfully against the task output.
 
 ## 13. Acceptance Criteria
 
-- [ ] `[Requirement or specification ID]` Objective result is observable and correct.
-- [ ] Required accessibility behavior is verified.
-- [ ] Required responsive and state behavior is verified.
-- [ ] Relevant automated and manual validation passes.
-- [ ] Snapshot verification or approved upstream rebaseline is complete.
-- [ ] The committed result has an Implementation output snapshot.
-- [ ] Documentation and task status are updated.
+- [ ] `PLAN-001` output is a valid Officelite product foundation rather than the Astro starter.
+- [ ] `REQ-CON-001/002`: implementation remains inside the Astro/static `frontend/` boundary except the approved validation workflow.
+- [ ] `SPEC-ACC-002/006`: visible focus foundation and reflow-safe base styling are established.
+- [ ] Diagnostics/build and remote validation transport are reproducible.
 
 ## 14. Risks and Considerations
 
-| Risk or assumption | Impact | Mitigation or validation |
-|---|---|---|
-| ... | ... | ... |
+| Risk | Mitigation |
+|---|---|
+| Dependency/pnpm drift | Recheck actual package/Vercel evidence; update lockfile intentionally |
+| Font/asset bloat or wrong copies | Import/copy only approved runtime-used resources |
+| CI scope creep | Add one isolated frontend-validation workflow; do not modify design-workflow caller |
 
 ## 15. Implementation Discoveries
 
-| Discovery | Impact | Owning artifact | Required update |
-|---|---|---|---|
-| ... | ... | `SOURCE-BASELINE.md` / `REQUIREMENTS.md` / `DESIGN.md` / `SPEC.md` / `ARCHITECTURE.md` / `PLAN.md` / Task | ... |
-
-Do not silently work around documentation or source-baseline errors.
+None at decomposition. Record any source/documentation discrepancy here during implementation and update the owning upstream artifact instead of silently working around it.
 
 ## 16. Deviations
 
-| Planned approach or baseline | Actual approach or baseline | Reason | Approval or evidence | Impact |
-|---|---|---|---|---|
-| ... | ... | ... | ... | ... |
-
-Use `None` when implementation followed the task exactly.
-
-
+None planned. Any deviation from the approved task scope, architecture, source baseline, or validation contract requires evidence and the appropriate workflow update.
 
 ## 18. Definition of Done
 
-- [ ] The objective is implemented within scope.
-- [ ] Acceptance criteria pass.
-- [ ] Required validation executed successfully.
-- [ ] No required validation remains failing or unverified.
-- [ ] Input snapshot references remain valid or an approved upstream rebaseline was completed.
-- [ ] The implementation output snapshot and parent lineage are recorded.
-- [ ] Relevant documentation was updated.
-- [ ] `TASKS-INDEX.md` and `WORKFLOW-STATE.md` reflect current status and lineage.
-- [ ] Deviations and remaining risks are recorded.
-- [ ] Downstream tasks have the information they need.
+- [ ] The objective is implemented without scope expansion.
+- [ ] Task-specific acceptance criteria pass.
+- [ ] Required automated/manual validation executes successfully.
+- [ ] Accessibility, responsive/state/error requirements owned by this task are verified.
+- [ ] Snapshot verification is complete or an approved rebaseline was performed.
+- [ ] An implementation output commit/snapshot is recorded separately from workflow bookkeeping.
+- [ ] Relevant documentation/discoveries/deviations are updated.
+- [ ] Downstream tasks have a stable contract.
 
 ## 19. Completion Report
 
-- Files created, modified, or deleted:
-- Input snapshot IDs used:
-- Task-start repository snapshot:
-- Implementation-output repository snapshot:
-- Source verification performed:
-- Behavior implemented:
-- Validation executed:
-- Validation results:
-- Deviations:
-- Remaining risks:
-- Documentation updated:
-- Next unblocked task:
+Complete during Stage 10 with affected files, input/output snapshots, behavior implemented, validation evidence, deviations, remaining risks, documentation updates, and next unblocked task.

@@ -1,13 +1,13 @@
 ---
 artifact: TASK
 id: P03-T02
+baseline:
   design:
     - SRC-DS-001
   repository:
     - SRC-REPO-001
   runtime: []
-  documentation:
-    - SRC-DOC-001
+  documentation: []
   assets: []
 created: 2026-08-28
 updated: 2026-08-28
@@ -16,213 +16,129 @@ profile: Full
 execution_mode: Gated
 ---
 
-The repository snapshot in metadata is the task-start state. Record the Implementation output snapshot after the task is committed.
+The canonical task registry owns mutable status, prerequisites, baseline changes, output lineage, and structured validation state.
 
 # Phase 03 — Task 02: Implement form validation and accessible field feedback
 
-
-
 ## 2. Objective
 
-Describe the single concrete result this task must produce.
+Make invalid Sign Up submissions fail before the persistence boundary and provide field-specific, visible, programmatically associated validation feedback that recovers cleanly when corrected.
 
 ## 3. Source References
 
 - Source baseline: `SOURCE-BASELINE.md`
-- Design inputs: `SRC-DS-*`
-- Task-start repository snapshot: `SRC-REPO-*`
-- Supporting runtime inputs: `SRC-RUN-*` / None
-- Documentation inputs: `SRC-DOC-*` / None
-- Asset inputs: `SRC-ASSET-*` / None
-- `PLAN.md`:
-- `PLAN-REVIEW.md`:
-- Requirement IDs:
-- Specification IDs or sections:
-- `DESIGN.md` references:
-- Design-source evidence:
-- `ARCHITECTURE.md` references, when applicable:
-- Related tasks:
+- Planned design input: `SRC-DS-001`
+- Planned repository baseline: `SRC-REPO-001`; canonical `task start` may advance this to an expected previous-task output/current checkpoint.
+- `PLAN.md`: `PLAN-005`
+- `PLAN-REVIEW.md`: Stage 8 corrections and residual-risk table
+- Requirement IDs: `REQ-FR-006`, `REQ-FR-007`, `REQ-BR-003`, `REQ-BR-004`, `REQ-AR-001`, `REQ-AR-004`, `REQ-AR-005`
+- Specification/design references: `SPEC-INT-004`, `SPEC-ACC-003`, `SPEC-VAL-001`, `SPEC-VAL-002`; `DES-008`, `DES-INT-006`
+- Architecture references: `ADR-004`, `ADR-009`
+- Related tasks: Prerequisite `P03-T01`; prerequisite for `P03-T03`
 
 ## 4. Snapshot Verification
 
-Complete before implementation begins.
-
-- Verification date and method:
-- Design inputs applicable: Yes / No / Unverified
-- Task-start repository commit checked out: Yes / No / Unverified
-- Difference classification: Unchanged / Expected previous-task output / Unexpected concurrent change / Unavailable
-- Upstream rebaseline required: Yes / No
-- Action or limitation:
-
-An approved previous-task output may become this task's start snapshot without reopening upstream stages. Do not begin affected implementation when an unexpected material change remains unresolved.
+Before implementation, reverify applicable Figma evidence and start through the canonical CLI so repository lineage is classified. Expected previous-task output may become the task-start snapshot. Stop and rebaseline if a material design or `frontend/` change is unexpected.
 
 ## 5. Prerequisites
 
-List tasks, repository conditions, assets, decisions, access requirements, and required snapshot verification.
-
-- ...
-
-Use `None` when no prerequisite exists.
+`P03-T01` Complete with stable native controls, IDs, controller initialization boundary, and validation/status hook structure.
 
 ## 6. Scope
 
 ### Included
-
-- Work required to produce the objective
-- Relevant accessibility, responsive, state, error, and testing work
+- Required-field validation for Name, Email, Plan, Phone, Company.
+- Single-address email validity using native/equivalent HTML constraint semantics.
+- One contextual error message per invalid field using approved replaceable copy.
+- Stable programmatic error associations and invalid state semantics.
+- Recovery when a field becomes valid; persistence callback remains unreachable until all values pass.
+- Focused E2E validation and keyboard tests.
 
 ### Excluded
-
-- Nearby work assigned to other tasks
-- Deferred or unapproved capabilities
-- Unrelated refactoring
+- IndexedDB write/open behavior or persistence success/failure status.
+- Whitespace normalization, duplicate policy, synthetic error-summary focus, or unsupported loading/disabled states.
 
 ## 7. Repository Context
 
-Record current state at the task-start `SRC-REPO-*` commit:
-
-- Existing files and modules
-- Established patterns and conventions
-- Reusable components, utilities, tokens, or tests
-- Confirmed scripts and commands
-- Constraints or technical debt
-
-Distinguish observed paths from proposed paths and unrelated later changes.
+The preceding task provides native form controls and controller ownership but intentionally does not implement the final validation orchestration. Figma lacks explicit validation-state compositions, so approved Stage 3/4 extensions use text plus red treatment while retaining visible focus.
 
 ## 8. Files and Modules
 
-| Path | Action | Existing or proposed | Responsibility | Repository evidence |
-|---|---|---|---|---|
-| `path/to/file` | Create / Modify / Delete | Existing / Proposed | ... | task-start `SRC-REPO-*` |
+| Path | Action | Responsibility |
+|---|---|---|
+| `frontend/src/components/SignUpForm.astro` | Modify | Error message hooks/relationships |
+| `frontend/src/scripts/signup-controller.ts` | Modify | Validation orchestration and pre-persistence gate |
+| `frontend/src/data/product.ts` | Modify if copy not already present | Replaceable validation strings |
+| Sign Up/global styles | Modify | Error text/border treatment without focus loss |
+| `frontend/tests/e2e/signup.spec.ts` | Modify | Required/email/recovery/keyboard validation coverage |
 
 ## 9. Dependencies and Interfaces
 
-Document module and task dependencies, public interfaces, data or component contracts, compatibility requirements, and downstream effects.
+The controller must expose a clear boundary where a normalized five-value product record is created only after all constraints pass. P03-T03 may attach persistence only behind that boundary. Validation uses the native field semantics already established by P03-T01.
 
 ## 10. Implementation Steps
 
-1. Verify input and task-start snapshots.
-2. Inspect affected files and confirm repository assumptions.
-3. ...
-4. Update relevant tests and documentation.
-5. Run required validation.
-6. Commit the approved result and create an Implementation output `SRC-REPO-*` record.
-
-Do not include implementation code during task decomposition.
+1. Start from canonical P03-T01 output and inspect final field IDs/control semantics.
+2. Implement required and email constraint evaluation without introducing unsupported normalization/business rules.
+3. Render/update one field-specific error message and programmatic association per invalid control.
+4. Ensure invalid styling coexists with visible focus and messages wrap/grow at narrow widths.
+5. Prevent the persistence boundary from being called when any field is invalid; clear/update errors when corrected.
+6. Add E2E scenarios for one/multiple required errors, invalid email, correction/retry, and keyboard-only submit; run check/build/tests.
 
 ## 11. State, Responsive, and Accessibility Requirements
 
-### States and errors
-
-- Default:
-- Loading:
-- Empty:
-- Error:
-- Success:
-- Disabled or unavailable:
-- Other:
-
-### Responsive behavior
-
-- Small viewports:
-- Intermediate widths:
-- Large viewports:
-- Content and overflow edge cases:
-
-### Accessibility
-
-- Semantic structure:
-- Keyboard interaction:
-- Focus behavior:
-- Accessible names and relationships:
-- Announcements:
-- Contrast, reflow, touch targets, or reduced motion:
-
-Use `Not applicable` only with a reason.
+- Error state uses text plus visual treatment; color alone is never the only signal.
+- Focus stays on the user's current interaction path; no unsupported synthetic summary focus.
+- Error text growth must not clip/overlap at compact widths.
+- Loading/success/persistence-failure states are not owned by this task.
 
 ## 12. Validation
 
-List only commands and checks supported by the task-start repository snapshot.
+### Automated
+- `pnpm check`, `pnpm build`, validation-focused `pnpm test:e2e` scenarios.
+- Empty one/multiple required fields must block the storage boundary.
+- Invalid single-address email must block the storage boundary; corrected email must recover.
+- Keyboard-only submit path must produce the same contextual feedback.
+### Manual
+- Inspect labels, `aria-describedby`/invalid relationships or approved equivalent semantics.
+- Verify focus ring remains visible on invalid controls and long messages reflow.
 
-### Automated validation
-
-- Unit tests:
-- Component or integration tests:
-- End-to-end tests:
-- Type checking:
-- Linting:
-- Build:
-- Other:
-
-### Manual validation
-
-- Interaction checks:
-- Responsive checks:
-- Accessibility checks:
-- Visual comparison against `SRC-DS-*`:
-- Error and edge-case checks:
-- Regression checks:
-
-For each check, define the expected result. Do not claim a check passed until it ran successfully.
+No check is considered passed until it executes successfully against the task output.
 
 ## 13. Acceptance Criteria
 
-- [ ] `[Requirement or specification ID]` Objective result is observable and correct.
-- [ ] Required accessibility behavior is verified.
-- [ ] Required responsive and state behavior is verified.
-- [ ] Relevant automated and manual validation passes.
-- [ ] Snapshot verification or approved upstream rebaseline is complete.
-- [ ] The committed result has an Implementation output snapshot.
-- [ ] Documentation and task status are updated.
+- [ ] `REQ-FR-006/007`: required/email invalid submissions are blocked with contextual feedback.
+- [ ] `SPEC-VAL-001/002`: validation semantics match the approved constraints exactly.
+- [ ] `REQ-AR-004/005`: messages are programmatically related and understandable without relying on color.
+- [ ] P03-T03 receives only valid record input.
 
 ## 14. Risks and Considerations
 
-| Risk or assumption | Impact | Mitigation or validation |
-|---|---|---|
-| ... | ... | ... |
+| Risk | Mitigation |
+|---|---|
+| Browser validation bubbles conflict with custom feedback | Use one observable orchestration path while preserving native validity semantics |
+| Error UI hides focus | Explicitly test focus/error style combination |
+| Validation scope grows into product rules | Do not trim/dedupe/reformat beyond approved constraints |
 
 ## 15. Implementation Discoveries
 
-| Discovery | Impact | Owning artifact | Required update |
-|---|---|---|---|
-| ... | ... | `SOURCE-BASELINE.md` / `REQUIREMENTS.md` / `DESIGN.md` / `SPEC.md` / `ARCHITECTURE.md` / `PLAN.md` / Task | ... |
-
-Do not silently work around documentation or source-baseline errors.
+None at decomposition. Record source/documentation discrepancies during implementation and update the owning upstream artifact instead of silently working around them.
 
 ## 16. Deviations
 
-| Planned approach or baseline | Actual approach or baseline | Reason | Approval or evidence | Impact |
-|---|---|---|---|---|
-| ... | ... | ... | ... | ... |
-
-Use `None` when implementation followed the task exactly.
-
-
+None planned. Any deviation from approved scope, architecture, source baseline, or validation contract requires evidence and the appropriate workflow update.
 
 ## 18. Definition of Done
 
-- [ ] The objective is implemented within scope.
-- [ ] Acceptance criteria pass.
-- [ ] Required validation executed successfully.
-- [ ] No required validation remains failing or unverified.
-- [ ] Input snapshot references remain valid or an approved upstream rebaseline was completed.
-- [ ] The implementation output snapshot and parent lineage are recorded.
-- [ ] Relevant documentation was updated.
-- [ ] `TASKS-INDEX.md` and `WORKFLOW-STATE.md` reflect current status and lineage.
-- [ ] Deviations and remaining risks are recorded.
-- [ ] Downstream tasks have the information they need.
+- [ ] The objective is implemented without scope expansion.
+- [ ] Task-specific acceptance criteria pass.
+- [ ] Required automated/manual validation executes successfully.
+- [ ] Accessibility, responsive/state/error requirements owned by this task are verified.
+- [ ] Snapshot verification is complete or an approved rebaseline was performed.
+- [ ] An implementation output commit/snapshot is recorded separately from workflow bookkeeping.
+- [ ] Relevant documentation/discoveries/deviations are updated.
+- [ ] Downstream tasks have a stable contract.
 
 ## 19. Completion Report
 
-- Files created, modified, or deleted:
-- Input snapshot IDs used:
-- Task-start repository snapshot:
-- Implementation-output repository snapshot:
-- Source verification performed:
-- Behavior implemented:
-- Validation executed:
-- Validation results:
-- Deviations:
-- Remaining risks:
-- Documentation updated:
-- Next unblocked task:
+Complete during Stage 10 with affected files, input/output snapshots, behavior implemented, validation evidence, deviations, remaining risks, documentation updates, and next unblocked task.

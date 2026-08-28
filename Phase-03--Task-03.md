@@ -1,13 +1,13 @@
 ---
 artifact: TASK
 id: P03-T03
+baseline:
   design:
     - SRC-DS-001
   repository:
     - SRC-REPO-001
   runtime: []
-  documentation:
-    - SRC-DOC-001
+  documentation: []
   assets: []
 created: 2026-08-28
 updated: 2026-08-28
@@ -16,213 +16,132 @@ profile: Full
 execution_mode: Gated
 ---
 
-The repository snapshot in metadata is the task-start state. Record the Implementation output snapshot after the task is committed.
+The canonical task registry owns mutable status, prerequisites, baseline changes, output lineage, and structured validation state.
 
 # Phase 03 — Task 03: Implement IndexedDB persistence and status feedback
 
-
-
 ## 2. Objective
 
-Describe the single concrete result this task must produce.
+Persist only valid five-value Sign Up records in browser-local IndexedDB, distinguish success from storage failure, keep failure recoverable, announce outcomes accessibly, and prove the flow never transmits sign-up data remotely.
 
 ## 3. Source References
 
 - Source baseline: `SOURCE-BASELINE.md`
-- Design inputs: `SRC-DS-*`
-- Task-start repository snapshot: `SRC-REPO-*`
-- Supporting runtime inputs: `SRC-RUN-*` / None
-- Documentation inputs: `SRC-DOC-*` / None
-- Asset inputs: `SRC-ASSET-*` / None
-- `PLAN.md`:
-- `PLAN-REVIEW.md`:
-- Requirement IDs:
-- Specification IDs or sections:
-- `DESIGN.md` references:
-- Design-source evidence:
-- `ARCHITECTURE.md` references, when applicable:
-- Related tasks:
+- Planned design input: `SRC-DS-001`
+- Planned repository baseline: `SRC-REPO-001`; canonical `task start` may advance this to an expected previous-task output/current checkpoint.
+- `PLAN.md`: `PLAN-006`
+- `PLAN-REVIEW.md`: Stage 8 corrections and residual-risk table
+- Requirement IDs: `REQ-FR-008`, `REQ-FR-009`, `REQ-FR-010`, `REQ-DR-001–003`, `REQ-AR-003`, `REQ-CON-003`
+- Specification/design references: `SPEC-INT-004/005`, `SPEC-ACC-004`, `SPEC-DATA-001–003`, `SPEC-VAL-003`; `DES-009`, `DES-INT-006`
+- Architecture references: `ADR-005`, `ADR-008`, `ADR-009`
+- Related tasks: Prerequisite `P03-T02`; converges with `P02-T01` before `P04-T01`
 
 ## 4. Snapshot Verification
 
-Complete before implementation begins.
-
-- Verification date and method:
-- Design inputs applicable: Yes / No / Unverified
-- Task-start repository commit checked out: Yes / No / Unverified
-- Difference classification: Unchanged / Expected previous-task output / Unexpected concurrent change / Unavailable
-- Upstream rebaseline required: Yes / No
-- Action or limitation:
-
-An approved previous-task output may become this task's start snapshot without reopening upstream stages. Do not begin affected implementation when an unexpected material change remains unresolved.
+Before implementation, reverify applicable Figma evidence and start through the canonical CLI so repository lineage is classified. Expected previous-task output may become the task-start snapshot. Stop and rebaseline if a material design or `frontend/` change is unexpected.
 
 ## 5. Prerequisites
 
-List tasks, repository conditions, assets, decisions, access requirements, and required snapshot verification.
-
-- ...
-
-Use `None` when no prerequisite exists.
+`P03-T02` Complete. The controller must already prevent invalid records from reaching persistence and expose stable status-region hooks.
 
 ## 6. Scope
 
 ### Included
-
-- Work required to produce the objective
-- Relevant accessibility, responsive, state, error, and testing work
+- Dedicated IndexedDB database/open/version/store/write adapter.
+- Persistence of exactly the five approved product values; implementation metadata only if a concrete storage need is documented and policy-neutral.
+- Application-level success/failure result returned to controller.
+- Stable non-modal visible/programmatic status region.
+- Value preservation on failure and ordinary retry.
+- Deterministic browser-test failure path at the test boundary without product-only debug UI.
+- Network assertions and pre-init safety regression.
 
 ### Excluded
-
-- Nearby work assigned to other tasks
-- Deferred or unapproved capabilities
-- Unrelated refactoring
+- Remote database/API, authentication, analytics, logging of PII.
+- Invented retention/deletion/encryption/consent policy.
+- Clearing fields solely because a local write succeeded, unless an upstream requirement changes.
+- Loading/disabled product state not approved upstream.
 
 ## 7. Repository Context
 
-Record current state at the task-start `SRC-REPO-*` commit:
-
-- Existing files and modules
-- Established patterns and conventions
-- Reusable components, utilities, tokens, or tests
-- Confirmed scripts and commands
-- Constraints or technical debt
-
-Distinguish observed paths from proposed paths and unrelated later changes.
+No persistence exists at the baseline. Approved architecture isolates IndexedDB from rendering and networking. Exact feedback copy is replaceable current-release content; lifecycle/privacy policies remain explicitly undefined and must not be invented.
 
 ## 8. Files and Modules
 
-| Path | Action | Existing or proposed | Responsibility | Repository evidence |
-|---|---|---|---|---|
-| `path/to/file` | Create / Modify / Delete | Existing / Proposed | ... | task-start `SRC-REPO-*` |
+| Path | Action | Responsibility |
+|---|---|---|
+| `frontend/src/lib/signup-store.ts` | Create | IndexedDB open/version/store/write boundary |
+| `frontend/src/scripts/signup-controller.ts` | Modify | Persist valid record and map result to UI |
+| `frontend/src/components/SignUpForm.astro` | Modify | Stable status region if not already present |
+| `frontend/src/data/product.ts` | Modify if required | Replaceable success/failure copy |
+| `frontend/tests/e2e/signup.spec.ts` | Modify | Success/failure/retry/network/IndexedDB assertions |
 
 ## 9. Dependencies and Interfaces
 
-Document module and task dependencies, public interfaces, data or component contracts, compatibility requirements, and downstream effects.
+`signup-store.ts` accepts only the valid record produced after P03-T02 validation and returns a success/failure result; it must not manipulate DOM or perform fetches. Controller owns UI feedback. Stored plan value must use the same shared plan domain as URL/select.
 
 ## 10. Implementation Steps
 
-1. Verify input and task-start snapshots.
-2. Inspect affected files and confirm repository assumptions.
-3. ...
-4. Update relevant tests and documentation.
-5. Run required validation.
-6. Commit the approved result and create an Implementation output `SRC-REPO-*` record.
-
-Do not include implementation code during task decomposition.
+1. Start from P03-T02 output and inspect final validated-record boundary.
+2. Implement the smallest IndexedDB schema/adapter needed to write the five approved values.
+3. Wire controller persistence after validation only; map success/failure to the stable status region without moving focus.
+4. Preserve entered values on failure and support ordinary resubmission; avoid unsupported success clearing.
+5. Add deterministic E2E coverage for successful record inspection, forced open/write failure, visible/programmatic outcomes, value retention, retry, and network inertness.
+6. Test client-initialization failure/pre-init behavior so static form cannot leak PII; run diagnostics/build/E2E.
 
 ## 11. State, Responsive, and Accessibility Requirements
 
-### States and errors
-
-- Default:
-- Loading:
-- Empty:
-- Error:
-- Success:
-- Disabled or unavailable:
-- Other:
-
-### Responsive behavior
-
-- Small viewports:
-- Intermediate widths:
-- Large viewports:
-- Content and overflow edge cases:
-
-### Accessibility
-
-- Semantic structure:
-- Keyboard interaction:
-- Focus behavior:
-- Accessible names and relationships:
-- Announcements:
-- Contrast, reflow, touch targets, or reduced motion:
-
-Use `Not applicable` only with a reason.
+- Status is non-modal and programmatically announced without shifting focus.
+- Failure uses text plus approved error language; success remains visually compatible with approved blue/neutral system.
+- Status copy wraps/grows across compact widths.
+- No per-submit network traffic containing sign-up values is allowed.
 
 ## 12. Validation
 
-List only commands and checks supported by the task-start repository snapshot.
+### Automated
+- `pnpm check`, `pnpm build`, persistence/network-focused `pnpm test:e2e`.
+- Inspect IndexedDB record and verify all five values and plan-domain consistency.
+- Force database open/write failure; assert failure feedback, retained values, and successful retry path.
+- Intercept requests/navigation to prove sign-up data is not sent remotely, including failed client initialization/pre-init path.
+### Manual
+- Verify success/failure announcement behavior with accessibility inspection/assistive-status check.
+- Confirm no focus theft and long status text reflows.
 
-### Automated validation
-
-- Unit tests:
-- Component or integration tests:
-- End-to-end tests:
-- Type checking:
-- Linting:
-- Build:
-- Other:
-
-### Manual validation
-
-- Interaction checks:
-- Responsive checks:
-- Accessibility checks:
-- Visual comparison against `SRC-DS-*`:
-- Error and edge-case checks:
-- Regression checks:
-
-For each check, define the expected result. Do not claim a check passed until it ran successfully.
+No check is considered passed until it executes successfully against the task output.
 
 ## 13. Acceptance Criteria
 
-- [ ] `[Requirement or specification ID]` Objective result is observable and correct.
-- [ ] Required accessibility behavior is verified.
-- [ ] Required responsive and state behavior is verified.
-- [ ] Relevant automated and manual validation passes.
-- [ ] Snapshot verification or approved upstream rebaseline is complete.
-- [ ] The committed result has an Implementation output snapshot.
-- [ ] Documentation and task status are updated.
+- [ ] `REQ-FR-008`/data specs: valid submissions are written locally to IndexedDB only.
+- [ ] `REQ-FR-009/010`: success and failure are distinguishable and failure remains retryable with values retained.
+- [ ] `REQ-AR-003`/SPEC-ACC-004: status is visible and programmatically announced without focus movement.
+- [ ] `REQ-CON-003`: no remote sign-up transmission occurs.
 
 ## 14. Risks and Considerations
 
-| Risk or assumption | Impact | Mitigation or validation |
-|---|---|---|
-| ... | ... | ... |
+| Risk | Mitigation |
+|---|---|
+| IndexedDB failure differs by browser | Isolate adapter and use deterministic test-boundary failure injection/mocking |
+| Metadata accidentally implies policy | Add only when technically necessary and document why; no lifecycle semantics |
+| Network leak through native fallback | Preserve P03-T01 network-inert initialization invariant and regression-test it |
 
 ## 15. Implementation Discoveries
 
-| Discovery | Impact | Owning artifact | Required update |
-|---|---|---|---|
-| ... | ... | `SOURCE-BASELINE.md` / `REQUIREMENTS.md` / `DESIGN.md` / `SPEC.md` / `ARCHITECTURE.md` / `PLAN.md` / Task | ... |
-
-Do not silently work around documentation or source-baseline errors.
+None at decomposition. Record source/documentation discrepancies during implementation and update the owning upstream artifact instead of silently working around them.
 
 ## 16. Deviations
 
-| Planned approach or baseline | Actual approach or baseline | Reason | Approval or evidence | Impact |
-|---|---|---|---|---|
-| ... | ... | ... | ... | ... |
-
-Use `None` when implementation followed the task exactly.
-
-
+None planned. Any deviation from approved scope, architecture, source baseline, or validation contract requires evidence and the appropriate workflow update.
 
 ## 18. Definition of Done
 
-- [ ] The objective is implemented within scope.
-- [ ] Acceptance criteria pass.
-- [ ] Required validation executed successfully.
-- [ ] No required validation remains failing or unverified.
-- [ ] Input snapshot references remain valid or an approved upstream rebaseline was completed.
-- [ ] The implementation output snapshot and parent lineage are recorded.
-- [ ] Relevant documentation was updated.
-- [ ] `TASKS-INDEX.md` and `WORKFLOW-STATE.md` reflect current status and lineage.
-- [ ] Deviations and remaining risks are recorded.
-- [ ] Downstream tasks have the information they need.
+- [ ] The objective is implemented without scope expansion.
+- [ ] Task-specific acceptance criteria pass.
+- [ ] Required automated/manual validation executes successfully.
+- [ ] Accessibility, responsive/state/error requirements owned by this task are verified.
+- [ ] Snapshot verification is complete or an approved rebaseline was performed.
+- [ ] An implementation output commit/snapshot is recorded separately from workflow bookkeeping.
+- [ ] Relevant documentation/discoveries/deviations are updated.
+- [ ] Downstream tasks have a stable contract.
 
 ## 19. Completion Report
 
-- Files created, modified, or deleted:
-- Input snapshot IDs used:
-- Task-start repository snapshot:
-- Implementation-output repository snapshot:
-- Source verification performed:
-- Behavior implemented:
-- Validation executed:
-- Validation results:
-- Deviations:
-- Remaining risks:
-- Documentation updated:
-- Next unblocked task:
+Complete during Stage 10 with affected files, input/output snapshots, behavior implemented, validation evidence, deviations, remaining risks, documentation updates, and next unblocked task.

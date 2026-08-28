@@ -1,13 +1,13 @@
 ---
 artifact: TASK
 id: P04-T03
+baseline:
   design:
     - SRC-DS-001
   repository:
     - SRC-REPO-001
   runtime: []
-  documentation:
-    - SRC-DOC-001
+  documentation: []
   assets: []
 created: 2026-08-28
 updated: 2026-08-28
@@ -16,213 +16,127 @@ profile: Full
 execution_mode: Gated
 ---
 
-The repository snapshot in metadata is the task-start state. Record the Implementation output snapshot after the task is committed.
+The canonical task registry owns mutable status, prerequisites, baseline changes, output lineage, and structured validation state.
 
 # Phase 04 — Task 03: Verify Vercel deployment and production readiness
 
-
-
 ## 2. Objective
 
-Describe the single concrete result this task must produce.
+Verify the final implementation deploys through the existing Vercel `frontend/` static build path and that production Home/Sign Up critical behavior matches the validated repository output without adding server runtime or changing the local-data boundary.
 
 ## 3. Source References
 
 - Source baseline: `SOURCE-BASELINE.md`
-- Design inputs: `SRC-DS-*`
-- Task-start repository snapshot: `SRC-REPO-*`
-- Supporting runtime inputs: `SRC-RUN-*` / None
-- Documentation inputs: `SRC-DOC-*` / None
-- Asset inputs: `SRC-ASSET-*` / None
-- `PLAN.md`:
-- `PLAN-REVIEW.md`:
-- Requirement IDs:
-- Specification IDs or sections:
-- `DESIGN.md` references:
-- Design-source evidence:
-- `ARCHITECTURE.md` references, when applicable:
-- Related tasks:
+- Planned design input: `SRC-DS-001`
+- Planned repository baseline: `SRC-REPO-001`; canonical `task start` may advance this to an expected previous-task output/current checkpoint.
+- `PLAN.md`: `PLAN-009`
+- `PLAN-REVIEW.md`: Stage 8 corrections and residual-risk table
+- Requirement IDs: `REQ-CON-002–004`, `REQ-FR-008`
+- Specification/design references: `SPEC-DATA-003` and production-relevant acceptance criteria from the approved specification
+- Architecture references: `ADR-008`, `ADR-010`
+- Related tasks: Prerequisite `P04-T02`; final implementation task before Stage 11
 
 ## 4. Snapshot Verification
 
-Complete before implementation begins.
-
-- Verification date and method:
-- Design inputs applicable: Yes / No / Unverified
-- Task-start repository commit checked out: Yes / No / Unverified
-- Difference classification: Unchanged / Expected previous-task output / Unexpected concurrent change / Unavailable
-- Upstream rebaseline required: Yes / No
-- Action or limitation:
-
-An approved previous-task output may become this task's start snapshot without reopening upstream stages. Do not begin affected implementation when an unexpected material change remains unresolved.
+Before implementation, reverify applicable Figma evidence and start through the canonical CLI so repository lineage is classified. Expected previous-task output may become the task-start snapshot. Stop and rebaseline if a material design or `frontend/` change is unexpected.
 
 ## 5. Prerequisites
 
-List tasks, repository conditions, assets, decisions, access requirements, and required snapshot verification.
-
-- ...
-
-Use `None` when no prerequisite exists.
+`P04-T02` Complete with green repository validation. Reverify current Vercel project/build settings before relying on Stage 7 evidence.
 
 ## 6. Scope
 
 ### Included
-
-- Work required to produce the objective
-- Relevant accessibility, responsive, state, error, and testing work
+- Inspect final Vercel deployment/build logs and READY status.
+- Confirm build executes from `frontend/`, uses compatible Node/pnpm, runs static Astro build, and emits `frontend/dist/`.
+- Production smoke for `/` and `/sign-up/`, plan context, local persistence, keyboard flow, responsive conditions, and network safety.
+- Confirm no serverless API/server adapter/runtime secret was introduced.
+- Record deployment/runtime evidence for Stage 11.
 
 ### Excluded
-
-- Nearby work assigned to other tasks
-- Deferred or unapproved capabilities
-- Unrelated refactoring
+- Changing Vercel deployment-trigger policy.
+- Adding Vercel config/server functions without concrete mismatch evidence.
+- New product behavior or environment-dependent remote persistence.
 
 ## 7. Repository Context
 
-Record current state at the task-start `SRC-REPO-*` commit:
-
-- Existing files and modules
-- Established patterns and conventions
-- Reusable components, utilities, tokens, or tests
-- Confirmed scripts and commands
-- Constraints or technical debt
-
-Distinguish observed paths from proposed paths and unrelated later changes.
+Stage 7/8 evidence showed the existing linked Vercel project builds from `/vercel/path0/frontend`, Node 24.x, managed pnpm, static `dist/`, and READY deployments. This task must re-check actual final state rather than infer success from GitHub.
 
 ## 8. Files and Modules
 
-| Path | Action | Existing or proposed | Responsibility | Repository evidence |
-|---|---|---|---|---|
-| `path/to/file` | Create / Modify / Delete | Existing / Proposed | ... | task-start `SRC-REPO-*` |
+| Path | Action | Responsibility |
+|---|---|---|
+| Application files | None expected | Verification-only unless a concrete deployment mismatch is discovered |
+| Vercel configuration | None expected | Any required change must be evidence-backed and remain within approved static architecture |
 
 ## 9. Dependencies and Interfaces
 
-Document module and task dependencies, public interfaces, data or component contracts, compatibility requirements, and downstream effects.
+GitHub is authority for implementation commit/validation; Vercel is authority for deployment/runtime. Production must preserve local IndexedDB persistence and no sign-up network endpoint. If a deployment mismatch requires architecture drift, stop and reopen the owning stage instead of patching around it.
 
 ## 10. Implementation Steps
 
-1. Verify input and task-start snapshots.
-2. Inspect affected files and confirm repository assumptions.
-3. ...
-4. Update relevant tests and documentation.
-5. Run required validation.
-6. Commit the approved result and create an Implementation output `SRC-REPO-*` record.
-
-Do not include implementation code during task decomposition.
+1. Start from the final validated implementation output and re-read Vercel project settings relevant to build root, Node, install/build, and output.
+2. Identify the deployment for the final implementation commit and inspect its build/deploy logs and READY state.
+3. Open production Home and Sign Up routes and smoke critical navigation/plan/countdown/form/local-persistence behavior.
+4. Inspect production network activity to confirm no sign-up API/server function and verify representative responsive/keyboard behavior.
+5. If no deployment change is required, record verification evidence without introducing configuration churn; if a concrete mismatch exists, repair only within approved static architecture and rerun repository/deployment validation.
+6. Record production evidence and remaining non-blocking product/policy gaps for Stage 11.
 
 ## 11. State, Responsive, and Accessibility Requirements
 
-### States and errors
-
-- Default:
-- Loading:
-- Empty:
-- Error:
-- Success:
-- Disabled or unavailable:
-- Other:
-
-### Responsive behavior
-
-- Small viewports:
-- Intermediate widths:
-- Large viewports:
-- Content and overflow edge cases:
-
-### Accessibility
-
-- Semantic structure:
-- Keyboard interaction:
-- Focus behavior:
-- Accessible names and relationships:
-- Announcements:
-- Contrast, reflow, touch targets, or reduced motion:
-
-Use `Not applicable` only with a reason.
+- Production keyboard/focus and representative reflow checks must match repository validation.
+- IndexedDB remains browser-local; no PII should appear in requests/URLs beyond approved plan key.
+- Status/error behavior must remain non-modal and usable in deployed output.
+- No formal browser-support policy is created by the smoke environment.
 
 ## 12. Validation
 
-List only commands and checks supported by the task-start repository snapshot.
+### Deployment/runtime
+- Vercel deployment for the final implementation commit is `READY`.
+- Build log shows work from `frontend/` and static Astro output; no server adapter/function is introduced.
+- Production `/` and `/sign-up/` return successfully.
+### Manual browser smoke
+- Home CTAs and plan-specific Sign Up initialization work.
+- Valid local submission persists in IndexedDB and does not send sign-up data remotely.
+- Keyboard/focus and representative compact/large responsive conditions remain usable.
+- Compare production behavior with the green P04-T02 repository result.
 
-### Automated validation
-
-- Unit tests:
-- Component or integration tests:
-- End-to-end tests:
-- Type checking:
-- Linting:
-- Build:
-- Other:
-
-### Manual validation
-
-- Interaction checks:
-- Responsive checks:
-- Accessibility checks:
-- Visual comparison against `SRC-DS-*`:
-- Error and edge-case checks:
-- Regression checks:
-
-For each check, define the expected result. Do not claim a check passed until it ran successfully.
+No check is considered passed until it executes successfully against the task output.
 
 ## 13. Acceptance Criteria
 
-- [ ] `[Requirement or specification ID]` Objective result is observable and correct.
-- [ ] Required accessibility behavior is verified.
-- [ ] Required responsive and state behavior is verified.
-- [ ] Relevant automated and manual validation passes.
-- [ ] Snapshot verification or approved upstream rebaseline is complete.
-- [ ] The committed result has an Implementation output snapshot.
-- [ ] Documentation and task status are updated.
+- [ ] Existing Vercel project successfully serves the final implementation through the approved static `frontend/` path.
+- [ ] Production critical flows match validated repository behavior.
+- [ ] No serverless sign-up endpoint, remote persistence, or runtime architecture drift is present.
+- [ ] Deployment/runtime evidence is sufficient to begin Stage 11 implementation review.
 
 ## 14. Risks and Considerations
 
-| Risk or assumption | Impact | Mitigation or validation |
-|---|---|---|
-| ... | ... | ... |
+| Risk | Mitigation |
+|---|---|
+| Platform settings drift since Stage 8 | Reinspect actual project/deployment before concluding readiness |
+| Auto-deploy noise from workflow/document commits | Verify the deployment tied to the final implementation commit; do not change trigger policy |
+| Verification finds architecture mismatch | Stop and reopen owning architecture/plan stage instead of silently expanding scope |
 
 ## 15. Implementation Discoveries
 
-| Discovery | Impact | Owning artifact | Required update |
-|---|---|---|---|
-| ... | ... | `SOURCE-BASELINE.md` / `REQUIREMENTS.md` / `DESIGN.md` / `SPEC.md` / `ARCHITECTURE.md` / `PLAN.md` / Task | ... |
-
-Do not silently work around documentation or source-baseline errors.
+None at decomposition. Record source/documentation discrepancies during implementation and update the owning upstream artifact instead of silently working around them.
 
 ## 16. Deviations
 
-| Planned approach or baseline | Actual approach or baseline | Reason | Approval or evidence | Impact |
-|---|---|---|---|---|
-| ... | ... | ... | ... | ... |
-
-Use `None` when implementation followed the task exactly.
-
-
+None planned. Any deviation from approved scope, architecture, source baseline, or validation contract requires evidence and the appropriate workflow update.
 
 ## 18. Definition of Done
 
-- [ ] The objective is implemented within scope.
-- [ ] Acceptance criteria pass.
-- [ ] Required validation executed successfully.
-- [ ] No required validation remains failing or unverified.
-- [ ] Input snapshot references remain valid or an approved upstream rebaseline was completed.
-- [ ] The implementation output snapshot and parent lineage are recorded.
-- [ ] Relevant documentation was updated.
-- [ ] `TASKS-INDEX.md` and `WORKFLOW-STATE.md` reflect current status and lineage.
-- [ ] Deviations and remaining risks are recorded.
-- [ ] Downstream tasks have the information they need.
+- [ ] The objective is implemented without scope expansion.
+- [ ] Task-specific acceptance criteria pass.
+- [ ] Required automated/manual validation executes successfully.
+- [ ] Accessibility, responsive/state/error requirements owned by this task are verified.
+- [ ] Snapshot verification is complete or an approved rebaseline was performed.
+- [ ] An implementation output commit/snapshot is recorded separately from workflow bookkeeping.
+- [ ] Relevant documentation/discoveries/deviations are updated.
+- [ ] Downstream tasks have a stable contract.
 
 ## 19. Completion Report
 
-- Files created, modified, or deleted:
-- Input snapshot IDs used:
-- Task-start repository snapshot:
-- Implementation-output repository snapshot:
-- Source verification performed:
-- Behavior implemented:
-- Validation executed:
-- Validation results:
-- Deviations:
-- Remaining risks:
-- Documentation updated:
-- Next unblocked task:
+Complete during Stage 10 with affected files, input/output snapshots, behavior implemented, validation evidence, deviations, remaining risks, documentation updates, and next unblocked task.
