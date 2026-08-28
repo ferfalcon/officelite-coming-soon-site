@@ -1551,7 +1551,21 @@
       ],
       "output": null,
       "blocker": null,
-      "validation": []
+      "validation": [
+        {
+          "name": "Shared module build validation",
+          "kind": "Build",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Astro diagnostics and the static build succeed on the final P01-T02 implementation output.",
+          "command": "pnpm check && pnpm build",
+          "evidence": [],
+          "reason": "Pending validation on the final implementation output.",
+          "references": [
+            "PLAN-002"
+          ]
+        }
+      ]
     },
     {
       "id": "P02-T01",
