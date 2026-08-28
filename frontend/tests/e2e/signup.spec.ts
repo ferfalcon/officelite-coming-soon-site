@@ -93,27 +93,31 @@ test('keyboard order follows the logical Sign Up form order with visible focus',
     page.getByRole('button', { name: 'Get on the list' }),
   ];
 
-  for (const control of focusSequence) {
+  for (const [index, control] of focusSequence.entries()) {
     await page.keyboard.press('Tab');
     await expect(control).toBeFocused();
+
+    if (index === 2) {
+      const nameFocusShadow = await control.evaluate(
+        (element) => getComputedStyle(element).boxShadow,
+      );
+      expect(nameFocusShadow).not.toBe('none');
+    }
+
+    if (index === 4) {
+      const planFocusShadow = await page
+        .locator('.form-field__select-shell')
+        .evaluate((element) => getComputedStyle(element).boxShadow);
+      expect(planFocusShadow).not.toBe('none');
+    }
+
+    if (index === 7) {
+      const buttonFocusShadow = await control.evaluate(
+        (element) => getComputedStyle(element).boxShadow,
+      );
+      expect(buttonFocusShadow).not.toBe('none');
+    }
   }
-
-  const nameFocusShadow = await page
-    .getByLabel('Name')
-    .evaluate((element) => getComputedStyle(element).boxShadow);
-  expect(nameFocusShadow).not.toBe('none');
-
-  await page.getByLabel('Plan').focus();
-  const planFocusShadow = await page
-    .locator('.form-field__select-shell')
-    .evaluate((element) => getComputedStyle(element).boxShadow);
-  expect(planFocusShadow).not.toBe('none');
-
-  await page.getByRole('button', { name: 'Get on the list' }).focus();
-  const buttonFocusShadow = await page
-    .getByRole('button', { name: 'Get on the list' })
-    .evaluate((element) => getComputedStyle(element).boxShadow);
-  expect(buttonFocusShadow).not.toBe('none');
 });
 
 test('the initialized shell does not put personal values in the URL or network', async ({
