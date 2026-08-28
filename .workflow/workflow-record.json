@@ -1212,7 +1212,21 @@
       ],
       "output": null,
       "blocker": null,
-      "validation": []
+      "validation": [
+        {
+          "name": "Foundation acceptance validation",
+          "kind": "Build",
+          "required": true,
+          "status": "Not executed",
+          "expected": "Astro diagnostics and static build pass; the product shell, assets, font, focus/reflow foundation, Playwright preview configuration, and path-scoped frontend validation workflow satisfy P01-T01 acceptance criteria.",
+          "command": "pnpm check && pnpm build",
+          "evidence": [],
+          "reason": "Defined during Stage 9; execution occurs during Stage 10 against the task output.",
+          "references": [
+            "PLAN-001"
+          ]
+        }
+      ]
     },
     {
       "id": "P01-T02",
