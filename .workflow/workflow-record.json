@@ -6,8 +6,8 @@
     "executionMode": "Gated"
   },
   "state": {
-    "stage": 7,
-    "status": "Ready",
+    "stage": 8,
+    "status": "In progress",
     "activeInputs": [
       "SRC-DS-001",
       "SRC-REPO-001"
@@ -306,6 +306,16 @@
         "algorithm": "sha256",
         "digest": "6023800148c4abfe7883126c9bd0532ea27c6e714bcb185728ea1e99c2581bcf"
       }
+    },
+    {
+      "id": "ART-PLAN-REVIEW",
+      "type": "PLAN-REVIEW",
+      "path": "PLAN-REVIEW.md",
+      "status": "Draft",
+      "baseline": [
+        "SRC-DS-001",
+        "SRC-REPO-001"
+      ]
     }
   ],
   "traceItems": [],
